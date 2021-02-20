@@ -34,3 +34,35 @@
 }
 
 .navbar_placeholder {}
+
+.item {
+    width: 20%;
+    height: 60%;
+    border: 3px solid gray;
+}
+
+.item_image {
+    height: 50%;
+    background-color: beige;
+}
+
+.item_title {
+    margin: 5%;
+}
+
+.item_description {
+    margin: 5%;
+}
+
+.item .wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+@media(max-width: 800px) {
+    .item {
+        width: 90vw;
+        height: 140vw;
+        border: 3px solid gray;
+    }
+}

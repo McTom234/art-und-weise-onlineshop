@@ -59,8 +59,16 @@
     <div class="navbar_placeholder"></div>
 
     <div class="recommended">
-        <h1>Content</h1>
-    </div>
+        <div class="item">
+            <div class="item_image"></div>
+            <h3 class="item_title">Titel</h3>
+            <p class="item_description">Lorem ipsum dolor sibum. Stet clita kasd gubergren sanctus est Lorem ipsum dolor sit amet.</p>
+
+            <div class="wrapper">
+                <h3 class="item_price">3€</h3>
+                <button>Jetzt Bestellen</button>
+            </div>
+        </div>
 
 </body>
 <script src="../dist/js/jquery.min.js"></script>
