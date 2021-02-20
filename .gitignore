@@ -1,0 +1,8 @@
+# libraries
+node_modules
+src/bootstrap
+
+package-lock.json
+
+# dist
+dist
