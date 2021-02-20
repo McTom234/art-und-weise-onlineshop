@@ -1,3 +1,5 @@
+<?php require 'database/authentication.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,6 +45,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link">Über uns</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login/">Login</a>
                         </li>
                     </ul>
                 </div>
