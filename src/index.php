@@ -17,7 +17,7 @@
         <h1 id="header_title"></h1>
     </div>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
             <div class="container">
 
                 <a class="navbar-brand">Art & Weise</a>
@@ -51,5 +51,6 @@
     </header>
 
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../dist/js/jquery.min.js"></script>
+<script src="../dist/js/bootstrap.bundle.min.js"></script>
 </html>
