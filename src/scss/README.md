@@ -4,6 +4,7 @@ Basic pattern for new SCSS files:
 @import "../bootstrap/functions";
 @import "../bootstrap/variables";
 @import "../bootstrap/mixins";
+@import "../bootstrap/utilities";
 
 // Include custom variable default overrides here
 
@@ -14,4 +15,29 @@ Basic pattern for new SCSS files:
 @import "../bootstrap/images";
 @import "../bootstrap/containers";
 @import "../bootstrap/grid";
+@import "../bootstrap/tables";
+@import "../bootstrap/forms";
+@import "../bootstrap/buttons";
+@import "../bootstrap/transitions";
+@import "../bootstrap/dropdown";
+@import "../bootstrap/button-group";
+@import "../bootstrap/nav";
+@import "../bootstrap/navbar";
+@import "../bootstrap/card";
+@import "../bootstrap/accordion";
+@import "../bootstrap/breadcrumb";
+@import "../bootstrap/pagination";
+@import "../bootstrap/badge";
+@import "../bootstrap/alert";
+@import "../bootstrap/progress";
+@import "../bootstrap/list-group";
+@import "../bootstrap/close";
+@import "../bootstrap/toasts";
+@import "../bootstrap/modal";
+@import "../bootstrap/tooltip";
+@import "../bootstrap/popover";
+@import "../bootstrap/carousel";
+@import "../bootstrap/spinners";
+@import "../bootstrap/helpers";
+@import "../bootstrap/utilities/api";
 ```
