@@ -13,11 +13,12 @@
     <header>
 
     <div id="header_image">
-        <h3 id="header_title"></h3>
-        <h1 id="header_title"></h1>
+        <h3>Schülerfirma</h3>
+        <h1>Art & Weise</h1>
+        <button class="button_more">Mehr Erfahren!</button>
     </div>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
 
                 <a class="navbar-brand">Art & Weise</a>
@@ -50,7 +51,14 @@
         </nav>
     </header>
 
+    <div class="navbar_placeholder"></div>
+
+    <div class="recommended">
+        <h1>Content</h1>
+    </div>
+
 </body>
 <script src="../dist/js/jquery.min.js"></script>
 <script src="../dist/js/bootstrap.bundle.min.js"></script>
+<script src="../dist/js/index.js"></script>
 </html>

@@ -4,3 +4,35 @@
 // Include custom variable default overrides here
 // Optional
 @import "../bootstrap/bootstrap";
+::-webkit-scrollbar {
+    display: none;
+}
+
+#header_image {
+    height: 92vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#header_image h3 {}
+
+#header_image h1 {
+    font-size: 5vh;
+}
+
+.recommended {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    height: 8vh;
+}
+
+.navbar_placeholder {
+    height: 8vh;
+}
