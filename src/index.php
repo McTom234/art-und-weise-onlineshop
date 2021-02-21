@@ -12,63 +12,157 @@
 </head>
 
 <body>
-    <header>
+<header>
 
-    <div id="header_image">
+    <div class="header_image">
         <h3>Schülerfirma</h3>
-        <h1>Art & Weise</h1>
+        <div class="header_title">
+            <h1>Art & Weise</h1>
+        </div>
         <button class="button_more">Mehr Erfahren!</button>
     </div>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-
-                <a class="navbar-brand">Art & Weise</a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse bg-dark" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link">Start</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Produkte</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Hintergrund</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Jetzt Bestellen</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Über uns</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login/">Login</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </nav>
-    </header>
-
-    <div class="navbar_placeholder"></div>
-
-    <div class="recommended">
-        <div class="item">
-            <div class="item_image"></div>
-            <h3 class="item_title">Titel</h3>
-            <p class="item_description">Lorem ipsum dolor sibum. Stet clita kasd gubergren sanctus est Lorem ipsum dolor sit amet.</p>
-
-            <div class="wrapper">
-                <h3 class="item_price">3€</h3>
-                <button>Jetzt Bestellen</button>
+    <nav class="navbar navbar-light navbar-expand-md d-xxl-flex navigation-clean-button">
+        <div class="container"><a class="navbar-brand" href="#">Art &amp; Weise</a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
+                        class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Start</a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false"
+                                                     data-bs-toggle="dropdown" href="#">Dropdown </a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="#">Karten</a><a class="dropdown-item"
+                                                                                                  href="#">Lesezeichen</a><a
+                                    class="dropdown-item" href="#">Kategorie 3</a></div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Hintergrund</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Über uns</a></li>
+                </ul>
+                <span class="nav-left float-end">
+                    <a class="link" href="login">Log In</a>
+                    <a class="link" href="login">Log Out</a>
+                    <button>Warenkorb</button>
+                </span>
             </div>
         </div>
+    </nav>
+    <div class="recommended">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Beliebt</h2>
+                <p class="text-center">Eine Auswahl der beliebtesten Produkte</p>
+            </div>
+
+            <div class="row">
+                <div id="col-left" class="col d-flex justify-content-center">
+                    <div class="item">
+                        <div class="item_image"></div>
+                        <h3 class="item_title">Titel</h3>
+                        <p class="item_description">Lorem ipsum dolor sibum. Stet clita kasd gubergren sanctus est Lorem
+                            ipsum dolor sit amet.</p>
+
+                        <div class="wrapper d-flex justify-content-between">
+                            <h3 class="item_price">3€</h3>
+                            <button>Jetzt Bestellen</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <div class="item">
+                        <div class="item_image"></div>
+                        <h3 class="item_title">Titel</h3>
+                        <p class="item_description">Lorem ipsum dolor sibum. Stet clita kasd gubergren sanctus est Lorem
+                            ipsum dolor sit amet.</p>
+
+                        <div class="wrapper d-flex justify-content-between">
+                            <h3 class="item_price">3€</h3>
+                            <button>Jetzt Bestellen</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="col-right" class="col d-flex justify-content-center">
+                    <div class="item">
+                        <div class="item_image"></div>
+                        <h3 class="item_title">Titel</h3>
+                        <p class="item_description">Lorem ipsum dolor sibum. Stet clita kasd gubergren sanctus est Lorem
+                            ipsum dolor sit amet.</p>
+
+                        <div class="wrapper d-flex justify-content-between">
+                            <h3 class="item_price">3€</h3>
+                            <button>Jetzt Bestellen</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <button class="float-end">Weitere</button>
+
+        </div>
+    </div>
+
+    <div class="recommended">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Beliebt</h2>
+                <p class="text-center">Eine Auswahl der beliebtesten Produkte</p>
+            </div>
+
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <div class="item">
+                        <div class="item_image"></div>
+                        <h3 class="item_title">Titel</h3>
+                        <p class="item_description">Lorem ipsum dolor sibum. Stet clita kasd gubergren sanctus est Lorem
+                            ipsum dolor sit amet.</p>
+
+                        <div class="wrapper d-flex justify-content-between">
+                            <h3 class="item_price">3€</h3>
+                            <button>Jetzt Bestellen</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <div class="item">
+                        <div class="item_image"></div>
+                        <h3 class="item_title">Titel</h3>
+                        <p class="item_description">Lorem ipsum dolor sibum. Stet clita kasd gubergren sanctus est Lorem
+                            ipsum dolor sit amet.</p>
+
+                        <div class="wrapper d-flex justify-content-between">
+                            <h3 class="item_price">3€</h3>
+                            <button>Jetzt Bestellen</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <div class="item">
+                        <div class="item_image"></div>
+                        <h3 class="item_title">Titel</h3>
+                        <p class="item_description">Lorem ipsum dolor sibum. Stet clita kasd gubergren sanctus est Lorem
+                            ipsum dolor sit amet.</p>
+
+                        <div class="wrapper d-flex justify-content-between">
+                            <h3 class="item_price">3€</h3>
+                            <button>Jetzt Bestellen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col"> </div>
+                <div class="col"><span class="float-end copyright">Schülerfirma Art & Weise &copy; 2021</span></div>
+            </div>
+        </div>
+    </div>
 
 </body>
 <script src="../dist/js/jquery.min.js"></script>
