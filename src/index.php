@@ -13,48 +13,46 @@
 
 <body>
     <header>
-
-    <div id="header_image">
-        <h3>Schülerfirma</h3>
-        <h1>Art & Weise</h1>
-        <button class="button_more">Mehr Erfahren!</button>
-    </div>
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-
-                <a class="navbar-brand">Art & Weise</a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse bg-dark" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link">Start</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Produkte</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Hintergrund</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Jetzt Bestellen</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Über uns</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login/">Login</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </nav>
+        <div id="header_image">
+            <h3>Schülerfirma</h3>
+            <h1>Art & Weise</h1>
+            <button class="button_more">Mehr Erfahren!</button>
+        </div>
     </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand">Art & Weise</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse bg-dark" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link">Start</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Produkte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Hintergrund</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Jetzt Bestellen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Über uns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login/">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="navbar_placeholder"></div>
 
