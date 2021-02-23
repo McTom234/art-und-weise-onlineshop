@@ -19,7 +19,9 @@
     "copy-jquery-js": "copyfiles -u 3 node_modules/jquery/dist/jquery.min.js dist/js",
     "compile-folder": "node-sass src/scss/ -o dist/css",
     "compile-watch": "node-sass -r -w src/scss/ -o dist/css",
-    "startDevServer": "node server.js"
+    "start-dev-server": "node server.js",
+    "make-dist-ready": "copyfiles -e \"src/bootstrap/**\" -e \"src/scss/**\" -u 1 \"src/**/*\" dist/",
+    "serve": "npm run make-dist-ready & npm run compile-folder && npm run start-dev-server"
   },
   "repository": {
     "type": "git",

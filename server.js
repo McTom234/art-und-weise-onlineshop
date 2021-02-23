@@ -1,6 +1,6 @@
 const phpServer = require('php-server');
 
 (async () => {
-    const server = await phpServer();
+    const server = await phpServer({base: "./dist/"});
     console.log(`PHP server running at ${server.url}`);
 }) ();
