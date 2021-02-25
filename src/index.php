@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerfirma Art und Weise</title>
-    <link rel="stylesheet" href="../dist/css/index.css">
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 
 <body>
@@ -165,7 +165,7 @@
     </div>
 
 </body>
-<script src="../dist/js/jquery.min.js"></script>
-<script src="../dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/index.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.bundle.min.js"></script>
+<script src="./js/index.js"></script>
 </html>
