@@ -38,7 +38,7 @@ $pdo = require 'database/connect.php';
 
             <?php
 
-            $statement = $pdo->query("SELECT * FROM products LIMIT 3");
+            $statement = $pdo->query("SELECT * FROM product LIMIT 3");
             $products = $statement->fetchAll();
 
 
