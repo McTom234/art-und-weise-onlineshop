@@ -1,8 +1,10 @@
 <?php
-return [
-    'host' => 'localhost',
-    'dbname' => 'manager',
-    'user' => 'root',
-    'password' => ''
-];
-?>
+
+return array(
+    "db" => array(
+        "dbname" => "artundweise",
+        "username" => "root",
+        "password" => "",
+        "host" => "localhost"
+    )
+);

@@ -4,30 +4,29 @@ if (session_status() === 1) {
     session_start();
 
     $database = require('../database/config/config.php');
-    $host = $database['host'];
-    $dbname = $database['dbname'];
-    $user = $database['user'];
-    $password = $database['password'];
+    $host = $database['db']['host'];
+    $dbname = $database['db']['dbname'];
+    $user = $database['db']['username'];
+    $password = $database['db']['password'];
     $pdo = new PDO("mysql:host={$host};dbname={$dbname}", $user, $password);
 }
 
 
 if (isset($_GET['login'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-        $statement = $pdo->prepare("SELECT * FROM users WHERE username = :username");
-        $result = $statement->execute(array('username' => $username));
-        $user = $statement->fetch();
-    
-        //check password
-        if ($user !== false && password_verify($password, $user['password'])) {
-            $_SESSION['userid'] = $user['id'];
-            header("Location: ../");
-        } else {
-            $errorMessage = "Benutzername oder Passwort war ungültig!";
-        }
+    $statement = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+    $result = $statement->execute(array('username' => $username));
+    $user = $statement->fetch();
 
+    //check password
+    if ($user !== false && password_verify($password, $user['password'])) {
+        $_SESSION['userid'] = $user['id'];
+        header("Location: ../");
+    } else {
+        $errorMessage = "E-Mail oder Passwort war ungültig!";
+    }
 
 
 }
@@ -36,34 +35,33 @@ if (isset($_GET['login'])) {
 <html>
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/login.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/forms.css"/>
 </head>
 
 <body>
 
-
-
-    <div class="login-dark" style="width: 100vw; height: 100vh;">
+<div class="page_form">
     <form id="menu" action="?login=1" method="post">
-    <div class="form-group"><h1>Login</h1></div>
-        <div class="form-group"><input type="email" class="form-control" name="username" placeholder="E-Mail" /></div>
-        <div class="form-group"><input type="password" class="form-control" name="password" placeholder="Password" /></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
-        <div class="error">    
+        <h1>Login</h1>
+        <label>
+            <input type="email" class="form_input" name="username" placeholder="E-Mail"/>
+        </label>
+        <label>
+            <input type="password" class="form_input" name="password" placeholder="Password"/>
+        </label>
+        <button type="submit">Log In</button>
+        <div class="error">
             <?php if (isset($errorMessage)) {
-        echo $errorMessage;
-    }
-    ?>
+                echo $errorMessage;
+            }
+            ?>
         </div>
     </form>
 </div>
-
-
-    </form>
 </body>
 
 </html>

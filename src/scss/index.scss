@@ -38,6 +38,11 @@
 @import "../bootstrap/helpers";
 @import "../bootstrap/utilities/api";
 
+
+$base-color: #FFFFFF;
+$text-color: #000000;
+$placeholder-images: #F5F5DC;
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -45,13 +50,14 @@
 body{
 
 }
-
-.nav-left{
-    width: 15vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+a {
+    text-decoration: none;
+    color: $text-color;
+    &:hover{
+        color: $text-color;
+    }
 }
+
 .link{
     text-decoration: none;
     color: gray;
@@ -60,87 +66,7 @@ body{
     }
 }
 
-.header_image {
-    height: 90vh;
-    background-color: beige;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 
-
-button{
-    background-color: white;
-    border-radius: 2px;
-    border: 1px solid gray;
-    padding: 5px;
-}
-.header_title h1 {
-    font-size: 5vh;
-}
-
-.navbar {
-    height: 10vh;
-    position: sticky;
-    top: 0;
-}
-
-.navbar_placeholder {}
-
-.intro{
-    margin-top: 5vh;
-}
-.item {
-    width: 20vw;
-    height: 30vw;
-    border: 1px solid gray;
-    margin-top: 5vh;
-}
-
-.item_image {
-    height: 50%;
-    background-color: beige;
-}
-
-.item_title {
-    margin: 5%;
-    height: 10%;
-}
-
-.item_description {
-    margin: 5%;
-    height: 15%;
-}
-
-.item .wrapper {
-    margin: 5%;
-    height: 10%;
-}
-
-col{
-    display: flex;
-    justify-content: center;
-}
-
-@media(min-width: 800px) {
-    #col-left .item{
-        display: inline-block;
-        float: left;
-    }
-    #col-right .item{
-        display: inline-block;
-        float: right;
-    }
-}
-
-@media(max-width: 800px) {
-    .item {
-        width: 90vw;
-        height: 140vw;
-        border: 3px solid gray;
-    }
-}
 
 .footer{
     margin-top: 10vh;

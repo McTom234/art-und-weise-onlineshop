@@ -1,11 +1,7 @@
 <?php 
 session_start();
-$database = require('../database/config/config.php');
-$host = $database['host'];
-$dbname = $database['dbname'];
-$user = $database['user'];
-$password = $database['password'];
-$pdo = new PDO("mysql:host={$host};dbname={$dbname}", $user, $password);
+
+$pdo = require '../database/connect.php';
 
  
 if(isset($_GET['register'])) {
@@ -22,8 +18,7 @@ if(isset($_GET['register'])) {
         $infoMessage = 'Die Passwörter müssen übereinstimmen';
         $error = true;
     }
-    
-    //Überprüfe, dass die E-Mail-Adresse noch nicht registriert wurde
+
     if(!$error) { 
         $statement = $pdo->prepare("SELECT * FROM users WHERE username = :username");
         $result = $statement->execute(array('username' => $username));
@@ -34,8 +29,7 @@ if(isset($_GET['register'])) {
             $error = true;
         }    
     }
-    
-    //Keine Fehler, wir können den Nutzer registrieren
+
     if(!$error) {    
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         
@@ -58,30 +52,29 @@ if(isset($_GET['register'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regristration</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/login.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/forms.css" />
 </head>
 <body>
-<div class="login-dark" style="width: 100vw; height: 100vh;">
+<div class="page_form">
     <form id="menu" action="?register=1" method="post">
-    <div class="form-group"><h1>Regristration</h1></div>
-        <div class="form-group"><input type="email" class="form-control" name="username" placeholder="E-Mail" /></div>
-        <div class="form-group"><input type="password" class="form-control" name="password" placeholder="Password" /></div>
-        <div class="form-group"><input type="password" class="form-control" name="password2" placeholder="Repeat Password" /></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Register</button></div>
-        <div class="info">    
-            <?php if (isset($infoMessage)) {
-        echo $infoMessage;
-    }
-    ?> </div>
-            <div class="error">    
+        <h1>Regristration</h1>
+        <label>
+            <input type="email" class="form_input" name="username" placeholder="E-Mail"/>
+        </label>
+        <label>
+            <input type="password" class="form_input" name="password" placeholder="Password"/>
+            <input type="password" class="form_input" name="password2" placeholder="Repeat Password"/>
+        </label>
+        <button type="submit">Log In</button>
+        <div class="error">
             <?php if (isset($errorMessage)) {
-        echo $errorMessage;
-    }
-    ?>
-        </div>
+                echo $errorMessage;
+            }
+            ?>
         </div>
     </form>
 </div>
+
 </body>
 </html>
 
