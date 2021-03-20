@@ -11,11 +11,11 @@ if(isset($_SESSION['userid'])) {
     $password = $database['password'];
     $pdo = new PDO("mysql:host={$host};dbname={$dbname}", $user, $password);
 
-    $statement = $pdo->query("SELECT username FROM users WHERE id = {$_SESSION['userid']}");
+    $statement = $pdo->query("SELECT email FROM `User` WHERE user_ID = {$_SESSION['userid']}");
     $result = $statement->fetch();
 
     if($result){
-        echo "eingelogt als " . $result["username"];
+        echo "eingelogt als " . $result["forename"] . $result["surname"];
     }
 
 

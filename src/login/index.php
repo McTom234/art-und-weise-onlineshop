@@ -11,13 +11,13 @@ if (isset($_GET['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $statement = $pdo->prepare("SELECT * FROM users WHERE username = :username");
-    $result = $statement->execute(array('username' => $username));
+    $statement = $pdo->prepare("SELECT * FROM user WHERE email = :username");
+    $statement->execute(array('username' => $username));
     $user = $statement->fetch();
 
     //check password
     if ($user !== false && password_verify($password, $user['password'])) {
-        $_SESSION['userid'] = $user['id'];
+        $_SESSION['userid'] = $user['user_ID'];
         header("Location: ../");
     } else {
         $errorMessage = "E-Mail oder Passwort war ungültig!";
