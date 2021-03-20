@@ -3,12 +3,7 @@
 if (session_status() === 1) {
     session_start();
 
-    $database = require('../database/config/config.php');
-    $host = $database['db']['host'];
-    $dbname = $database['db']['dbname'];
-    $user = $database['db']['username'];
-    $password = $database['db']['password'];
-    $pdo = new PDO("mysql:host={$host};dbname={$dbname}", $user, $password);
+    $pdo = require 'database/connect.php';
 }
 
 
