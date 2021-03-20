@@ -3,7 +3,7 @@
 if (session_status() === 1) {
     session_start();
 
-    $pdo = require 'database/connect.php';
+    $pdo = require '../database/connect.php';
 }
 
 
@@ -22,8 +22,6 @@ if (isset($_GET['login'])) {
     } else {
         $errorMessage = "E-Mail oder Passwort war ungültig!";
     }
-
-
 }
 ?>
 <!DOCTYPE html>

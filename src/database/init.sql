@@ -123,7 +123,7 @@ create table product
     product_ID int auto_increment,
     name varchar(1024) not null,
     price int not null,
-    discount int null,
+    discount int not null default 0,
     description varchar(8192) null,
     constraint Product_pk
         primary key (product_ID)
