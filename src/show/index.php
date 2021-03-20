@@ -1,6 +1,6 @@
 <?php
 $pdo = require '../database/connect.php';
-
+require '../database/authentication.php'
 ?>
 
 
