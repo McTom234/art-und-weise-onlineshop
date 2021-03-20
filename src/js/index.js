@@ -1,3 +1,14 @@
+function addToBasket(id, count){
+    var basket = JSON.parse($.cookie('basket'));
+    basket.push([id, count]);
+    $.cookie('basket', JSON.stringify(basket));
+}
+
+function getBasket(){
+    $.post('../basket/', {basket: $.cookie('basket')});
+}
+
+
 $(function() {
 
     onstart = true;

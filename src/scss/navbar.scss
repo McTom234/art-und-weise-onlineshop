@@ -1,0 +1,15 @@
+.nav-left{
+  width: 15vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar {
+  height: 10vh;
+  position: sticky;
+  top: 0;
+  background-color: $navbar-color;
+}
+
+.navbar_placeholder {}

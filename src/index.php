@@ -1,6 +1,5 @@
 <?php
 $pdo = require 'database/connect.php';
-require 'database/authentication.php';
 ?>
 
 
@@ -58,7 +57,6 @@ require 'database/authentication.php';
                 </a>
             <?php } ?>
 
-
         </div>
 
         <button class="more_items_button">Weitere</button>
@@ -68,7 +66,7 @@ require 'database/authentication.php';
 <?php require 'components/footer.php';?>
 
 </body>
-<script src="./js/jquery.min.js"></script>
-<script src="./js/bootstrap.bundle.min.js"></script>
-<script src="./js/index.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/index.js"></script>
 </html>
