@@ -1,6 +1,5 @@
 <?php
 $pdo = require 'database/connect.php';
-require './database/authentication.php'
 ?>
 
 
@@ -44,14 +43,21 @@ require './database/authentication.php'
 
 
             foreach ($products as $product) { ?>
-                <a href="show?id=<?php echo $product['id'] ?>">
+                <a href="show?id=<?php echo $product['product_ID'] ?>">
                     <div class="item">
                         <div class="item_image"></div>
                         <h3 class="item_title"><?php echo nl2br(htmlspecialchars($product['name']))?></h3>
                         <p class="item_description"><?php echo nl2br(htmlspecialchars($product['description']))?></p>
 
                         <div class="wrapper d-flex justify-content-between">
-                            <h3 class="item_price">3€</h3>
+                            <h3 class="item_price">
+                                <?php if ($product['discount'] > 0) {
+                                    echo $product['price'] - $product['price'] * ($product['discount']/100) . '€ ' . "<span style='text-decoration: line-through'>" . $product['price'] . '€</span>';
+                                } else {
+                                    echo $product['price'] . '€';
+
+                                } ?>
+                            </h3>
                             <button>Jetzt Bestellen</button>
                         </div>
                     </div>

@@ -26,7 +26,7 @@ $pdo = require '../database/connect.php';
     if (isset($_GET['id'])) {
 
         $id = htmlspecialchars($_GET['id']);
-        $statement = $pdo->prepare('SELECT * FROM products WHERE id = :id');
+        $statement = $pdo->prepare('SELECT * FROM product WHERE product_ID = :id');
         $statement->execute(array('id' => $id));
         $product = $statement->fetch();
 
@@ -36,7 +36,7 @@ $pdo = require '../database/connect.php';
             <div class="product_view">
                 <h1><?php echo $product['name']; ?></h1>
                 <p><?php echo $product['description']; ?></p>
-                <button onclick="addToBasket(<?php echo $product['id'];?>)">+ Warenkorb</button>
+                <button onclick="addToBasket(<?php echo $product['product_ID'];?>)">+ Warenkorb</button>
             </div>
 
         <?php } else { ?>
