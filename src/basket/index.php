@@ -23,25 +23,8 @@ $pdo = require '../database/connect.php';
     <?php require '../components/navbar.php'; ?>
 
     <?php
-    if (isset($_GET['id'])) {
+    if (isset($_POST['basket'])) {
 
-        $id = htmlspecialchars($_GET['id']);
-        $statement = $pdo->prepare('SELECT * FROM products WHERE id = :id');
-        $statement->execute(array('id' => $id));
-        $product = $statement->fetch();
-
-        if ($product) {
-            ?>
-
-            <div class="product_view">
-                <h1><?php echo $product['name']; ?></h1>
-                <p><?php echo $product['description']; ?></p>
-                <button onclick="addToBasket(<?php echo $product['id'];?>)">+ Warenkorb</button>
-            </div>
-
-        <?php } else { ?>
-            <h1>Produkt konnte nicht gefunden werden!</h1>
-        <?php }
     } else { ?>
         <h1>Produkt konnte nicht gefunden werden.</h1>
     <?php } ?>
