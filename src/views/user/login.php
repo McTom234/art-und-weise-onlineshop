@@ -3,7 +3,7 @@
 if (session_status() === 1) {
     session_start();
 
-    $pdo = require '../database/connect.php';
+    $pdo = require '../Database/databaseConnection.php';
 }
 
 

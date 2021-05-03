@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-$pdo = require '../database/connect.php';
+$pdo = require '../Database/databaseConnection.php';
 
  
 if(isset($_GET['register'])) {

@@ -22,18 +22,19 @@
                 <li class="nav-item"><a class="nav-link" href="#">Über uns</a></li>
             </ul>
             <form class="d-flex">
-                <?php
-                    if ($loggedIn) {
-                        echo '<span class="navbar-text">'.$loggedIn['forename'].' '.$loggedIn['surname'].'</span>';
-                        echo '<a class="nav-link" href="logout">Abmelden</a>';
-                        echo '<button>Warenkorb</button>';
-                    }
-                    else {
-                        echo '<a class="nav-link" href="login">Anmelden</a>
-                                <a class="nav-link" href="regristration">Registrieren</a>
-                                <button>Warenkorb</button>';
-                    }
-                ?>
+                <?php if ($loggedIn) { ?>
+                    <span class="navbar-text"> <?= $loggedIn['forename'] . ' ' . $loggedIn['surname'] ?></span>
+                    <a class="nav-link" href="logout">Abmelden</a>';
+                    <a class="nav-link" href="shopping-cart">
+                        <button>Warenkorb</button>
+                    </a>
+                <?php } else { ?>
+                    <a class="nav-link" href="login">Anmelden</a>
+                    <a class="nav-link" href="regristration">Registrieren</a>
+                    <a class="nav-link" href="shopping-cart">
+                        <button>Warenkorb</button>
+                    </a>
+                <?php } ?>
             </form>
         </div>
     </div>

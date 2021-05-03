@@ -1,5 +1,5 @@
 <?php
-$pdo = require '../database/connect.php';
+$pdo = require '../Database/databaseConnection.php';
 
 ?>
 
@@ -23,7 +23,7 @@ $pdo = require '../database/connect.php';
     <?php require '../components/navbar.php'; ?>
 
     <?php
-    if (isset($_POST['basket'])) {
+    if (isset($_POST['shopping-cart'])) {
 
     } else { ?>
         <h1>Produkt konnte nicht gefunden werden.</h1>
@@ -34,8 +34,8 @@ $pdo = require '../database/connect.php';
 <?php require '../components/footer.php'; ?>
 
 </body>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/jquery.cookie.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/index.js"></script>
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.cookie.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/jsndex.js"></script>
 </html>

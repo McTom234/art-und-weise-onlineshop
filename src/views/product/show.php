@@ -1,6 +1,6 @@
 <?php
-$pdo = require '../database/connect.php';
-require '../database/authentication.php'
+$pdo = require '../Database/databaseConnection.php';
+require '../Database/authentication.php'
 ?>
 
 
@@ -51,8 +51,8 @@ require '../database/authentication.php'
 <?php require '../components/footer.php'; ?>
 
 </body>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/jquery.cookie.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/index.js"></script>
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.cookie.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/jsndex.js"></script>
 </html>

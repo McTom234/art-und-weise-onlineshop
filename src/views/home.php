@@ -1,9 +1,3 @@
-<?php
-$pdo = require 'database/connect.php';
-require 'database/authentication.php'
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +6,7 @@ require 'database/authentication.php'
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerfirma Art und Weise</title>
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="/src/assets/css/home.css">
 </head>
 
 <body>
@@ -26,7 +20,7 @@ require 'database/authentication.php'
     </div>
 </header>
 
-<?php require 'components/navbar.php';?>
+<?php require '../views/layout/navbar.php';?>
 
 <div class="recommended">
     <div class="container">
@@ -37,25 +31,20 @@ require 'database/authentication.php'
 
         <div class="items_wrapper">
 
-            <?php
+            <?php foreach ($products as $product):?>
 
-            $statement = $pdo->query("SELECT * FROM product LIMIT 3");
-            $products = $statement->fetchAll();
-
-
-            foreach ($products as $product) { ?>
-                <a href="show?id=<?php echo $product['product_ID'] ?>">
+                <a href="product/show.php?id=<?=$product->id?>">
                     <div class="item">
                         <div class="item_image"></div>
-                        <h3 class="item_title"><?php echo nl2br(htmlspecialchars($product['name']))?></h3>
-                        <p class="item_description"><?php echo nl2br(htmlspecialchars($product['description']))?></p>
+                        <h3 class="item_title"><?=$product->name?></h3>
+                        <p class="item_description"><?php echo nl2br(htmlspecialchars($product->shortDescription))?></p>
 
                         <div class="wrapper d-flex justify-content-between">
                             <h3 class="item_price">
-                                <?php if ($product['discount'] > 0) {
-                                    echo $product['price'] - $product['price'] * ($product['discount']/100) . '€ ' . "<span style='text-decoration: line-through'>" . $product['price'] . '€</span>';
+                                <?php if ($product->discount > 0) {
+                                    echo $product->price - $product->price * ($product->discount/100) . '€ ' . "<span style='text-decoration: line-through'>" . $product->price . '€</span>';
                                 } else {
-                                    echo $product['price'] . '€';
+                                    echo $product->price . '€';
 
                                 } ?>
                             </h3>
@@ -63,7 +52,7 @@ require 'database/authentication.php'
                         </div>
                     </div>
                 </a>
-            <?php } ?>
+            <?php endforeach; ?>
 
         </div>
 
@@ -71,10 +60,10 @@ require 'database/authentication.php'
     </div>
 </div>
 
-<?php require 'components/footer.php';?>
+<?php require '../views/layout/footer.php';?>
 
 </body>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/index.js"></script>
+<script src="../assets/jsndex.js"></script>
 </html>

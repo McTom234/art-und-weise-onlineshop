@@ -1,6 +1,6 @@
 # libraries
 node_modules
-src/bootstrap
+src/assets/bootstrap
 .idea
 
 package-lock.json
@@ -9,4 +9,4 @@ package-lock.json
 dist
 
 # individual config files
-src/database/config/config.php
+src/src/Core/Database/config.php
