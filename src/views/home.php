@@ -33,7 +33,7 @@
 
             <?php foreach ($products as $product):?>
 
-                <a href="product/show.php?id=<?=$product->id?>">
+                <a href="./show?id=<?=$product->product_ID?>">
                     <div class="item">
                         <div class="item_image"></div>
                         <h3 class="item_title"><?=$product->name?></h3>

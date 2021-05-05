@@ -1,9 +1,3 @@
-<?php
-$pdo = require '../Database/databaseConnection.php';
-require '../Database/authentication.php'
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +6,7 @@ require '../Database/authentication.php'
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerfirma Art und Weise</title>
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="/src/assets/css/home.css">
 </head>
 
 <body>
@@ -20,39 +14,27 @@ require '../Database/authentication.php'
 <div class="container">
 
 
-    <?php require '../components/navbar.php'; ?>
+    <?php include __DIR__ . '/../layout/navbar.php'; ?>
 
-    <?php
-    if (isset($_GET['id'])) {
-
-        $id = htmlspecialchars($_GET['id']);
-        $statement = $pdo->prepare('SELECT * FROM product WHERE product_ID = :id');
-        $statement->execute(array('id' => $id));
-        $product = $statement->fetch();
-
-        if ($product) {
-            ?>
+    <?php if ($product) {?>
 
             <div class="product_view">
-                <h1><?php echo $product['name']; ?></h1>
-                <p><?php echo $product['description']; ?></p>
-                <button onclick="addToBasket(<?php echo $product['product_ID'];?>)">+ Warenkorb</button>
+                <h1><?php echo $product->name; ?></h1>
+                <p><?php echo $product->description; ?></p>
+                <button onclick="addToBasket(<?php echo $product->product_ID;?>)">+ Warenkorb</button>
             </div>
 
-        <?php } else { ?>
-            <h1>Produkt konnte nicht gefunden werden!</h1>
-        <?php }
-    } else { ?>
-        <h1>Produkt konnte nicht gefunden werden.</h1>
+    <?php } else { ?>
+        <h1>Produkt konnte nicht gefunden werden!</h1>
     <?php } ?>
 
 </div>
 
-<?php require '../components/footer.php'; ?>
+<?php include __DIR__ . '/../layout/footer.php'; ?>
 
 </body>
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/jquery.cookie.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/jsndex.js"></script>
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/jquery.cookie.js"></script>
+<script src="../../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/js/index.js"></script>
 </html>

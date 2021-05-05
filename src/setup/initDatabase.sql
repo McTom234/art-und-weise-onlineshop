@@ -9,7 +9,7 @@
 #                          PRIMARY KEY (`id`), UNIQUE (`username`)
 # ) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-# Table User
+# Table Users
 
 create table `user`
 (
