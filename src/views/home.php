@@ -63,7 +63,6 @@
 <?php require '../views/layout/footer.php';?>
 
 </body>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="../assets/jsndex.js"></script>
+<script src="/src/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/src/assets/js/index.js"></script>
 </html>

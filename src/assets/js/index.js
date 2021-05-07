@@ -1,24 +1,3 @@
-function addToBasket(id, count){
-    var basket
-    var cookies = $.cookie('cookies');
-    var cookiesObject;
-    if(cookies != null){
-        cookiesObject = JSON.parse(cookies);
-    }else {
-        cookiesObject = {
-            basket: []
-        }
-    }
-    cookiesObject.basket.push([id, count]);
-    $.cookie('cookies', JSON.stringify(cookiesObject));
-}
-
-function getBasket(){
-    $.post('../basket/', {basket: $.cookie('cookies')});
-    var cookies = JSON.parse($.cookie('cookies'));
-    return cookies.basket;
-}
-
 $(function() {
 
 

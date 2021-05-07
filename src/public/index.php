@@ -23,9 +23,17 @@ $root = [
         'controller' => 'controller',
         'methode' => 'show',
     ],
+    '/shopping-cart' => [
+        'controller' => 'controller',
+        'methode' => 'shoppingCart',
+    ],
     '/notFound' => [
         'controller' => 'controller',
         'methode' => 'notFound',
+    ],
+    '/fetchShoppingCart' => [
+        'controller' => 'controller',
+        'methode' => 'fetchShoppingCart',
     ]
 ];
 

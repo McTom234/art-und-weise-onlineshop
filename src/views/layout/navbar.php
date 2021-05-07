@@ -31,9 +31,7 @@
                 <?php } else { ?>
                     <a class="nav-link" href="login">Anmelden</a>
                     <a class="nav-link" href="registration">Registrieren</a>
-                    <a class="nav-link" href="shopping-cart">
-                        <button>Warenkorb</button>
-                    </a>
+                    <a class="nav-button" href="shopping-cart">Warenkorb</a>
                 <?php } ?>
             </form>
         </div>

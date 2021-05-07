@@ -21,7 +21,7 @@
             <div class="product_view">
                 <h1><?php echo $product->name; ?></h1>
                 <p><?php echo $product->description; ?></p>
-                <button onclick="addToBasket(<?php echo $product->product_ID;?>)">+ Warenkorb</button>
+                <button onclick="addItem(<?=$product->product_ID?>, '<?=$product->name?>')">+ Warenkorb</button>
             </div>
 
     <?php } else { ?>
@@ -33,8 +33,5 @@
 <?php include __DIR__ . '/../layout/footer.php'; ?>
 
 </body>
-<script src="../../assets/js/jquery.min.js"></script>
-<script src="../../assets/js/jquery.cookie.js"></script>
-<script src="../../assets/js/bootstrap.bundle.min.js"></script>
-<script src="../../assets/js/index.js"></script>
+<script src="../../assets/js/shoppingCart.js"></script>
 </html>

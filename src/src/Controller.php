@@ -175,4 +175,29 @@ class Controller extends AbstractController {
     public function logout(){
        $this->render("user/logout");
     }
+
+    public function shoppingCart(){
+        $authentication = $this->authentication();
+
+        $this->render("product/shoppingCart", [
+            'loggedIn' => $authentication
+        ]);
+    }
+
+    public function fetchShoppingCart(){
+
+        if(isset($_POST)){
+
+            $shoppingCartString = $_POST['shoppingCart'];
+            $shoppingCart = json_decode($shoppingCartString, true);
+
+            $items = [];
+           foreach($shoppingCart as $id => $count){
+                array_push($items, $this->productsRepository->fetch($id));
+            }
+           echo json_encode($items);
+        }
+
+
+    }
 }
