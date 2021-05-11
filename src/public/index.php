@@ -3,7 +3,7 @@
 require '../init.php';
 
 $root = [
-    '/home' => [
+    '/' => [
         'controller' => 'controller',
         'methode' => 'home',
     ],

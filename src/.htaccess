@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !/public/index.php/
+RewriteCond %{REQUEST_URI} !/assets/
+RewriteRule (.*) /public/index.php/$1 [L]
