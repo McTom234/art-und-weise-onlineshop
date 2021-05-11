@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrierung</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/src/assets/css/forms.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/dist/assets/css/forms.css" />
 </head>
 <body>
 <div class="page_form">
