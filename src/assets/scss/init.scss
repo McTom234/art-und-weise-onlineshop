@@ -1,3 +1,4 @@
+/**
 @import "../bootstrap/functions";
 @import "../bootstrap/variables";
 @import "../bootstrap/mixins";
@@ -37,7 +38,7 @@
 @import "../bootstrap/spinners";
 @import "../bootstrap/helpers";
 @import "../bootstrap/utilities/api";
-
+**/
 
 $base-color: #FFFFFF;
 $text-color: #000000;
@@ -49,7 +50,8 @@ $navbar-color: #FFFFFF;
 }
 
 body{
-
+    font-family: "Roboto Light", sans-serif;
+    margin: 0;
 }
 a {
     text-decoration: none;
@@ -57,6 +59,11 @@ a {
     &:hover{
         color: $text-color;
     }
+}
+
+.container{
+    margin-right: 10vw;
+    margin-left: 10vw;
 }
 
 .link{

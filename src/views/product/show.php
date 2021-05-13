@@ -10,11 +10,8 @@
 </head>
 
 <body>
-
+<?php include __DIR__ . '/../layout/navbar.php'; ?>
 <div class="container">
-
-
-    <?php include __DIR__ . '/../layout/navbar.php'; ?>
 
     <?php if ($product) {?>
 

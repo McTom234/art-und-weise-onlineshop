@@ -23,6 +23,10 @@ $root = [
         'controller' => 'controller',
         'methode' => 'show',
     ],
+    '/products' => [
+        'controller' => 'controller',
+        'methode' => 'products',
+    ],
     '/shopping-cart' => [
         'controller' => 'controller',
         'methode' => 'shoppingCart',

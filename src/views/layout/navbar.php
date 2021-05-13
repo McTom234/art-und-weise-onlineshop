@@ -1,39 +1,45 @@
-<nav class="navbar navbar-light navbar-expand-md d-xxl-flex navigation-clean-button">
-    <div class="container">
-        <a class="navbar-brand" href="#">Art &amp; Weise</a>
-        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-            <span class="visually-hidden">Toggle navigation</span>
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Start</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown">Dropdown</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Karten</a>
-                        <a class="dropdown-item" href="#">Lesezeichen</a>
-                        <a class="dropdown-item" href="#">Kategorie 3</a>
-                    </div>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="#">Hintergrund</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Über uns</a></li>
-            </ul>
-            <form class="d-flex">
-                <?php if($loggedIn) { ?>
-                    <span class="navbar-text"> <?= $loggedIn->forename . ' ' . $loggedIn->surname ?></span>
-                    <a class="nav-link" href="logout">Abmelden</a>
-                    <a class="nav-link" href="shopping-cart">
-                        <button>Warenkorb</button>
-                    </a>
-                <?php } else { ?>
-                    <a class="nav-link" href="login">Anmelden</a>
-                    <a class="nav-link" href="registration">Registrieren</a>
-                    <a class="nav-button" href="shopping-cart">Warenkorb</a>
-                <?php } ?>
-            </form>
+<div class="navbar" id="navbar">
+    <div class="left">
+        <a href="/">Art und Weise</a>
+        <a href="/">Art und Weise</a>
+        <div class="dropdown">
+            <button class="dropbtn">Products
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="/">Link 1</a>
+                <a href="/">Link 2</a>
+                <a href="/">Link 3</a>
+            </div>
         </div>
     </div>
-</nav>
+
+    <div class="right">
+        <?php if($loggedIn) { ?>
+            <span class="navbar-text"> <?= $loggedIn->forename . ' ' . $loggedIn->surname ?></span>
+            <a href="logout">Abmelden</a>
+            <a href="shopping-cart">
+                <button>Warenkorb</button>
+            </a>
+        <?php } else { ?>
+            <a href="login">Anmelden</a>
+            <a href="registration">Registrieren</a>
+            <a class="nav-button" href="shopping-cart">Warenkorb</a>
+        <?php } ?>
+    </div>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("navbar");
+        if (x.className === "navbar") {
+            x.className += " responsive";
+        } else {
+            x.className = "navbar";
+        }
+    }
+</script>
+
+
+

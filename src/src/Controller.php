@@ -33,7 +33,6 @@ class Controller extends AbstractController {
     }
 
     public function home(){
-        $_SESSION['userid'] = 1;
         $authentication = $this->authentication();
 
         $products = $this->productsRepository->fetchNumber(3);
@@ -166,6 +165,17 @@ class Controller extends AbstractController {
 
         $this->render("product/shoppingCart", [
             'loggedIn' => $authentication
+        ]);
+    }
+
+    public function products(){
+        $authentication = $this->authentication();
+
+        $products = $this->productsRepository->fetchAll();
+
+        $this->render('product/products', [
+            'loggedIn' => $authentication,
+            'products' => $products
         ]);
     }
 

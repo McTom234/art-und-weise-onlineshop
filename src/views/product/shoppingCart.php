@@ -11,11 +11,11 @@
 </head>
 
 <body>
-
+<?php require __DIR__ . '/../layout/navbar.php'; ?>
 <div class="container">
 
 
-    <?php require __DIR__ . '/../layout/navbar.php'; ?>
+
 
     <h1>Warenkorb</h1>
     <div id="cart-list"></div>
