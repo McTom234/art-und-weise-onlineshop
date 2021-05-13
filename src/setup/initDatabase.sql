@@ -1,14 +1,3 @@
-# JP's user management
-
-# CREATE TABLE `users` (
-#                          `id` INT NOT NULL AUTO_INCREMENT ,
-#                          `username` VARCHAR(255) NOT NULL ,
-#                          `password` VARCHAR(255) NOT NULL ,
-#                          `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-#                          `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-#                          PRIMARY KEY (`id`), UNIQUE (`username`)
-# ) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 # Table Users
 
 create table `user`
@@ -20,10 +9,8 @@ create table `user`
     password varchar(512) not null,
     location_ID int null,
     constraint User_pk
-        primary key (user_ID),
-        unique (email)
+        primary key (user_ID)
 );
-
 
 create unique index User_Email_uindex
     on `user` (email);
