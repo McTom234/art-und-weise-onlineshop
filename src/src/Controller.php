@@ -118,24 +118,9 @@ class Controller extends AbstractController {
                 $error = true;
             }
 
-
-            //better way -> make email UNIQUE
-
-            /**
-            if(!$error) {
-                $statement = $pdo->prepare("SELECT user_ID FROM user WHERE email = :username");
-                $statement->execute(array('username' => $email));
-                $user = $statement->fetch();
-
-                if($user !== false) {
-                    $errorMessage = 'Dieser Benutzername ist bereits vergeben';
-                    $error = true;
-                }
-            }
-            **/
-
             if(!$error) {
 
+                // TODO: check if email (unique) is already used
                 $result = $this->usersRepository->registration($user);
 
                 if($result) {

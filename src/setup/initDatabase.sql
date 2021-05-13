@@ -20,7 +20,8 @@ create table `user`
     password varchar(512) not null,
     location_ID int null,
     constraint User_pk
-        primary key (user_ID)
+        primary key (user_ID),
+        unique (email)
 );
 
 
