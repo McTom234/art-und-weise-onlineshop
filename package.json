@@ -4,25 +4,17 @@
   "description": "Onlineshop for student company \"Art und Weise\"",
   "main": "index.js",
   "dependencies": {
-    "bootstrap": "^5.0.0-beta2",
     "copyfiles": "^2.4.1",
     "jquery": "^3.5.1",
     "jquery.cookie": "^1.4.1",
     "node-sass": "^5.0.0"
   },
-  "devDependencies": {
-    "php-server": "^0.2.1"
-  },
   "scripts": {
-    "update-copy": "npm update && npm run copy-bootstrap-scss && npm run copy-bootstrap-js && npm run copy-jquery-js",
-    "copy-bootstrap-js": "copyfiles -u 4 node_modules/bootstrap/dist/js/bootstrap.bundle.min.js dist/js",
-    "copy-bootstrap-scss": "copyfiles -u 3 node_modules/bootstrap/scss/* src/assets/bootstrap &&copyfiles -u 3 node_modules/bootstrap/scss/forms/* src/bootstrap && copyfiles -u 3 node_modules/bootstrap/scss/helpers/* src/bootstrap && copyfiles -u 3 node_modules/bootstrap/scss/mixins/* src/bootstrap && copyfiles -u 3 node_modules/bootstrap/scss/utilities/* src/bootstrap && copyfiles -u 3 node_modules/bootstrap/scss/vendor/* src/bootstrap",
+    "update-copy": "npm update && npm run copy-jquery-js",
     "copy-jquery-js": "copyfiles -u 3 node_modules/jquery/dist/jquery.min.js dist/js && copyfiles -u 2 node_modules/jquery.cookie/jquery.cookie.js",
     "compile-folder": "node-sass src/assets/scss/sites/ -o dist/assets/css/",
     "compile-watch": "node-sass -r -w src/assets/scss/sites/ -o dist/assets/css/",
-    "start-dev-server": "node server.js",
-    "make-dist-ready": "copyfiles -e \"src/assets/bootstrap/**\" -e \"src/assets/scss/**\" -u 1 \"src/**/*\" dist/",
-    "serve": "npm run make-dist-ready & npm run compile-folder && npm run start-dev-server"
+    "make-dist-ready": "copyfiles -e \"src/assets/scss/**\" -u 1 \"src/**/*\" dist/ && copyfiles -u 1 \"src/.htaccess\" dist/"
   },
   "repository": {
     "type": "git",
