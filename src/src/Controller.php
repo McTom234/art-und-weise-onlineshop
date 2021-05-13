@@ -179,9 +179,20 @@ class Controller extends AbstractController {
         ]);
     }
 
+    public function fetchProducts(){
+        if(isset($_POST['row']) && isset($_POST['number'])){
+            $products = $this->productsRepository->fetchNumberOffset($_POST['number'], $_POST['row']);
+            $this->render('layout/productsRow', [
+               'products' => $products
+            ]);
+
+        }
+
+    }
+
     public function fetchShoppingCart(){
 
-        if(isset($_POST)){
+        if(isset($_POST['shoppingCart'])){
 
             $shoppingCartString = $_POST['shoppingCart'];
             $shoppingCart = json_decode($shoppingCartString, true);
@@ -193,6 +204,11 @@ class Controller extends AbstractController {
            echo json_encode($items);
         }
 
+    }
 
+    public function insertTestProducts($count){
+        for($i = 0; $i < $count; $i++){
+            $this->productsRepository->insertProduct('Product ' . $i, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.');
+        }
     }
 }

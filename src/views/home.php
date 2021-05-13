@@ -20,47 +20,25 @@
     </div>
 </header>
 
-<?php require '../views/layout/navbar.php';?>
-
-<div class="recommended">
-    <div class="container">
+<?php require '../views/layout/navbar.php'; ?>
+<div class="container content">
+    <div class="recommended">
         <div class="intro">
             <h2 class="text-center">Beliebt</h2>
             <p class="text-center">Eine Auswahl der beliebtesten Produkte</p>
         </div>
 
-        <div class="items_wrapper">
+        <?php
+        include __DIR__ . './layout/productsRow.php';
+        ?>
 
-            <?php foreach ($products as $product):?>
-
-                <a href="./show?id=<?=$product->product_ID?>">
-                    <div class="item">
-                        <div class="item_image"></div>
-                        <h3 class="item_title"><?=$product->name?></h3>
-                        <p class="item_description"><?php echo nl2br(htmlspecialchars($product->shortDescription))?></p>
-
-                        <div class="wrapper d-flex justify-content-between">
-                            <h3 class="item_price">
-                                <?php if ($product->discount > 0) {
-                                    echo $product->price - $product->price * ($product->discount/100) . '€ ' . "<span style='text-decoration: line-through'>" . $product->price . '€</span>';
-                                } else {
-                                    echo $product->price . '€';
-
-                                } ?>
-                            </h3>
-                            <button>Jetzt Bestellen</button>
-                        </div>
-                    </div>
-                </a>
-            <?php endforeach; ?>
-
-        </div>
-
-        <button class="more_items_button">Weitere</button>
+        <a href="/products">
+            <button class="more_items_button">Weitere</button>
+        </a>
     </div>
 </div>
 
-<?php require '../views/layout/footer.php';?>
+<?php require '../views/layout/footer.php'; ?>
 
 </body>
 <script src="/assets/js/jquery-3.6.0.min.js"></script>

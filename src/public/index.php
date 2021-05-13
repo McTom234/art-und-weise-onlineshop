@@ -35,6 +35,10 @@ $root = [
         'controller' => 'controller',
         'methode' => 'notFound',
     ],
+    '/fetchProducts' => [
+        'controller' => 'controller',
+        'methode' => 'fetchProducts',
+    ],
     '/fetchShoppingCart' => [
         'controller' => 'controller',
         'methode' => 'fetchShoppingCart',

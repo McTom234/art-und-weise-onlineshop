@@ -2,6 +2,7 @@
 
 namespace Products;
 use Core\AbstractRepository;
+use PDO;
 
 class ProductsRepository extends AbstractRepository {
 
@@ -18,5 +19,16 @@ class ProductsRepository extends AbstractRepository {
     public function getIdName()
     {
         return "product_ID";
+    }
+
+    function fetchNumberOffset($number, $offset){
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table LIMIT :number OFFSET :offset");
+        $statement->execute([':number' => $number, ':offset' => $offset]);
+        return $statement->fetchAll(PDO::FETCH_CLASS, $this->model);
+    }
+
+    function insertProduct($name, $description){
+        $statement = $this->pdo->prepare("INSERT INTO $this->table (name, description) VALUES (:name, :description)");
+        $statement->execute([':name' => $name, ':description' => $description]);
     }
 }

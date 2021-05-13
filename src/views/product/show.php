@@ -11,7 +11,7 @@
 
 <body>
 <?php include __DIR__ . '/../layout/navbar.php'; ?>
-<div class="container">
+<div class="container content">
 
     <?php if ($product) {?>
 

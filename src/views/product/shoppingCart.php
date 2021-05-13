@@ -12,7 +12,7 @@
 
 <body>
 <?php require __DIR__ . '/../layout/navbar.php'; ?>
-<div class="container">
+<div class="container content">
 
 
 
