@@ -10,6 +10,16 @@
 </head>
 
 <body>
+
+<div id="popup-box">
+    <a href="#" class="cancel">×</a>
+    <p><strong><?=$product->name?></strong> wurde zum Warenkorb hinzugefügt</p>
+    <a href="./shopping-cart"><button>Zum Warenkorb</button></a>
+</div>
+<div id="popup">
+
+</div>
+
 <?php include __DIR__ . '/../layout/navbar.php'; ?>
 <div class="container content">
 
@@ -18,12 +28,14 @@
             <div class="product_view">
                 <h1><?php echo $product->name; ?></h1>
                 <p><?php echo $product->description; ?></p>
-                <button onclick="addItem(<?=$product->product_ID?>, '<?=$product->name?>')">+ Warenkorb</button>
+                <a href="#popup-box"><button onclick="addItem(<?=$product->product_ID?>)">+ Warenkorb</button></a>
             </div>
 
     <?php } else { ?>
         <h1>Produkt konnte nicht gefunden werden!</h1>
     <?php } ?>
+
+
 
 </div>
 

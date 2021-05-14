@@ -73,7 +73,7 @@ function deleteItem(id){
     setCookies('shoppingCart', shoppingCart);
 }
 
-function addItem(id, name, count = 1){
+function addItem(id,  count = 1){
 
     let shoppingCart = getCookies('shoppingCart');
     if(shoppingCart === null){
@@ -124,4 +124,9 @@ function getCookies(cookieName){
         }
     }
     return null;
+}
+
+function closePopup() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
 }
