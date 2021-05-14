@@ -42,6 +42,10 @@ $root = [
     '/fetchShoppingCart' => [
         'controller' => 'controller',
         'methode' => 'fetchShoppingCart',
+    ],
+    '/admin/dashboard' => [
+        'controller' => 'adminController',
+        'methode' => 'adminDashboard'
     ]
 ];
 

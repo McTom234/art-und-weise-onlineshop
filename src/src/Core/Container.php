@@ -4,6 +4,7 @@ namespace Core;
 
 use PDO;
 use Controller;
+use AdminController;
 use Products\ProductsRepository;
 use Users\UsersRepository;
 
@@ -15,7 +16,10 @@ class Container{
     public function __construct(){
         $this->recipes = [
             'controller' => function (){
-            return new Controller($this->make('usersRepository'),$this->make('productsRepository'));
+                return new Controller($this->make('usersRepository'),$this->make('productsRepository'));
+            },
+            'adminController' => function (){
+                return new AdminController($this->make('usersRepository'),$this->make('productsRepository'));
             },
             'usersRepository' => function () {
                 return new UsersRepository($this->make('pdo'));
