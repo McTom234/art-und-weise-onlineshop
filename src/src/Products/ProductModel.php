@@ -9,6 +9,7 @@ class ProductModel
     public $price;
     public $discountPercent;
     public $description;
+    public $image;
 
     public function __get($name)
     {

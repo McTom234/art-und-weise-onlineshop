@@ -1,6 +1,7 @@
 <a href="./show?id=<?=$product->product_ID?>">
     <div class="item">
-        <div class="item_image"></div>
+        <img src="data:image/png;base64,<?=$product->images[0]->base64?>" class="item_image" alt="Image: <?=$product->name?>" />
+
         <h3 class="item_title"><?=$product->name?></h3>
         <p class="item_description"><?php echo nl2br(htmlspecialchars($product->shortDescription))?></p>
 

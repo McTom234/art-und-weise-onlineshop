@@ -1,6 +1,7 @@
 <?php
 
 use Core\AbstractController;
+use Products\ImagesProductsRepository;
 use Products\ProductsRepository;
 use Users\UsersRepository;
 
@@ -8,11 +9,13 @@ class Controller extends AbstractController {
 
     private $productsRepository;
     private $usersRepository;
+    private $imagesProductRepository;
 
-    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository)
+    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, ImagesProductsRepository $imagesProductRepository)
     {
         $this->usersRepository = $usersRepository;
         $this->productsRepository = $productsRepository;
+        $this->imagesProductRepository = $imagesProductRepository;
     }
 
     public function authentication(){
@@ -36,6 +39,10 @@ class Controller extends AbstractController {
         $authentication = $this->authentication();
 
         $products = $this->productsRepository->fetchNumber(3);
+        foreach ($products as $product){
+            $product_ID = $product->product_ID;
+            $product->images = $this->imagesProductRepository->fetchByProductID($product_ID);
+        }
 
         $this->render("home", [
             'loggedIn' => $authentication,
@@ -171,17 +178,20 @@ class Controller extends AbstractController {
     public function products(){
         $authentication = $this->authentication();
 
-        $products = $this->productsRepository->fetchAll();
-
         $this->render('product/products', [
-            'loggedIn' => $authentication,
-            'products' => $products
+            'loggedIn' => $authentication
         ]);
     }
 
     public function fetchProducts(){
         if(isset($_POST['row']) && isset($_POST['number'])){
             $products = $this->productsRepository->fetchNumberOffset($_POST['number'], $_POST['row']);
+
+            foreach ($products as $product){
+                $product_ID = $product->product_ID;
+                $product->images = $this->imagesProductRepository->fetchByProductID($product_ID);
+            }
+
             $this->render('layout/productsRow', [
                'products' => $products
             ]);
@@ -211,6 +221,15 @@ class Controller extends AbstractController {
     public function insertTestProducts($count){
         for($i = 0; $i < $count; $i++){
             $this->productsRepository->insertProduct('Product ' . $i, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.');
+        }
+    }
+
+    public function insertTestImages($count){
+        $products = $this->productsRepository->fetchNumber($count);
+        foreach($products AS $product){
+            $img = file_get_contents('https://picsum.photos/200/300');
+            $this->imagesProductRepository->insertImage($product->product_ID, $img);
+
         }
     }
 }
