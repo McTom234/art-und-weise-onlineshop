@@ -199,7 +199,9 @@ class Controller extends AbstractController {
 
             $items = [];
            foreach($shoppingCart as $id => $count){
-                array_push($items, $this->productsRepository->fetch($id));
+               $item = $this->productsRepository->fetch($id);
+               $item->description = $item->getShortDescription(50);
+                array_push($items, $item);
             }
            echo json_encode($items);
         }

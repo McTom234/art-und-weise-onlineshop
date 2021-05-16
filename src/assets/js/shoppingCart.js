@@ -1,14 +1,13 @@
-
 renderShoppingCart();
 
 
-function renderShoppingCart(){
+function renderShoppingCart() {
 
     const cartList = document.getElementById('cart-list');
     const shoppingCart = getShoppingCart();
     const shoppingCartString = JSON.stringify(shoppingCart);
 
-    if(shoppingCart != null){
+    if (shoppingCart != null) {
         let http = new XMLHttpRequest();
         let url = './fetchShoppingCart';
         let params = `shoppingCart=${shoppingCartString}`;
@@ -16,18 +15,26 @@ function renderShoppingCart(){
 
         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-        http.onreadystatechange = function() {
-            if(http.readyState === 4 && http.status === 200) {
+        http.onreadystatechange = function () {
+            if (http.readyState === 4 && http.status === 200) {
 
                 cartList.innerHTML = '';
 
                 let response = JSON.parse(http.responseText);
-                response.forEach( item => {
-                    let count = shoppingCart[item.product_ID];
+
+                response.forEach((item, index) => {
+                    if (!item) {
+                        const shoppingCartKeys = Object.keys(shoppingCart);
+                        deleteItem(shoppingCartKeys[index]);
+                        return;
+                    }
+
+                    const {product_ID} = item;
+                    let count = shoppingCart[product_ID];
 
                     let itemBox = document.createElement('div');
-                    itemBox.addEventListener('click', function (){
-                        window.location.href = './show?id=' + item.product_ID;
+                    itemBox.addEventListener('click', function () {
+                        window.location.href = './show?id=' + product_ID;
                     });
                     itemBox.className = 'itemBox';
 
@@ -37,22 +44,25 @@ function renderShoppingCart(){
                     let itemName = document.createElement('h3');
                     itemName.textContent = item.name;
 
+                    let itemDescription = document.createElement('p');
+                    itemDescription.textContent = item.description;
+
+
                     let deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Löschen';
                     deleteButton.addEventListener('click', function () {
-                        event.stopPropagation();
-                        deleteItem(item.product_ID);
-                        cartList.removeChild(itemBox);
+                            event.stopPropagation();
+                            deleteItem(product_ID);
+                            cartList.removeChild(itemBox);
                         }
                     )
 
 
                     itemBox.appendChild(itemName);
+                    itemBox.appendChild(itemDescription);
                     itemBox.appendChild(itemCount);
                     itemBox.appendChild(deleteButton);
                     cartList.appendChild(itemBox);
-
-
 
 
                 });
@@ -64,57 +74,57 @@ function renderShoppingCart(){
 
 }
 
-function deleteItem(id){
+function deleteItem(id) {
     let shoppingCart = getCookies('shoppingCart');
-    if(shoppingCart === null){
+    if (shoppingCart === null) {
         return;
     }
     delete shoppingCart[id];
     setCookies('shoppingCart', shoppingCart);
 }
 
-function addItem(id,  count = 1){
+function addItem(id, count = 1) {
 
     let shoppingCart = getCookies('shoppingCart');
-    if(shoppingCart === null){
+    if (shoppingCart === null) {
         shoppingCart = {};
     }
 
-    if(shoppingCart[id] == null){
+    if (shoppingCart[id] == null) {
         shoppingCart[id] = count;
-    }else{
+    } else {
         shoppingCart[id] += count;
     }
 
     setCookies('shoppingCart', shoppingCart);
 
-    if(name){
+    if (name) {
         alert(name + ' wurde dem Warenkorb hinzugefügt!');
     }
 }
 
-function getShoppingCart(){
+function getShoppingCart() {
 
     return getCookies('shoppingCart');
 
 }
 
-function setCookies(cookieName, cookieObject, expireDays = 30){
+function setCookies(cookieName, cookieObject, expireDays = 30) {
 
     let cookieString = JSON.stringify(cookieObject);
 
     let day = new Date();
-    day.setTime(day.getTime() + (expireDays*24*60*60*1000));
+    day.setTime(day.getTime() + (expireDays * 24 * 60 * 60 * 1000));
 
     document.cookie = `${cookieName}=${cookieString}; expires=${day}; path=/;`
 }
 
-function getCookies(cookieName){
+function getCookies(cookieName) {
     const name = cookieName + '=';
     const decodedCookie = decodeURIComponent(document.cookie);
     const cookieStrings = decodedCookie.split(';');
 
-    for(let i = 0; i <cookieStrings.length; i++) {
+    for (let i = 0; i < cookieStrings.length; i++) {
         let string = cookieStrings[i];
         while (string.charAt(0) === ' ') {
             string = string.substring(1);
