@@ -7,15 +7,17 @@ class ProductModel
     public $product_ID;
     public $name;
     public $price;
-    public $discountPercent;
+    public $discount;
     public $description;
     public $image;
 
     public function __get($name)
     {
         switch ($name){
-            case 'discountPrice':
-                return $this->getDiscountPrice();
+            case 'priceEuro':
+                return $this->getPriceEuro();
+            case 'discountPriceEuro':
+                return $this->getDiscountPriceEuro();
             case 'shortDescription':
                 return $this->getShortDescription();
             default:
@@ -23,9 +25,14 @@ class ProductModel
         }
     }
 
-    private function getDiscountPrice()
+    private function getPriceEuro()
     {
-        return $this->price / $this->discountPercent * 100;
+        return $this->price / 100;
+    }
+
+    private function getDiscountPriceEuro()
+    {
+        return round($this->priceEuro * $this->discount) / 100;
     }
 
     public function getShortDescription($charsLimit = 150){

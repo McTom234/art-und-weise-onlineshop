@@ -33,8 +33,8 @@ class ProductsRepository extends AbstractRepository {
         return $statement->fetchAll(PDO::FETCH_CLASS, $this->model);
     }
 
-    function insertProduct($name, $description){
-        $statement = $this->pdo->prepare("INSERT INTO $this->table (name, description) VALUES (:name, :description)");
-        $statement->execute([':name' => $name, ':description' => $description]);
+    function insertProduct($name, $description, $price, $discount){
+        $statement = $this->pdo->prepare("INSERT INTO $this->table (name, price, discount, description) VALUES (:name, :price, :discount, :description)");
+        $statement->execute([':name' => $name, ':description' => $description, ':price' => $price, ':discount' => $discount]);
     }
 }
