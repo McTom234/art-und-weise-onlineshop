@@ -178,8 +178,42 @@ class Controller extends AbstractController {
     public function products(){
         $authentication = $this->authentication();
 
+        $request = [
+
+        ];
+
+        $page = 1;
+        if(isset($_GET['p'])){
+            $page = $_GET['p'];
+        }
+        $request['page'] = $page;
+
+        $numberProducts = 15;
+        $offset = ($page - 1) * $numberProducts;
+
+
+        if(isset($_GET['q'])){
+            $query = $_GET['q'];
+            $request['query'] = $query;
+            $products = $this->productsRepository->fetchNumberOffsetQuery($numberProducts, $offset, $query);
+        }else{
+            $products = $this->productsRepository->fetchNumberOffset($numberProducts, $offset);
+        }
+
+
+
+
+        foreach ($products as $product){
+            $product_ID = $product->product_ID;
+            $product->images = $this->imagesProductRepository->fetchByProductID($product_ID);
+        }
+        $maxPages = 10;
+
         $this->render('product/products', [
-            'loggedIn' => $authentication
+            'loggedIn' => $authentication,
+            'products' => $products,
+            'request' => $request,
+            'maxPages' => $maxPages
         ]);
     }
 

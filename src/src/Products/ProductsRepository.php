@@ -27,6 +27,12 @@ class ProductsRepository extends AbstractRepository {
         return $statement->fetchAll(PDO::FETCH_CLASS, $this->model);
     }
 
+    function fetchNumberOffsetQuery($number, $offset, $query){
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE name LIKE :query LIMIT :number OFFSET :offset");
+        $statement->execute([':query' => '%' . $query . '%',':number' => $number, ':offset' => $offset]);
+        return $statement->fetchAll(PDO::FETCH_CLASS, $this->model);
+    }
+
     function insertProduct($name, $description){
         $statement = $this->pdo->prepare("INSERT INTO $this->table (name, description) VALUES (:name, :description)");
         $statement->execute([':name' => $name, ':description' => $description]);

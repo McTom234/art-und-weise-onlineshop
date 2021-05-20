@@ -20,13 +20,13 @@ function fetchProducts(number){
 }
 
 for(let i = 0; i < 3; i++){
-    fetchProducts(3);
+   // fetchProducts(3);
 }
 
 $(window).scroll(function() {
     if($(window).scrollTop() > $(document).height() - $(window).height() * 2) {
         for(let i = 0; i < 3; i++){
-            fetchProducts(3);
+            //fetchProducts(3);
         }
     }
 });
