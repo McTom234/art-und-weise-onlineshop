@@ -20,6 +20,7 @@
     <h1>Warenkorb</h1>
     <div id="cart-list"></div>
 
+    <a href="" ><button>Kaufen</button></a>
 </div>
 
 <?php require __DIR__ . '/../layout/footer.php'; ?>

@@ -244,8 +244,14 @@ class Controller extends AbstractController {
             $items = [];
            foreach($shoppingCart as $id => $count){
                $item = $this->productsRepository->fetch($id);
-               $item->description = $item->getShortDescription(50);
-                array_push($items, $item);
+               if(!$item){
+                   array_push($items, false);
+                   continue;
+               }
+               $item->description = $item->getShortDescription(100);
+               $product_ID = $item->product_ID;
+               $item->images = $this->imagesProductRepository->fetchByProductID($product_ID);
+               array_push($items, $item);
             }
            echo json_encode($items);
         }
