@@ -7,7 +7,7 @@
     "copyfiles": "^2.4.1",
     "jquery": "^3.5.1",
     "jquery.cookie": "^1.4.1",
-    "node-sass": "^5.0.0"
+    "node-sass": "^6.0.1"
   },
   "scripts": {
     "update-copy": "npm update && npm run copy-jquery-js",
