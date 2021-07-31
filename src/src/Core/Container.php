@@ -2,6 +2,10 @@
 
 namespace Core;
 
+use Articles\ArticlesRepository;
+use Checkouts\CheckoutsRepository;
+use Locations\LocationsRepository;
+use Orders\OrdersRepository;
 use PDO;
 use Controller;
 use AdminController;
@@ -18,7 +22,7 @@ class Container{
     public function __construct(){
         $this->recipes = [
             'controller' => function (){
-                return new Controller($this->make('usersRepository'),$this->make('productsRepository'), $this->make('imagesProductsRepository'));
+                return new Controller($this->make('usersRepository'),$this->make('productsRepository'), $this->make('imagesProductsRepository') , $this->make('articlesRepository'), $this->make('checkoutsRepository'), $this->make('locationsRepository'), $this->make('ordersRepository'));
             },
             'adminController' => function (){
                 return new AdminController($this->make('usersRepository'),$this->make('productsRepository'));
@@ -35,8 +39,24 @@ class Container{
                 return new ImagesProductsRepository($this->make('pdo'), $this->make('imagesRepository'));
 
             },
+            'articlesRepository' => function () {
+            return new ArticlesRepository($this->make('pdo'));
+
+            },
+            'checkoutsRepository' => function () {
+                return new CheckoutsRepository($this->make('pdo'));
+
+            },
+            'locationsRepository' => function () {
+                return new LocationsRepository($this->make('pdo'));
+
+            },
+            'ordersRepository' => function () {
+                return new OrdersRepository($this->make('pdo'));
+
+            },
             'productsRepository' => function () {
-            return new ProductsRepository($this->make('pdo'));
+                return new ProductsRepository($this->make('pdo'), $this->make('imagesProductsRepository'));
 
             },
             'pdo' => function () {

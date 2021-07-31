@@ -1,6 +1,10 @@
 <?php
 
+use Articles\ArticlesRepository;
+use Checkouts\CheckoutsRepository;
 use Core\AbstractController;
+use Locations\LocationsRepository;
+use Orders\OrdersRepository;
 use Products\ImagesProductsRepository;
 use Products\ProductsRepository;
 use Users\UsersRepository;
@@ -10,12 +14,20 @@ class Controller extends AbstractController {
     private $productsRepository;
     private $usersRepository;
     private $imagesProductRepository;
+    private $articlesRepository;
+    private $checkoutsRepository;
+    private $locationsRepository;
+    private $ordersRepository;
 
-    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, ImagesProductsRepository $imagesProductRepository)
+    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, ImagesProductsRepository $imagesProductRepository, ArticlesRepository $articlesRepository, CheckoutsRepository $checkoutsRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository)
     {
         $this->usersRepository = $usersRepository;
         $this->productsRepository = $productsRepository;
         $this->imagesProductRepository = $imagesProductRepository;
+        $this->articlesRepository = $articlesRepository;
+        $this->checkoutsRepository = $checkoutsRepository;
+        $this->locationsRepository =  $locationsRepository;
+        $this->ordersRepository =  $ordersRepository;
     }
 
     public function authentication(){
@@ -54,6 +66,11 @@ class Controller extends AbstractController {
         $this->authentication();
 
         $message = null;
+        $buy = false;
+        if(isset($_GET['buy'])){
+            $buy = true;
+        }
+
         if (isset($_GET['login'])) {
             if (isset($_POST['email']) && isset($_POST['password'])) {
                 $email = $_POST['email'];
@@ -61,7 +78,12 @@ class Controller extends AbstractController {
                 $result = $this->usersRepository->login($email, $password);
 
                 if ($result) {
-                    header("Location: home");
+                    if(isset($_GET['buy'])){
+                        header("Location: /buy");
+                    }else{
+                        header("Location: /");
+                    }
+
                 } else {
                     $message = 'Email or Password wrong!';
                 }
@@ -72,7 +94,8 @@ class Controller extends AbstractController {
         }
 
         $this->render("user/login", [
-            'message' => $message
+            'message' => $message,
+            'buy' => $buy,
         ]);
 
     }
@@ -164,7 +187,9 @@ class Controller extends AbstractController {
     }
 
     public function logout(){
-       $this->render("user/logout");
+        session_start();
+        session_destroy();
+        header("Location: /");
     }
 
     public function shoppingCart(){
@@ -178,9 +203,7 @@ class Controller extends AbstractController {
     public function products(){
         $authentication = $this->authentication();
 
-        $request = [
-
-        ];
+        $request = [];
 
         $page = 1;
         if(isset($_GET['p'])){
@@ -192,13 +215,19 @@ class Controller extends AbstractController {
         $offset = ($page - 1) * $numberProducts;
 
 
+        $query = "";
         if(isset($_GET['q'])){
             $query = $_GET['q'];
             $request['query'] = $query;
             $products = $this->productsRepository->fetchNumberOffsetQuery($numberProducts, $offset, $query);
+
         }else{
             $products = $this->productsRepository->fetchNumberOffset($numberProducts, $offset);
+
         }
+        $maxPages = 0;
+        $numberTotalProducts = $this->productsRepository->fetchProductCount($query);
+        $maxPages = ceil(($numberTotalProducts / $numberProducts));
 
 
 
@@ -207,13 +236,79 @@ class Controller extends AbstractController {
             $product_ID = $product->product_ID;
             $product->images = $this->imagesProductRepository->fetchByProductID($product_ID);
         }
-        $maxPages = 10;
+
+
+
 
         $this->render('product/products', [
             'loggedIn' => $authentication,
             'products' => $products,
             'request' => $request,
             'maxPages' => $maxPages
+        ]);
+    }
+
+    public function buy(){
+        $authentication = $this->authentication();
+        $userLocation = $this->locationsRepository->fetch($authentication->location_ID);
+
+        if(!$authentication){
+            header('Location: /login?buy=1');
+        }
+
+
+
+
+
+        if(isset($_COOKIE['shoppingCart'])) {
+            $shoppingCartIDs = json_decode($_COOKIE['shoppingCart'], true);
+
+            $shoppingCart = [];
+
+            $totalPrice = 0;
+            foreach ($shoppingCartIDs as $product_ID => $quantity){
+                $product = $this->productsRepository->fetch($product_ID);
+                if($product){
+                    $price = $product->discountPriceEuro;
+                    $totalPrice += $price * $quantity;
+                    $product->price = $price;
+                    $product->count = $quantity;
+                    array_push($shoppingCart, $product);
+                }
+            }
+
+            if(isset($_GET['submit'])){
+                $checkout_ID = $this->checkoutsRepository->insertCheckout($authentication->user_ID);
+                foreach ($shoppingCartIDs as $product_ID => $quantity){
+                    $product = $this->productsRepository->fetch($product_ID);
+                    if($product) {
+                        $this->ordersRepository->insertOrder($checkout_ID, $product_ID, 0, $quantity);
+                    }
+                }
+                header('Location: /ordered');
+            }
+
+
+            $this->render('buy', [
+                'loggedIn' => $authentication,
+                'userLocation' => $userLocation,
+                'shoppingCart' => $shoppingCart,
+                'totalPrice' => $totalPrice,
+            ]);
+        }
+
+
+    }
+
+    public function ordered(){
+        $authentication = $this->authentication();
+
+        if(!$authentication){
+            header('Location: /login?buy=1');
+        }
+
+        $this->render('ordered', [
+            'loggedIn' => $authentication,
         ]);
     }
 
@@ -251,6 +346,7 @@ class Controller extends AbstractController {
                $item->description = $item->getShortDescription(100);
                $product_ID = $item->product_ID;
                $item->images = $this->imagesProductRepository->fetchByProductID($product_ID);
+               $item->price = $item->discountPriceEuro;
                array_push($items, $item);
             }
            echo json_encode($items);
@@ -279,4 +375,6 @@ class Controller extends AbstractController {
 
         }
     }
+
+
 }

@@ -12,7 +12,7 @@
 <body>
 
 <div class="page_form">
-    <form id="menu" action="?login=1" method="post">
+    <form id="menu" action="?login=1<?php if($buy) echo'&buy=1'?>" method="post">
         <h1>Login</h1>
         <label>
             <input type="email" class="form_input" name="email" placeholder="E-Mail"/>

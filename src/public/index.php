@@ -46,6 +46,14 @@ $root = [
     '/admin/dashboard' => [
         'controller' => 'adminController',
         'methode' => 'adminDashboard'
+    ],
+    '/buy' => [
+        'controller' => 'controller',
+        'methode' => 'buy'
+    ],
+    '/ordered' => [
+        'controller' => 'controller',
+        'methode' => 'ordered'
     ]
 ];
 

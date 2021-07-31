@@ -9,7 +9,7 @@ class ProductModel
     public $price;
     public $discount;
     public $description;
-    public $image;
+    public $images;
 
     public function __get($name)
     {
@@ -32,6 +32,7 @@ class ProductModel
 
     private function getDiscountPriceEuro()
     {
+        if($this->discount == 0) return  $this->priceEuro;
         return round($this->priceEuro * $this->discount) / 100;
     }
 

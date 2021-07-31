@@ -3,13 +3,25 @@
   position: relative;
   font-family: Arial;
   width: 200px;
+  font-size: 16px;
+  margin: 20px;
 }
 
-.quantity-input{
-
+.quantity-input input{
+  font-size: 16px;
+  color: #fff;
+  background-color: gray;
+  padding: 8px 16px;
+  outline: none;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
 }
 
-.hide {
+.quantity-input button{
+  margin-top: 20px;
+}
+
+.hide{
   display: none;
 }
 
@@ -47,7 +59,7 @@
 /* Style items (options): */
 .select-items {
   position: absolute;
-  background-color: gray;
+  background-color: #808080;
   top: 100%;
   left: 0;
   right: 0;

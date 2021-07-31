@@ -15,17 +15,19 @@
 <div class="container content">
 
 
-
-
     <h1>Warenkorb</h1>
     <div id="cart-list"></div>
 
-    <a href="" ><button>Kaufen</button></a>
+    <a href="/buy">
+        <button>Kaufen</button>
+    </a>
 </div>
 
 <?php require __DIR__ . '/../layout/footer.php'; ?>
 
 </body>
-<script src="/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/cookies.js"></script>
 <script src="/assets/js/shoppingCart.js"></script>
+<script src="/assets/js/quantitySelect.js"></script>
+<script src="/assets/js/renderShoppingCart.js"></script>
 </html>

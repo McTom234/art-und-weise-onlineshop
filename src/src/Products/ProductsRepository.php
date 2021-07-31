@@ -6,6 +6,16 @@ use PDO;
 
 class ProductsRepository extends AbstractRepository {
 
+    public $imagesProductsRepository;
+
+    public function __construct(PDO $pdo, ImagesProductsRepository $imagesProductsRepository)
+    {
+        parent::__construct($pdo);
+
+        $this->imagesProductsRepository = $imagesProductsRepository;
+
+    }
+
     public function getModel()
     {
         return "Products\\ProductModel";
@@ -19,6 +29,21 @@ class ProductsRepository extends AbstractRepository {
     public function getIdName()
     {
         return "product_ID";
+    }
+
+    public function fetch($id)
+    {
+         $product = parent::fetch($id);
+         if($product){
+             $product->images = $this->imagesProductsRepository->fetchByProductID($id);
+         }
+         return $product;
+    }
+
+    function fetchProductCount($query = ""){
+        $statement = $this->pdo->prepare("SELECT COUNT(*) AS count FROM $this->table WHERE name LIKE :query");
+        $statement->execute([':query' => '%' . $query . '%']);
+        return $statement->fetch()['count'];
     }
 
     function fetchNumberOffset($number, $offset){

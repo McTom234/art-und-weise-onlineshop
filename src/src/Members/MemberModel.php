@@ -1,14 +1,14 @@
 <?php
 
-namespace Users;
+namespace Members;
 
-class UserModel
+class MemberModel
 {
-    //user
-    public $user_ID;
+    public $member_ID;
     public $forename;
     public $surname;
     public $email;
     public $password;
-    public $location_ID;
+    public $rights;
+
 }

@@ -2,6 +2,7 @@
 
 namespace Users;
 use Core\AbstractRepository;
+use Locations\LocationsRepository;
 use PDO;
 
 class UsersRepository extends AbstractRepository {

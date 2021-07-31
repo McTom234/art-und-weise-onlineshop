@@ -1,0 +1,23 @@
+@import "../components/popup";
+@import "../components/quantitySelect";
+
+.product_view{
+  display: flex;
+  margin-top: 100px;
+}
+
+.product_view .images-wrapper{
+  width: 500px;
+  height: 500px;
+}
+
+.product_view .text-wrapper{
+  margin-left: 50px;
+}
+
+.product_view .panel-box{
+  border-radius: 10px;
+  border: 2px solid lightgray;
+  padding: 50px;
+  margin-left: 50px;
+}
