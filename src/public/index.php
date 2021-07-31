@@ -66,8 +66,19 @@ if(isset($_SERVER['PATH_INFO'])){
     }
 
 
-}else{
-    $pathInfo = '/notFound';
+}
+else {
+    // dirty workaround for missing PATH_INFO
+    if (isset($_SERVER['DOCUMENT_URI']) && isset($_SERVER['SCRIPT_NAME'])) {
+        $pathInfo = substr($_SERVER['DOCUMENT_URI'], strlen($_SERVER['SCRIPT_NAME']));
+
+        if(!isset($root[$pathInfo])){
+            $pathInfo = '/notFound';
+        }
+    }
+    else {
+        $pathInfo = '/notFound';
+    }
 }
 
 
