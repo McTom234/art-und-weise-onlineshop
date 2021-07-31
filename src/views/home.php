@@ -29,7 +29,7 @@
         </div>
 
         <?php
-        include __DIR__ . './layout/productsRow.php';
+        include __DIR__ . '/./layout/productsRow.php';
         ?>
 
         <a href="/products">
