@@ -1,5 +1,5 @@
 CREATE DATABASE artundweise;
-
+USE artundweise;
 # Table Users
 
 create table `user`
