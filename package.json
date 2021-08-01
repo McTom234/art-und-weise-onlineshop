@@ -7,13 +7,13 @@
     "copyfiles": "^2.4.1",
     "jquery": "^3.5.1",
     "jquery.cookie": "^1.4.1",
-    "node-sass": "^6.0.1"
+    "sass": "^1.37.0"
   },
   "scripts": {
     "update-copy": "npm update && npm run copy-jquery-js",
     "copy-jquery-js": "copyfiles -u 3 node_modules/jquery/dist/jquery.min.js dist/js && copyfiles -u 2 node_modules/jquery.cookie/jquery.cookie.js",
-    "compile-folder": "node-sass src/assets/scss/sites/ -o dist/assets/css/",
-    "compile-watch": "node-sass -r -w src/assets/scss/sites/ -o dist/assets/css/",
+    "compile-folder": "sass src/assets/scss/sites/:dist/assets/css/",
+    "compile-watch": "sass --watch src/assets/scss/:dist/assets/css/",
     "make-dist-ready": "copyfiles -e \"src/assets/scss/**\" -u 1 \"src/**/*\" dist/ && copyfiles -u 1 \"src/.htaccess\" dist/"
   },
   "repository": {
