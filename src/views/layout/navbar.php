@@ -1,3 +1,4 @@
+<?php if (!isset($navbar_index)) $navbar_index = ""; ?>
 <div class="navbar" id="navbar">
     <div class="left">
         <a href="/" <?php if ($navbar_index == "home") echo "data-active"; ?>>Art und Weise</a>
