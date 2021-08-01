@@ -71,17 +71,16 @@ create unique index Checkout_Order_ID_uindex
 create table member
 (
     member_ID int auto_increment,
-    forename varchar(255) null,
-    surname varchar(255) null,
-    email varchar(255) not null,
-    password varchar(512) not null,
+    user_ID int not null,
     rights int null,
     constraint Member_pk
-        primary key (member_ID)
+        primary key (member_ID),
+    constraint Member_fk
+        foreign key (user_ID) references user(user_ID)
 );
 
-create unique index Member_Email_uindex
-    on member (email);
+create unique index Member_UserID_uindex
+    on member (user_ID);
 
 # Table Article
 
