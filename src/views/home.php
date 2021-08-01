@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerfirma Art und Weise</title>
     <link rel="stylesheet" href="/assets/css/home.css">
+    <?php $navbar_index = "home";?>
 </head>
 
 <body>

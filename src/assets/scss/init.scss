@@ -1,7 +1,10 @@
 $base-color: #FFFFFF;
 $text-color: #000000;
 $placeholder-images: #F5F5DC;
-$navbar-color: rgb(108,0,8);
+
+* {
+    box-sizing: border-box;
+}
 
 ::-webkit-scrollbar {
     display: none;
