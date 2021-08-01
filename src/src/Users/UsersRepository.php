@@ -3,9 +3,15 @@
 namespace Users;
 use Core\AbstractRepository;
 use Locations\LocationsRepository;
+use Members\MembersRepository;
 use PDO;
 
 class UsersRepository extends AbstractRepository {
+
+    public function __construct(PDO $pdo)
+    {
+        parent::__construct($pdo);
+    }
 
     public function getModel()
     {
@@ -20,6 +26,15 @@ class UsersRepository extends AbstractRepository {
     public function getIdName()
     {
         return "user_ID";
+    }
+
+    public function getUserCount(){
+        $statement = $this->pdo->query("SELECT COUNT(*) AS count FROM user");
+        $count = $statement->fetch();
+        if($count){
+            return $count['count'];
+        }
+        return false;
     }
 
     public function login($email, $password){
@@ -61,6 +76,13 @@ class UsersRepository extends AbstractRepository {
         $statement = $this->pdo->prepare("UPDATE user SET location_ID = :loc WHERE user_ID = :uid");
         $result = $statement->execute(array('uid' => $user_ID, 'loc' => $location_ID));
 
-        return $result;
+        if($result){
+            if (session_status() === 1) {
+                session_start();
+            }
+            $_SESSION['userid'] = $user_ID;
+            return $user_ID;
+        }
+        return false;
     }
 }

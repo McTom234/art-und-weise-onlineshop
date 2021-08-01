@@ -8,7 +8,7 @@ class OrdersRepository extends AbstractRepository {
 
     public function getModel()
     {
-        return "Orders\\OrdersModel";
+        return "Orders\\OrderModel";
     }
 
     public function getTable()
@@ -19,6 +19,13 @@ class OrdersRepository extends AbstractRepository {
     public function getIdName()
     {
         return "order_ID";
+    }
+
+    public function fetchNumber($number)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM `order` LIMIT :number");
+        $statement->execute([':number' => $number]);
+        return $statement->fetchAll(PDO::FETCH_CLASS, $this->model);
     }
 
     public function insertOrder($checkout_ID, $product_ID, $discount, $quantity){

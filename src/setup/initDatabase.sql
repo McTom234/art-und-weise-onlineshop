@@ -28,7 +28,9 @@ create table `location`
     postcode int not null,
     city varchar(512) not null,
     constraint User_pk
-        primary key (location_ID)
+        primary key (location_ID),
+    constraint User_fk
+        foreign key (user_ID) references user(user_ID)
 );
 
 # Table Order
