@@ -43,6 +43,10 @@ $root = [
         'controller' => 'controller',
         'methode' => 'fetchShoppingCart',
     ],
+    '/admin' => [
+        'controller' => 'adminController',
+        'methode' => 'admin'
+    ],
     '/admin/dashboard' => [
         'controller' => 'adminController',
         'methode' => 'adminDashboard'

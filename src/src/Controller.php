@@ -4,6 +4,7 @@ use Articles\ArticlesRepository;
 use Checkouts\CheckoutsRepository;
 use Core\AbstractController;
 use Locations\LocationsRepository;
+use Members\MembersRepository;
 use Orders\OrdersRepository;
 use Products\ImagesProductsRepository;
 use Products\ProductsRepository;
@@ -18,8 +19,9 @@ class Controller extends AbstractController {
     private $checkoutsRepository;
     private $locationsRepository;
     private $ordersRepository;
+    private $membersRepository;
 
-    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, ImagesProductsRepository $imagesProductRepository, ArticlesRepository $articlesRepository, CheckoutsRepository $checkoutsRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository)
+    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, ImagesProductsRepository $imagesProductRepository, ArticlesRepository $articlesRepository, CheckoutsRepository $checkoutsRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository, MembersRepository $membersRepository)
     {
         $this->usersRepository = $usersRepository;
         $this->productsRepository = $productsRepository;
@@ -28,6 +30,7 @@ class Controller extends AbstractController {
         $this->checkoutsRepository = $checkoutsRepository;
         $this->locationsRepository =  $locationsRepository;
         $this->ordersRepository =  $ordersRepository;
+        $this->membersRepository = $membersRepository;
     }
 
     public function authentication(){
@@ -62,7 +65,7 @@ class Controller extends AbstractController {
         ]);
     }
 
-    public function login(){;
+    public function login(){
         $this->authentication();
 
         $message = null;
@@ -105,6 +108,16 @@ class Controller extends AbstractController {
         $infoMessage = null;
         $errorMessage = null;
 
+        //$this->membersRepository->insertMember(5, 1);
+
+
+
+        $userCount = $this->usersRepository->getUserCount();
+
+        if($userCount === 0){
+            $infoMessage = "Du bist die erste Person, die sich registriert. Bitte gebe deine Daten an, damit du als Administrator hinzugefügt wirst.";
+        }
+
         if(isset($_GET['register'])) {
             $error = false;
 
@@ -143,7 +156,7 @@ class Controller extends AbstractController {
                 $error = true;
             }
             if($user->password != $password2) {
-                $infoMessage = 'Die Passwörter müssen übereinstimmen';
+                $errorMessage = 'Die Passwörter müssen übereinstimmen';
                 $error = true;
             }
 
@@ -153,6 +166,15 @@ class Controller extends AbstractController {
                 $result = $this->usersRepository->registration($user);
 
                 if($result) {
+
+                    // first registration -> make user to member/admin
+                    if($userCount === 0){
+                        $this->membersRepository->insertMember($result, 1);
+                        header("Location: /admin");
+                    }
+
+                    header("Location: /");
+
                     $infoMessage = 'Du wurdest erfolgreich registriert.';
                 } else {
                     $errorMessage = 'Beim Abspeichern ist leider ein Fehler aufgetreten<br>';

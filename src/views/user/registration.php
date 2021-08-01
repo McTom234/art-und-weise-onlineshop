@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrierung</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/forms.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/forms.css"/>
 </head>
 <body>
 <div class="page_form">
     <form id="menu" action="?register=1" method="post">
         <h1>Registrierung</h1>
+        <?php if (isset($infoMessage)): ?>
+            <p class="infoMessage">
+                <?=$infoMessage?>
+            </p>
+        <?php endif; ?>
         <label>
-            <input type="text" class="form_input" name="forename" placeholder="Vorname" />
+            <input type="text" class="form_input" name="forename" placeholder="Vorname"/>
             <input type="text" class="form_input" name="surname" placeholder="Nachname"/>
         </label>
         <label>
@@ -28,15 +33,11 @@
             <input type="password" class="form_input" name="password2" placeholder="Passwort wiederholen"/>
         </label>
         <button type="submit">Log In</button>
-        <?php if (isset($errorMessage)) { ?>
-            <div class="error">
-                <?=$errorMessage?>
-            </div>
-        <?php} if(isset($infoMessage)) { ?>
-            <div class="info">
-                <?=$infoMessage?>
-            </div>
-        <?php } ?>
+        <?php if (isset($errorMessage)): ?>
+            <p class="errorMessage">
+                <?= $errorMessage ?>
+            </p>
+        <?php endif; ?>
 
     </form>
 </div>
