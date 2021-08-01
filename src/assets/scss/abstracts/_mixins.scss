@@ -1,0 +1,22 @@
+@use "sass:map";
+@use "vars";
+
+// fonts
+@mixin font ($var) {
+  @include font-style(map.get($var, "font-family"), map.get($var, "font-size"), map.get($var, "font-weight"), map.get($var, "line-height"), map.has-key($var, "text-transform"));
+}
+@mixin font-style ($font: map.get(vars.$font-style-body1, "font-family"),
+                    $size: map.get(vars.$font-style-body1, "font-size"),
+                    $weight: map.get(vars.$font-style-body1, "font-weight"),
+                    $line-height: map.get(vars.$font-style-body1, "line-height"),
+                    $uppercase: map.has-key(vars.$font-style-body1, "text-transform")) {
+  font-family: $font;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  @if $uppercase {
+    text-transform: uppercase;
+  } @else if $uppercase != null {
+    text-transform: $uppercase;
+  }
+}

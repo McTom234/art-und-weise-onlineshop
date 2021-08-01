@@ -1,6 +1,6 @@
-@import "../init";
-@import "../components/navbar";
-@import "../components/quantitySelect";
+@use "abstracts" as *;
+@use "components";
+@use "components/quantitySelect";
 
 .itemBox{
   border: 1px solid gray;

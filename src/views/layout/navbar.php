@@ -1,7 +1,7 @@
 <?php if (!isset($navbar_index)) $navbar_index = ""; ?>
 <div class="navbar" id="navbar">
     <div class="left">
-        <a href="/" <?php if ($navbar_index == "home") echo "data-active"; ?>>Art und Weise</a>
+        <a class="nav-button-home" href="/" <?php if ($navbar_index == "home") echo "data-active"; ?>>Art und Weise</a>
         <div class="dropdown">
             <a <?php if (in_array($navbar_index, array("link 1", "link 2", "link 3"))) echo "data-active"; ?>>Produkte</a>
             <div class="dropdown-content">

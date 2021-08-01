@@ -1,9 +1,9 @@
-@import "../init";
+@use "abstracts" as *;
 
 .page_form {
   width: 100vw;
   height: 100vh;
-  background: $placeholder-images; //url(image.jpg);
+  background: $placeholder-images;
   background-size: cover;
   position: relative;
   display: flex;
@@ -18,10 +18,10 @@ form {
   max-width: 320px;
   width: 50%;
   margin: 1rem;
-  background-color: $base-color;
+  background-color: black;
   padding: 1rem;
   border-radius: 4px;
-  color: $text-color;
+  color: white;
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
 
   label{

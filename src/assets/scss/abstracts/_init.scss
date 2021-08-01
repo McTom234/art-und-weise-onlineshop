@@ -1,6 +1,4 @@
-$base-color: #FFFFFF;
-$text-color: #000000;
-$placeholder-images: #F5F5DC;
+@use "vars" as *;
 
 * {
     box-sizing: border-box;
@@ -11,17 +9,11 @@ $placeholder-images: #F5F5DC;
 }
 
 body{
-    font-family: "Roboto Light", sans-serif;
+    font-size: 20px;
     margin: 0;
 }
-a {
-    text-decoration: none;
-    color: $text-color;
-    &:hover{
-        color: $text-color;
-    }
-}
 
+// todo
 .container{
     margin-right: 10vw;
     margin-left: 10vw;
@@ -29,7 +21,6 @@ a {
 .content{
     min-height: 80vh;
 }
-
 .link{
     text-decoration: none;
     color: gray;
@@ -37,13 +28,11 @@ a {
         color: black;
     }
 }
-
-
-
 .footer{
     margin-top: 10vh;
     height: 15vh;
 
 }
 .copyright{
-    margin-top: 10%;}
+    margin-top: 10%;
+}
