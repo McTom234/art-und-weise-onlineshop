@@ -3,7 +3,9 @@
 
 // fonts
 @mixin font ($var) {
-  @include font-style(map.get($var, "font-family"), map.get($var, "font-size"), map.get($var, "font-weight"), map.get($var, "line-height"), map.has-key($var, "text-transform"));
+  @include font-style(map.get($var, "font-family"), map.get($var, "font-size"), map.get($var, "font-weight"), map.get($var, "line-height"), map.has-key($var, "text-transform")) {
+    @content;
+  };
 }
 @mixin font-style ($font: map.get(vars.$font-style-body1, "font-family"),
                     $size: map.get(vars.$font-style-body1, "font-size"),
@@ -16,7 +18,9 @@
   line-height: $line-height;
   @if $uppercase {
     text-transform: uppercase;
-  } @else if $uppercase != null {
+  } @else if $uppercase != false {
     text-transform: $uppercase;
   }
+
+  @content
 }
