@@ -12,13 +12,11 @@
 
 <body>
 <header>
-    <div class="header_image">
-        <h3>Schülerfirma</h3>
-        <div class="header_title">
-            <h1>Art & Weise</h1>
-        </div>
-        <button class="button_more">Mehr Erfahren!</button>
+    <div>
+        <h4>Schülerfirma</h4>
+        <h1>Art & Weise</h1>
     </div>
+    <button class="button_more">Mehr Erfahren!</button>
 </header>
 
 <?php require '../views/layout/navbar.php'; ?>
