@@ -3,6 +3,7 @@
 namespace Core;
 
 use Articles\ArticlesRepository;
+use Authentication\AuthenticationRepository;
 use Checkouts\CheckoutsRepository;
 use Locations\LocationsRepository;
 use Members\MembersRepository;
@@ -13,20 +14,23 @@ use AdminController;
 use Products\ImagesProductsRepository;
 use Images\ImagesRepository;
 use Products\ProductsRepository;
+use ShoppingCart\ShoppingCartRepository;
 use Users\UsersRepository;
 
-class Container{
+class Container
+{
 
     private $recipes = [];
     private $instances = [];
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->recipes = [
-            'controller' => function (){
-                return new Controller($this->make('usersRepository'),$this->make('productsRepository'), $this->make('imagesProductsRepository') , $this->make('articlesRepository'), $this->make('checkoutsRepository'), $this->make('locationsRepository'), $this->make('ordersRepository'), $this->make('membersRepository'));
+            'controller' => function () {
+                return new Controller($this->make('usersRepository'), $this->make('productsRepository'), $this->make('imagesProductsRepository'), $this->make('articlesRepository'), $this->make('checkoutsRepository'), $this->make('locationsRepository'), $this->make('ordersRepository'), $this->make('membersRepository'), $this->make('authenticationRepository'), $this->make('shoppingCartRepository'));
             },
-            'adminController' => function (){
-                return new AdminController($this->make('usersRepository'),$this->make('productsRepository'), $this->make('membersRepository'), $this->make('articlesRepository'), $this->make('locationsRepository'), $this->make('ordersRepository'), $this->make('checkoutsRepository'));
+            'adminController' => function () {
+                return new AdminController($this->make('usersRepository'), $this->make('productsRepository'), $this->make('membersRepository'), $this->make('articlesRepository'), $this->make('locationsRepository'), $this->make('ordersRepository'), $this->make('checkoutsRepository'), $this->make('authenticationRepository'), $this->make('shoppingCartRepository'));
             },
             'usersRepository' => function () {
                 return new UsersRepository($this->make('pdo'));
@@ -41,7 +45,7 @@ class Container{
 
             },
             'articlesRepository' => function () {
-            return new ArticlesRepository($this->make('pdo'));
+                return new ArticlesRepository($this->make('pdo'));
 
             },
             'checkoutsRepository' => function () {
@@ -64,14 +68,23 @@ class Container{
                 return new MembersRepository($this->make('pdo'), $this->make('usersRepository'));
 
             },
+            'authenticationRepository' => function () {
+                return new AuthenticationRepository($this->make('usersRepository'), $this->make('membersRepository'));
+
+            },
+            'shoppingCartRepository' => function () {
+                return new ShoppingCartRepository();
+
+            },
             'pdo' => function () {
-            return require __DIR__ . '/Database/databaseConnection.php';
+                return require __DIR__ . '/Database/databaseConnection.php';
             }
         ];
     }
 
-    public function make($name){
-        if(empty($this->instances[$name]) && isset($this->recipes[$name])){
+    public function make($name)
+    {
+        if (empty($this->instances[$name]) && isset($this->recipes[$name])) {
             $this->instances[$name] = $this->recipes[$name]();
         }
         return $this->instances[$name];

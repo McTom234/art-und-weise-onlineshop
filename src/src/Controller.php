@@ -1,6 +1,7 @@
 <?php
 
 use Articles\ArticlesRepository;
+use Authentication\AuthenticationRepository;
 use Checkouts\CheckoutsRepository;
 use Core\AbstractController;
 use Locations\LocationsRepository;
@@ -8,9 +9,11 @@ use Members\MembersRepository;
 use Orders\OrdersRepository;
 use Products\ImagesProductsRepository;
 use Products\ProductsRepository;
+use ShoppingCart\ShoppingCartRepository;
 use Users\UsersRepository;
 
-class Controller extends AbstractController {
+class Controller extends AbstractController
+{
 
     private $productsRepository;
     private $usersRepository;
@@ -20,57 +23,47 @@ class Controller extends AbstractController {
     private $locationsRepository;
     private $ordersRepository;
     private $membersRepository;
+    private $authenticationRepository;
+    private $shoppingCartRepository;
 
-    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, ImagesProductsRepository $imagesProductRepository, ArticlesRepository $articlesRepository, CheckoutsRepository $checkoutsRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository, MembersRepository $membersRepository)
+    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, ImagesProductsRepository $imagesProductRepository, ArticlesRepository $articlesRepository, CheckoutsRepository $checkoutsRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository, MembersRepository $membersRepository, AuthenticationRepository $authenticationRepository, ShoppingCartRepository $shoppingCartRepository)
     {
         $this->usersRepository = $usersRepository;
         $this->productsRepository = $productsRepository;
         $this->imagesProductRepository = $imagesProductRepository;
         $this->articlesRepository = $articlesRepository;
         $this->checkoutsRepository = $checkoutsRepository;
-        $this->locationsRepository =  $locationsRepository;
-        $this->ordersRepository =  $ordersRepository;
+        $this->locationsRepository = $locationsRepository;
+        $this->ordersRepository = $ordersRepository;
         $this->membersRepository = $membersRepository;
+        $this->authenticationRepository = $authenticationRepository;
+        $this->shoppingCartRepository = $shoppingCartRepository;
     }
 
-    public function authentication(){
-        if (session_status() === 1) {
-            session_start();
-        }
-        if(isset($_SESSION['userid'])) {
-            $result = $this->usersRepository->fetch($_SESSION['userid']);
-            if(!$result){
-                return false;
-            }else{
-                return $result;
-            }
-        }
-        else {
-            return false;
-        }
-    }
-
-    public function home(){
-        $authentication = $this->authentication();
+    public function home()
+    {
+        $authentication = $this->authenticationRepository->authentication();
 
         $products = $this->productsRepository->fetchNumber(3);
-        foreach ($products as $product){
+        foreach ($products as $product) {
             $product_ID = $product->product_ID;
             $product->images = $this->imagesProductRepository->fetchByProductID($product_ID);
         }
 
         $this->render("home", [
             'loggedIn' => $authentication,
-            'products' => $products
+            'products' => $products,
+            'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
     }
 
-    public function login(){
-        $this->authentication();
+    public function login()
+    {
+        $authentication = $this->authenticationRepository->authentication();
 
         $message = null;
         $buy = false;
-        if(isset($_GET['buy'])){
+        if (isset($_GET['buy'])) {
             $buy = true;
         }
 
@@ -78,13 +71,19 @@ class Controller extends AbstractController {
             if (isset($_POST['email']) && isset($_POST['password'])) {
                 $email = $_POST['email'];
                 $password = $_POST['password'];
-                $result = $this->usersRepository->login($email, $password);
+                $user = $this->usersRepository->login($email, $password);
 
-                if ($result) {
-                    if(isset($_GET['buy'])){
+                if ($user) {
+                    if (isset($_GET['buy'])) {
                         header("Location: /buy");
-                    }else{
-                        header("Location: /");
+                    } else {
+                        $member = $this->membersRepository->fetchByUserID($user->user_ID);
+                        if ($member) {
+                            header("Location: /admin");
+                        } else {
+                            header("Location: /");
+                        }
+
                     }
 
                 } else {
@@ -103,22 +102,20 @@ class Controller extends AbstractController {
 
     }
 
-    public function registration(){
+    public function registration()
+    {
 
         $infoMessage = null;
         $errorMessage = null;
 
-        //$this->membersRepository->insertMember(5, 1);
-
-
 
         $userCount = $this->usersRepository->getUserCount();
 
-        if($userCount === 0){
+        if ($userCount === 0) {
             $infoMessage = "Du bist die erste Person, die sich registriert. Bitte gebe deine Daten an, damit du als Administrator hinzugefügt wirst.";
         }
 
-        if(isset($_GET['register'])) {
+        if (isset($_GET['register'])) {
             $error = false;
 
             $user = new Users\UserModel();
@@ -136,39 +133,39 @@ class Controller extends AbstractController {
             $user->city = $_POST['city'];
 
 
-            if(strlen($user->email) == 0) {
+            if (strlen($user->email) == 0) {
                 $errorMessage = 'Bitte eine E-Mail angeben';
                 $error = true;
             }
 
-            if(strlen($user->forename) == 0 || strlen($user->surname) == 0) {
+            if (strlen($user->forename) == 0 || strlen($user->surname) == 0) {
                 $errorMessage = 'Bitte einen Namen angeben';
                 $error = true;
             }
 
-            if(strlen($user->street) == 0 || strlen($user->street_number) == 0 || strlen($user->postcode) == 0 || strlen($user->city) == 0) {
+            if (strlen($user->street) == 0 || strlen($user->street_number) == 0 || strlen($user->postcode) == 0 || strlen($user->city) == 0) {
                 $errorMessage = 'Bitte eine Adresse angeben';
                 $error = true;
             }
 
-            if(strlen($user->password) == 0) {
+            if (strlen($user->password) == 0) {
                 $errorMessage = 'Bitte ein Passwort angeben';
                 $error = true;
             }
-            if($user->password != $password2) {
+            if ($user->password != $password2) {
                 $errorMessage = 'Die Passwörter müssen übereinstimmen';
                 $error = true;
             }
 
-            if(!$error) {
+            if (!$error) {
 
                 // TODO: check if email (unique) is already used
                 $result = $this->usersRepository->registration($user);
 
-                if($result) {
+                if ($result) {
 
                     // first registration -> make user to member/admin
-                    if($userCount === 0){
+                    if ($userCount === 0) {
                         $this->membersRepository->insertMember($result, 1);
                         header("Location: /admin");
                     }
@@ -185,50 +182,57 @@ class Controller extends AbstractController {
         $this->render('user/registration', [
             "infoMessage" => $infoMessage,
             "errorMessage" => $errorMessage
-            ]);
+        ]);
     }
 
-    public function show(){
-        $authentication = $this->authentication();
+    public function show()
+    {
+        $authentication = $this->authenticationRepository->authentication();
 
         $product = false;
-        if(isset($_GET['id'])){
+        if (isset($_GET['id'])) {
             $product = $this->productsRepository->fetch($_GET['id']);
         }
 
         $this->render('product/show', [
             'loggedIn' => $authentication,
-            'product' => $product
+            'product' => $product,
+            'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
     }
 
-    public function notFound(){
+    public function notFound()
+    {
         $products = $this->productsRepository->fetchNumber(3);
 
         $this->render("error/notFound");
     }
 
-    public function logout(){
+    public function logout()
+    {
         session_start();
         session_destroy();
         header("Location: /");
     }
 
-    public function shoppingCart(){
-        $authentication = $this->authentication();
+    public function shoppingCart()
+    {
+        $authentication = $this->authenticationRepository->authentication();
 
         $this->render("product/shoppingCart", [
-            'loggedIn' => $authentication
+            'loggedIn' => $authentication,
+            'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
     }
 
-    public function products(){
-        $authentication = $this->authentication();
+    public function products()
+    {
+        $authentication = $this->authenticationRepository->authentication();
 
         $request = [];
 
         $page = 1;
-        if(isset($_GET['p'])){
+        if (isset($_GET['p'])) {
             $page = $_GET['p'];
         }
         $request['page'] = $page;
@@ -238,12 +242,12 @@ class Controller extends AbstractController {
 
 
         $query = "";
-        if(isset($_GET['q'])){
+        if (isset($_GET['q'])) {
             $query = $_GET['q'];
             $request['query'] = $query;
             $products = $this->productsRepository->fetchNumberOffsetQuery($numberProducts, $offset, $query);
 
-        }else{
+        } else {
             $products = $this->productsRepository->fetchNumberOffset($numberProducts, $offset);
 
         }
@@ -252,45 +256,40 @@ class Controller extends AbstractController {
         $maxPages = ceil(($numberTotalProducts / $numberProducts));
 
 
-
-
-        foreach ($products as $product){
+        foreach ($products as $product) {
             $product_ID = $product->product_ID;
             $product->images = $this->imagesProductRepository->fetchByProductID($product_ID);
         }
-
-
 
 
         $this->render('product/products', [
             'loggedIn' => $authentication,
             'products' => $products,
             'request' => $request,
-            'maxPages' => $maxPages
+            'maxPages' => $maxPages,
+            'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
     }
 
-    public function buy(){
-        $authentication = $this->authentication();
+    public function buy()
+    {
+        $authentication = $this->authenticationRepository->authentication();
         $userLocation = $this->locationsRepository->fetch($authentication->location_ID);
 
-        if(!$authentication){
+        if (!$authentication) {
             header('Location: /login?buy=1');
         }
 
 
-
-
-
-        if(isset($_COOKIE['shoppingCart'])) {
+        if (isset($_COOKIE['shoppingCart'])) {
             $shoppingCartIDs = json_decode($_COOKIE['shoppingCart'], true);
 
             $shoppingCart = [];
 
             $totalPrice = 0;
-            foreach ($shoppingCartIDs as $product_ID => $quantity){
+            foreach ($shoppingCartIDs as $product_ID => $quantity) {
                 $product = $this->productsRepository->fetch($product_ID);
-                if($product){
+                if ($product) {
                     $price = $product->discountPriceEuro;
                     $totalPrice += $price * $quantity;
                     $product->price = $price;
@@ -299,11 +298,11 @@ class Controller extends AbstractController {
                 }
             }
 
-            if(isset($_GET['submit'])){
+            if (isset($_GET['submit'])) {
                 $checkout_ID = $this->checkoutsRepository->insertCheckout($authentication->user_ID);
-                foreach ($shoppingCartIDs as $product_ID => $quantity){
+                foreach ($shoppingCartIDs as $product_ID => $quantity) {
                     $product = $this->productsRepository->fetch($product_ID);
-                    if($product) {
+                    if ($product) {
                         $this->ordersRepository->insertOrder($checkout_ID, $product_ID, 0, $quantity);
                     }
                 }
@@ -316,16 +315,18 @@ class Controller extends AbstractController {
                 'userLocation' => $userLocation,
                 'shoppingCart' => $shoppingCart,
                 'totalPrice' => $totalPrice,
+
             ]);
         }
 
 
     }
 
-    public function ordered(){
-        $authentication = $this->authentication();
+    public function ordered()
+    {
+        $authentication = $this->authenticationRepository->authentication();
 
-        if(!$authentication){
+        if (!$authentication) {
             header('Location: /login?buy=1');
         }
 
@@ -334,54 +335,57 @@ class Controller extends AbstractController {
         ]);
     }
 
-    public function fetchProducts(){
-        if(isset($_POST['row']) && isset($_POST['number'])){
+    public function fetchProducts()
+    {
+        if (isset($_POST['row']) && isset($_POST['number'])) {
             $products = $this->productsRepository->fetchNumberOffset($_POST['number'], $_POST['row']);
 
-            foreach ($products as $product){
+            foreach ($products as $product) {
                 $product_ID = $product->product_ID;
                 $product->images = $this->imagesProductRepository->fetchByProductID($product_ID);
             }
 
             $this->render('layout/productsRow', [
-               'products' => $products
+                'products' => $products
             ]);
 
         }
 
     }
 
-    public function fetchShoppingCart(){
+    public function fetchShoppingCart()
+    {
 
-        if(isset($_POST['shoppingCart'])){
+        if (isset($_POST['shoppingCart'])) {
 
             $shoppingCartString = $_POST['shoppingCart'];
             $shoppingCart = json_decode($shoppingCartString, true);
 
             $items = [];
-           foreach($shoppingCart as $id => $count){
-               $item = $this->productsRepository->fetch($id);
-               if(!$item){
-                   array_push($items, false);
-                   continue;
-               }
-               $item->description = $item->getShortDescription(100);
-               $product_ID = $item->product_ID;
-               $item->images = $this->imagesProductRepository->fetchByProductID($product_ID);
-               $item->price = $item->discountPriceEuro;
-               array_push($items, $item);
+            foreach ($shoppingCart as $id => $count) {
+                $item = $this->productsRepository->fetch($id);
+                if (!$item) {
+                    array_push($items, false);
+                    continue;
+                }
+                $item->description = $item->getShortDescription(100);
+                $product_ID = $item->product_ID;
+                $item->images = $this->imagesProductRepository->fetchByProductID($product_ID);
+                $item->price = $item->discountPriceEuro;
+                array_push($items, $item);
             }
-           echo json_encode($items);
+            echo json_encode($items);
         }
 
     }
 
-    public function insertTestProducts($count){
-        for($i = 1; $i <= $count; $i++){
+    public function insertTestProducts($count)
+    {
+        for ($i = 1; $i <= $count; $i++) {
             $price = rand(50, 2000);
-            if(rand(0,3) == 0){
-                $discount = rand(0,100);
-            }else{
+            if (rand(0, 3) == 0) {
+                $discount = rand(0, 100);
+            } else {
                 $discount = 0;
             }
 
@@ -389,9 +393,10 @@ class Controller extends AbstractController {
         }
     }
 
-    public function insertTestImages($count){
+    public function insertTestImages($count)
+    {
         $products = $this->productsRepository->fetchNumber($count);
-        foreach($products AS $product){
+        foreach ($products as $product) {
             $img = file_get_contents('https://picsum.photos/200/300');
             $this->imagesProductRepository->insertImage($product->product_ID, $img);
 

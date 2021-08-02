@@ -45,7 +45,7 @@ class UsersRepository extends AbstractRepository {
         //check password
         if ($user !== false && password_verify($password, $user->password)) {
             $_SESSION['userid'] = $user->user_ID;
-            return true;
+            return $user;
         } else {
             return false;
         }

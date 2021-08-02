@@ -1,6 +1,7 @@
 <?php
 
 use Articles\ArticlesRepository;
+use Authentication\AuthenticationRepository;
 use Checkouts\CheckoutsRepository;
 use Core\AbstractController;
 use Images\ImagesRepository;
@@ -8,6 +9,7 @@ use Locations\LocationsRepository;
 use Members\MembersRepository;
 use Orders\OrdersRepository;
 use Products\ProductsRepository;
+use ShoppingCart\ShoppingCartRepository;
 use Users\UsersRepository;
 
 class AdminController extends AbstractController {
@@ -19,8 +21,10 @@ class AdminController extends AbstractController {
     private $locationsRepository;
     private $ordersRepository;
     private $membersRepository;
+    private $authenticationRepository;
+    private $shoppingCartRepository;
 
-    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, MembersRepository $membersRepository, ArticlesRepository $articlesRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository, CheckoutsRepository $checkoutsRepository)
+    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, MembersRepository $membersRepository, ArticlesRepository $articlesRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository, CheckoutsRepository $checkoutsRepository, AuthenticationRepository $authenticationRepository, ShoppingCartRepository $shoppingCartRepository)
     {
         $this->usersRepository = $usersRepository;
         $this->productsRepository = $productsRepository;
@@ -29,45 +33,12 @@ class AdminController extends AbstractController {
         $this->locationsRepository =  $locationsRepository;
         $this->ordersRepository =  $ordersRepository;
         $this->membersRepository = $membersRepository;
-    }
-
-    // FIXME can I move/leave this in Container?
-    public function authentication(){
-        if (session_status() === 1) {
-            session_start();
-        }
-        if(isset($_SESSION['userid'])) {
-            $result = $this->usersRepository->fetch($_SESSION['userid']);
-            if(!$result){
-                return false;
-            }else{
-                return $result;
-            }
-        }
-        else {
-            return false;
-        }
-    }
-
-    public function memberAuthentication(){
-        if (session_status() === 1) {
-            session_start();
-        }
-        if(isset($_SESSION['userid'])) {
-            $result = $this->membersRepository->fetchByUserID($_SESSION['userid']);
-            if(!$result){
-                return false;
-            }else{
-                return $result;
-            }
-        }
-        else {
-            return false;
-        }
+        $this->authenticationRepository = $authenticationRepository;
+        $this->shoppingCartRepository = $shoppingCartRepository;
     }
 
     public function adminDashboard(){
-        $authentication = $this->memberAuthentication();
+        $authentication = $this->authenticationRepository->memberAuthentication();
         if(!$authentication){
             header("Location: /login");
             exit();
@@ -92,7 +63,7 @@ class AdminController extends AbstractController {
     }
 
     public function admin(){
-        $authentication = $this->memberAuthentication();
+        $authentication = $this->authenticationRepository->memberAuthentication();
 
         if(!$authentication){
             header("Location: /login");

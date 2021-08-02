@@ -20,7 +20,7 @@
             <a href="/login" <?php if ($navbar_index == "login") echo "data-active"; ?>>Anmelden</a>
             <a href="/registration" <?php if ($navbar_index == "registration") echo "data-active"; ?>>Registrieren</a>
         <?php } ?>
-        <a class="nav-button-shopping-cart" href="/shopping-cart" <?php if ($navbar_index == "shopping-cart") echo "data-active"; ?>>Warenkorb</a>
+        <a class="nav-button-shopping-cart" href="/shopping-cart" <?php if ($navbar_index == "shopping-cart") echo "data-active"; ?>><?php if(isset($shoppingCartProductCount)){echo $shoppingCartProductCount;}?> Warenkorb</a>
     </div>
     <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
 </div>
