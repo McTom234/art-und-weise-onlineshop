@@ -1,17 +1,55 @@
-@use "vars" as *;
+@use "vars";
+@use "mixins";
+
+// fonts
+h1 {
+    @include mixins.font(vars.$font-style-headline1);
+} // h1
+h2 {
+    @include mixins.font(vars.$font-style-headline2);
+} // h2
+h3 {
+    @include mixins.font(vars.$font-style-headline3);
+} // h3
+h4 {
+    @include mixins.font(vars.$font-style-headline4);
+} // h4
+h5 {
+    @include mixins.font(vars.$font-style-headline5);
+} // h5
+h6 {
+    @include mixins.font(vars.$font-style-headline6);
+} // h6
 
 * {
     box-sizing: border-box;
-}
+} // *
 
 ::-webkit-scrollbar {
     display: none;
-}
+} // ::-webkit-scrollbar
 
 body{
     font-size: 20px;
     margin: 0;
-}
+} // body
+
+button {
+    background-color: vars.$blood-red;
+    color: vars.$white;
+    @include mixins.font(vars.$font-style-button);
+    border-radius: 6px;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 0 vars.$hunter-green;
+    transition: box-shadow 150ms ease-in-out;
+
+    &:hover {
+        box-shadow: 0 0 8px vars.$hunter-green;
+    } // :hover
+
+} // button
 
 // todo
 .container{
