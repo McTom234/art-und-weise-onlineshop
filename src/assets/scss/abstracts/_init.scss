@@ -20,6 +20,9 @@ h5 {
 h6 {
     @include mixins.font(vars.$font-style-headline6);
 } // h6
+p {
+    @include mixins.font(vars.$font-style-body1);
+} // p
 
 * {
     box-sizing: border-box;
@@ -35,7 +38,7 @@ body{
     color: black;
 } // body
 
-button {
+.link-button, button {
     background-color: vars.$blood-red;
     color: vars.$white;
     @include mixins.font(vars.$font-style-button);
@@ -45,25 +48,27 @@ button {
     cursor: pointer;
     box-shadow: 0 0 0 vars.$hunter-green;
     transition: box-shadow 150ms ease-in-out;
+    text-decoration: none;
 
     &:hover {
         box-shadow: 0 0 8px vars.$hunter-green;
     } // :hover
 
+    &.secondary-button {
+
+    } // .secondary-button
+
 } // button
 
-// todo
-.container{
-    margin-right: 10vw;
-    margin-left: 10vw;
-}
-.content{
-    min-height: 80vh;
-}
-.link{
+.no-text-decoration {
     text-decoration: none;
-    color: gray;
-    &:hover{
-        color: black;
-    }
+    color: inherit;
+}
+
+main {
+    margin: 0 10vw;
+} // main
+
+section {
+    margin-top: 3em;
 }
