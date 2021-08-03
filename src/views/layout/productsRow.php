@@ -1,6 +1,7 @@
-<div class="items_wrapper">
+<div class="grid-container">
     <?php
     foreach ($products as $product) {
-        include __DIR__ . '/product.php';
-    }?>
+        require 'product.php';
+    }
+    ?>
 </div>

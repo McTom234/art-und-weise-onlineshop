@@ -19,25 +19,23 @@
     <button class="button_more">Mehr Erfahren!</button>
 </header>
 
-<?php require '../views/layout/navbar.php'; ?>
-<div class="container content">
-    <div class="recommended">
+<?php require 'layout/navbar.php'; ?>
+<main>
+    <section class="recommended">
         <div class="intro">
-            <h2 class="text-center">Beliebt</h2>
-            <p class="text-center">Eine Auswahl der beliebtesten Produkte</p>
+            <h3>Beliebte Produkte</h3>
+            <p>Die Auswahl unserer beliebtesten Produkte aus unserem Online-Shop.</p>
         </div>
 
         <?php
-        include __DIR__ . '/./layout/productsRow.php';
+        require 'layout/productsRow.php';
         ?>
 
-        <a href="/products">
-            <button class="more_items_button">Weitere</button>
-        </a>
-    </div>
-</div>
+        <a class="link-button more-items" href="/products">Weitere</a>
+    </section>
+</main>
 
-<?php require '../views/layout/footer.php'; ?>
+<?php require 'layout/footer.php'; ?>
 
 </body>
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
