@@ -1,5 +1,5 @@
 <?php if (!isset($navbar_index)) $navbar_index = ""; ?>
-<div class="navbar" id="navbar">
+<nav id="navbar">
     <div class="left">
         <a class="nav-button-home" href="/" <?php if ($navbar_index == "home") echo "data-active"; ?>>
             Art und Weise
@@ -34,7 +34,7 @@
         </a>
     </div>
     <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
-</div>
+</nav>
 
 <script>
     function myFunction() {
