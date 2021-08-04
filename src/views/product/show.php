@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerfirma Art und Weise</title>
-    <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/showProduct.css">
 </head>
 
@@ -26,41 +25,37 @@
 
 
 <?php include __DIR__ . '/../layout/navbar.php'; ?>
-<div class="container content">
+<main>
 
     <?php if ($product) { ?>
 
-        <div class="product_view">
-            <div class="images-wrapper">
-                <img src="data:image/png;base64,<?= $product->images[0]->base64 ?>" class="item_image"
-                     alt="Image: <?= $product->name ?>"/>
-            </div>
-            <div class="text-wrapper">
-                <h1><?= $product->name; ?></h1>
+        <section>
+            <figure>
+                <img src="data:image/png;base64,<?= $product->images[0]->base64 ?>" class="item_image" alt="Image: <?= $product->name ?>"/>
+            </figure>
+            <div>
+                <h4><?= $product->name; ?></h4>
                 <p><?= $product->description; ?></p>
+            </div>
+            <aside>
                 <?php if ($product->discount > 0) { ?>
-                    <span><?=str_replace('.', ',', $product->discountPriceEuro)?> </span><span style='text-decoration: line-through'><?=str_replace('.', ',', $product->priceEuro)?> €</span>
+                    <span><?=str_replace('.', ',', $product->discountPriceEuro)?></span><span style='text-decoration: line-through'><?=str_replace('.', ',', $product->priceEuro)?></span>
                 <?php } else { ?>
-                    <span><?=str_replace('.', ',', $product->priceEuro)?> €</span>
+                    <span><?=str_replace('.', ',', $product->priceEuro)?></span>
                 <?php } ?>
-            </div>
-            <div class="panel-wrapper">
-                <div class="panel-box">
-                    <button id="addToCartButton">In den Einkaufswagen</button>
-                    <button id="buyButton">Jetzt kaufen</button>
-                    <div id="quantitySelect-wrapper"></div>
-                    <div id="price"><?=$product->discountPriceEuro?> €
-                    </div>
-                </div>
-            </div>
-        </div>
+                <button id="addToCartButton">In den Einkaufswagen</button>
+                <button class="inactive" id="buyButton">Jetzt kaufen</button>
+                <div id="quantitySelect-wrapper"></div>
+                <p id="price"><?=$product->discountPriceEuro?></p>
+            </aside>
+        </section>
 
     <?php } else { ?>
-        <h1>Produkt konnte nicht gefunden werden!</h1>
+        <p class="product-not-found">Produkt konnte nicht gefunden werden!</p>
     <?php } ?>
 
 
-</div>
+</main>
 
 <?php include __DIR__ . '/../layout/footer.php'; ?>
 
