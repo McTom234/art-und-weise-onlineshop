@@ -5,9 +5,8 @@ footer {
   background: a.$dark-slate-gray;
   color: a.$white;
   @include a.font(a.$font-style-subtitle2);
-  position: absolute;
-  top: calc(100% - 3em - 1em);
-  width: 100%;
+  position: sticky;
+  top: 100vh;
 
   .copyright {
     display: flex;
