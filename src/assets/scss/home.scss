@@ -99,8 +99,6 @@ section.recommended {
 
       figure img {
         width: 75%;
-        border-top-left-radius: .5em;
-        border-top-right-radius: .5em;
       } // figure img
 
     } // hover
@@ -109,6 +107,8 @@ section.recommended {
       margin: 0;
       aspect-ratio: 3/2;
       background: a.$pale-spring-bud;
+      border-top-left-radius: .5em;
+      border-top-right-radius: .5em;
 
       img {
         width: 100%;
