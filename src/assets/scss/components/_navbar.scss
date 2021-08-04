@@ -30,7 +30,7 @@ nav {
         height: .2rem;
         background: white;
         transform: scaleX(0);
-        transition: all 300ms ease-in-out;
+        transition: all 150ms ease-in-out;
       } // ::before
 
       &:hover, &:focus-visible {
@@ -101,6 +101,7 @@ nav {
       text-align: center;
       user-select: none;
       color: a.$navbar-text-color;
+      z-index: 99;
 
       &:hover, &:focus-within {
         a::after {
@@ -126,7 +127,7 @@ nav {
         font-family: map.get(a.$font-style-fontAwesome, "font-family");
         padding-left: 6px;
         transform: rotate(0turn);
-        transition: all 300ms ease-in-out;
+        transition: all 150ms ease-in-out;
       } // a::after
 
       .dropdown-content {
@@ -139,7 +140,7 @@ nav {
         min-width: 160px;
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
         transform: scaleY(0) scaleX(0);
-        transition: transform 300ms ease-in-out;
+        transition: transform 150ms ease-in-out;
 
         a {
           float: none;
