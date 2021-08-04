@@ -23,7 +23,7 @@ header {
 
     h1 {
       text-shadow: 0 0 0 a.$hunter-green;
-      transition: text-shadow 150ms ease-in;
+      transition: text-shadow 100ms ease-in;
 
       &:hover {
         text-shadow: 2px 2px  4px a.$hunter-green;
@@ -91,7 +91,7 @@ section.recommended {
   article {
     border: .1em solid a.$hunter-green;
     box-shadow: 0 0 0 a.$dark-slate-gray;
-    transition: box-shadow 150ms ease-in-out;
+    transition: box-shadow 100ms ease-in-out;
     border-radius: .5em;
 
     &:hover {
@@ -99,6 +99,8 @@ section.recommended {
 
       figure img {
         width: 75%;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
       } // figure img
 
     } // hover
@@ -117,7 +119,9 @@ section.recommended {
         display: block;
         object-fit: cover;
         object-position: center;
-        transition: width 350ms ease-in-out;
+        transition: all 150ms ease-in-out;
+        border-top-left-radius: .5em;
+        border-top-right-radius: .5em;
       } // img
 
     } // figure
@@ -153,16 +157,12 @@ section.recommended {
           content: ' €';
         } // ::after
 
-        &:nth-child(2) {
+        &:nth-of-type(2) {
           float: right;
           text-decoration: line-through;
           color: a.$blood-red;
-
-          &::before {
-            content: ' ';
-          } // ::before
-
-        } // :nth-child(2)
+          font-weight: 300;
+        } // :nth-of-type(2)
 
       } // span
       
