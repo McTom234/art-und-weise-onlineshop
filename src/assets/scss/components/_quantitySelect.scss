@@ -2,7 +2,7 @@
 .quantity-select {
   position: relative;
   font-family: Arial;
-  width: 200px;
+  width: calc( ( (100vw - 3em - 3em) / 12 ) * (3/2) );
   font-size: 16px;
   margin: 20px;
 }
