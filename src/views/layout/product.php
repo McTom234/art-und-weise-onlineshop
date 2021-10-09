@@ -1,8 +1,6 @@
 <a class="grid-column-4 no-text-decoration" href="./show?id=<?=$product->product_ID?>">
     <article>
-        <figure>
-            <img src="<?=$product->images[0]->base64?>" alt="Image: <?=$product->name?>"/>
-        </figure>
+        <figure style="background-image: url('<?=$product->images[0]->base64?>')"></figure>
 
         <h4><?=$product->name?></h4>
         <p><?php echo nl2br(htmlspecialchars($product->description))?></p>
