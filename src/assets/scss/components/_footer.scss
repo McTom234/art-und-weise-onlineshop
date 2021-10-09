@@ -7,6 +7,7 @@ footer {
   @include a.font(a.$font-style-subtitle2);
   position: sticky;
   top: 100vh;
+  user-select: none;
 
   .copyright {
     display: flex;
