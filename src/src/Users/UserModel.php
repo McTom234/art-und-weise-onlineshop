@@ -11,4 +11,6 @@ class UserModel
     public $email;
     public $password;
     public $location_ID;
+
+    public $member = false;
 }

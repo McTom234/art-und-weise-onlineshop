@@ -58,8 +58,28 @@ class ProductsRepository extends AbstractRepository {
         return $statement->fetchAll(PDO::FETCH_CLASS, $this->model);
     }
 
-    function insertProduct($name, $description, $price, $discount){
+    function remove($id)
+    {
+        $this->imagesProductsRepository->removeByProductID($id);
+        return parent::remove($id);
+    }
+
+    function updateProduct($product_ID, $name, $description, $price, $discount, $image = null){
+        $this->imagesProductsRepository->removeByProductID($product_ID);
+
+        $statement = $this->pdo->prepare("UPDATE product SET name = :name, price = :price, discount = :discount, description = :description WHERE product_ID = :product_ID");
+        $statement->execute([':product_ID' => $product_ID, ':name' => $name, ':description' => $description, ':price' => $price, ':discount' => $discount]);
+
+        if($image){
+            $this->imagesProductsRepository->insertImage($product_ID, $image);
+        }
+    }
+
+    function insertProduct($name, $description, $price, $discount, $image){
         $statement = $this->pdo->prepare("INSERT INTO $this->table (name, price, discount, description) VALUES (:name, :price, :discount, :description)");
         $statement->execute([':name' => $name, ':description' => $description, ':price' => $price, ':discount' => $discount]);
+        $product_ID = $this->pdo->lastInsertId();
+        $this->imagesProductsRepository->insertImage($product_ID, $image);
+        return $product_ID;
     }
 }

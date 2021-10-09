@@ -22,11 +22,15 @@ class AuthenticationRepository
             session_start();
         }
         if (isset($_SESSION['userid'])) {
-            $result = $this->usersRepository->fetch($_SESSION['userid']);
-            if (!$result) {
+            $id = $_SESSION['userid'];
+            $user = $this->usersRepository->fetch($id);
+            if (!$user) {
                 return false;
             } else {
-                return $result;
+                if($this->membersRepository->fetchByUserID($id)){
+                    $user->member = true;
+                }
+                return $user;
             }
         } else {
             return false;

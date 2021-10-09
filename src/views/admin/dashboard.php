@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/assets/css/admin.css">
 </head>
 <body>
-<?php require '../views/layout/navbar.php'; ?>
+<?php require __DIR__ .'/../layout/navbarAdmin.php'; ?>
 <div class="grid-container">
     <div class="grid-column-8 grid-column">
         <h3 class="card-title">Bestellungen</h3>
@@ -93,7 +93,7 @@
             </tbody>
         </table>
         <div class="card-bottom">
-            <a href="">
+            <a href="/admin/products">
                 <button>Gehe zur Übersicht</button>
             </a>
         </div>

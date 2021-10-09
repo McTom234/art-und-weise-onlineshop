@@ -43,6 +43,14 @@ $root = [
         'controller' => 'controller',
         'methode' => 'fetchShoppingCart',
     ],
+    '/buy' => [
+        'controller' => 'controller',
+        'methode' => 'buy'
+    ],
+    '/ordered' => [
+        'controller' => 'controller',
+        'methode' => 'ordered'
+    ],
     '/admin' => [
         'controller' => 'adminController',
         'methode' => 'admin'
@@ -51,13 +59,25 @@ $root = [
         'controller' => 'adminController',
         'methode' => 'adminDashboard'
     ],
-    '/buy' => [
-        'controller' => 'controller',
-        'methode' => 'buy'
+    '/admin/orders' => [
+        'controller' => 'adminController',
+        'methode' => 'adminOrders'
     ],
-    '/ordered' => [
-        'controller' => 'controller',
-        'methode' => 'ordered'
+    '/admin/products' => [
+        'controller' => 'adminController',
+        'methode' => 'adminProducts'
+    ],
+    '/admin/products/add' => [
+        'controller' => 'adminController',
+        'methode' => 'adminProductsAdd'
+    ],
+    '/admin/products/edit' => [
+        'controller' => 'adminController',
+        'methode' => 'adminProductsEdit'
+    ],
+    '/admin/members' => [
+        'controller' => 'adminController',
+        'methode' => 'adminMembers'
     ]
 ];
 

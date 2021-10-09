@@ -1,7 +1,7 @@
 <a class="grid-column-4 no-text-decoration" href="./show?id=<?=$product->product_ID?>">
     <article>
         <figure>
-            <img src="data:image/png;base64,<?=$product->images[0]->base64?>" alt="Image: <?=$product->name?>"/>
+            <img src="<?=$product->images[0]->base64?>" alt="Image: <?=$product->name?>"/>
         </figure>
 
         <h4><?=$product->name?></h4>

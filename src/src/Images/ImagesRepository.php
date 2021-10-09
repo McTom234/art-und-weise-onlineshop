@@ -22,9 +22,8 @@ class ImagesRepository extends AbstractRepository {
     }
 
     public function insertImage($image){
-        $image_base64 = base64_encode($image);
         $statement = $this->pdo->prepare("INSERT INTO $this->table (base64) VALUES (:image_base64)");
-        $statement->execute(['image_base64' => $image_base64]);
+        $statement->execute(['image_base64' => $image]);
         return $this->pdo->lastInsertId();
     }
 }

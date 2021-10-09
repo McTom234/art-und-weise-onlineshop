@@ -12,7 +12,8 @@ use Products\ProductsRepository;
 use ShoppingCart\ShoppingCartRepository;
 use Users\UsersRepository;
 
-class AdminController extends AbstractController {
+class AdminController extends AbstractController
+{
 
     private $productsRepository;
     private $usersRepository;
@@ -30,16 +31,28 @@ class AdminController extends AbstractController {
         $this->productsRepository = $productsRepository;
         $this->articlesRepository = $articlesRepository;
         $this->checkoutsRepository = $checkoutsRepository;
-        $this->locationsRepository =  $locationsRepository;
-        $this->ordersRepository =  $ordersRepository;
+        $this->locationsRepository = $locationsRepository;
+        $this->ordersRepository = $ordersRepository;
         $this->membersRepository = $membersRepository;
         $this->authenticationRepository = $authenticationRepository;
         $this->shoppingCartRepository = $shoppingCartRepository;
     }
 
-    public function adminDashboard(){
+    public function admin()
+    {
         $authentication = $this->authenticationRepository->memberAuthentication();
-        if(!$authentication){
+
+        if (!$authentication) {
+            header("Location: /login");
+            exit();
+        }
+        header("Location: /admin/dashboard");
+    }
+
+    public function adminDashboard()
+    {
+        $authentication = $this->authenticationRepository->memberAuthentication();
+        if (!$authentication) {
             header("Location: /login");
             exit();
         }
@@ -62,13 +75,92 @@ class AdminController extends AbstractController {
         ]);
     }
 
-    public function admin(){
+    public function adminOrders()
+    {
+    }
+
+    public function adminProducts()
+    {
         $authentication = $this->authenticationRepository->memberAuthentication();
 
-        if(!$authentication){
-            header("Location: /login");
+        $page = 1;
+        if (isset($_GET['p'])) {
+            $page = $_GET['p'];
+        }
+        $request['page'] = $page;
+
+        $numberProducts = 20;
+        $offset = ($page - 1) * $numberProducts;
+
+
+        $query = "";
+        if (isset($_GET['q'])) {
+            $query = $_GET['q'];
+            $request['query'] = $query;
+            $products = $this->productsRepository->fetchNumberOffsetQuery($numberProducts, $offset, $query);
+
+        } else {
+            $products = $this->productsRepository->fetchNumberOffset($numberProducts, $offset);
+
+        }
+
+        $numberTotalProducts = $this->productsRepository->fetchProductCount($query);
+        $maxPages = ceil(($numberTotalProducts / $numberProducts));
+
+        $this->render("admin/products", [
+            'loggedIn' => $authentication,
+            'products' => $products,
+            'request' => $request,
+            'maxPages' => $maxPages
+        ]);
+    }
+
+    public function adminProductsAdd()
+    {
+    }
+
+    public function adminProductsEdit()
+    {
+        $authentication = $this->authenticationRepository->memberAuthentication();
+
+        if (isset($_GET['id'])) {
+            $product_id = $_GET['id'];
+            $product = $this->productsRepository->fetch($product_id);
+
+            if (!empty($_POST)) {
+
+                if(isset($_POST['delete'])){
+                    $this->productsRepository->remove($product_id);
+                    header("Location: /admin/products");
+                    exit();
+                }
+
+                $name = $_POST['name'];
+                $description = $_POST['description'];
+                $price = $_POST['price'];
+                $discount = $_POST['discount'];
+
+                $file_tmp = $_FILES['image']['tmp_name'];
+                $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
+                $data = file_get_contents($file_tmp);
+                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+                $this->productsRepository->updateProduct($product_id, $name, $description, $price, $discount, $base64);
+                header("Refresh:0");
+            }
+
+            $this->render("admin/products/edit", [
+                'loggedIn' => $authentication,
+                'product' => $product,
+            ]);
+        } else {
+            header("Location: /admin/products");
             exit();
         }
-        header("Location: /admin/dashboard");
+    }
+
+
+    public function adminMembers()
+    {
     }
 }

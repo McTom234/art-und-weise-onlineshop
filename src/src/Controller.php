@@ -111,7 +111,7 @@ class Controller extends AbstractController
 
         $userCount = $this->usersRepository->getUserCount();
 
-        if ($userCount === 0) {
+        if ($userCount <= 0) {
             $infoMessage = "Du bist die erste Person, die sich registriert. Bitte gebe deine Daten an, damit du als Administrator hinzugefügt wirst.";
         }
 
@@ -388,20 +388,13 @@ class Controller extends AbstractController
             } else {
                 $discount = 0;
             }
+            $file_tmp = 'https://picsum.photos/200/300';
+            $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
+            $data = file_get_contents($file_tmp);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
-            $this->productsRepository->insertProduct('Product ' . $i, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', $price, $discount);
+            $this->productsRepository->insertProduct('Product ' . $i, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', $price, $discount, $base64);
         }
+
     }
-
-    public function insertTestImages($count)
-    {
-        $products = $this->productsRepository->fetchNumber($count);
-        foreach ($products as $product) {
-            $img = file_get_contents('https://picsum.photos/200/300');
-            $this->imagesProductRepository->insertImage($product->product_ID, $img);
-
-        }
-    }
-
-
 }

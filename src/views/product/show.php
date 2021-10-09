@@ -31,7 +31,7 @@
 
         <section>
             <figure>
-                <img src="data:image/png;base64,<?= $product->images[0]->base64 ?>" class="item_image" alt="Image: <?= $product->name ?>"/>
+                <img src="<?= $product->images[0]->base64 ?>" class="item_image" alt="Image: <?= $product->name ?>"/>
             </figure>
             <div>
                 <h4><?= $product->name; ?></h4>

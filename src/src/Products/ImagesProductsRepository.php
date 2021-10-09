@@ -39,10 +39,24 @@ class ImagesProductsRepository extends AbstractRepository {
 
         foreach($imagesProducts AS $imageProduct){
             $image = $this->imagesRepository->fetch($imageProduct->image_ID);
-            $imageProduct->base64 = $image->base64;
+            if($image){
+                $imageProduct->base64 = $image->base64;
+            }
         }
 
         return $imagesProducts;
+    }
+
+    public function removeByProductID($product_ID){
+        $imageProducts = $this->fetchByProductID($product_ID);
+        if($imageProducts){
+            foreach ($imageProducts as $imageProduct){
+                $this->imagesRepository->remove($imageProduct->image_ID);
+            }
+        }
+
+        $statement = $this->pdo->prepare("DELETE FROM `image-product` WHERE product_ID = :id");
+        return $statement->execute(['id' => $product_ID]);
     }
 
     public function insertImage($product_ID, $image){

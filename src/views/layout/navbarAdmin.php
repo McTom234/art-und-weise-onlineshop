@@ -6,12 +6,13 @@
         </a>
         <div class="dropdown">
             <a <?php if (in_array($navbar_index, array("link 1", "link 2", "link 3"))) echo "data-active"; ?>>
-                Produkte
+                Dashboard
             </a>
             <div class="dropdown-content">
-                <a href="/" <?php if ($navbar_index == "link 1") echo "data-active"; ?>>Link 1</a>
-                <a href="/" <?php if ($navbar_index == "link 2") echo "data-active"; ?>>Link 2</a>
-                <a href="/" <?php if ($navbar_index == "link 3") echo "data-active"; ?>>Link 3</a>
+                <a href="/admin/orders" <?php if ($navbar_index == "link 1") echo "data-active"; ?>>Bestellungen</a>
+                <a href="/admin/products" <?php if ($navbar_index == "link 2") echo "data-active"; ?>>Produkte</a>
+                <a href="/admin/members" <?php if ($navbar_index == "link 3") echo "data-active"; ?>>Mitglieder</a>
+                <a href="/" <?php if ($navbar_index == "link 4") echo "data-active"; ?>>Finanzen</a>
             </div>
         </div>
     </div>
@@ -19,9 +20,6 @@
     <div class="right">
         <?php if ($loggedIn): ?>
             <span class="navbar-text"> <?= $loggedIn->forename . ' ' . $loggedIn->surname ?></span>
-            <?php if ($loggedIn->member): ?>
-                <a href="/admin">Administration</a>
-            <?php endif; ?>
             <a href="/logout">Abmelden</a>
         <?php else: ?>
             <a href="/login" <?php if ($navbar_index == "login") echo "data-active"; ?>>
@@ -31,12 +29,6 @@
                 Registrieren
             </a>
         <?php endif; ?>
-        <a class="nav-button-shopping-cart" href="/shopping-cart"
-            <?php if ($navbar_index == "shopping-cart") echo "data-active"; ?>>
-            Warenkorb <?php if (isset($shoppingCartProductCount)) {
-                echo $shoppingCartProductCount;
-            } ?>
-        </a>
     </div>
     <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
 </nav>

@@ -39,4 +39,9 @@ abstract class AbstractRepository {
         return $statement->fetchAll(PDO::FETCH_CLASS, $this->model);
     }
 
+    public function remove($id){
+        $statement = $this->pdo->prepare("DELETE FROM $this->table WHERE $this->idName = :id");
+        return $statement->execute(['id' => $id]);
+    }
+
 }
