@@ -6,22 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerfirma Art und Weise</title>
-    <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/shoppingCart.css">
 </head>
 
 <body>
 <?php require __DIR__ . '/../layout/navbar.php'; ?>
-<div class="container content">
-
-
-    <h1>Warenkorb</h1>
-    <div id="cart-list"></div>
-
-    <a href="/buy">
-        <button>Kaufen</button>
-    </a>
-</div>
+<main>
+    <h2>Warenkorb</h2>
+    <section id="cart-list"></section>
+    <a href="/buy" class="link-button">Kaufen</a>
+</main>
 
 <?php require __DIR__ . '/../layout/footer.php'; ?>
 

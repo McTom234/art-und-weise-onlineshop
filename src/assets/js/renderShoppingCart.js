@@ -30,33 +30,15 @@ function renderShoppingCart() {
                     const {product_ID} = item;
                     let count = shoppingCart[product_ID];
 
-                    let itemBox = document.createElement('div');
+                    let itemBox = document.createElement('article');
 
-                    itemBox.className = 'itemBox';
-
-                    let itemImage = document.createElement('img');
-                    itemImage.setAttribute('src', item.images[0].base64);
-                    itemImage.className = 'itemImage';
+                    let itemFigure = document.createElement('figure');
+                    let itemImg = document.createElement('img');
+                    itemImg.setAttribute('src', item.images[0].base64);
+                    itemFigure.appendChild(itemImg);
 
                     let itemTextWrapper = document.createElement('div');
-                    itemTextWrapper.className = 'itemTextWrapper'
-
-                    const values = [
-                        0, 1, 2, 3, 4, 5
-                    ];
-
-                    console.log(count);
-
-                    let itemCount = createQuantitySelect(count, values, 100, true, function (number) {
-
-                        if (number === 0) {
-                            deleteItem(product_ID);
-                            renderShoppingCart();
-                        } else {
-                            setItem(product_ID, number);
-                        }
-                    });
-
+                    itemTextWrapper.className = 'item-description';
 
                     let itemName = document.createElement('h3');
                     itemName.textContent = item.name;
@@ -64,12 +46,22 @@ function renderShoppingCart() {
                         window.location.href = './show?id=' + product_ID;
                     });
 
-
                     let itemDescription = document.createElement('p');
                     itemDescription.textContent = item.description;
 
-                    let itemPrice = document.createElement('p');
-                    itemPrice.textContent = item.price * count;
+                    const values = [
+                        0, 1, 2, 3, 4, 5
+                    ];
+                    let itemCount = createQuantitySelect(count, values, 100, true, function (number) {
+
+                        if (number === 0) {
+                            deleteItem(product_ID);
+                            renderShoppingCart();
+                        } else {
+                            setItem(product_ID, number);
+                            renderShoppingCart();
+                        }
+                    });
 
                     let deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Löschen';
@@ -79,13 +71,21 @@ function renderShoppingCart() {
                         }
                     )
 
-                    itemBox.appendChild(itemImage);
+                    const itemControl = document.createElement('div');
+                    itemControl.className = "item-control";
+                    itemControl.appendChild(itemCount);
+                    itemControl.appendChild(deleteButton);
+
+                    let itemPrice = document.createElement('span');
+                    // TODO: round value
+                    itemPrice.textContent = (item.price * count).toFixed(2).replace(".", ",");
+
+                    itemBox.appendChild(itemFigure);
                     itemTextWrapper.appendChild(itemName);
                     itemTextWrapper.appendChild(itemDescription);
-                    itemTextWrapper.append(itemPrice);
+                    itemTextWrapper.appendChild(itemControl);
                     itemBox.appendChild(itemTextWrapper);
-                    itemBox.appendChild(itemCount);
-                    itemBox.appendChild(deleteButton);
+                    itemBox.appendChild(itemPrice);
                     cartList.appendChild(itemBox);
 
                 });
