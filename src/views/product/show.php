@@ -17,9 +17,7 @@
         <p><strong><?= $product->name ?></strong> wurde zum Warenkorb hinzugefügt</p>
         <p id="count">Anzahl: 1</p>
         <p id="popup-price"></p>
-        <a href="./shopping-cart">
-            <button>Zum Warenkorb</button>
-        </a>
+        <a href="./shopping-cart" class="link-button">Zum Warenkorb</a>
     </div>
 </div>
 
@@ -59,7 +57,6 @@ include __DIR__ . '/../layout/navbar.php'; ?>
 
 <?php include __DIR__ . '/../layout/footer.php'; ?>
 
-</body>
 <script src="/assets/js/cookies.js"></script>
 <script src="/assets/js/shoppingCart.js"></script>
 <script src="/assets/js/quantitySelect.js"></script>
@@ -120,4 +117,5 @@ include __DIR__ . '/../layout/navbar.php'; ?>
     });
 
 </script>
+</body>
 </html>
