@@ -1,12 +1,14 @@
 <?php
 
 namespace Users;
+
 use Core\AbstractRepository;
 use Locations\LocationsRepository;
 use Members\MembersRepository;
 use PDO;
 
-class UsersRepository extends AbstractRepository {
+class UsersRepository extends AbstractRepository
+{
 
     public function __construct(PDO $pdo)
     {
@@ -28,16 +30,18 @@ class UsersRepository extends AbstractRepository {
         return "user_ID";
     }
 
-    public function getUserCount(){
+    public function getUserCount()
+    {
         $statement = $this->pdo->query("SELECT COUNT(*) AS count FROM user");
         $count = $statement->fetch();
-        if($count){
+        if ($count) {
             return $count['count'];
         }
         return false;
     }
 
-    public function login($email, $password){
+    public function login($email, $password)
+    {
         $statement = $this->pdo->prepare("SELECT * FROM user WHERE email = :email");
         $statement->execute(['email' => $email]);
         $statement->setFetchMode(PDO::FETCH_CLASS, $this->model);
@@ -56,32 +60,26 @@ class UsersRepository extends AbstractRepository {
         }
     }
 
-    public function registration(UserModel $user){
+    public function registration(UserModel $user)
+    {
         $password_hash = password_hash($user->password, PASSWORD_DEFAULT);
 
+        $user_ID = md5(uniqid(rand(), true));
+
         // create user in Users
-        $statement = $this->pdo->prepare("INSERT INTO user (email, password, forename, surname) VALUES (:username, :password, :forename, :surname);");
-        $result = $statement->execute(array('username' => $user->email, 'password' => $password_hash, 'forename' => $user->forename, 'surname' => $user->surname));
+        $statement = $this->pdo->prepare("INSERT INTO user (user_ID, email, password, forename, surname) VALUES (:user_ID , :email, :password, :forename, :surname);");
+        $result = $statement->execute([':user_ID' => $user_ID, 'email' => $user->email, 'password' => $password_hash, 'forename' => $user->forename, 'surname' => $user->surname]);
 
-        // fetch new user_ID by email
-        $statement = $this->pdo->prepare("SELECT user_ID FROM user WHERE email = :email");
-        $statement->execute(array('email' => $user->email));
-        $user_ID = $statement->fetch()['user_ID'];
-
+        $location_ID = md5(uniqid(rand(), true));
         // create new location in Location
-        $statement = $this->pdo->prepare("INSERT INTO location (user_ID, street, street_number, postcode, city) VALUES (:uid, :st, :nu, :pc, :ci);");
-        $result = $statement->execute(array('uid' => $user_ID, 'st' => $user->street, 'nu' => $user->street_number, 'pc' => $user->postcode, 'ci' => $user->city));
-
-        // fetch new location_ID by user_ID
-        $statement = $this->pdo->prepare("SELECT location_ID FROM location WHERE user_ID = :uid");
-        $statement->execute(array('uid' => $user_ID));
-        $location_ID = $statement->fetch()['location_ID'];
+        $statement = $this->pdo->prepare("INSERT INTO location (location_ID, user_ID, street, street_number, postcode, city) VALUES (:location_ID, :uid, :st, :nu, :pc, :ci);");
+        $result = $statement->execute(['location_ID' => $location_ID, 'uid' => $user_ID, 'st' => $user->street, 'nu' => $user->street_number, 'pc' => $user->postcode, 'ci' => $user->city]);
 
         // update location_ID of user in Users by user_ID
         $statement = $this->pdo->prepare("UPDATE user SET location_ID = :loc WHERE user_ID = :uid");
         $result = $statement->execute(array('uid' => $user_ID, 'loc' => $location_ID));
 
-        if($result){
+        if ($result) {
             if (session_status() === 1) {
                 session_start();
             }

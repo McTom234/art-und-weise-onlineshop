@@ -4,12 +4,12 @@ use artundweise;
 
 create table `user`
 (
-    user_ID int auto_increment,
-    forename varchar(255) not null,
-    surname varchar(255) not null,
-    email varchar(255) not null,
-    password varchar(512) not null,
-    location_ID int null,
+    user_ID     varchar(100) not null,
+    forename    varchar(255) not null,
+    surname     varchar(255) not null,
+    email       varchar(255) not null,
+    password    varchar(512) not null,
+    location_ID varchar(100) not null,
     constraint User_pk
         primary key (user_ID)
 );
@@ -21,27 +21,27 @@ create unique index User_Email_uindex
 
 create table `location`
 (
-    location_ID int auto_increment,
-    user_ID int not null,
-    street varchar(512) not null,
+    location_ID   varchar(100) not null,
+    user_ID       varchar(100) not null,
+    street        varchar(512) not null,
     street_number varchar(128) not null,
-    postcode int not null,
-    city varchar(512) not null,
+    postcode      int          not null,
+    city          varchar(512) not null,
     constraint User_pk
         primary key (location_ID),
     constraint User_fk
-        foreign key (user_ID) references user(user_ID)
+        foreign key (user_ID) references user (user_ID)
 );
 
 # Table Order
 
 create table `order`
 (
-    order_ID int auto_increment,
-    product_ID int not null,
-    price int not null,
-    discount int null,
-    quantity int not null,
+    order_ID   varchar(100) not null,
+    product_ID varchar(100) not null,
+    price      int          not null,
+    discount   int          null,
+    quantity   int          not null,
     constraint Order_pk
         primary key (order_ID)
 );
@@ -50,10 +50,10 @@ create table `order`
 
 create table `checkout`
 (
-    checkout_ID int auto_increment,
-    user_ID int not null,
-    tip int null,
-    member_ID int null,
+    checkout_ID varchar(100) not null,
+    user_ID     varchar(100) not null,
+    tip         int          null,
+    member_ID   int          null,
     constraint Checkout_pk
         primary key (checkout_ID)
 );
@@ -62,8 +62,8 @@ create table `checkout`
 
 create table `checkout-Order`
 (
-    checkout_ID int not null,
-    order_ID int not null
+    checkout_ID varchar(100) not null,
+    order_ID    varchar(100) not null
 );
 
 create unique index Checkout_Order_ID_uindex
@@ -73,13 +73,13 @@ create unique index Checkout_Order_ID_uindex
 
 create table member
 (
-    member_ID int auto_increment,
-    user_ID int not null,
-    rights int null,
+    member_ID varchar(100) not null,
+    user_ID   varchar(100) not null,
+    rights    int          null,
     constraint Member_pk
         primary key (member_ID),
     constraint Member_fk
-        foreign key (user_ID) references user(user_ID)
+        foreign key (user_ID) references user (user_ID)
 );
 
 create unique index Member_UserID_uindex
@@ -89,12 +89,12 @@ create unique index Member_UserID_uindex
 
 create table article
 (
-    article_ID int auto_increment,
-    title varchar(512) null,
-    content varchar(8192) not null,
-    publish timestamp default CURRENT_TIMESTAMP not null,
-    likes int default 0 not null,
-    num_of_read int default 0 not null,
+    article_ID  varchar(100)                        not null,
+    title       varchar(512)                        null,
+    content     varchar(8192)                       not null,
+    publish     timestamp default CURRENT_TIMESTAMP not null,
+    likes       int       default 0                 not null,
+    num_of_read int       default 0                 not null,
     constraint Article_pk
         primary key (article_ID)
 );
@@ -104,29 +104,47 @@ create table article
 
 create table `member-article`
 (
-    member_ID int not null,
-    article_ID int not null
+    member_ID  varchar(100) not null,
+    article_ID varchar(100) not null
 );
 
 # Table Product
 
 create table product
 (
-    product_ID int auto_increment,
-    name varchar(1024) not null,
-    price int not null,
-    discount int not null default 0 check ( discount between 0 and 100),
+    product_ID  varchar(100)  not null,
+    name        varchar(1024) not null,
+    price       int           not null,
+    discount    int           not null default 0 check ( discount between 0 and 100),
     description varchar(8192) null,
     constraint Product_pk
         primary key (product_ID)
 );
 
+# Table Category
+
+create table category
+(
+    category_ID varchar(100)  not null,
+    name        varchar(1024) not null,
+    primary key (category_ID)
+);
+
+# Table Category - Product
+
+create table `category-product`
+(
+    category_ID varchar(100) not null,
+    product_ID  varchar(100) not null
+);
+
+
 # Table Image
 
 create table image
 (
-    image_ID int auto_increment,
-    base64 mediumblob null,
+    image_ID varchar(100) not null,
+    base64   mediumblob   null,
     constraint Image_pk
         primary key (image_ID)
 );
@@ -135,16 +153,16 @@ create table image
 
 create table `image-product`
 (
-    image_ID int not null,
-    product_ID int not null
+    image_ID   varchar(100) not null,
+    product_ID varchar(100) not null
 );
 
 # Table Image-Article
 
 create table `image-article`
 (
-    image_ID   int not null,
-    article_ID int not null
+    image_ID   varchar(100) not null,
+    article_ID varchar(100) not null
 );
 
 create trigger product_insert_discountCheck

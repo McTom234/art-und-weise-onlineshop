@@ -89,7 +89,7 @@ include __DIR__ . '/../layout/navbar.php'; ?>
 
     let addToCartButton = document.getElementById('addToCartButton');
     addToCartButton.addEventListener('click', function () {
-        addItem(<?=$product->product_ID?>, currentValue)
+        addItem("<?=$product->product_ID?>", currentValue)
         openPopup();
     });
 

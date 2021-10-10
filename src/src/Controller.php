@@ -43,7 +43,6 @@ class Controller extends AbstractController
     public function home()
     {
         $authentication = $this->authenticationRepository->authentication();
-
         $products = $this->productsRepository->fetchNumber(3);
         foreach ($products as $product) {
             $product_ID = $product->product_ID;
@@ -383,6 +382,7 @@ class Controller extends AbstractController
             } else {
                 $discount = 0;
             }
+
             $file_tmp = 'https://picsum.photos/200/300';
             $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
             $data = file_get_contents($file_tmp);

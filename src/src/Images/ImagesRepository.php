@@ -1,10 +1,12 @@
 <?php
 
 namespace Images;
+
 use Core\AbstractRepository;
 use PDO;
 
-class ImagesRepository extends AbstractRepository {
+class ImagesRepository extends AbstractRepository
+{
 
     public function getModel()
     {
@@ -21,9 +23,14 @@ class ImagesRepository extends AbstractRepository {
         return "image_ID";
     }
 
-    public function insertImage($image){
-        $statement = $this->pdo->prepare("INSERT INTO $this->table (base64) VALUES (:image_base64)");
-        $statement->execute(['image_base64' => $image]);
-        return $this->pdo->lastInsertId();
+    public function insertImage($image)
+    {
+        $image_ID = md5(uniqid(rand(), true));
+        $statement = $this->pdo->prepare("INSERT INTO image (image_ID, base64) VALUES (:image_ID, :image_base64)");
+        $statement->execute([
+            ':image_ID' => $image_ID,
+            ':image_base64' => $image
+        ]);
+        return $image_ID;
     }
 }
