@@ -4,6 +4,7 @@ namespace Core;
 
 use Articles\ArticlesRepository;
 use Authentication\AuthenticationRepository;
+use Categories\CategoriesRepository;
 use Checkouts\CheckoutsRepository;
 use Locations\LocationsRepository;
 use Members\MembersRepository;
@@ -27,10 +28,10 @@ class Container
     {
         $this->recipes = [
             'controller' => function () {
-                return new Controller($this->make('usersRepository'), $this->make('productsRepository'), $this->make('imagesProductsRepository'), $this->make('articlesRepository'), $this->make('checkoutsRepository'), $this->make('locationsRepository'), $this->make('ordersRepository'), $this->make('membersRepository'), $this->make('authenticationRepository'), $this->make('shoppingCartRepository'));
+                return new Controller($this->make('usersRepository'), $this->make('productsRepository'), $this->make('imagesProductsRepository'), $this->make('articlesRepository'), $this->make('checkoutsRepository'), $this->make('locationsRepository'), $this->make('ordersRepository'), $this->make('membersRepository'), $this->make('authenticationRepository'), $this->make('shoppingCartRepository'), $this->make('categoriesRepository'));
             },
             'adminController' => function () {
-                return new AdminController($this->make('usersRepository'), $this->make('productsRepository'), $this->make('membersRepository'), $this->make('articlesRepository'), $this->make('locationsRepository'), $this->make('ordersRepository'), $this->make('checkoutsRepository'), $this->make('authenticationRepository'), $this->make('shoppingCartRepository'));
+                return new AdminController($this->make('usersRepository'), $this->make('productsRepository'), $this->make('membersRepository'), $this->make('articlesRepository'), $this->make('locationsRepository'), $this->make('ordersRepository'), $this->make('checkoutsRepository'), $this->make('authenticationRepository'), $this->make('shoppingCartRepository'), $this->make('categoriesRepository'));
             },
             'usersRepository' => function () {
                 return new UsersRepository($this->make('pdo'));
@@ -62,6 +63,10 @@ class Container
             },
             'productsRepository' => function () {
                 return new ProductsRepository($this->make('pdo'), $this->make('imagesProductsRepository'));
+
+            },
+            'categoriesRepository' => function () {
+                return new CategoriesRepository($this->make('pdo'), $this->make('productsRepository'));
 
             },
             'membersRepository' => function () {

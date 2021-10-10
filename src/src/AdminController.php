@@ -2,6 +2,7 @@
 
 use Articles\ArticlesRepository;
 use Authentication\AuthenticationRepository;
+use Categories\CategoriesRepository;
 use Checkouts\CheckoutsRepository;
 use Core\AbstractController;
 use Images\ImagesRepository;
@@ -24,8 +25,9 @@ class AdminController extends AbstractController
     private $membersRepository;
     private $authenticationRepository;
     private $shoppingCartRepository;
+    private $categoriesRepository;
 
-    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, MembersRepository $membersRepository, ArticlesRepository $articlesRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository, CheckoutsRepository $checkoutsRepository, AuthenticationRepository $authenticationRepository, ShoppingCartRepository $shoppingCartRepository)
+    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, MembersRepository $membersRepository, ArticlesRepository $articlesRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository, CheckoutsRepository $checkoutsRepository, AuthenticationRepository $authenticationRepository, ShoppingCartRepository $shoppingCartRepository, CategoriesRepository $categoriesRepository)
     {
         $this->usersRepository = $usersRepository;
         $this->productsRepository = $productsRepository;
@@ -36,6 +38,7 @@ class AdminController extends AbstractController
         $this->membersRepository = $membersRepository;
         $this->authenticationRepository = $authenticationRepository;
         $this->shoppingCartRepository = $shoppingCartRepository;
+        $this->categoriesRepository = $categoriesRepository;
     }
 
     public function admin()

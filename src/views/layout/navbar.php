@@ -9,9 +9,11 @@
                 Produkte
             </a>
             <div class="dropdown-content">
-                <a href="/" <?php if ($navbar_index == "link 1") echo "data-active"; ?>>Link 1</a>
-                <a href="/" <?php if ($navbar_index == "link 2") echo "data-active"; ?>>Link 2</a>
-                <a href="/" <?php if ($navbar_index == "link 3") echo "data-active"; ?>>Link 3</a>
+                <?php if (isset($categories)) {
+                    foreach ($categories as $category): ?>
+                        <a href="/products?c=<?= $category->category_ID?>" <?php if ($navbar_index == "link 1") echo "data-active"; ?>><?= $category->name ?></a>
+                    <?php endforeach;
+                } ?>
             </div>
         </div>
     </div>

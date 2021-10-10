@@ -2,6 +2,7 @@
 
 use Articles\ArticlesRepository;
 use Authentication\AuthenticationRepository;
+use Categories\CategoriesRepository;
 use Checkouts\CheckoutsRepository;
 use Core\AbstractController;
 use Locations\LocationsRepository;
@@ -25,8 +26,9 @@ class Controller extends AbstractController
     private $membersRepository;
     private $authenticationRepository;
     private $shoppingCartRepository;
+    private $categoriesRepository;
 
-    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, ImagesProductsRepository $imagesProductRepository, ArticlesRepository $articlesRepository, CheckoutsRepository $checkoutsRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository, MembersRepository $membersRepository, AuthenticationRepository $authenticationRepository, ShoppingCartRepository $shoppingCartRepository)
+    public function __construct(UsersRepository $usersRepository, ProductsRepository $productsRepository, ImagesProductsRepository $imagesProductRepository, ArticlesRepository $articlesRepository, CheckoutsRepository $checkoutsRepository, LocationsRepository $locationsRepository, OrdersRepository $ordersRepository, MembersRepository $membersRepository, AuthenticationRepository $authenticationRepository, ShoppingCartRepository $shoppingCartRepository, CategoriesRepository $categoriesRepository)
     {
         $this->usersRepository = $usersRepository;
         $this->productsRepository = $productsRepository;
@@ -38,11 +40,18 @@ class Controller extends AbstractController
         $this->membersRepository = $membersRepository;
         $this->authenticationRepository = $authenticationRepository;
         $this->shoppingCartRepository = $shoppingCartRepository;
+        $this->shoppingCartRepository = $shoppingCartRepository;
+        $this->categoriesRepository = $categoriesRepository;
     }
 
     public function home()
     {
         $authentication = $this->authenticationRepository->authentication();
+        $categories = $this->categoriesRepository->fetchAllWithProducts();
+
+        /*  $this->categoriesRepository->insertProductCategory("714d5ccc8f042839d87f66d44dc7a0c0", "0578cd02b3f72e0d3b241f57759b6075");
+        $this->categoriesRepository->insertProductCategory("714d5ccc8f042839d87f66d44dc7a0c0", "215cd1687a5106b8b469e3bdb343952f");
+        $this->categoriesRepository->insertProductCategory("714d5ccc8f042839d87f66d44dc7a0c0", "57dbf6b3d7287a12acf9fe09d00375d2"); */
         $products = $this->productsRepository->fetchNumber(3);
         foreach ($products as $product) {
             $product_ID = $product->product_ID;
@@ -51,6 +60,7 @@ class Controller extends AbstractController
 
         $this->render("home", [
             'loggedIn' => $authentication,
+            'categories' => $categories,
             'products' => $products,
             'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
@@ -58,6 +68,8 @@ class Controller extends AbstractController
 
     public function login()
     {
+        $categories = $this->categoriesRepository->fetchAll();
+
         $message = null;
         $buy = false;
         if (isset($_GET['buy'])) {
@@ -91,6 +103,7 @@ class Controller extends AbstractController
         }
 
         $this->render("user/login", [
+            'categories' => $categories,
             'message' => $message,
             'buy' => $buy,
         ]);
@@ -99,6 +112,7 @@ class Controller extends AbstractController
 
     public function registration()
     {
+        $categories = $this->categoriesRepository->fetchAll();
 
         $infoMessage = null;
         $errorMessage = null;
@@ -175,6 +189,7 @@ class Controller extends AbstractController
         }
 
         $this->render('user/registration', [
+            'categories' => $categories,
             "infoMessage" => $infoMessage,
             "errorMessage" => $errorMessage
         ]);
@@ -183,6 +198,7 @@ class Controller extends AbstractController
     public function show()
     {
         $authentication = $this->authenticationRepository->authentication();
+        $categories = $this->categoriesRepository->fetchAll();
 
         $product = false;
         if (isset($_GET['id'])) {
@@ -191,6 +207,7 @@ class Controller extends AbstractController
 
         $this->render('product/show', [
             'loggedIn' => $authentication,
+            'categories' => $categories,
             'product' => $product,
             'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
@@ -213,9 +230,11 @@ class Controller extends AbstractController
     public function shoppingCart()
     {
         $authentication = $this->authenticationRepository->authentication();
+        $categories = $this->categoriesRepository->fetchAll();
 
         $this->render("product/shoppingCart", [
             'loggedIn' => $authentication,
+            'categories' => $categories,
             'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
     }
@@ -223,6 +242,7 @@ class Controller extends AbstractController
     public function products()
     {
         $authentication = $this->authenticationRepository->authentication();
+        $categories = $this->categoriesRepository->fetchAll();
 
         $request = [];
 
@@ -240,13 +260,24 @@ class Controller extends AbstractController
         if (isset($_GET['q'])) {
             $query = $_GET['q'];
             $request['query'] = $query;
-            $products = $this->productsRepository->fetchNumberOffsetQuery($numberProducts, $offset, $query);
-
-        } else {
-            $products = $this->productsRepository->fetchNumberOffset($numberProducts, $offset);
-
         }
+
+        $products = [];
+
+        if (isset($_GET['c'])) {
+            $category_ID = $_GET['c'];
+            $request['category'] = $category_ID;
+
+            $category = $this->categoriesRepository->fetch($category_ID);
+            if($category){
+                $products = $category->products;
+            }
+        }else{
+            $products = $this->productsRepository->fetchNumberOffsetQuery($numberProducts, $offset, $query);
+        }
+
         $maxPages = 0;
+
         $numberTotalProducts = $this->productsRepository->fetchProductCount($query);
         $maxPages = ceil(($numberTotalProducts / $numberProducts));
 
@@ -259,6 +290,7 @@ class Controller extends AbstractController
 
         $this->render('product/products', [
             'loggedIn' => $authentication,
+            'categories' => $categories,
             'products' => $products,
             'request' => $request,
             'maxPages' => $maxPages,
@@ -269,6 +301,7 @@ class Controller extends AbstractController
     public function buy()
     {
         $authentication = $this->authenticationRepository->authentication();
+        $categories = $this->categoriesRepository->fetchAll();
         $userLocation = $this->locationsRepository->fetch($authentication->location_ID);
 
         if (!$authentication) {
@@ -307,6 +340,7 @@ class Controller extends AbstractController
 
             $this->render('buy', [
                 'loggedIn' => $authentication,
+                'categories' => $categories,
                 'userLocation' => $userLocation,
                 'shoppingCart' => $shoppingCart,
                 'totalPrice' => $totalPrice,
@@ -320,6 +354,7 @@ class Controller extends AbstractController
     public function ordered()
     {
         $authentication = $this->authenticationRepository->authentication();
+        $categories = $this->categoriesRepository->fetchAll();
 
         if (!$authentication) {
             header('Location: /login?buy=1');
@@ -327,6 +362,7 @@ class Controller extends AbstractController
 
         $this->render('ordered', [
             'loggedIn' => $authentication,
+            'categories' => $categories,
         ]);
     }
 
