@@ -19,6 +19,10 @@ function renderShoppingCart() {
 
                 cartList.innerHTML = '';
 
+                const heading = document.createElement('h2');
+                heading.innerHTML = "Warenkorb";
+                cartList.prepend(heading);
+
                 let response = JSON.parse(http.responseText);
                 response.forEach((item, index) => {
                     if (!item) {

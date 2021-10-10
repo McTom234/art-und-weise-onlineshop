@@ -12,16 +12,15 @@
 <body>
 <?php require __DIR__ . '/../layout/navbar.php'; ?>
 <main>
-    <h2>Warenkorb</h2>
-    <section id="cart-list"></section>
+    <section id="cart-list"><h2>Warenkorb</h2></section>
     <a href="/buy" class="link-button">Kaufen</a>
 </main>
 
 <?php require __DIR__ . '/../layout/footer.php'; ?>
 
-</body>
 <script src="/assets/js/cookies.js"></script>
 <script src="/assets/js/shoppingCart.js"></script>
 <script src="/assets/js/quantitySelect.js"></script>
 <script src="/assets/js/renderShoppingCart.js"></script>
+</body>
 </html>
