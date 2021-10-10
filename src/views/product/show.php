@@ -23,8 +23,8 @@
     </div>
 </div>
 
-
-<?php include __DIR__ . '/../layout/navbar.php'; ?>
+<?php $navbar_index = "product";
+include __DIR__ . '/../layout/navbar.php'; ?>
 <main>
 
     <?php if ($product) { ?>
