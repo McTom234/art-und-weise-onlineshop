@@ -42,6 +42,11 @@ class UsersRepository extends AbstractRepository {
         $statement->execute(['email' => $email]);
         $statement->setFetchMode(PDO::FETCH_CLASS, $this->model);
         $user = $statement->fetch(PDO::FETCH_CLASS);
+
+        if (session_status() === 1) {
+            session_start();
+        }
+
         //check password
         if ($user !== false && password_verify($password, $user->password)) {
             $_SESSION['userid'] = $user->user_ID;
