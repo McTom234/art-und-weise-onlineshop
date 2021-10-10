@@ -27,7 +27,7 @@ include __DIR__ . '/../layout/navbar.php'; ?>
 
     <?php if ($product) { ?>
 
-        <section>
+        <article>
             <figure>
                 <img src="<?= $product->images[0]->base64 ?>" class="item_image" alt="Image: <?= $product->name ?>"/>
             </figure>
@@ -46,7 +46,7 @@ include __DIR__ . '/../layout/navbar.php'; ?>
                 <div id="quantitySelect-wrapper"></div>
                 <p id="price"><?=$product->discountPriceEuro?></p>
             </aside>
-        </section>
+        </article>
 
     <?php } else { ?>
         <p class="product-not-found">Produkt konnte nicht gefunden werden!</p>
