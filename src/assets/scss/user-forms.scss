@@ -73,12 +73,10 @@ form {
 
     & + label {
       position: relative;
-      @include a.font(a.$font-style-body2);
-      @include a.font-style(map-get(a.$font-style-body2, "font-family"),
-              map-get(a.$font-style-body2, "font-size"),
-              300,
-              map-get(a.$font-style-body2, "line-height"),
-              true);
+      @include a.font(a.$font-style-body2) {
+        font-weight: 300;
+        text-transform: uppercase;
+      };
       font-style: italic;
       top: calc(-2.5em - 2px);
       text-align: start;
