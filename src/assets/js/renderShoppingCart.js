@@ -35,7 +35,7 @@ function renderShoppingCart() {
                     itemBox.className = 'itemBox';
 
                     let itemImage = document.createElement('img');
-                    itemImage.setAttribute('src', "data:image/png;base64," + item.images[0].base64);
+                    itemImage.setAttribute('src', item.images[0].base64);
                     itemImage.className = 'itemImage';
 
                     let itemTextWrapper = document.createElement('div');
