@@ -65,12 +65,11 @@ class ProductsRepository extends AbstractRepository {
     }
 
     function updateProduct($product_ID, $name, $description, $price, $discount, $image = null){
-        $this->imagesProductsRepository->removeByProductID($product_ID);
-
         $statement = $this->pdo->prepare("UPDATE product SET name = :name, price = :price, discount = :discount, description = :description WHERE product_ID = :product_ID");
         $statement->execute([':product_ID' => $product_ID, ':name' => $name, ':description' => $description, ':price' => $price, ':discount' => $discount]);
 
         if($image){
+            $this->imagesProductsRepository->removeByProductID($product_ID);
             $this->imagesProductsRepository->insertImage($product_ID, $image);
         }
     }

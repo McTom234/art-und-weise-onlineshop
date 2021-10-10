@@ -5,7 +5,7 @@
             Art und Weise
         </a>
         <div class="dropdown">
-            <a <?php if (in_array($navbar_index, array("link 1", "link 2", "link 3"))) echo "data-active"; ?>>
+            <a href="/admin/dashboard" <?php if (in_array($navbar_index, array("link 1", "link 2", "link 3"))) echo "data-active"; ?>>
                 Dashboard
             </a>
             <div class="dropdown-content">

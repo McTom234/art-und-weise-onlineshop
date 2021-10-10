@@ -140,10 +140,16 @@ class AdminController extends AbstractController
                 $price = $_POST['price'];
                 $discount = $_POST['discount'];
 
+
+                $base64 = null;
                 $file_tmp = $_FILES['image']['tmp_name'];
-                $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
-                $data = file_get_contents($file_tmp);
-                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                var_dump($file_tmp);
+                if(!empty($file_tmp)){
+                    $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
+                    $data = file_get_contents($file_tmp);
+                    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+
 
                 $this->productsRepository->updateProduct($product_id, $name, $description, $price, $discount, $base64);
                 header("Refresh:0");

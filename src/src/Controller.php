@@ -75,14 +75,12 @@ class Controller extends AbstractController
                     if (isset($_GET['buy'])) {
                         header("Location: /buy");
                     } else {
-                        header("Location: /");
-                        /**
-                        $member = $this->authenticationRepository->memberAuthentication();
+                        $member = $this->membersRepository->fetchByUserID($user->user_ID);
                         if ($member) {
                             header("Location: /admin");
                         } else {
                             header("Location: /");
-                        } **/
+                        }
                     }
                 } else {
                     $message = 'Email or Password wrong!';
