@@ -59,8 +59,6 @@ class Controller extends AbstractController
 
     public function login()
     {
-        $authentication = $this->authenticationRepository->authentication();
-
         $message = null;
         $buy = false;
         if (isset($_GET['buy'])) {
