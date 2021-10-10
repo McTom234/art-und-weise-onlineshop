@@ -77,6 +77,51 @@ class AdminController extends AbstractController
 
     public function adminOrders()
     {
+        $authentication = $this->authenticationRepository->memberAuthentication();
+
+        $page = 1;
+        if (isset($_GET['p'])) {
+            $page = $_GET['p'];
+        }
+        $request['page'] = $page;
+
+        $number = 20;
+        $offset = ($page - 1) * $number;
+
+
+        $query = "";
+        if (isset($_GET['q'])) {
+            $query = $_GET['q'];
+            $request['query'] = $query;
+        }
+        $checkouts = $this->checkoutsRepository->fetchNumberOffsetQuery($number, $offset, $query);
+
+        $numberTotalProducts = $this->productsRepository->fetchProductCount($query);
+        $maxPages = ceil(($numberTotalProducts / $number));
+
+        $this->render("admin/orders", [
+            'loggedIn' => $authentication,
+            'checkouts' => $checkouts,
+            'request' => $request,
+            'maxPages' => $maxPages
+        ]);
+    }
+
+    public function adminOrdersShow()
+    {
+        $authentication = $this->authenticationRepository->memberAuthentication();
+
+        if (isset($_GET['id'])) {
+            $checkout_id = $_GET['id'];
+            $checkout = $this->checkoutsRepository->fetch($checkout_id);
+            $this->render("admin/orders/show", [
+                'loggedIn' => $authentication,
+                'checkout' => $checkout,
+            ]);
+        }else{
+            header("Location: /admin/orders");
+            exit();
+        }
     }
 
     public function adminProducts()
@@ -89,23 +134,23 @@ class AdminController extends AbstractController
         }
         $request['page'] = $page;
 
-        $numberProducts = 20;
-        $offset = ($page - 1) * $numberProducts;
+        $number = 20;
+        $offset = ($page - 1) * $number;
 
 
         $query = "";
         if (isset($_GET['q'])) {
             $query = $_GET['q'];
             $request['query'] = $query;
-            $products = $this->productsRepository->fetchNumberOffsetQuery($numberProducts, $offset, $query);
+            $products = $this->productsRepository->fetchNumberOffsetQuery($number, $offset, $query);
 
         } else {
-            $products = $this->productsRepository->fetchNumberOffset($numberProducts, $offset);
+            $products = $this->productsRepository->fetchNumberOffset($number, $offset);
 
         }
 
         $numberTotalProducts = $this->productsRepository->fetchProductCount($query);
-        $maxPages = ceil(($numberTotalProducts / $numberProducts));
+        $maxPages = ceil(($numberTotalProducts / $number));
 
         $this->render("admin/products", [
             'loggedIn' => $authentication,
@@ -129,7 +174,7 @@ class AdminController extends AbstractController
 
             if (!empty($_POST)) {
 
-                if(isset($_POST['delete'])){
+                if (isset($_POST['delete'])) {
                     $this->productsRepository->remove($product_id);
                     header("Location: /admin/products");
                     exit();
@@ -144,7 +189,7 @@ class AdminController extends AbstractController
                 $base64 = null;
                 $file_tmp = $_FILES['image']['tmp_name'];
                 var_dump($file_tmp);
-                if(!empty($file_tmp)){
+                if (!empty($file_tmp)) {
                     $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
                     $data = file_get_contents($file_tmp);
                     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);

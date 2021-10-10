@@ -38,7 +38,7 @@
             </tbody>
         </table>
         <div class="card-bottom">
-            <a href="">
+            <a href="/admin/orders">
                 <button>Gehe zur Übersicht</button>
             </a>
         </div>

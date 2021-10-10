@@ -49,7 +49,7 @@ class Container
 
             },
             'checkoutsRepository' => function () {
-                return new CheckoutsRepository($this->make('pdo'));
+                return new CheckoutsRepository($this->make('pdo'), $this->make('ordersRepository'));
 
             },
             'locationsRepository' => function () {

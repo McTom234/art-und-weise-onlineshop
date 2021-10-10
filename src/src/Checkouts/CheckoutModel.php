@@ -9,4 +9,14 @@ class CheckoutModel
     public $tip;
     public $member_ID;
 
+    public $forename;
+    public $surname;
+    public $email;
+    public $street;
+    public $street_number;
+    public $postcode;
+    public $city;
+
+    public $orders;
+
 }

@@ -21,6 +21,13 @@ class OrdersRepository extends AbstractRepository {
         return "order_ID";
     }
 
+    public function fetch($id){
+        $statement = $this->pdo->prepare("SELECT * FROM `order`  WHERE $this->idName = :id");
+        $statement->execute(['id' => $id]);
+        $statement->setFetchMode(PDO::FETCH_CLASS, $this->model);
+        return $statement->fetch(PDO::FETCH_CLASS);
+    }
+
     public function fetchNumber($number)
     {
         $statement = $this->pdo->prepare("SELECT * FROM `order` LIMIT :number");

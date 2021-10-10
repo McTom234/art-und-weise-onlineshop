@@ -63,6 +63,10 @@ $root = [
         'controller' => 'adminController',
         'methode' => 'adminOrders'
     ],
+    '/admin/orders/show' => [
+        'controller' => 'adminController',
+        'methode' => 'adminOrdersShow'
+    ],
     '/admin/products' => [
         'controller' => 'adminController',
         'methode' => 'adminProducts'
@@ -81,26 +85,24 @@ $root = [
     ]
 ];
 
-if(isset($_SERVER['PATH_INFO'])){
+if (isset($_SERVER['PATH_INFO'])) {
 
     $pathInfo = $_SERVER['PATH_INFO'];
 
-    if(!isset($root[$pathInfo])){
+    if (!isset($root[$pathInfo])) {
         $pathInfo = '/notFound';
     }
 
 
-}
-else {
+} else {
     // dirty workaround for missing PATH_INFO
     if (isset($_SERVER['DOCUMENT_URI']) && isset($_SERVER['SCRIPT_NAME'])) {
         $pathInfo = substr($_SERVER['DOCUMENT_URI'], strlen($_SERVER['SCRIPT_NAME']));
 
-        if(!isset($root[$pathInfo])){
+        if (!isset($root[$pathInfo])) {
             $pathInfo = '/notFound';
         }
-    }
-    else {
+    } else {
         $pathInfo = '/notFound';
     }
 }

@@ -16,6 +16,7 @@
     <table>
         <thead>
         <tr>
+            <th>Produkt ID</th>
             <th>Name</th>
             <th>Preis</th>
             <th>Rabatt</th>
@@ -25,6 +26,9 @@
         <tbody>
         <?php foreach ($products as $product): ?>
             <tr>
+                <td>
+                    <?= $product->product_ID; ?>
+                </td>
                 <td>
                     <?= $product->name; ?>
                 </td>
