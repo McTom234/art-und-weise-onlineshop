@@ -27,13 +27,13 @@ class ProductModel
 
     private function getPriceEuro()
     {
-        return $this->price / 100;
+        return number_format($this->price / 100, 2);
     }
 
     private function getDiscountPriceEuro()
     {
         if($this->discount == 0) return  $this->priceEuro;
-        return round($this->priceEuro * $this->discount) / 100;
+        return number_format($this->priceEuro * $this->discount / 100, 2);
     }
 
     public function getShortDescription($charsLimit = 150){
