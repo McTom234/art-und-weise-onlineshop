@@ -14,11 +14,11 @@
     <h3>Bestellung</h3>
     <table>
         <tr>
-            <td><?=$checkout->forename?> <?=$checkout->surname?></td>
+            <td><?= $checkout->forename ?> <?= $checkout->surname ?></td>
         </tr>
         <tr>
             <?php $location = $checkout->street . " " . $checkout->street_number . ", " . $checkout->postcode . " " . $checkout->city; ?>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=<?=$location?>"><?=$location?></a></td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query=<?= $location ?>"><?= $location ?></a></td>
         </tr>
     </table>
 
@@ -29,11 +29,11 @@
             <th>Anzahl</th>
         </tr>
         <?php foreach ($checkout->orders as $order): ?>
-        <tr>
-            <td><?=$order->product_ID?></td>
-            <td><?=$order->discount?></td>
-            <td><?=$order->quantity?></td>
-        </tr>
+            <tr>
+                <td><a href="/show?id=<?= $order->product_ID; ?>"><?= $order->product_ID; ?></a></td>
+                <td><?= $order->discount ?></td>
+                <td><?= $order->quantity ?></td>
+            </tr>
         <?php endforeach; ?>
     </table>
 </div>

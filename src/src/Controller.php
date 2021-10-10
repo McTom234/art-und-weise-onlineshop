@@ -299,7 +299,7 @@ class Controller extends AbstractController
                 foreach ($shoppingCartIDs as $product_ID => $quantity) {
                     $product = $this->productsRepository->fetch($product_ID);
                     if ($product) {
-                        $this->ordersRepository->insertOrder($checkout_ID, $product_ID, 0, $quantity);
+                        $this->ordersRepository->insertOrder($checkout_ID, $product_ID, $product->price, $product->discount, $quantity);
                     }
                 }
                 header('Location: /ordered');

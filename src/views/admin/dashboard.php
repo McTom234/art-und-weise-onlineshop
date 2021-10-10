@@ -25,7 +25,7 @@
             <?php foreach ($orders as $order): ?>
                 <tr>
                     <td>
-                        <?= $order->product_ID; ?>
+                        <a href="/show?id=<?=$order->product_ID; ?>"><?=$order->product_ID; ?></a>
                     </td>
                     <td>
                         <?= $order->discount; ?>

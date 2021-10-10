@@ -1,10 +1,12 @@
 <?php
 
 namespace Orders;
+
 use Core\AbstractRepository;
 use PDO;
 
-class OrdersRepository extends AbstractRepository {
+class OrdersRepository extends AbstractRepository
+{
 
     public function getModel()
     {
@@ -21,7 +23,8 @@ class OrdersRepository extends AbstractRepository {
         return "order_ID";
     }
 
-    public function fetch($id){
+    public function fetch($id)
+    {
         $statement = $this->pdo->prepare("SELECT * FROM `order`  WHERE $this->idName = :id");
         $statement->execute(['id' => $id]);
         $statement->setFetchMode(PDO::FETCH_CLASS, $this->model);
@@ -35,23 +38,23 @@ class OrdersRepository extends AbstractRepository {
         return $statement->fetchAll(PDO::FETCH_CLASS, $this->model);
     }
 
-    public function insertOrder($checkout_ID, $product_ID, $discount, $quantity){
-        $statement = $this->pdo->prepare("INSERT INTO `order` (product_ID, discount, quantity) VALUES (:product_ID, :discount, :quantity)");
+    public function insertOrder($checkout_ID, $product_ID, $price, $discount, $quantity)
+    {
+        $statement = $this->pdo->prepare("INSERT INTO `order` (product_ID, price, discount, quantity) VALUES (:product_ID, :price, :discount, :quantity)");
         $result = $statement->execute([
             ':product_ID' => $product_ID,
+            ':price' => $price,
             ':discount' => $discount,
             ':quantity' => $quantity,
         ]);
-        if($result){
+        if ($result) {
             $order_ID = $this->pdo->lastInsertId();
 
             $statement = $this->pdo->prepare("INSERT INTO `checkout-order` (checkout_ID, order_ID) VALUES (:checkout_ID, :order_ID)");
-            $result = $statement->execute([
+            return $statement->execute([
                 ':checkout_ID' => $checkout_ID,
                 ':order_ID' => $order_ID,
             ]);
-
-            return $result;
         }
         return false;
 

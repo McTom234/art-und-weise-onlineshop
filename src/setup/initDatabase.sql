@@ -39,6 +39,7 @@ create table `order`
 (
     order_ID int auto_increment,
     product_ID int not null,
+    price int not null,
     discount int null,
     quantity int not null,
     constraint Order_pk
