@@ -137,19 +137,25 @@ section.recommended {
       margin: 1em;
       display: grid;
       grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+      user-select: none;
+      position: sticky;
+      top: 100%;
 
       span {
         float: left;
         @include a.font(a.$font-style-subtitle1) {
           font-size: 1.75em;
         };
+        grid-column: 1;
+        grid-row: 2;
 
         &::after {
           content: ' €';
         } // ::after
 
         &:nth-of-type(2) {
-          float: right;
+          grid-column: 1;
+          grid-row: 1;
           text-decoration: line-through;
           color: a.$blood-red;
           font-weight: 300;
@@ -157,8 +163,9 @@ section.recommended {
 
       } // span
       
-      button {
-        float: inside;
+      .link-button {
+        line-height: calc(16px + .8em);
+        text-align: center;
         grid-column: 2;
         grid-row: 2;
       }
