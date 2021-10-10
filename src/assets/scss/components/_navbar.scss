@@ -6,11 +6,17 @@ nav {
   background-color: a.$navbar-color;
   overflow: hidden;
   padding-left: 10vw;
+  user-select: none;
   padding-right: 10vw;
 
   div {
     display: flex;
     align-items: center;
+
+    span {
+      @include a.font(a.$font-style-subtitle2);
+      color: a.$navbar-text-color;
+    }
 
     a {
       text-decoration: none;
