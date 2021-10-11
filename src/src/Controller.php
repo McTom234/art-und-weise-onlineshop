@@ -102,6 +102,7 @@ class Controller extends AbstractController
             'categories' => $categories,
             'message' => $message,
             'buy' => $buy,
+            'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
 
     }
@@ -187,7 +188,8 @@ class Controller extends AbstractController
         $this->render('user/registration', [
             'categories' => $categories,
             "infoMessage" => $infoMessage,
-            "errorMessage" => $errorMessage
+            "errorMessage" => $errorMessage,
+            'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
     }
 
@@ -340,7 +342,7 @@ class Controller extends AbstractController
                 'userLocation' => $userLocation,
                 'shoppingCart' => $shoppingCart,
                 'totalPrice' => $totalPrice,
-
+                'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
             ]);
         }
 
@@ -373,7 +375,8 @@ class Controller extends AbstractController
             }
 
             $this->render('layout/productsRow', [
-                'products' => $products
+                'products' => $products,
+                'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
             ]);
 
         }
