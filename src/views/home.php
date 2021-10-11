@@ -21,7 +21,7 @@
 
 <?php require 'layout/navbar.php'; ?>
 <main>
-    <section class="recommended">
+    <section>
         <div class="intro">
             <h3>Beliebte Produkte</h3>
             <p>Die Auswahl unserer beliebtesten Produkte aus unserem Online-Shop.</p>
@@ -34,9 +34,9 @@
         <a class="link-button more-items" href="/products">Weitere</a>
     </section>
 
-    <?php foreach ($categories as $category): ?>
-        <?php if (count($category->products) >= 3): ?>
-            <section class="recommended">
+    <?php foreach ($categories as $category):
+        if (count($category->products) >= 3): ?>
+            <section>
                 <div class="intro">
                     <h3><?= $category->name ?></h3>
                     <p>Eine Auswahl von Produkten aus der Kategorie <?= $category->name ?>.</p>
@@ -49,7 +49,7 @@
 
                 <a class="link-button more-items" href="/products?c=<?= $category->category_ID ?>">Weitere</a>
             </section>
-        <?php endif; endforeach; ?>
+    <?php endif; endforeach; ?>
 </main>
 
 <?php require 'layout/footer.php'; ?>

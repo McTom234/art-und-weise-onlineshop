@@ -59,48 +59,7 @@ form {
     display: block;
   }
 
-  input {
-    margin: .8em .5em .5em;
-    padding: .5em;
-    width: calc(100% - 1em);
-    background: a.$white;
-    color: a.$dark-slate-gray;
-    @include a.font(a.$font-style-body2);
-    outline: none;
-    border: 2px solid a.$dark-slate-gray;
-    border-radius: 8px;
-    transition: box-shadow 150ms ease-in-out;
-
-    & + label {
-      position: relative;
-      @include a.font(a.$font-style-body2) {
-        font-weight: 300;
-        text-transform: uppercase;
-      };
-      font-style: italic;
-      top: calc(-2.5em - 2px);
-      text-align: start;
-      margin: 0 22px;
-      height: 0;
-      transition: all 50ms ease-in-out;
-    }
-
-    &:focus {
-      border-color: a.$blood-red;
-      box-shadow: 0 0 4px a.$hunter-green;
-    }
-
-    &:focus, &:not(:placeholder-shown) {
-      & + label {
-        top: calc(-4.5em - 2px);
-      }
-    }
-
-    &:hover {
-      box-shadow: 0 0 4px a.$hunter-green;
-    }
-
-  } // input
+  @include a.input();
 
   button, .link-button {
     width: 90%;

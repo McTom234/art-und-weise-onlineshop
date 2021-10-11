@@ -24,3 +24,52 @@
 
   @content
 }
+
+@mixin input ($placement-label-attr: top,
+              $placement-label: calc(-2.5em - 2px),
+              $placement-not-shown-attr: top,
+              $placement-not-shown: calc(-4.5em - 2px)) {
+  input {
+    margin: .8em .5em .5em;
+    padding: .5em;
+    width: calc(100% - 1em);
+    background: vars.$white;
+    color: vars.$dark-slate-gray;
+    @include font(vars.$font-style-body2);
+    outline: none;
+    border: 2px solid vars.$dark-slate-gray;
+    border-radius: 8px;
+    transition: box-shadow 150ms ease-in-out;
+
+    & + label {
+      position: relative;
+      @include font(vars.$font-style-body2) {
+        font-weight: 300;
+        text-transform: uppercase;
+      };
+      font-style: italic;
+      #{$placement-label-attr}: #{$placement-label};
+      text-align: start;
+      margin: 0 22px;
+      height: 0;
+      transition: all 50ms ease-in-out;
+    }
+
+    &:focus {
+      border-color: vars.$blood-red;
+      box-shadow: 0 0 4px vars.$hunter-green;
+    }
+
+    &:focus, &:not(:placeholder-shown) {
+      & + label {
+        #{$placement-not-shown-attr}: #{$placement-not-shown};
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 0 4px vars.$hunter-green;
+    }
+
+  }
+  @content;
+}
