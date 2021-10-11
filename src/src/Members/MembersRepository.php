@@ -53,9 +53,10 @@ class MembersRepository extends AbstractRepository
 
     public function insertMember($userID, $rights)
     {
+        $member_ID = $this->generateUID();
         $statement = $this->pdo->prepare("INSERT INTO member (member_ID, user_ID, rights) VALUES (:member_ID, :user_ID, :rights)");
         return $statement->execute([
-            ':member_ID' => md5(uniqid(rand(), true)),
+            ':member_ID' => $member_ID,
             ':user_ID' => $userID,
             ':rights' => $rights,
         ]);

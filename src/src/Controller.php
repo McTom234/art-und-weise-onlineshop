@@ -138,6 +138,10 @@ class Controller extends AbstractController
             $user->postcode = $_POST['postcode'];
             $user->city = $_POST['city'];
 
+            if($this->usersRepository->existsEmail($user->email)){
+                $errorMessage = 'Diese E-Mail ist bereits vergeben';
+                $error = true;
+            }
 
             if (strlen($user->email) == 0) {
                 $errorMessage = 'Bitte eine E-Mail angeben';
@@ -164,8 +168,6 @@ class Controller extends AbstractController
             }
 
             if (!$error) {
-
-                // TODO: check if email (unique) is already used
                 $result = $this->usersRepository->registration($user);
 
                 if ($result) {

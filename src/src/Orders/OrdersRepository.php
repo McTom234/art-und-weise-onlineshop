@@ -40,17 +40,16 @@ class OrdersRepository extends AbstractRepository
 
     public function insertOrder($checkout_ID, $product_ID, $price, $discount, $quantity)
     {
+        $order_ID = $this->generateUID();
         $statement = $this->pdo->prepare("INSERT INTO `order` (order_ID, product_ID, price, discount, quantity) VALUES (:order_ID, :product_ID, :price, :discount, :quantity)");
         $result = $statement->execute([
-            'order_ID' => md5(uniqid(rand(), true)),
+            'order_ID' => $order_ID,
             ':product_ID' => $product_ID,
             ':price' => $price,
             ':discount' => $discount,
             ':quantity' => $quantity,
         ]);
         if ($result) {
-            $order_ID = $this->pdo->lastInsertId();
-
             $statement = $this->pdo->prepare("INSERT INTO `checkout-order` (checkout_ID, order_ID) VALUES (:checkout_ID, :order_ID)");
             return $statement->execute([
                 ':checkout_ID' => $checkout_ID,

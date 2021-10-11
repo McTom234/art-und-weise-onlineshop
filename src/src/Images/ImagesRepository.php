@@ -25,7 +25,7 @@ class ImagesRepository extends AbstractRepository
 
     public function insertImage($image)
     {
-        $image_ID = md5(uniqid(rand(), true));
+        $image_ID = $this->generateUID();
         $statement = $this->pdo->prepare("INSERT INTO image (image_ID, base64) VALUES (:image_ID, :image_base64)");
         $statement->execute([
             ':image_ID' => $image_ID,

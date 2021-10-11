@@ -40,6 +40,19 @@ class UsersRepository extends AbstractRepository
         return false;
     }
 
+    public function existsEmail($email)
+    {
+        $statement = $this->pdo->prepare("SELECT email FROM user WHERE email = :email");
+        $statement->execute(['email' => $email]);
+        $user = $statement->fetchAll();
+        if ($user) {
+            if (count($user) >= 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function login($email, $password)
     {
         $statement = $this->pdo->prepare("SELECT * FROM user WHERE email = :email");
@@ -64,20 +77,17 @@ class UsersRepository extends AbstractRepository
     {
         $password_hash = password_hash($user->password, PASSWORD_DEFAULT);
 
-        $user_ID = md5(uniqid(rand(), true));
-        $location_ID = md5(uniqid(rand(), true));
+        $user_ID = $this->generateUID();
+        $location_ID = $this->generateUID("location", "location_ID");
 
         // create user in Users
         $statement = $this->pdo->prepare("INSERT INTO user (user_ID, email, password, forename, surname, location_ID) VALUES (:user_ID , :email, :password, :forename, :surname, :location);");
-        $result = $statement->execute([':user_ID' => $user_ID, 'email' => $user->email, 'password' => $password_hash, 'forename' => $user->forename, 'surname' => $user->surname, 'location' => $location_ID] );
+        $result = $statement->execute([':user_ID' => $user_ID, 'email' => $user->email, 'password' => $password_hash, 'forename' => $user->forename, 'surname' => $user->surname, 'location' => $location_ID]);
 
         // create new location in Location
         $statement = $this->pdo->prepare("INSERT INTO location (location_ID, user_ID, street, street_number, postcode, city) VALUES (:location_ID, :uid, :st, :nu, :pc, :ci);");
         $result = $statement->execute(['location_ID' => $location_ID, 'uid' => $user_ID, 'st' => $user->street, 'nu' => $user->street_number, 'pc' => $user->postcode, 'ci' => $user->city]);
-        // FIXME: if $location_ID exists and execute fails -> execute update after recreation of $location_ID
-//        // update location_ID of user in Users by user_ID
-//        $statement = $this->pdo->prepare("UPDATE user SET location_ID = :loc WHERE user_ID = :uid");
-//        $result = $statement->execute(array('uid' => $user_ID, 'loc' => $location_ID));
+
 
         if ($result) {
             if (session_status() === 1) {

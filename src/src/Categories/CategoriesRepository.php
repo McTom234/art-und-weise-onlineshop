@@ -133,7 +133,7 @@ class CategoriesRepository extends AbstractRepository
 
     public function insertCategory($name)
     {
-        $category_ID = md5(uniqid(rand(), true));
+        $category_ID = $this->generateUID();
 
         $statement = $this->pdo->prepare("INSERT INTO category (category_ID, name) VALUES (:category_ID, :name)");
         $statement->execute([

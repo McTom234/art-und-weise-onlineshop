@@ -102,7 +102,8 @@ class ProductsRepository extends AbstractRepository
 
     function insertProduct($name, $description, $price, $discount, $image = null)
     {
-        $product_ID = md5(uniqid(rand(), true));
+        $product_ID = $this->generateUID();
+
         $statement = $this->pdo->prepare("INSERT INTO product (product_ID, name, price, discount, description) VALUES (:product_ID, :name, :price, :discount, :description)");
         $statement->execute([
             ':product_ID' => $product_ID,
