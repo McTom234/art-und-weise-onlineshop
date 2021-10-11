@@ -60,14 +60,14 @@ create table `checkout`
 
 # Table Checkout-Order
 
-create table `checkout-Order`
+create table `checkout-order`
 (
     checkout_ID varchar(100) not null,
     order_ID    varchar(100) not null
 );
 
 create unique index Checkout_Order_ID_uindex
-    on `checkout-Order` (order_ID);
+    on `checkout-order` (order_ID);
 
 # Table Member
 
