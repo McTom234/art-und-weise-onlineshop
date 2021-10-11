@@ -69,13 +69,14 @@ class CategoriesRepository extends AbstractRepository
         return $category;
     }
 
-    public function fetchAllWithProducts()
+    public function fetchAllWithProductsNumber($number)
     {
         $categories = parent::fetchAll();
         foreach ($categories as $category) {
-            $statement = $this->pdo->prepare("SELECT product_ID FROM `category-product` WHERE category_ID = :category_ID");
+            $statement = $this->pdo->prepare("SELECT product_ID FROM `category-product` WHERE category_ID = :category_ID LIMIT :number");
             $statement->execute([
                 ':category_ID' => $category->category_ID,
+                ':number' => $number,
             ]);
             $product_IDs = $statement->fetchAll();
             foreach ($product_IDs as $product_ID) {

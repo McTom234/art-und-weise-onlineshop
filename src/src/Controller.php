@@ -47,7 +47,7 @@ class Controller extends AbstractController
     public function home()
     {
         $authentication = $this->authenticationRepository->authentication();
-        $categories = $this->categoriesRepository->fetchAllWithProducts();
+        $categories = $this->categoriesRepository->fetchAllWithProductsNumber(3);
         $products = $this->productsRepository->fetchNumber(3);
         foreach ($products as $product) {
             $product_ID = $product->product_ID;
