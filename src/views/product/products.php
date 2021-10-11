@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerfirma Art und Weise</title>
-    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/products-overview.css">
 </head>
 
 <body>
 <?php include __DIR__ . '/../layout/navbar.php'; ?>
-<div class="container content">
+<main>
 
     <?php include __DIR__ . '/../layout/searchbar.php'; ?>
 
@@ -19,7 +19,7 @@
     if (isset($products)) {
         for ($p = 0; $p < count($products); $p += 3) {
             ?>
-            <div class="items_wrapper">
+            <div class="grid-container">
                 <?php
                 for ($count = 0; $count < 3; $count++) {
                     if (isset($products[$p + $count])) {
@@ -31,11 +31,11 @@
         <?php }
     } ?>
     <?php require __DIR__ . '/../../views/layout/pageNavigation.php'; ?>
-</div>
+</main>
 
 <?php include __DIR__ . '/../layout/footer.php'; ?>
 
-</body>
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script src="/assets/js/products.js"></script>
+</body>
 </html>
