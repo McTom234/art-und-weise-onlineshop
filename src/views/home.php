@@ -16,7 +16,7 @@
         <h4>Schülerfirma</h4>
         <h1>Art & Weise</h1>
     </div>
-    <button class="button_more">Mehr Erfahren!</button>
+    <a href="#navbar">Mehr Erfahren!</a>
 </header>
 
 <?php require 'layout/navbar.php'; ?>
