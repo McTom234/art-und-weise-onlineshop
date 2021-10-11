@@ -48,10 +48,6 @@ class Controller extends AbstractController
     {
         $authentication = $this->authenticationRepository->authentication();
         $categories = $this->categoriesRepository->fetchAllWithProducts();
-
-        /*  $this->categoriesRepository->insertProductCategory("714d5ccc8f042839d87f66d44dc7a0c0", "0578cd02b3f72e0d3b241f57759b6075");
-        $this->categoriesRepository->insertProductCategory("714d5ccc8f042839d87f66d44dc7a0c0", "215cd1687a5106b8b469e3bdb343952f");
-        $this->categoriesRepository->insertProductCategory("714d5ccc8f042839d87f66d44dc7a0c0", "57dbf6b3d7287a12acf9fe09d00375d2"); */
         $products = $this->productsRepository->fetchNumber(3);
         foreach ($products as $product) {
             $product_ID = $product->product_ID;
@@ -268,17 +264,17 @@ class Controller extends AbstractController
             $category_ID = $_GET['c'];
             $request['category'] = $category_ID;
 
-            $category = $this->categoriesRepository->fetch($category_ID);
+            $category = $this->categoriesRepository->fetchWithProductsNumberOffsetQuery($category_ID, $numberProducts, $offset, $query);
             if($category){
                 $products = $category->products;
+                $numberTotalProducts = $this->categoriesRepository->fetchProductCount($category_ID, $query);
             }
         }else{
             $products = $this->productsRepository->fetchNumberOffsetQuery($numberProducts, $offset, $query);
+            $numberTotalProducts = $this->productsRepository->fetchProductCount($query);
         }
 
         $maxPages = 0;
-
-        $numberTotalProducts = $this->productsRepository->fetchProductCount($query);
         $maxPages = ceil(($numberTotalProducts / $numberProducts));
 
 

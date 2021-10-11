@@ -44,7 +44,14 @@ class ProductsRepository extends AbstractRepository
 
     function fetchProductCount($query = "")
     {
-        $statement = $this->pdo->prepare("SELECT COUNT(*) AS count FROM $this->table WHERE name LIKE :query");
+        $statement = $this->pdo->prepare("SELECT COUNT(*) AS count FROM product WHERE name LIKE :query");
+        $statement->execute([':query' => '%' . $query . '%']);
+        return $statement->fetch()['count'];
+    }
+
+    function fetchProductCountWithIDs($product_IDs, $query = "")
+    {
+        $statement = $this->pdo->prepare("SELECT COUNT(*) AS count FROM product WHERE product_ID IN ('" . implode("','", $product_IDs) . "') AND name LIKE :query");
         $statement->execute([':query' => '%' . $query . '%']);
         return $statement->fetch()['count'];
     }
@@ -60,6 +67,19 @@ class ProductsRepository extends AbstractRepository
     {
         $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE name LIKE :query LIMIT :number OFFSET :offset");
         $statement->execute([':query' => '%' . $query . '%', ':number' => $number, ':offset' => $offset]);
+        return $statement->fetchAll(PDO::FETCH_CLASS, $this->model);
+    }
+
+    function fetchNumberOffsetQueryWithIDs($product_IDs, $number, $offset, $query)
+    {
+        $sql = "SELECT * FROM product WHERE product_ID IN ('" . implode("','", $product_IDs) . "') AND name LIKE :query LIMIT :number OFFSET :offset";
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([
+            ':number' => $number,
+            ':offset' => $offset,
+            ':query' => "%" . $query. "%",
+        ]);
         return $statement->fetchAll(PDO::FETCH_CLASS, $this->model);
     }
 
@@ -91,7 +111,7 @@ class ProductsRepository extends AbstractRepository
             ':price' => $price,
             ':discount' => $discount]);
 
-        if($image){
+        if ($image) {
             $this->imagesProductsRepository->insertImage($product_ID, $image);
         }
         return $product_ID;

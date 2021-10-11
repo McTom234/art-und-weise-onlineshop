@@ -10,7 +10,9 @@
 </head>
 
 <body>
-<?php include __DIR__ . '/../layout/navbar.php'; ?>
+<?php $navbar_index="products";
+include __DIR__ . '/../layout/navbar.php';
+?>
 <main>
 
     <?php include __DIR__ . '/../layout/searchbar.php'; ?>

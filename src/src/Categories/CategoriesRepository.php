@@ -34,16 +34,34 @@ class CategoriesRepository extends AbstractRepository
         return "category_ID";
     }
 
+    public function fetchProductCount($category_ID, $query)
+    {
+        $count = 0;
+        $statement = $this->pdo->prepare("SELECT product_ID FROM `category-product` WHERE category_ID = :category_ID");
+        $statement->execute([
+            ':category_ID' => $category_ID,
+        ]);
+        $products = $statement->fetchAll();
+        if ($products) {
+            $product_IDs = [];
+            foreach ($products as $product) {
+                array_push($product_IDs, $product[0]);
+            }
+            $count = $this->productRepository->fetchProductCountWithIDs($product_IDs, $query);
+        }
+        return $count;
+    }
+
     public function fetch($id)
     {
         $category = parent::fetch($id);
-        if($category){
+        if ($category) {
             $statement = $this->pdo->prepare("SELECT product_ID FROM `category-product` WHERE category_ID = :category_ID");
             $statement->execute([
                 ':category_ID' => $category->category_ID,
             ]);
             $product_IDs = $statement->fetchAll();
-            foreach ($product_IDs as $product_ID){
+            foreach ($product_IDs as $product_ID) {
                 $product = $this->productRepository->fetch($product_ID[0]);
                 array_push($category->products, $product);
             }
@@ -54,18 +72,38 @@ class CategoriesRepository extends AbstractRepository
     public function fetchAllWithProducts()
     {
         $categories = parent::fetchAll();
-        foreach ($categories as $category){
+        foreach ($categories as $category) {
             $statement = $this->pdo->prepare("SELECT product_ID FROM `category-product` WHERE category_ID = :category_ID");
             $statement->execute([
                 ':category_ID' => $category->category_ID,
             ]);
             $product_IDs = $statement->fetchAll();
-            foreach ($product_IDs as $product_ID){
+            foreach ($product_IDs as $product_ID) {
                 $product = $this->productRepository->fetch($product_ID[0]);
                 array_push($category->products, $product);
             }
         }
         return $categories;
+    }
+
+    public function fetchWithProductsNumberOffsetQuery($category_ID, $number, $offset, $query)
+    {
+        $category = parent::fetch($category_ID);
+        if ($category) {
+            $statement = $this->pdo->prepare("SELECT product_ID FROM `category-product` WHERE category_ID = :category_ID");
+            $statement->execute([
+                ':category_ID' => $category->category_ID,
+            ]);
+            $products = $statement->fetchAll();
+            if ($products) {
+                $product_IDs = [];
+                foreach ($products as $product) {
+                    array_push($product_IDs, $product[0]);
+                }
+                $category->products = $this->productRepository->fetchNumberOffsetQueryWithIDs($product_IDs, $number, $offset, $query);
+            }
+        }
+        return $category;
     }
 
     public function fetchByProductID($product_ID)
