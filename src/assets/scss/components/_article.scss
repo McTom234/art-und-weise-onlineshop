@@ -4,7 +4,7 @@ article {
   border: .1em solid a.$hunter-green;
   box-shadow: 0 0 0 a.$dark-slate-gray;
   transition: box-shadow 300ms ease-in-out;
-  border-radius: .5em;
+  border-radius: a.$border-radius;
 
   &:hover {
     box-shadow: 2px 2px 6px a.$dark-slate-gray;
@@ -20,8 +20,8 @@ article {
     margin: 0;
     aspect-ratio: 3/2;
     background-color: a.$pale-spring-bud;
-    border-top-left-radius: .5em;
-    border-top-right-radius: .5em;
+    border-top-left-radius: a.$border-radius;
+    border-top-right-radius: a.$border-radius;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

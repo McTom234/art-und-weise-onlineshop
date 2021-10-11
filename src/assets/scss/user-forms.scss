@@ -15,7 +15,7 @@ fieldset {
   background-color: a.$white;
   padding: 0;
   border: none;
-  border-radius: 6px;
+  border-radius: a.$border-radius;
   vertical-align: middle;
   line-height: normal;
 
@@ -41,7 +41,7 @@ form {
   background-color: a.$white;
   box-shadow: 0 0 8px a.$hunter-green;
   padding: 1em;
-  border-radius: 6px;
+  border-radius: a.$border-radius;
   vertical-align: middle;
   line-height: normal;
 
@@ -80,7 +80,7 @@ form {
     overflow-wrap: break-word;
     hyphens: manual;
     background: lightgray;
-    border-radius: 8px;
+    border-radius: a.$border-radius;
     border: solid 2px a.$dark-slate-gray;
   }
 
@@ -92,7 +92,7 @@ form {
     hyphens: manual;
     background: a.$blood-red;
     color: white;
-    border-radius: 8px;
+    border-radius: a.$border-radius;
     border: solid 2px a.$dark-slate-gray;
   }
 

@@ -38,7 +38,7 @@
     @include font(vars.$font-style-body2);
     outline: none;
     border: 2px solid vars.$dark-slate-gray;
-    border-radius: 8px;
+    border-radius: vars.$border-radius;
     transition: box-shadow 300ms ease-in-out;
 
     & + label {

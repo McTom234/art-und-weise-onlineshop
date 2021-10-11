@@ -49,7 +49,7 @@ body{
     background-color: vars.$blood-red;
     color: vars.$white;
     @include mixins.font(vars.$font-style-button);
-    border-radius: 6px;
+    border-radius: vars.$border-radius;
     padding: 8px;
     border: none;
     cursor: pointer;

@@ -16,7 +16,7 @@ main {
     }
 
     article {
-      border-radius: .5em;
+      border-radius: a.$border-radius;
       border: 1px solid gray;
       padding: 1em;
       gap: 1em;
