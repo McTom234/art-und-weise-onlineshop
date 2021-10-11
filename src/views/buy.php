@@ -29,9 +29,9 @@
                     <?php foreach ($shoppingCart as $product): ?>
                     <tr>
                         <td><?=$product->name?></td>
-                        <td><?=$product->price?> €</td>
+                        <td><?=str_replace(".", ",", $product->price)?> €</td>
                         <td><?=$product->count?></td>
-                        <td><?=str_replace(".", ",", round($product->price * $product->count, 2))?></td>
+                        <td><?=str_replace(".", ",", sprintf('%.2f', $product->price * $product->count))?> €</td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -40,7 +40,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><?=$totalPrice?> €</td>
+                        <td><?=str_replace(".", ",", $totalPrice)?> €</td>
                     </tr>
                 </tfoot>
             </table>
@@ -48,13 +48,23 @@
 
         <section class="grid-column--6">
             <h3>Deine Daten</h3>
-            <ul>
-                <li>Name: <?= $loggedIn->forename . ' ' . $loggedIn->surname ?></li>
-                <li>Email: <?= $loggedIn->email ?></li>
-                <li><?= $userLocation->street . ' ' . $userLocation->street_number?> <br>
-                    <?= $userLocation->postcode . ' ' . $userLocation->city?>
-                </li>
-            </ul>
+            <table>
+                <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td><?= $loggedIn->forename . ' ' . $loggedIn->surname ?></td>
+                </tr>
+                <tr>
+                    <td>E-Mail</td>
+                    <td><?= $loggedIn->email ?></td>
+                </tr>
+                <tr>
+                    <td>Adresse</td>
+                    <td><?= $userLocation->street . ' ' . $userLocation->street_number?> <br>
+                        <?= $userLocation->postcode . ' ' . $userLocation->city?></td>
+                </tr>
+                </tbody>
+            </table>
         </section>
     </div>
 
