@@ -334,6 +334,7 @@ class Controller extends AbstractController
                         $this->ordersRepository->insertOrder($checkout_ID, $product_ID, $product->price, $product->discount, $quantity);
                     }
                 }
+                $this->shoppingCartRepository->removeAllProducts();
                 header('Location: /ordered');
             }
 

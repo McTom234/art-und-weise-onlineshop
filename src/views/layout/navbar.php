@@ -11,7 +11,7 @@
             <div class="dropdown-content">
                 <?php if (isset($categories)) {
                     foreach ($categories as $category): ?>
-                        <a href="/products?c=<?= $category->category_ID?>" <?php if ($navbar_index == "link 1") echo "data-active"; ?>><?= $category->name ?></a>
+                        <a href="/products?c=<?= $category->category_ID ?>" <?php if ($navbar_index == "link 1") echo "data-active"; ?>><?= $category->name ?></a>
                     <?php endforeach;
                 } ?>
             </div>
@@ -36,7 +36,9 @@
         <a class="nav-button-shopping-cart" href="/shopping-cart"
             <?php if ($navbar_index == "shopping-cart") echo "data-active"; ?>>
             Warenkorb <?php if (isset($shoppingCartProductCount)) {
-                echo $shoppingCartProductCount;
+                if ($shoppingCartProductCount > 0) {
+                    echo $shoppingCartProductCount;
+                }
             } ?>
         </a>
     </div>

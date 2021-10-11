@@ -17,5 +17,7 @@ class ShoppingCartRepository {
         return $count;
     }
 
-
+    public function removeAllProducts(){
+        setcookie('shoppingCart', null);
+    }
 }
