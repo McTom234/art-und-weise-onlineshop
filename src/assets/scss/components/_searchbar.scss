@@ -1,0 +1,37 @@
+@use "../abstracts" as a;
+form.searchbar {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  label.label-placeholder {
+    position: relative;
+    @include a.font(a.$font-style-body2) {
+      font-weight: 300;
+      text-transform: uppercase;
+    };
+    font-style: italic;
+    text-align: start;
+    margin: .5em 0;
+    visibility: hidden;
+  }
+  @include a.input(left, 5em, left, 0);
+  input {
+    margin: .5em;
+    & + label {
+      position: absolute;
+      height: auto;
+      margin: .5em 0;
+    }
+    & ~ button {
+      position: relative;
+      right: 7em;
+      transition: all 50ms ease-in-out;
+    }
+    &:focus, &:not(:placeholder-shown) {
+      & ~ button {
+        right: 0;
+      }
+    }
+  }
+}
