@@ -11,7 +11,7 @@
 <body>
 <?php require __DIR__ .'/../layout/navbarAdmin.php'; ?>
 <div class="grid-container">
-    <div class="grid-column-8 grid-column">
+    <div class="grid-column--8 grid-column">
         <h3 class="card-title">Bestellungen</h3>
         <table>
             <thead>
@@ -43,7 +43,7 @@
             </a>
         </div>
     </div>
-    <div class="grid-column-4 grid-column">
+    <div class="grid-column--4 grid-column">
         <h3 class="card-title">Mitglieder</h3>
         <div>
 
@@ -54,7 +54,7 @@
             </a>
         </div>
     </div>
-    <div class="grid-column-6 grid-column">
+    <div class="grid-column--6 grid-column">
         <h3 class="card-title">Produkte</h3>
         <table>
             <thead>
@@ -98,7 +98,7 @@
             </a>
         </div>
     </div>
-    <div class="grid-column-6 grid-column">
+    <div class="grid-column--6 grid-column">
         <h3 class="card-title">Finzanzen</h3>
         <div class="card-bottom">
             <a href="">
@@ -106,7 +106,7 @@
             </a>
         </div>
     </div>
-    <div class="grid-column-8 grid-column">
+    <div class="grid-column--8 grid-column">
         <h3 class="card-title">News</h3>
         <div class="card-bottom">
             <a href="">
@@ -114,7 +114,7 @@
             </a>
         </div>
     </div>
-    <div class="grid-column-4 grid-column">
+    <div class="grid-column--4 grid-column">
         <h3 class="card-title">Bilder</h3>
         <div class="card-bottom">
             <a href="">

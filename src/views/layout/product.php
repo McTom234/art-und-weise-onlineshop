@@ -1,4 +1,4 @@
-<article class="grid-column-4">
+<article class="grid-column--4">
     <a class="no-text-decoration" href="./show?id=<?=$product->product_ID?>">
         <figure style="background-image: url('<?=$product->images[0]->base64?>')"></figure>
     </a>
