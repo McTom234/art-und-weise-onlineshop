@@ -8,6 +8,7 @@ h1 {
 h2 {
     @include mixins.font(vars.$font-style-headline2);
     color: vars.$blood-red;
+    text-align: center;
 } // h2
 h3 {
     @include mixins.font(vars.$font-style-headline3);
