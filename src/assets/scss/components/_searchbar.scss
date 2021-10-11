@@ -4,33 +4,26 @@ form.searchbar {
   align-items: center;
   position: relative;
 
-  label.label-placeholder {
-    position: relative;
-    @include a.font(a.$font-style-body2) {
-      font-weight: 300;
-      text-transform: uppercase;
-    };
-    font-style: italic;
-    text-align: start;
-    margin: .5em 0;
-    visibility: hidden;
+  button {
+    position: absolute;
+    right: 7rem;
+    transition: all 50ms ease-in-out;
+    z-index: -1;
   }
-  @include a.input(left, 5em, left, 0);
+  @include a.input(left, 7rem, left, 0);
   input {
-    margin: .5em;
+    margin: .5em 6.5rem;
+    background: transparent;
     & + label {
       position: absolute;
       height: auto;
       margin: .5em 0;
-    }
-    & ~ button {
-      position: relative;
-      right: 7em;
-      transition: all 50ms ease-in-out;
+      z-index: -1;
     }
     &:focus, &:not(:placeholder-shown) {
       & ~ button {
         right: 0;
+        z-index: 0;
       }
     }
   }
