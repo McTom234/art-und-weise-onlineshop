@@ -30,7 +30,7 @@ fieldset {
       }
       &:focus, &:not(:placeholder-shown) {
         & + label {
-          top: calc(-4.2em - 2px);
+          top: calc(-3.9em);
         }
       }
     }

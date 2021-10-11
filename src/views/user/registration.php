@@ -58,7 +58,7 @@ require __DIR__ . '/../layout/navbar.php';
         <label for="password2">Passwort wiederholen</label>
 
         <button type="submit">Registrieren</button>
-        <a class="link-button" href="/login">Zum Log In wechseln</a>
+        <a class="link-button" href="/login">Zur Anmeldung wechseln</a>
         <?php if (isset($errorMessage)): ?>
             <p class="error">
                 <?= $errorMessage ?>

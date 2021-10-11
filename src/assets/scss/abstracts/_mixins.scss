@@ -28,7 +28,7 @@
 @mixin input ($placement-label-attr: top,
               $placement-label: calc(-2.5em - 2px),
               $placement-not-shown-attr: top,
-              $placement-not-shown: calc(-4.5em - 2px)) {
+              $placement-not-shown: calc(-4.2em)) {
   input {
     margin: .8em .5em .5em;
     padding: .5em;
@@ -39,7 +39,7 @@
     outline: none;
     border: 2px solid vars.$dark-slate-gray;
     border-radius: 8px;
-    transition: box-shadow 150ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out;
 
     & + label {
       position: relative;
@@ -52,7 +52,9 @@
       text-align: start;
       margin: 0 22px;
       height: 0;
-      transition: all 50ms ease-in-out;
+      transform: scale(1);
+      transform-origin: left;
+      transition: all 200ms ease-in-out;
     }
 
     &:focus {
@@ -62,6 +64,7 @@
 
     &:focus, &:not(:placeholder-shown) {
       & + label {
+        transform: scale(.75);
         #{$placement-not-shown-attr}: #{$placement-not-shown};
       }
     }

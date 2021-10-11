@@ -19,12 +19,12 @@ require __DIR__ . '/../layout/navbar.php';
 
 <main>
     <form id="menu" action="?login=1<?php if($buy) echo'&buy=1'?>" method="post">
-        <h2>Login</h2>
+        <h2>Anmeldung</h2>
         <input id="email" type="email" name="email" placeholder=" "/>
         <label for="email">E-Mail</label>
         <input id="password" type="password" name="password" placeholder=" "/>
         <label for="password">Passwort</label>
-        <button type="submit">Log In</button>
+        <button type="submit">Anmelden</button>
         <a class="link-button" href="/registration">Registrieren</a>
 
         <?php if (isset($message)) { ?>

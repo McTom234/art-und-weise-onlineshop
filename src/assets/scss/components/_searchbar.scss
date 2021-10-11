@@ -7,10 +7,10 @@ form.searchbar {
   button {
     position: absolute;
     right: 7rem;
-    transition: all 50ms ease-in-out;
+    transition: all 200ms ease-in-out;
     z-index: -1;
   }
-  @include a.input(left, 7rem, left, 0);
+  @include a.input(left, 7rem, left, 2rem);
   input {
     margin: .5em 6.5rem;
     background: transparent;

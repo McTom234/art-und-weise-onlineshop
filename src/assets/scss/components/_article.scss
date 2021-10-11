@@ -3,7 +3,7 @@
 article {
   border: .1em solid a.$hunter-green;
   box-shadow: 0 0 0 a.$dark-slate-gray;
-  transition: box-shadow 100ms ease-in-out;
+  transition: box-shadow 300ms ease-in-out;
   border-radius: .5em;
 
   &:hover {
@@ -26,7 +26,6 @@ article {
     background-position: center;
     background-size: contain;
     transition: all 150ms ease-in-out;
-
   } // figure
 
   h4 {

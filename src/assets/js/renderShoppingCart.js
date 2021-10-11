@@ -34,24 +34,31 @@ function renderShoppingCart() {
                     const {product_ID} = item;
                     let count = shoppingCart[product_ID];
 
-                    let itemBox = document.createElement('article');
+                    let article = document.createElement('article');
 
-                    let itemFigure = document.createElement('figure');
-                    let itemImg = document.createElement('img');
-                    itemImg.setAttribute('src', item.images[0].base64);
-                    itemFigure.appendChild(itemImg);
+                    let a_itemLink = document.createElement('a')
+                    a_itemLink.setAttribute('href', './show?id=' + product_ID);
+                    a_itemLink.className = "no-text-decoration";
+
+                    let figure = a_itemLink.cloneNode(false);
+                    let figure_element = document.createElement('figure');
+                    let img = document.createElement('img');
+                    img.setAttribute('src', item.images[0].base64);
+                    figure_element.appendChild(img);
+                    figure.appendChild(figure_element);
 
                     let itemTextWrapper = document.createElement('div');
                     itemTextWrapper.className = 'item-description';
 
-                    let itemName = document.createElement('h3');
-                    itemName.textContent = item.name;
-                    itemName.addEventListener('click', function () {
-                        window.location.href = './show?id=' + product_ID;
-                    });
+                    let itemName = a_itemLink.cloneNode(false);
+                    let itemNameE = document.createElement('h3');
+                    itemNameE.textContent = item.name;
+                    itemName.appendChild(itemNameE);
 
-                    let itemDescription = document.createElement('p');
-                    itemDescription.textContent = item.description;
+                    let itemDescription = a_itemLink.cloneNode(false);
+                    let itemDescriptionE = document.createElement('p');
+                    itemDescriptionE.textContent = item.description;
+                    itemDescription.appendChild(itemDescriptionE);
 
                     const values = [
                         0, 1, 2, 3, 4, 5
@@ -71,7 +78,7 @@ function renderShoppingCart() {
                     deleteButton.textContent = 'Löschen';
                     deleteButton.addEventListener('click', function () {
                             deleteItem(product_ID);
-                            cartList.removeChild(itemBox);
+                            cartList.removeChild(article);
                         }
                     )
 
@@ -84,13 +91,13 @@ function renderShoppingCart() {
                     // TODO: round value
                     itemPrice.textContent = (item.price * count).toFixed(2).replace(".", ",");
 
-                    itemBox.appendChild(itemFigure);
+                    article.appendChild(figure);
                     itemTextWrapper.appendChild(itemName);
                     itemTextWrapper.appendChild(itemDescription);
                     itemTextWrapper.appendChild(itemControl);
-                    itemBox.appendChild(itemTextWrapper);
-                    itemBox.appendChild(itemPrice);
-                    cartList.appendChild(itemBox);
+                    article.appendChild(itemTextWrapper);
+                    article.appendChild(itemPrice);
+                    cartList.appendChild(article);
 
                 });
             }
