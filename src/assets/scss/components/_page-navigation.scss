@@ -1,0 +1,22 @@
+@use "../abstracts" as a;
+
+.page-navigation {
+  margin: 1em auto;
+  width: max-content;
+  @include a.font(a.$font-style-subtitle1);
+
+  a {
+    @extend .link-button;
+    background: inherit;
+    color: initial;
+    border: solid 1px a.$dark-slate-gray;
+    transition-property: all;
+    &:hover {
+      background: a.$hunter-green;
+      color: white;
+    }
+    &.inactive {
+      pointer-events: none;
+    }
+  }
+}

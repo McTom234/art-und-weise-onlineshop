@@ -2,8 +2,18 @@
 
 $lastPageLink = '';
 $nextPageLink = '';
+$reload = false;
 if (isset($request['page'])):
     $page = $request['page'];
+    if ($page == 0) {
+        $page = 1;
+        $reload = true;
+    }
+    if ($page > $maxPages) {
+        $page = $maxPages;
+        $reload = true;
+    }
+    if ($maxPages == 0) $reload = false;
     if ($page > 1) {
         $lastPageLink .= '?p=' . ($page - 1);
         $nextPageLink .= '?p=' . ($page + 1);
@@ -15,8 +25,11 @@ if (isset($request['page'])):
         $nextPageLink .= '?p=' . ($page + 1);
         if (isset($request['query'])) $nextPageLink .= '&q=' . $request['query'];
     }
+    if ($reload) header("Location: ?p=1&q=".$request['query']);
     ?>
-    <a href="<?= $lastPageLink ?>"><</a>
+<div class="page-navigation">
+    <a href="<?= $lastPageLink ?>" <?php if (1 >= $page) echo 'class="inactive"'; ?>>&lt;</a>
     <span>Seite <?= $page ?> von <?= $maxPages ?></span>
-    <a href="<?= $nextPageLink ?>">></a>
+    <a href="<?= $nextPageLink ?>" <?php if ($maxPages <= $page) echo 'class="inactive"'; ?>>&gt;</a>
+</div>
 <?php endif; ?>
