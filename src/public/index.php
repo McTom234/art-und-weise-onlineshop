@@ -7,6 +7,10 @@ $root = [
         'controller' => 'controller',
         'methode' => 'home',
     ],
+    '/about' => [
+        'controller' => 'controller',
+        'methode' => 'about',
+    ],
     '/login' => [
         'controller' => 'controller',
         'methode' => 'login',

@@ -16,6 +16,9 @@
                 } ?>
             </div>
         </div>
+        <a href="/about" <?php if ($navbar_index == "about") echo "data-active"; ?>>
+            Über uns
+        </a>
     </div>
 
     <div class="right">
