@@ -226,9 +226,10 @@ class Controller extends AbstractController
 
     public function notFound()
     {
-        $products = $this->productsRepository->fetchNumber(3);
-
-        $this->render("error/notFound");
+        $authentication = $this->authenticationRepository->authentication();
+        $this->render("error/notFound", [
+            'loggedIn' => $authentication,
+        ]);
     }
 
     public function logout()

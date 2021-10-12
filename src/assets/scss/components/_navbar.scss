@@ -76,7 +76,7 @@ nav {
           padding-left: 4px;
         } // ::after
 
-        &:hover, &:focus-visible {
+        &:hover, &:focus-visible, &[data-active] {
           &::before {
             transform: translateZ(-1px) scaleX(1);
           }

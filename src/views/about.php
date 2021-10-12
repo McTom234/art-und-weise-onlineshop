@@ -18,6 +18,8 @@
 
         <h2>Danke für Ihren Besuch!</h2>
 
+        <!--    TODO Email-->
+
         <p>Wir arbeiten zur Zeit mit Hochdruck an der Fertigstellung dieser Seite.<br/>
             Sollten Sie sonstige Fragen zu der Schülerfirma <b>Art und Weise</b>, dem Konzept von Schülerfirmen oder generelles Interesse haben und gerne mehr erfahren möchten, können Sie uns per <a href="mailto:jonas">E-Mail</a> erreichen.</p>
     </main>

@@ -1,7 +1,7 @@
 <div class="grid-container">
-    <?php
+<?php
     foreach ($products as $product) {
         require 'product.php';
     }
-    ?>
+?>
 </div>
