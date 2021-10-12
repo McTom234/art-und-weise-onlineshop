@@ -62,6 +62,17 @@ class Controller extends AbstractController
         ]);
     }
 
+    public function about() {
+        $authentication = $this->authenticationRepository->authentication();
+        $categories = $this->categoriesRepository->fetchAllWithProductsNumber(3);
+
+        $this->render("about", [
+            'loggedIn' => $authentication,
+            'categories' => $categories,
+            'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
+        ]);
+    }
+
     public function login()
     {
         $categories = $this->categoriesRepository->fetchAll();
@@ -138,13 +149,13 @@ class Controller extends AbstractController
             $user->postcode = $_POST['postcode'];
             $user->city = $_POST['city'];
 
-            if($this->usersRepository->existsEmail($user->email)){
-                $errorMessage = 'Diese E-Mail ist bereits vergeben';
+            if (strlen($user->email) == 0) {
+                $errorMessage = 'Bitte eine E-Mail angeben';
                 $error = true;
             }
 
-            if (strlen($user->email) == 0) {
-                $errorMessage = 'Bitte eine E-Mail angeben';
+            if($this->usersRepository->existsEmail($user->email)){
+                $errorMessage = 'Diese E-Mail ist bereits vergeben';
                 $error = true;
             }
 
@@ -348,8 +359,10 @@ class Controller extends AbstractController
                 'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
             ]);
         }
-
-
+        else {
+            // TODO
+            header('Location: /');
+        }
     }
 
     public function ordered()
