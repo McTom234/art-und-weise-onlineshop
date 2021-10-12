@@ -12,17 +12,23 @@
 </head>
 
 <body>
-    <div id="popup" class="hide">
-        <div id="popup-box">
-            <div onclick="closePopup()" id="cancel">×</div>
+    <div id="popup" class="hide popup">
+        <div class="popup-box">
+            <div onclick="closePopup()" class="popup-cancel">×</div>
 
-            <p><strong><?= $product->name ?></strong> wurde zum Warenkorb hinzugefügt</p>
+            <div class="popup-title"><strong><?= $product->name ?></strong> wurde zum Warenkorb hinzugefügt</div>
 
-            <p id="count">Anzahl: 1</p>
+            <div class="popup-content">
+                <p>Preis: <span id="popup-price"></span> €</p>
 
-            <p id="popup-price"></p>
+                <p>Anzahl: <span id="popup-count"></span></p>
 
-            <a href="./shopping-cart" class="link-button">Zum Warenkorb</a>
+                <p>Gesamt: <span id="popup-result"></span> €</p>
+            </div>
+
+            <div class="popup-bottom">
+                <a href="./shopping-cart" class="link-button">Zum Warenkorb</a>
+            </div>
         </div>
     </div>
 
@@ -59,7 +65,7 @@
 
                     <div id="quantitySelect-wrapper"></div>
 
-                    <p id="price"><?=$product->discountPriceEuro?></p>
+                    <p id="price"><?= str_replace(".", ",", round($product->discountPriceEuro, 2)) ?></p>
                 </aside>
             </article>
 <?php
@@ -85,7 +91,7 @@
         let currentValue = 1;
         let quantitySelect = createQuantitySelect(currentValue, values, 100, true, function (number) {
             let price = document.getElementById('price');
-            price.textContent = <?=$product->discountPriceEuro?> * number + "€";
+            price.textContent = (<?=$product->discountPriceEuro?> * number).toFixed(2).toString().replace(".",",");
             currentValue = number;
         });
 
@@ -108,15 +114,17 @@
         });
 
         function openPopup() {
-            let count = document.getElementById('count');
-            count.textContent = "Anzahl: " + currentValue;
+            let count = document.getElementById('popup-count');
+            count.textContent = currentValue.toString().replace(".",",");
             let price = document.getElementById('popup-price');
-            price.textContent = <?=$product->discountPriceEuro?> * currentValue + "€";
-            popup.className = "";
+            price.textContent = <?=$product->discountPriceEuro?>;
+            let result = document.getElementById('popup-result');
+            result.textContent = (currentValue * <?=$product->discountPriceEuro?>).toFixed(2).toString().replace(".",",");
+            popup.classList.remove("hide");
         }
 
         function closePopup() {
-            popup.className = "hide";
+            popup.classList.add("hide");
         }
 
         let buyButton = document.getElementById('buyButton');

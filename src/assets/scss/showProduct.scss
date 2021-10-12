@@ -14,7 +14,7 @@ article {
   margin-bottom: 1em !important;
 
   figure {
-    @extend .grid-column--3;
+    grid-column: span 3;
     margin: 0;
 
     img {
@@ -26,7 +26,7 @@ article {
   } // figure
 
   & > div {
-    @extend .grid-column--6;
+    grid-column: span 5;
 
     h4 {
       margin: 0;
@@ -40,7 +40,7 @@ article {
   } // div
 
   aside {
-    @extend .grid-column--3;
+    grid-column: span 4;
     display: grid;
     margin-top: 4em;
     grid-template: repeat(4, auto) / repeat(2, auto);
@@ -79,7 +79,6 @@ article {
       grid-column: 2;
       font-size: 1.75em;
       margin: auto;
-      vertical-align: middle;
       font-weight: 500;
 
       &::after {
