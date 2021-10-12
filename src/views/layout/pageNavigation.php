@@ -28,8 +28,8 @@ if (isset($request['page'])):
     if ($reload) header("Location: ?p=1&q=".$request['query']);
     ?>
 <div class="page-navigation">
-    <a href="<?= $lastPageLink ?>" <?php if (1 >= $page) echo 'class="inactive"'; ?>>&lt;</a>
-    <span>Seite <?= $page ?> von <?= $maxPages ?></span>
-    <a href="<?= $nextPageLink ?>" <?php if ($maxPages <= $page) echo 'class="inactive"'; ?>>&gt;</a>
+    <a href="<?= htmlspecialchars($lastPageLink) ?>" <?php if (1 >= $page) echo 'class="inactive"'; ?>>&lt;</a>
+    <span>Seite <?= htmlspecialchars($page) ?> von <?= htmlspecialchars($maxPages) ?></span>
+    <a href="<?= htmlspecialchars($nextPageLink) ?>" <?php if ($maxPages <= $page) echo 'class="inactive"'; ?>>&gt;</a>
 </div>
 <?php endif; ?>
