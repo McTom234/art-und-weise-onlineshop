@@ -257,6 +257,7 @@ class Controller extends AbstractController
         $categories = $this->categoriesRepository->fetchAll();
 
         $request = [];
+        $numberTotalProducts = 0;
 
         $page = 1;
         if (isset($_GET['p'])) {
@@ -275,6 +276,7 @@ class Controller extends AbstractController
         }
 
         $products = [];
+
 
         if (isset($_GET['c'])) {
             $category_ID = $_GET['c'];
