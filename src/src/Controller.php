@@ -85,8 +85,8 @@ class Controller extends AbstractController
 
         if (isset($_GET['login'])) {
             if (isset($_POST['email']) && isset($_POST['password'])) {
-                $email = $_POST['email'];
-                $password = $_POST['password'];
+                $email = htmlspecialchars($_POST['email']);
+                $password = htmlspecialchars($_POST['password']);
                 $user = $this->usersRepository->login($email, $password);
 
                 if ($user) {
@@ -137,17 +137,17 @@ class Controller extends AbstractController
 
             $user = new Users\UserModel();
 
-            $user->email = $_POST['email'];
+            $user->email = htmlspecialchars($_POST['email']);
             $user->password = $_POST['password'];
             $password2 = $_POST['password2'];
 
-            $user->forename = $_POST['forename'];
-            $user->surname = $_POST['surname'];
+            $user->forename = htmlspecialchars($_POST['forename']);
+            $user->surname = htmlspecialchars($_POST['surname']);
 
-            $user->street = $_POST['street'];
-            $user->street_number = $_POST['number'];
-            $user->postcode = $_POST['postcode'];
-            $user->city = $_POST['city'];
+            $user->street = htmlspecialchars($_POST['street']);
+            $user->street_number = htmlspecialchars($_POST['number']);
+            $user->postcode = htmlspecialchars($_POST['postcode']);
+            $user->city = htmlspecialchars($_POST['city']);
 
             if (strlen($user->email) == 0) {
                 $errorMessage = 'Bitte eine E-Mail angeben';
@@ -213,7 +213,8 @@ class Controller extends AbstractController
 
         $product = false;
         if (isset($_GET['id'])) {
-            $product = $this->productsRepository->fetch($_GET['id']);
+            $id = htmlspecialchars($_GET['id']);
+            $product = $this->productsRepository->fetch($id);
         }
 
         $this->render('product/show', [
@@ -261,7 +262,7 @@ class Controller extends AbstractController
 
         $page = 1;
         if (isset($_GET['p'])) {
-            $page = $_GET['p'];
+            $page = htmlspecialchars($_GET['p']);
         }
         $request['page'] = $page;
 
@@ -271,7 +272,7 @@ class Controller extends AbstractController
 
         $query = "";
         if (isset($_GET['q'])) {
-            $query = $_GET['q'];
+            $query = htmlspecialchars($_GET['q']);
             $request['query'] = $query;
         }
 
@@ -279,7 +280,7 @@ class Controller extends AbstractController
 
 
         if (isset($_GET['c'])) {
-            $category_ID = $_GET['c'];
+            $category_ID = htmlspecialchars($_GET['c']);
             $request['category'] = $category_ID;
 
             $category = $this->categoriesRepository->fetchWithProductsNumberOffsetQuery($category_ID, $numberProducts, $offset, $query);
@@ -386,7 +387,9 @@ class Controller extends AbstractController
     public function fetchProducts()
     {
         if (isset($_POST['row']) && isset($_POST['number'])) {
-            $products = $this->productsRepository->fetchNumberOffset($_POST['number'], $_POST['row']);
+            $number = htmlspecialchars($_POST['number']);
+            $row = htmlspecialchars($_POST['row']);
+            $products = $this->productsRepository->fetchNumberOffset($number, $row);
 
             foreach ($products as $product) {
                 $product_ID = $product->product_ID;
