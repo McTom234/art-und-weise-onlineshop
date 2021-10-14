@@ -42,7 +42,7 @@
 
                 <label>
                     Kategorie
-                    <select name="category">
+                    <select  name="category">
                         <option value="">Keine</option>
                         <?php foreach ($categories as $category):?>
                             <option value="<?=$category->category_ID?>" <?php if($category->selected) echo "selected";?>><?=$category->name?></option>
@@ -67,7 +67,4 @@
 <?php include __DIR__ . '/../../layout/footer.php'; ?>
 
 </body>
-<script src="/assets/js/cookies.js"></script>
-<script src="/assets/js/shoppingCart.js"></script>
-<script src="/assets/js/quantitySelect.js"></script>
 </html>

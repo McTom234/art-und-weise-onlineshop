@@ -105,7 +105,7 @@ class ProductsRepository extends AbstractRepository
         $product_ID = $this->generateUID();
 
         $statement = $this->pdo->prepare("INSERT INTO product (product_ID, name, price, discount, description) VALUES (:product_ID, :name, :price, :discount, :description)");
-        $statement->execute([
+        $result = $statement->execute([
             ':product_ID' => $product_ID,
             ':name' => $name,
             ':description' => $description,
@@ -115,6 +115,9 @@ class ProductsRepository extends AbstractRepository
         if ($image) {
             $this->imagesProductsRepository->insertImage($product_ID, $image);
         }
-        return $product_ID;
+        if($result){
+            return $product_ID;
+        }
+        return false;
     }
 }

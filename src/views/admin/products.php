@@ -12,6 +12,7 @@
 <?php require __DIR__ . '/../layout/navbarAdmin.php'; ?>
 <div>
     <h3 class="card-title">Produkte</h3>
+    <a href="/admin/products/add"><button>Produkt hinzufügen</button></a>
     <?php require __DIR__ . '/../layout/searchbar.php'; ?>
     <table>
         <thead>

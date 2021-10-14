@@ -165,6 +165,43 @@ class AdminController extends AbstractController
 
     public function adminProductsAdd()
     {
+        $authentication = $this->authenticationRepository->memberAuthentication();
+
+        $categories = $this->categoriesRepository->fetchAll();
+
+        if (!empty($_POST)) {
+
+            $name = htmlspecialchars($_POST['name']);
+            $description = htmlspecialchars($_POST['description']);
+            $price = htmlspecialchars($_POST['price']);
+            $discount = htmlspecialchars($_POST['discount']);
+
+            $newCategory = htmlspecialchars($_POST['category']);
+
+            $base64 = null;
+            $file_tmp = $_FILES['image']['tmp_name'];
+
+            if (!empty($file_tmp)) {
+                $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
+                $data = file_get_contents($file_tmp);
+                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+            }
+
+            $product_ID = $this->productsRepository->insertProduct($name, $description, $price, $discount, $base64);
+
+            if($product_ID){
+                if(strlen($newCategory) > 0){
+                    $this->categoriesRepository->insertProductCategory($newCategory, $product_ID);
+                }
+                header("Location: /show?id=" . $product_ID);
+                exit();
+            }
+        }
+
+        $this->render("admin/products/add", [
+            'loggedIn' => $authentication,
+            'categories' => $categories,
+        ]);
     }
 
     public function adminProductsEdit()
