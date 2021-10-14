@@ -110,9 +110,11 @@ class CategoriesRepository extends AbstractRepository
     public function fetchByProductID($product_ID)
     {
         $statement = $this->pdo->prepare("SELECT category.category_ID, name FROM `category-product` RIGHT JOIN category ON category.category_ID = `category-product`.category_ID WHERE product_ID = :product_ID");
-        return $statement->execute([
+        $statement->execute([
             ':product_ID' => $product_ID,
         ]);
+        $statement->setFetchMode(PDO::FETCH_CLASS, $this->model);
+        return $statement->fetch(PDO::FETCH_CLASS);
     }
 
     public function removeProductCategory($product_ID)

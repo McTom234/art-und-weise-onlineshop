@@ -212,15 +212,20 @@ class Controller extends AbstractController
         $categories = $this->categoriesRepository->fetchAll();
 
         $product = false;
+        $category = false;
         if (isset($_GET['id'])) {
             $id = htmlspecialchars($_GET['id']);
             $product = $this->productsRepository->fetch($id);
+            if($product){
+                $category = $this->categoriesRepository->fetchByProductID($id);
+            }
         }
 
         $this->render('product/show', [
             'loggedIn' => $authentication,
             'categories' => $categories,
             'product' => $product,
+            "c" => $category,
             'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
     }

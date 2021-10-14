@@ -44,6 +44,10 @@
                 <div>
                     <h4><?= $product->name; ?></h4>
 
+                    <?php if ($c): ?>
+                        <p><a href="/products?c=<?=$c->category_ID?>"><?=$c->name?></a></p>
+                    <?php endif; ?>
+
                     <p><?= $product->description; ?></p>
                 </div>
 
