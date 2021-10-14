@@ -68,6 +68,7 @@ function renderShoppingCart() {
 
                             if (number === 0) {
                                 deleteItem(product_ID);
+                                cartList.removeChild(article);
                                 renderShoppingCart();
                             } else {
                                 setItem(product_ID, number);
