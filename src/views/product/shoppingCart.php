@@ -11,20 +11,21 @@
 </head>
 
 <body>
-    <?php require __DIR__ . '/../layout/navbar.php'; ?>
+<?php require __DIR__ . '/../layout/navbar.php'; ?>
 
-    <main>
-        <section id="cart-list"><h2>Warenkorb</h2></section>
+<main>
+    <section id="cart-list">
+        <h2>Warenkorb</h2>
+    </section>
+    <a href="/buy" id="buy-button" class="link-button">Kaufen</a>
+</main>
 
-        <a href="/buy" class="link-button">Kaufen</a>
-    </main>
+<?php require __DIR__ . '/../layout/footer.php'; ?>
 
-    <?php require __DIR__ . '/../layout/footer.php'; ?>
-
-    <script src="/assets/js/cookies.js"></script>
-    <script src="/assets/js/shoppingCart.js"></script>
-    <script src="/assets/js/quantitySelect.js"></script>
-    <script src="/assets/js/renderShoppingCart.js"></script>
+<script src="/assets/js/cookies.js"></script>
+<script src="/assets/js/shoppingCart.js"></script>
+<script src="/assets/js/quantitySelect.js"></script>
+<script src="/assets/js/renderShoppingCart.js"></script>
 </body>
 
 </html>
