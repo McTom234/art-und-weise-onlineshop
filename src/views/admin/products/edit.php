@@ -22,20 +22,34 @@
                     <?php $src = $product->images[0]->base64 ?>
                 <?php endif; ?>
                 <?php require __DIR__ . '/../../layout/imagePicker.php'; ?>
-                <input required type="text" name="name" value="<?= $product->name; ?>"/>
-                <textarea name="description"><?= $product->description; ?></textarea>
-                <input required type="number" name="price" value="<?= $product->price; ?>" min="0">
-                <input required type="number" name="discount" value="<?= $product->discount; ?>" min="0" max="100"
-                       step="1">
-                <label for="category">Kategorie: </label>
-                <select name="category">
-                    <option value="">Keine</option>
-                    <?php foreach ($categories as $category):?>
-                        <option value="<?=$category->category_ID?>" <?php if($category->selected) echo "selected";?>><?=$category->name?></option>
-                    <?php endforeach; ?>
-                </select>
+                <label>
+                    Name
+                    <input required type="text" name="name" value="<?= $product->name; ?>"/>
+                </label>
+                <label>
+                    Beschreibung
+                    <textarea name="description"><?= $product->description; ?></textarea>
+                </label>
+                <label>
+                    Preis
+                    <input required type="number" name="price" value="<?= $product->price; ?>" min="0">
+                </label>
+                <label>
+                    Rabatt
+                    <input required type="number" name="discount" value="<?= $product->discount; ?>" min="0" max="100"
+                           step="1">
+                </label>
 
-                <label for="cars">Choose a car:</label>
+                <label>
+                    Kategorie
+                    <select name="category">
+                        <option value="">Keine</option>
+                        <?php foreach ($categories as $category):?>
+                            <option value="<?=$category->category_ID?>" <?php if($category->selected) echo "selected";?>><?=$category->name?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </label>
+
                 <button type="submit">Speichern</button>
             </form>
 
