@@ -26,11 +26,21 @@
                 $nextPageLink .= '&q=' . $request['query'];
                 $lastPageLink .= '&q=' . $request['query'];
             }
+
+            if (isset($request['category'])) {
+                $nextPageLink .= '&c=' . $request['category'];
+                $lastPageLink .= '&c=' . $request['category'];
+            }
         }
         else {
             $nextPageLink .= '?p=' . ($page + 1);
 
-            if (isset($request['query'])) $nextPageLink .= '&q=' . $request['query'];
+            if (isset($request['query'])){
+                $nextPageLink .= '&q=' . $request['query'];
+            }
+            if (isset($request['category'])) {
+                $nextPageLink .= '&c=' . $request['category'];
+            }
         }
 
         if ($reload) header("Location: ?p=1&q=".$request['query']);
