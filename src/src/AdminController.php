@@ -121,7 +121,7 @@ class AdminController extends AbstractController
                 'loggedIn' => $authentication,
                 'checkout' => $checkout,
             ]);
-        }else{
+        } else {
             header("Location: /admin/orders");
             exit();
         }
@@ -172,8 +172,19 @@ class AdminController extends AbstractController
         $authentication = $this->authenticationRepository->memberAuthentication();
 
         if (isset($_GET['id'])) {
-            $product_id = $_GET['id'];
+            $product_id = htmlspecialchars($_GET['id']);
             $product = $this->productsRepository->fetch($product_id);
+            $categories = $this->categoriesRepository->fetchAll();
+            if ($product) {
+                $category = $this->categoriesRepository->fetchByProductID($product_id);
+                if ($category) {
+                    foreach ($categories as $c) {
+                        if ($c->category_ID == $category->category_ID) {
+                            $c->selected = true;
+                        }
+                    }
+                }
+            }
 
             if (!empty($_POST)) {
 
@@ -183,15 +194,22 @@ class AdminController extends AbstractController
                     exit();
                 }
 
-                $name = $_POST['name'];
-                $description = $_POST['description'];
-                $price = $_POST['price'];
-                $discount = $_POST['discount'];
+                $name = htmlspecialchars($_POST['name']);
+                $description = htmlspecialchars($_POST['description']);
+                $price = htmlspecialchars($_POST['price']);
+                $discount = htmlspecialchars($_POST['discount']);
+
+                $newCategory = htmlspecialchars($_POST['category']);
+
+                $this->categoriesRepository->removeProductCategory($product_id);
+                if(strlen($newCategory) > 0){
+                    $this->categoriesRepository->insertProductCategory($newCategory, $product_id);
+                }
 
 
                 $base64 = null;
                 $file_tmp = $_FILES['image']['tmp_name'];
-                var_dump($file_tmp);
+
                 if (!empty($file_tmp)) {
                     $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
                     $data = file_get_contents($file_tmp);
@@ -206,6 +224,7 @@ class AdminController extends AbstractController
             $this->render("admin/products/edit", [
                 'loggedIn' => $authentication,
                 'product' => $product,
+                'categories' => $categories,
             ]);
         } else {
             header("Location: /admin/products");

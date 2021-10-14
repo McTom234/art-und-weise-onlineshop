@@ -8,4 +8,6 @@ class CategoryModel
     public $name;
 
     public $products = [];
+
+    public $selected;
 }

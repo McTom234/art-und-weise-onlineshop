@@ -127,11 +127,16 @@ class CategoriesRepository extends AbstractRepository
 
     public function insertProductCategory($category_ID, $product_ID)
     {
-        $statement = $this->pdo->prepare("INSERT INTO `category-product` (category_ID, product_ID) VALUES (:category_ID, :product_ID)");
-        return $statement->execute([
-            ':category_ID' => $category_ID,
-            ':product_ID' => $product_ID,
-        ]);
+        $category = $this->fetch($category_ID);
+        if($category){
+            $statement = $this->pdo->prepare("INSERT INTO `category-product` (category_ID, product_ID) VALUES (:category_ID, :product_ID)");
+            return $statement->execute([
+                ':category_ID' => $category_ID,
+                ':product_ID' => $product_ID,
+            ]);
+        }else{
+            return false;
+        }
     }
 
     public function insertCategory($name)

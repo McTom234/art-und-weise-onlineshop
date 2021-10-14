@@ -27,6 +27,15 @@
                 <input required type="number" name="price" value="<?= $product->price; ?>" min="0">
                 <input required type="number" name="discount" value="<?= $product->discount; ?>" min="0" max="100"
                        step="1">
+                <label for="category">Kategorie: </label>
+                <select name="category">
+                    <option value="">Keine</option>
+                    <?php foreach ($categories as $category):?>
+                        <option value="<?=$category->category_ID?>" <?php if($category->selected) echo "selected";?>><?=$category->name?></option>
+                    <?php endforeach; ?>
+                </select>
+
+                <label for="cars">Choose a car:</label>
                 <button type="submit">Speichern</button>
             </form>
 
