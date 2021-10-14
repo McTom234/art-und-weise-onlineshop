@@ -15,8 +15,10 @@
 <?php include __DIR__ . '/../layout/navbar.php'; ?>
 
 <main>
+    <?php if (isset($c)): ?>
+        <h2><?= $c->name ?></h2>
+    <?php endif; ?>
     <?php include __DIR__ . '/../layout/searchbar.php'; ?>
-
     <?php
     if (isset($products)):
         if (count($products) > 0):

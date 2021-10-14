@@ -278,7 +278,7 @@ class Controller extends AbstractController
 
         $products = [];
 
-
+        $category = null;
         if (isset($_GET['c'])) {
             $category_ID = htmlspecialchars($_GET['c']);
             $request['category'] = $category_ID;
@@ -307,7 +307,8 @@ class Controller extends AbstractController
             'loggedIn' => $authentication,
             'categories' => $categories,
             'products' => $products,
-            'request' => $request,
+            'c' => $category,
+            'request'  => $request,
             'maxPages' => $maxPages,
             'shoppingCartProductCount' => $this->shoppingCartRepository->getProductCount(),
         ]);
