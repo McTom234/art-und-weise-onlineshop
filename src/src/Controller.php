@@ -340,6 +340,10 @@ class Controller extends AbstractController
                     array_push($shoppingCart, $product);
                 }
             }
+            if(count($shoppingCart) <= 0){
+                header('Location: /shopping-cart');
+                exit();
+            }
 
             if (isset($_GET['submit'])) {
                 $checkout_ID = $this->checkoutsRepository->insertCheckout($authentication->user_ID);
