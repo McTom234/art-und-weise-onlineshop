@@ -18,6 +18,6 @@ class ShoppingCartRepository {
     }
 
     public function removeAllProducts(){
-        setcookie('shoppingCart', null);
+        setcookie('shoppingCart', "{}");
     }
 }
