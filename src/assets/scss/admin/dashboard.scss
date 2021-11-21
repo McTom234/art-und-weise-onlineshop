@@ -1,16 +1,6 @@
-.grid-container {
-  margin: 0 10vw 10px;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-gap: 6px;
-}
+@use "./abstracts" as a;
+@use "./components";
 
-/*
-tablet:
-6 columns
-mobile:
-2/3 columns
- */
 .grid-column {
   border-color: gray;
   border-width: 1px;

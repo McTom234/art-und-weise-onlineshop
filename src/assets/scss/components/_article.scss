@@ -48,7 +48,6 @@ article {
     margin: 1em;
     display: grid;
     grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-    user-select: none;
     position: sticky;
     top: 100%;
 
