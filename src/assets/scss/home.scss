@@ -6,7 +6,11 @@ header {
   max-height: 90vh;
   background-color: a.$placeholder-images;
   display: grid;
-  grid-template: 1fr 2fr 1fr/ auto 50% auto;
+  grid-template: 1fr 2fr 1fr/ auto 80% auto;
+
+  @include a.breakpoint(xl) {
+
+  }
 
   div {
     grid-row: 2;
