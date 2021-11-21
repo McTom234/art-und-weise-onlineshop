@@ -230,7 +230,6 @@ class AdminController extends AbstractController
                     header("Location: /admin/products");
                     exit();
                 }
-
                 $name = htmlspecialchars($_POST['name']);
                 $description = htmlspecialchars($_POST['description']);
                 $price = htmlspecialchars($_POST['price']);
