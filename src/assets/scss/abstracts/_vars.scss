@@ -102,3 +102,11 @@ $font-style-fontAwesome: (
         font-family: unquote("FontAwesome")
 );
 
+$responsive_breakpoints: (
+        sm: 576px,
+        md: 768px,
+        lg: 990px,
+        xl: 1200px,
+        xxl: 1460px
+);
+

@@ -84,6 +84,13 @@ body{
 
 main {
     margin: 0 10vw;
+
+    @include mixins.breakpoint(xxl) {
+        margin-inline: 5vw !important;
+    }
+    @include mixins.breakpoint(xl) {
+        margin-inline: 1em !important;
+    }
 } // main
 
 section {

@@ -76,3 +76,23 @@
   }
   @content;
 }
+
+/* use it always in order from xxl to sm */
+@mixin breakpoint($breakpoint) {
+
+  //check if the supplied breakpoint exists in our breakpoints map
+  @if map-has-key(vars.$responsive_breakpoints, $breakpoint) {
+    $breakpoint-width: map-get(vars.$responsive_breakpoints, $breakpoint);
+
+    @media (max-width: $breakpoint-width) {
+      @content;
+    }
+
+    // use the custom value if the breakpoint is not part of the pre-defined list
+  } @else {
+
+    @media (max-width: $breakpoint) {
+      @content;
+    }
+  }
+}
