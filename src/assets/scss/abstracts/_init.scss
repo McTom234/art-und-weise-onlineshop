@@ -43,6 +43,13 @@ body{
     margin: 0;
     color: black;
     min-height: 100vh;
+
+    @include mixins.breakpoint(md) {
+        font-size: 16px;
+    }
+    @include mixins.breakpoint(sm) {
+        font-size: 14px;
+    }
 } // body
 
 .link-button, button {
