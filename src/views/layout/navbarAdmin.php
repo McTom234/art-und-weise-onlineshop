@@ -8,7 +8,8 @@
     <div class="navbar-container">
         <div>
             <div class="dropdown">
-                <a href="/admin/dashboard" <?php if (in_array($navbar_index, array("link 1", "link 2", "link 3"))) echo "data-active"; ?>>Dashboard</a>
+                <a href="/admin/dashboard" <?php if (in_array($navbar_index, array("link 1", "link 2", "link 3"))) echo "data-active"; ?> data-screenFull>Dashboard</a>
+                <b <?php if (in_array($navbar_index, array("link 1", "link 2", "link 3"))) echo "data-active"; ?> data-responsive>Dashboard</b>
 
                 <div class="dropdown-content">
                     <a href="/admin/orders" <?php if ($navbar_index == "link 1") echo "data-active"; ?>>Bestellungen</a>
@@ -18,6 +19,8 @@
                     <a href="/admin/members" <?php if ($navbar_index == "link 3") echo "data-active"; ?>>Mitglieder</a>
 
                     <a href="/" <?php if ($navbar_index == "link 4") echo "data-active"; ?>>Finanzen</a>
+
+                    <a href="/admin/dashboard" <?php if (in_array($navbar_index, array("link 1", "link 2", "link 3"))) echo "data-active"; ?> data-responsive>Zum Dashboard</a>
                 </div>
             </div>
         </div>
