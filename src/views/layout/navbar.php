@@ -9,7 +9,7 @@
         <div>
             <div class="dropdown">
                 <b <?php if ($navbar_index == "products") echo "data-active"; ?> data-responsive>Produkte</b>
-                <a href="/products" <?php if ($navbar_index == "products") echo "data-active"; ?> data-scc>Produkte</a>
+                <a href="/products" <?php if ($navbar_index == "products") echo "data-active"; ?> data-screenFull>Produkte</a>
 
                 <div class="dropdown-content">
                     <?php

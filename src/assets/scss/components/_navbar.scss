@@ -8,6 +8,9 @@ nav {
   display: flex;
   position: relative;
 
+  @include a.breakpoint(xxl) {
+    padding-inline: 5vw !important;
+  }
   @include a.breakpoint(xl) {
     padding-inline: 1em !important;
   }
@@ -86,6 +89,8 @@ nav {
                       map-get(a.$font-style-body2, "line-height"),
                       false
       );
+      align-self: center;
+      flex-shrink: 0;
     } //.nav-button-home
 
     &[data-active] {
@@ -112,15 +117,28 @@ nav {
     background-color: a.$navbar-color;
 
     [data-responsive] {
-      display: none;
+      display: none !important;
+    }
+
+    & > * {
+      flex-shrink: 0;
+      &:last-child {
+        flex-shrink: 1;
+        & * {
+          flex-shrink: 0;
+        }
+      }
     }
 
     span {
       @include a.font(a.$font-style-subtitle2);
       color: a.$navbar-text-color;
+      flex-shrink: 1 !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    div.dropdown {
+    &.dropdown {
       position: relative;
       display: inline-block;
       text-align: center;
@@ -162,6 +180,7 @@ nav {
       .dropdown-content {
         display: block;
         height: auto;
+        top: 100%;
         margin-top: 14px;
         padding-bottom: 6px;
         position: absolute;
@@ -196,26 +215,32 @@ nav {
   } // div
 
   @include a.breakpoint(lg) {
-    div.navbar-container {
-      transform-origin: 50% 0;
-      transform: scaleY(0);
-      transition: transform 100ms ease-in-out;
-      display: flex;
-      position: absolute;
-      left: 0;
-      top: 100%;
-      flex-direction: column;
-      width: 100%;
-
-      div {
+    div {
+      &.navbar-container {
+        transform-origin: 50% 0;
+        transform: scaleY(0);
+        transition: transform 100ms ease-in-out;
         display: flex;
+        position: absolute;
+        left: 0;
+        top: 100%;
         flex-direction: column;
+        width: 100%;
+
+        div {
+          display: flex;
+          flex-direction: column;
+        }
       }
 
-      & > [data-responsive] {
-        display: block;
+      &.dropdown .dropdown-content {
+        margin-top: 0;
       }
-      & > [data-screenFull] {
+
+      [data-responsive] {
+        display: block !important;
+      }
+      [data-screenFull] {
         display: none;
       }
     }
@@ -226,6 +251,10 @@ nav {
 
     input:checked ~ div {
       transform: scaleY(1);
+    }
+
+    span {
+      display: none;
     }
   }
 
