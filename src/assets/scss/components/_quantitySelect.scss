@@ -1,9 +1,9 @@
+@use "../abstracts";
+
 /* The container must be positioned relative: */
 .quantity-select {
   position: relative;
-  font-family: Arial;
-  width: calc( ( (100vw - 3em - 3em) / 12 ) * (3/2) );
-  font-size: 16px;
+  @include abstracts.font(abstracts.$font-style-body1);
   margin: 20px;
 }
 
