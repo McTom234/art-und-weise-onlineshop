@@ -31,9 +31,9 @@
             <a class="link-button" href="/registration">Registrieren</a>
 
             <?php if (isset($message)) { ?>
-                <div class="error">
+                <p class="error">
                     <?=$message?>
-                </div>
+                </p>
             <?php } ?>
         </form>
     </main>
