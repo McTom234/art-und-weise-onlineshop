@@ -19,12 +19,12 @@
         <h2><?= $c->name ?></h2>
     <?php endif; ?>
     <?php include __DIR__ . '/../layout/searchbar.php'; ?>
+    <div class="grid-container">
     <?php
     if (isset($products)):
         if (count($products) > 0):
             for ($p = 0; $p < count($products); $p += 3):
                 ?>
-                <div class="grid-container">
                     <?php
                     for ($count = 0; $count < 3; $count++) {
                         if (isset($products[$p + $count])) {
@@ -33,9 +33,9 @@
                         }
                     }
                     ?>
-                </div>
             <?php
             endfor; ?>
+    </div>
             <?php include __DIR__ . '/../layout/pageNavigation.php'; ?>
         <?php
         else: ?>
@@ -45,7 +45,6 @@
     endif;
     ?>
 
-    <?php ?>
 </main>
 <?php include __DIR__ . '/../layout/footer.php'; ?>
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
