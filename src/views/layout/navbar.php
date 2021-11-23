@@ -8,7 +8,8 @@
     <div class="navbar-container">
         <div>
             <div class="dropdown">
-                <b <?php if ($navbar_index == "products") echo "data-active"; ?>>Produkte</b>
+                <b <?php if ($navbar_index == "products") echo "data-active"; ?> data-responsive>Produkte</b>
+                <a href="/products" <?php if ($navbar_index == "products") echo "data-active"; ?> data-scc>Produkte</a>
 
                 <div class="dropdown-content">
                     <?php
@@ -20,7 +21,7 @@
                         endforeach;
                     }
                     ?>
-                    <a href="/products" <?php if ($navbar_index == "products") echo "data-active"; ?>>Alle Produkte</a>
+                    <a href="/products" <?php if ($navbar_index == "products") echo "data-active"; ?> data-responsive>Alle Produkte</a>
                 </div>
             </div>
 
@@ -57,19 +58,6 @@
         </div>
     </div>
 </nav>
-
-<script>
-    function myFunction() {
-        const x = document.getElementById("navbar");
-
-        if (x.className === "navbar") {
-            x.className += " responsive";
-        }
-        else {
-            x.className = "navbar";
-        }
-    }
-</script>
 
 
 

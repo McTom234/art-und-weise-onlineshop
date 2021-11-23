@@ -111,6 +111,10 @@ nav {
     align-items: center;
     background-color: a.$navbar-color;
 
+    [data-responsive] {
+      display: none;
+    }
+
     span {
       @include a.font(a.$font-style-subtitle2);
       color: a.$navbar-text-color;
@@ -186,6 +190,7 @@ nav {
 
     &.navbar-container {
       display: contents;
+      z-index: 10;
     }
 
   } // div
@@ -205,6 +210,13 @@ nav {
       div {
         display: flex;
         flex-direction: column;
+      }
+
+      & > [data-responsive] {
+        display: block;
+      }
+      & > [data-screenFull] {
+        display: none;
       }
     }
 
