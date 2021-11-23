@@ -39,7 +39,7 @@ function renderShoppingCart() {
 
                         let a_itemLink = document.createElement('a')
                         a_itemLink.setAttribute('href', './show?id=' + product_ID);
-                        a_itemLink.className = "no-text-decoration";
+                        a_itemLink.className = "no-text-decoration article-image";
 
                         let figure = a_itemLink.cloneNode(false);
                         let figure_element = document.createElement('figure');
@@ -87,21 +87,20 @@ function renderShoppingCart() {
                             }
                         )
 
+                        let itemPrice = document.createElement('span');
+                        itemPrice.textContent = (item.price * count).toFixed(2).replace(".", ",");
+
                         const itemControl = document.createElement('div');
                         itemControl.className = "item-control";
                         itemControl.appendChild(itemCount);
                         itemControl.appendChild(deleteButton);
-
-                        let itemPrice = document.createElement('span');
-                        // TODO: round value
-                        itemPrice.textContent = (item.price * count).toFixed(2).replace(".", ",");
+                        itemControl.appendChild(itemPrice);
 
                         article.appendChild(figure);
                         itemTextWrapper.appendChild(itemName);
                         itemTextWrapper.appendChild(itemDescription);
                         itemTextWrapper.appendChild(itemControl);
                         article.appendChild(itemTextWrapper);
-                        article.appendChild(itemPrice);
                         cartList.appendChild(article);
 
                     });
