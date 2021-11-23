@@ -104,4 +104,24 @@ article {
 
   } // aside
 
+  @include abstracts.breakpoint(lg) {
+    aside {
+      grid-column: span 12;
+      margin-top: 0;
+    }
+    & > div {
+      grid-column: span 9;
+    }
+  }
+
+  @include abstracts.breakpoint(sm) {
+    figure {
+      grid-column-start: 4;
+      grid-column-end: 10;
+    }
+    & > div {
+      grid-column: span 12;
+    }
+  }
+
 } // section
