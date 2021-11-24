@@ -39,7 +39,7 @@
             <?php include __DIR__ . '/../layout/pageNavigation.php'; ?>
         <?php
         else: ?>
-            <p>Es wurden keine Produkte gefunden.</p>
+            <p class="product-not-found">Es wurden keine Produkte gefunden.</p>
         <?php
         endif;
     endif;
