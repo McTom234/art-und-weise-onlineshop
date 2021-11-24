@@ -1,4 +1,5 @@
 @use "../abstracts" as a;
+
 form.searchbar {
   display: flex;
   align-items: center;
@@ -6,13 +7,13 @@ form.searchbar {
 
   button {
     position: absolute;
-    right: 7rem;
+    right: 8em;
     transition: all 200ms ease-in-out;
     z-index: -1;
   }
-  @include a.input(left, 7rem, left, 2rem);
+  @include a.input(left, 6.5em, left, 2rem);
   input {
-    margin: .5em 6.5rem;
+    margin: .5em 6em;
     background: transparent;
     & + label {
       position: absolute;
@@ -24,6 +25,26 @@ form.searchbar {
       & ~ button {
         right: 0;
         z-index: 0;
+      }
+    }
+  }
+
+  @include a.breakpoint(sm) {
+    button {
+      position: initial;
+    }
+
+    input {
+      margin: .5em;
+
+      & + label {
+        left: 1em;
+      }
+
+      &:focus, &:not(:placeholder-shown) {
+        & + label {
+          display: none;
+        }
       }
     }
   }
