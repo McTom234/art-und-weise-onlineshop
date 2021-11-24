@@ -57,9 +57,17 @@ table {
 
 main {
   position: relative;
+
   a {
-    position: absolute;
-    margin: 1em 0;
-    right: 0;
+    position: sticky;
+    left: 100%;
   }
+
+  div.grid-container {
+    margin-bottom: 1em;
+  }
+}
+
+footer {
+  margin-top: 2em;
 }
