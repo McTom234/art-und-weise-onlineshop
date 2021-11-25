@@ -20,93 +20,91 @@ main {
       border: 1px solid gray;
       padding: 1em;
       gap: 1em;
-      display: flex;
+      display: grid;
+      grid-template: repeat(3, auto) / 25% auto;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1em;
       box-shadow: 0 0 0 a.$dark-slate-gray;
       transition: box-shadow 300ms ease-in-out;
 
+      @include a.breakpoint(lg) {
+        grid-template-columns: 20% auto ;
+      }
+      @include a.breakpoint(md) {
+        grid-template-columns: auto;
+      }
+
       &:hover {
         box-shadow: 2px 2px 6px a.$dark-slate-gray;
       }
 
       figure {
+        display: inline-flex;
         margin: 0;
-        img {
-          display: block;
+        grid-row: span 3;
+        a {
+          width: 100%;
+          img {
+            width: 100%;
+            display: block;
+          }
         }
       }
 
-      .item-description {
-        align-self: stretch;
-        flex-basis: 100%;
+      h3 {
+        margin: 0;
+      }
 
-        h3 {
-          margin: 0;
-        }
-        p {
-          margin: 0;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          display: -moz-box;
-          -webkit-line-clamp: 5;
-          -webkit-box-orient: vertical;
-          -moz-line-clamp: 5;
-          -moz-box-orient: vertical;
+      p {
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        display: -moz-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        -moz-line-clamp: 5;
+        -moz-box-orient: vertical;
+      }
 
-          @include a.breakpoint(md) {
-            -webkit-line-clamp: 8;
-            -moz-line-clamp: 8;
-          }
-          @include a.breakpoint(sm) {
-            -webkit-line-clamp: 10;
-            -moz-line-clamp: 10;
-          }
-        }
-        .item-control {
-          position: relative;
-          display: flex;
-          justify-content: center;
-          gap: 1em;
-          margin-top: 1em;
-          flex-wrap: wrap;
+      div { // flex container
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5em 2em;
+        justify-content: right;
+
+        div.item-control {
+          margin: auto;
+          gap: .5em 1em;
+          justify-content: initial;
 
           .quantity-select {
             margin: 0;
-            @include a.breakpoint(lg) {
-              flex-basis: 50%;
-            }
           }
+
           button {
             align-self: center;
           }
+        }
 
-          span {
-            user-select: none;
-            position: absolute;
-            right: 0;
-            @include a.font(a.$font-style-body2) {
-              font-size: 2em;
-            };
+        span {
+          align-self: center;
+          margin-left: auto;
 
-            @include a.breakpoint(lg) {
-              position: static;
-              text-align: right;
-              align-self: flex-end;
-              flex-shrink: 0;
-              flex-grow: 1;
-            }
+          user-select: none;
+          @include a.font(a.$font-style-body2) {
+            font-size: 2em;
+          };
 
-            &::after {
-              content: ' €';
-            }
+          &::after {
+            content: ' €';
           }
         }
       }
     }
   }
+
   a {
     width: min-content;
     align-self: flex-end;

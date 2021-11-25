@@ -18,91 +18,109 @@ function renderShoppingCart() {
             http.onreadystatechange = function () {
                 if (http.readyState === 4 && http.status === 200) {
 
+                    // empty div#cart-list
                     cartList.innerHTML = '';
 
+                    // create new heading
                     const heading = document.createElement('h2');
                     heading.innerHTML = "Warenkorb";
                     cartList.prepend(heading);
 
+                    // fetch item data
                     let response = JSON.parse(http.responseText);
                     response.forEach((item, index) => {
+                        // if item is not present, delete from shopping cart
                         if (!item) {
                             const shoppingCartKeys = Object.keys(shoppingCart);
                             deleteItem(shoppingCartKeys[index]);
                             return;
                         }
 
+                        // get product ID from response
                         const {product_ID} = item;
+                        // get count of product from shopping cart
                         let count = shoppingCart[product_ID];
 
-                        let article = document.createElement('article');
+                        /* object structure
+                        article
+                            figure
+                            name
+                            description
+                            flex container
+                                controls container
+                                    quantity selector
+                                    delete button
+                                price
+                         */
 
-                        let a_itemLink = document.createElement('a')
-                        a_itemLink.setAttribute('href', './show?id=' + product_ID);
-                        a_itemLink.className = "no-text-decoration article-image";
+                        // create <a/> instance
+                        const aPreset = document.createElement('a')
+                        aPreset.setAttribute('href', './show?id=' + product_ID);
+                        aPreset.className = "no-text-decoration article-image";
 
-                        let figure = a_itemLink.cloneNode(false);
-                        let figure_element = document.createElement('figure');
-                        let img = document.createElement('img');
-                        img.setAttribute('src', item.images[0].base64);
-                        figure_element.appendChild(img);
-                        figure.appendChild(figure_element);
+                        // create parent of product <article/>
+                        const article = document.createElement('article');
 
-                        let itemTextWrapper = document.createElement('div');
-                        itemTextWrapper.className = 'item-description';
+                            // create figure for image
+                            const figure = document.createElement('figure');
+                                const figureLink = aPreset.cloneNode(false);
+                                    const figureImg = document.createElement('img');
+                                    figureImg.setAttribute('src', item.images[0].base64);
+                                figureLink.appendChild(figureImg);
+                            figure.appendChild(figureLink);
 
-                        let itemName = a_itemLink.cloneNode(false);
-                        let itemNameE = document.createElement('h3');
-                        itemNameE.textContent = item.name;
-                        itemName.appendChild(itemNameE);
+                            // create h3 item title
+                            const title = document.createElement('h3');
+                                const titleLink = aPreset.cloneNode(false);
+                                titleLink.textContent = item.name;
+                            title.appendChild(titleLink);
 
-                        let itemDescription = a_itemLink.cloneNode(false);
-                        let itemDescriptionE = document.createElement('p');
-                        itemDescriptionE.textContent = item.description;
-                        itemDescription.appendChild(itemDescriptionE);
+                            // create p item description
+                            const description = document.createElement('p');
+                                const descriptionLink = aPreset.cloneNode(false);
+                                descriptionLink.textContent = item.description;
+                            description.appendChild(descriptionLink);
 
-                        const values = [
-                            0, 1, 2, 3, 4, 5
-                        ];
-                        let itemCount = createQuantitySelect(count, values, 100, true, function (number) {
+                            // create div flex container for quantity selector, delete button and price
+                            const flexContainer = document.createElement('div');
+                                // create div item controls container for quantity selector and delete button
+                                const controls = document.createElement('div');
+                                    controls.className = "item-control";
 
-                            if (number === 0) {
-                                deleteItem(product_ID);
-                                cartList.removeChild(article);
-                                renderShoppingCart();
-                            } else {
-                                setItem(product_ID, number);
-                                renderShoppingCart();
-                            }
-                        });
+                                    const values = [ 0, 1, 2, 3, 4, 5 ];
+                                    const quantitySelect = createQuantitySelect(count, values, 100, true, function (number) {
+                                            if (number === 0) {
+                                                deleteItem(product_ID);
+                                                cartList.removeChild(article);
+                                                renderShoppingCart();
+                                            } else {
+                                                setItem(product_ID, number);
+                                                renderShoppingCart();
+                                            }
+                                        });
+                                    const deleteButton = document.createElement('button');
+                                        deleteButton.textContent = 'Löschen';
+                                        deleteButton.addEventListener('click', function () {
+                                                deleteItem(product_ID);
+                                                cartList.removeChild(article);
+                                                if(cartList.childElementCount <= 1){
+                                                    renderEmptyShoppingCart();
+                                                }
+                                            });
+                                controls.appendChild(quantitySelect);
+                                controls.appendChild(deleteButton);
 
-                        let deleteButton = document.createElement('button');
-                        deleteButton.textContent = 'Löschen';
-                        deleteButton.addEventListener('click', function () {
-                                deleteItem(product_ID);
-                                cartList.removeChild(article);
-                                if(cartList.childElementCount <= 1){
-                                    renderEmptyShoppingCart();
-                                }
-                            }
-                        )
-
-                        let itemPrice = document.createElement('span');
-                        itemPrice.textContent = (item.price * count).toFixed(2).replace(".", ",");
-
-                        const itemControl = document.createElement('div');
-                        itemControl.className = "item-control";
-                        itemControl.appendChild(itemCount);
-                        itemControl.appendChild(deleteButton);
-                        itemControl.appendChild(itemPrice);
+                                const price = document.createElement('span');
+                                    price.textContent = (item.price * count).toFixed(2).replace(".", ",");
+                            flexContainer.appendChild(controls);
+                            flexContainer.appendChild(price);
 
                         article.appendChild(figure);
-                        itemTextWrapper.appendChild(itemName);
-                        itemTextWrapper.appendChild(itemDescription);
-                        itemTextWrapper.appendChild(itemControl);
-                        article.appendChild(itemTextWrapper);
-                        cartList.appendChild(article);
+                        article.appendChild(title);
+                        article.appendChild(description);
+                        article.appendChild(flexContainer);
 
+                        cartList.appendChild(article);
                     });
                 }
             }
