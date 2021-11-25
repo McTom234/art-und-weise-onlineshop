@@ -87,15 +87,15 @@ article {
 
     } // p
 
-    button {
+    button, a {
       grid-column: span 2;
+      grid-row: 3;
+    } // button, a
+
+    a {
       grid-row: 2;
-
-      &:nth-of-type(2) {
-        grid-row: 3;
-      } // :nth-of-child(2)
-
-    } // button
+      text-align: center;
+    }
 
     div {
       grid-row: 4;

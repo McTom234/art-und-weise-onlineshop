@@ -12,9 +12,10 @@
 </head>
 
 <body>
-    <div id="popup" class="hide popup">
+    <div id="popup" class="popup">
+        <a href="#" class="popup"></a>
         <div class="popup-box">
-            <div onclick="closePopup()" class="popup-cancel">×</div>
+            <a class="popup-cancel no-text-decoration" href="#">×</a>
 
             <div class="popup-title"><strong><?= $product->name ?></strong> wurde zum Warenkorb hinzugefügt</div>
 
@@ -63,7 +64,7 @@
                         <span><?=str_replace('.', ',', $product->priceEuro)?></span>
                     <?php } ?>
 
-                    <button id="addToCartButton">In den Einkaufswagen</button>
+                    <a href="#popup" id="addToCartButton" class="link-button">In den Einkaufswagen</a>
 
                     <button class="inactive" id="buyButton">Jetzt kaufen</button>
 
@@ -87,32 +88,25 @@
     <script src="/assets/js/shoppingCart.js"></script>
     <script src="/assets/js/quantitySelect.js"></script>
     <script>
+        const url = window.location.href.split('#');
+        while (url.length >= 2 && url[url.length-1] !== "") {
+            url.pop();
+            window.location.href = url.join();
+        }
+
         const values = [
             1, 2, 3, 4, 5
         ]
-
-
         let currentValue = 1;
-        let quantitySelect = createQuantitySelect(currentValue, values, 100, true, function (number) {
-            let price = document.getElementById('price');
-            price.textContent = (<?=$product->discountPriceEuro?> * number).toFixed(2).toString().replace(".",",");
-            currentValue = number;
-        });
+        document.getElementById('quantitySelect-wrapper').appendChild(
+            createQuantitySelect(currentValue, values, 100, true, function (number) {
+                let price = document.getElementById('price');
+                price.textContent = (<?=$product->discountPriceEuro?> * number).toFixed(2).toString().replace(".",",");
+                currentValue = number;
+            })
+        );
 
-
-        let quantitySelectWrapper = document.getElementById("quantitySelect-wrapper");
-        quantitySelectWrapper.append(quantitySelect);
-
-
-        let popup = document.getElementById("popup");
-        popup.addEventListener("click", function (event) {
-            if (event.target === popup) {
-                closePopup();
-            }
-        });
-
-        let addToCartButton = document.getElementById('addToCartButton');
-        addToCartButton.addEventListener('click', function () {
+        document.getElementById('addToCartButton').addEventListener('click', function () {
             addItem("<?=$product->product_ID?>", currentValue)
             openPopup();
         });
@@ -124,11 +118,6 @@
             price.textContent = <?=$product->discountPriceEuro?>;
             let result = document.getElementById('popup-result');
             result.textContent = (currentValue * <?=$product->discountPriceEuro?>).toFixed(2).toString().replace(".",",");
-            popup.classList.remove("hide");
-        }
-
-        function closePopup() {
-            popup.classList.add("hide");
         }
 
         let buyButton = document.getElementById('buyButton');
