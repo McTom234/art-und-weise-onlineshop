@@ -20,7 +20,7 @@
 
         if ($page > 1) {
             $lastPageLink .= '?p=' . ($page - 1);
-            $nextPageLink .= '?p=' . ($page + 1);
+            $nextPageLink .= '?p=' . ($page + 1 > $maxPages ? $maxPages : $page + 1);
 
             if (isset($request['query'])) {
                 $nextPageLink .= '&q=' . $request['query'];
@@ -33,7 +33,7 @@
             }
         }
         else {
-            $nextPageLink .= '?p=' . ($page + 1);
+            $nextPageLink .= '?p=' . ($page + 1 > $maxPages ? $maxPages : $page + 1);
 
             if (isset($request['query'])){
                 $nextPageLink .= '&q=' . $request['query'];
