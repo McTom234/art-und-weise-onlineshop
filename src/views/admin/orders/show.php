@@ -7,6 +7,7 @@
     <title>Schülerfirma Art und Weise</title>
     <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/admin.css">
+    <?php $navbar_index = "orders"; ?>
 </head>
 <body>
 <?php require __DIR__ . '/../../layout/navbarAdmin.php'; ?>
@@ -24,14 +25,14 @@
 
     <table>
         <tr>
-            <th>Produkt ID</th>
+            <th>Produkt</th>
             <th>Rabbat</th>
             <th>Anzahl</th>
         </tr>
         <?php foreach ($checkout->orders as $order): ?>
             <tr>
-                <td><a href="/show?id=<?= $order->product_ID; ?>"><?= $order->product_ID; ?></a></td>
-                <td><?= $order->discount ?></td>
+                <td><a href="/show?id=<?= $order->product_ID; ?>"><?= $order->product_name; ?></a></td>
+                <td><?= 100-$order->discount != 100 ? 100-$order->discount."%" : "Kein Rabatt"; ?></td>
                 <td><?= $order->quantity ?></td>
             </tr>
         <?php endforeach; ?>

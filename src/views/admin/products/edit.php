@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/admin.css">
     <script src="/assets/js/jquery-3.6.0.min.js"></script>
+    <?php $navbar_index = "products"; ?>
 </head>
 
 <body>
@@ -36,7 +37,7 @@
                 </label>
                 <label>
                     Rabatt
-                    <input required type="number" name="discount" value="<?= $product->discount; ?>" min="0" max="100"
+                    <input required type="number" name="discount" value="<?= 100-$product->discount; ?>" min="0" max="100"
                            step="1">
                 </label>
 

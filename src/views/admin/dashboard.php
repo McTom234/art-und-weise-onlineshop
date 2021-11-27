@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerfirma Art und Weise</title>
     <link rel="stylesheet" href="/assets/css/admin/dashboard.css">
+    <?php $navbar_index = "home"; ?>
 </head>
 <body>
 <?php require __DIR__ .'/../layout/navbarAdmin.php'; ?>
@@ -17,7 +18,7 @@
             <table>
                 <thead>
                 <tr>
-                    <th>Produkt ID</th>
+                    <th>Produkt</th>
                     <th>Rabatt</th>
                     <th>Anzahl</th>
                     <th></th>
@@ -26,8 +27,8 @@
                 <tbody>
                 <?php foreach ($orders as $order): ?>
                     <tr>
-                        <td><?=$order->product_ID; ?></td>
-                        <td><?= $order->discount; ?></td>
+                        <td><?=$order->product_name; ?></td>
+                        <td><?= 100-$order->discount != 100 ? 100-$order->discount."%" : "Kein Rabatt"; ?></td>
                         <td><?= $order->quantity; ?></td>
                         <td><a href="/show?id=<?=$order->product_ID; ?>" class="link-button">Ansehen</a></td>
                     </tr>
@@ -35,21 +36,17 @@
                 </tbody>
             </table>
             <div class="card-bottom">
-                <a href="/admin/orders">
-                    <button>Gehe zur Übersicht</button>
-                </a>
+                <a href="/admin/orders" class="link-button">Gehe zur Übersicht</a>
             </div>
         </div>
         <div class="grid-column--4 grid-column">
-            <h3 class="card-title">Mitglieder</h3>
+            <!--<h3 class="card-title">Mitglieder</h3>
             <div>
 
             </div>
             <div class="card-bottom">
-                <a href="">
-                    <button>Gehe zur Übersicht</button>
-                </a>
-            </div>
+                <a href="" class="link-button">Gehe zur Übersicht</a>
+            </div>-->
         </div>
         <div class="grid-column--6 grid-column">
             <h3 class="card-title">Produkte</h3>
@@ -69,41 +66,28 @@
                             <?= $product->name; ?>
                         </td>
                         <td>
-                            <?= $product->price; ?>
+                            <?= str_replace(".", ",", $product->price/100); ?>
                             €
                         </td>
+                        <td><?= 100-$product->discount != 100 ? 100-$product->discount."%" : "Kein Rabatt"; ?></td></td>
                         <td>
-
-                            <?php if (empty($product->discount)): ?>
-                                kein Rabatt
-                            <?php else:?>
-                                <?=$product->discount; ?>%
-                            <?php endif;?>
-                        </td>
-                        <td>
-                            <a href="">
-                                <button>Bearbeiten</button>
-                            </a>
+                            <a href="/admin/products/edit?id=<?=$product->product_ID ?>" class="link-button">Bearbeiten</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>
             <div class="card-bottom">
-                <a href="/admin/products">
-                    <button>Gehe zur Übersicht</button>
-                </a>
+                <a href="/admin/products" class="link-button">Gehe zur Übersicht</a>
             </div>
         </div>
         <div class="grid-column--6 grid-column">
-            <h3 class="card-title">Finzanzen</h3>
+            <!--<h3 class="card-title">Finzanzen</h3>
             <div class="card-bottom">
-                <a href="">
-                    <button>Gehe zur Übersicht</button>
-                </a>
-            </div>
+                <a href="" class="link-button">Gehe zur Übersicht</a>
+            </div>-->
         </div>
-        <div class="grid-column--8 grid-column">
+        <!--<div class="grid-column--8 grid-column">
             <h3 class="card-title">News</h3>
             <div class="card-bottom">
                 <a href="">
@@ -118,7 +102,7 @@
                     <button>Gehe zur Übersicht</button>
                 </a>
             </div>
-        </div>
+        </div>-->
     </div>
 </main>
 <?php require '../views/layout/footer.php'; ?>
