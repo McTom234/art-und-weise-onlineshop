@@ -32,7 +32,7 @@
         <?php foreach ($checkout->orders as $order): ?>
             <tr>
                 <td><a href="/show?id=<?= $order->product_ID; ?>"><?= $order->product_name; ?></a></td>
-                <td><?= 100-$order->discount != 100 ? 100-$order->discount."%" : "Kein Rabatt"; ?></td>
+                <td><?= $order->discount != 100 ? 100-$order->discount."%" : "Kein Rabatt"; ?></td>
                 <td><?= $order->quantity ?></td>
             </tr>
         <?php endforeach; ?>

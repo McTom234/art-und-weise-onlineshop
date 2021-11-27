@@ -28,7 +28,7 @@
                 <?php foreach ($orders as $order): ?>
                     <tr>
                         <td><?=$order->product_name; ?></td>
-                        <td><?= 100-$order->discount != 100 ? 100-$order->discount."%" : "Kein Rabatt"; ?></td>
+                        <td><?= $order->discount != 100 ? 100-$order->discount."%" : "Kein Rabatt"; ?></td>
                         <td><?= $order->quantity; ?></td>
                         <td><a href="/show?id=<?=$order->product_ID; ?>" class="link-button">Ansehen</a></td>
                     </tr>
@@ -69,7 +69,7 @@
                             <?= str_replace(".", ",", $product->price/100); ?>
                             €
                         </td>
-                        <td><?= 100-$product->discount != 100 ? 100-$product->discount."%" : "Kein Rabatt"; ?></td></td>
+                        <td><?= $product->discount != 100 ? 100-$product->discount."%" : "Kein Rabatt"; ?></td></td>
                         <td>
                             <a href="/admin/products/edit?id=<?=$product->product_ID ?>" class="link-button">Bearbeiten</a>
                         </td>

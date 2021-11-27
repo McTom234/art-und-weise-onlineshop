@@ -173,8 +173,10 @@ class AdminController extends AbstractController
 
             $name = htmlspecialchars($_POST['name']);
             $description = htmlspecialchars($_POST['description']);
-            $price = htmlspecialchars($_POST['price']);
-            $discount = htmlspecialchars($_POST['discount']);
+            $price = ( ((int) htmlspecialchars($_POST['price_euro'])) * 100 ) + ( (int) htmlspecialchars($_POST['price_cent']) );
+            $discount = 100-htmlspecialchars($_POST['discount']);
+            if ($discount < 0) $discount = 0;
+            if ($discount > 100) $discount = 99;
 
             $newCategory = htmlspecialchars($_POST['category']);
 
@@ -232,8 +234,10 @@ class AdminController extends AbstractController
                 }
                 $name = htmlspecialchars($_POST['name']);
                 $description = htmlspecialchars($_POST['description']);
-                $price = htmlspecialchars($_POST['price']);
-                $discount = htmlspecialchars($_POST['discount']);
+                $price = ( ((int) htmlspecialchars($_POST['price_euro'])) * 100 ) + ( (int) htmlspecialchars($_POST['price_cent']) );
+                $discount = 100-htmlspecialchars($_POST['discount']);
+                if ($discount < 0) $discount = 0;
+                if ($discount > 100) $discount = 99;
 
                 $newCategory = htmlspecialchars($_POST['category']);
 

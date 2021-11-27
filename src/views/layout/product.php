@@ -14,14 +14,11 @@
     </p>
 
     <div class="price">
-        <?php if ($product->discount > 0) { ?>
+        <?php if ($product->discount != 100) { ?>
             <span><?=str_replace('.', ',', $product->discountPriceEuro)?></span>
 
             <span><?=str_replace('.', ',', $product->priceEuro)?></span>
-<?php
-        }
-        else {
-?>
+        <?php } else { ?>
             <span><?=str_replace('.', ',', $product->priceEuro)?></span>
         <?php } ?>
 

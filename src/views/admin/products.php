@@ -40,10 +40,10 @@
                 </td>
                 <td>
 
-                    <?php if (empty($product->discount)): ?>
+                    <?php if ($product->discount == 100): ?>
                         kein Rabatt
                     <?php else: ?>
-                        <?= $product->discount; ?>%
+                        <?= 100-$product->discount; ?>%
                     <?php endif; ?>
                 </td>
                 <td>

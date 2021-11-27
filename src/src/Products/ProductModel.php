@@ -32,7 +32,7 @@ class ProductModel
 
     private function getDiscountPriceEuro()
     {
-        if($this->discount == 0) return  $this->priceEuro;
+        if($this->discount == 100) return  $this->priceEuro;
         return number_format($this->priceEuro * $this->discount / 100, 2);
     }
 
