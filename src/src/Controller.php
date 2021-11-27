@@ -430,8 +430,7 @@ class Controller extends AbstractController
                     array_push($items, false);
                     continue;
                 }
-                $product_ID = $item->product_ID;
-                $item->images = $this->imagesProductRepository->fetchByProductID($product_ID);
+                $item->images = $this->imagesProductRepository->fetchByProductID($id);
                 $item->price = $item->discountPriceEuro;
                 array_push($items, $item);
             }

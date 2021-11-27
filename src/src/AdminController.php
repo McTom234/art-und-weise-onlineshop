@@ -61,7 +61,10 @@ class AdminController extends AbstractController
         }
 
         $products = $this->productsRepository->fetchNumber(10);
-        $orders = $this->ordersRepository->fetchNumber(5);
+        $orders = $this->ordersRepository->fetchNumber(10);
+        for ($i = 0; $i < count($orders); $i++) {
+            $orders[$i]->product_name = $this->productsRepository->fetch($orders[$i]->product_ID)->name;
+        }
 //        $members = $this->membersRepository->fetchAll();
 //        $balance = $this->balanceRepository->fetchAll();
 //        $articles = $this->articlesRepository->fetchAll();
@@ -99,8 +102,7 @@ class AdminController extends AbstractController
         }
         $checkouts = $this->checkoutsRepository->fetchNumberOffsetQuery($number, $offset, $query);
 
-        $numberTotalProducts = $this->productsRepository->fetchProductCount($query);
-        $maxPages = ceil(($numberTotalProducts / $number));
+        $maxPages = ceil((count($checkouts) / $number));
 
         $this->render("admin/orders", [
             'loggedIn' => $authentication,
@@ -117,6 +119,9 @@ class AdminController extends AbstractController
         if (isset($_GET['id'])) {
             $checkout_id = $_GET['id'];
             $checkout = $this->checkoutsRepository->fetch($checkout_id);
+            foreach ($checkout->orders as $order) {
+                $order->product_name = $this->productsRepository->fetch($order->product_ID)->name;
+            }
             $this->render("admin/orders/show", [
                 'loggedIn' => $authentication,
                 'checkout' => $checkout,

@@ -32,8 +32,9 @@
                     <textarea name="description"><?= $product->description; ?></textarea>
                 </label>
                 <label>
-                    Preis
-                    <input required type="number" name="price" value="<?= $product->price; ?>" min="0">
+                    Preis (5 = 5 Cent; 50 = 50 Cent)
+                    <input required type="number" name="price_euro" value="<?= intdiv($product->price,100); ?>" min="0">
+                    <input required type="number" name="price_cent" value="<?= $product->price-(intdiv($product->price,100)*100); ?>" min="0" max="99">
                 </label>
                 <label>
                     Rabatt
