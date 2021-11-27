@@ -8,8 +8,14 @@
     <div class="navbar-container">
         <div>
             <div class="dropdown">
-                <b <?php if ($navbar_index == "products") echo "data-active"; ?> data-responsive>Produkte</b>
-                <a href="/products" <?php if ($navbar_index == "products") echo "data-active"; ?> data-screenFull>Produkte</a>
+                <?php
+                $products_array = array();
+                array_push($products_array, "products");
+                foreach ($categories as $category) {
+                    array_push($products_array, $category->name);
+                } ?>
+                <b <?php if (in_array($navbar_index, $products_array)) echo "data-active"; ?> data-responsive>Produkte</b>
+                <a href="/products" <?php if (in_array($navbar_index, $products_array)) echo "data-active"; ?> data-screenFull>Produkte</a>
 
                 <div class="dropdown-content">
                     <?php
