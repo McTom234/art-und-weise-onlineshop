@@ -7,6 +7,7 @@
     <title>Schülerfirma Art und Weise</title>
     <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/admin.css">
+    <?php $navbar_index = "orders"; ?>
 </head>
 <body>
 <?php require __DIR__ . '/../layout/navbarAdmin.php'; ?>
@@ -43,9 +44,7 @@
                     <?= count($checkout->orders);?>
                 </td>
                 <td>
-                    <a href="/admin/orders/show?id=<?=$checkout->checkout_ID?>">
-                        <button>Öffnen</button>
-                    </a>
+                    <a href="/admin/orders/show?id=<?=$checkout->checkout_ID?>" class="link-button">Öffnen</button></a>
                 </td>
             </tr>
         <?php endforeach; ?>

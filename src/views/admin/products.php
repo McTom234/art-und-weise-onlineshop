@@ -7,12 +7,13 @@
     <title>Schülerfirma Art und Weise</title>
     <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/admin.css">
+    <?php $navbar_index = "products"; ?>
 </head>
 <body>
 <?php require __DIR__ . '/../layout/navbarAdmin.php'; ?>
 <div>
     <h3 class="card-title">Produkte</h3>
-    <a href="/admin/products/add"><button>Produkt hinzufügen</button></a>
+    <a href="/admin/products/add" class="link-button">Produkt hinzufügen</a>
     <?php require __DIR__ . '/../layout/searchbar.php'; ?>
     <table>
         <thead>
@@ -46,9 +47,7 @@
                     <?php endif; ?>
                 </td>
                 <td>
-                    <a href="/admin/products/edit?id=<?=$product->product_ID?>">
-                        <button>Bearbeiten</button>
-                    </a>
+                    <a href="/admin/products/edit?id=<?=$product->product_ID?>" class="link-button">Bearbeiten</a>
                 </td>
             </tr>
         <?php endforeach; ?>
