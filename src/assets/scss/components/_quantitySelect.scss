@@ -7,18 +7,20 @@
   margin: 20px;
 }
 
+.quantity-input {
+  column-gap: .3em;
+  align-items: center;
+}
+
 .quantity-input input{
-  font-size: 16px;
   color: #fff;
   background-color: gray;
   padding: 8px 16px;
   outline: none;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-}
-
-.quantity-input button{
-  margin-top: 20px;
+  font-size: 1em;
+  border-radius: 8px;
 }
 
 .hide{
@@ -64,6 +66,7 @@
   left: 0;
   right: 0;
   z-index: 99;
+  display: block;
 }
 
 /* Hide the items when the select box is closed: */
