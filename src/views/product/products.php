@@ -8,7 +8,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Schülerfirma Art und Weise | Produktübersicht</title>
     <link rel="stylesheet" href="/assets/css/products-overview.css">
-    <?php $navbar_index = "products"; ?>
+    <?php $navbar_index = $c->name ?? "products"; ?>
 </head>
 
 <body>

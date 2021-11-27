@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerfirma Art und Weise | <?= $product->name ?></title>
     <link rel="stylesheet" href="/assets/css/showProduct.css">
-    <!-- TODO: add navbar tag -->
-    <?php $navbar_index = "login"; ?>
+    <?php $navbar_index = $c->name ?? "products"; ?>
 </head>
 
 <body>

@@ -16,7 +16,7 @@
                     if (isset($categories)) {
                         foreach ($categories as $category):
                             ?>
-                            <a href="/products?c=<?= $category->category_ID ?>" <?php if ($navbar_index == "link 1") echo "data-active"; ?>><?= $category->name ?></a>
+                            <a href="/products?c=<?= $category->category_ID ?>" <?php if ($navbar_index == $category->name) echo "data-active"; ?>><?= $category->name ?></a>
                         <?php
                         endforeach;
                     }
