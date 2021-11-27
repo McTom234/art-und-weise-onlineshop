@@ -24,8 +24,8 @@
                     <thead>
                         <tr>
                             <th>Bezeichnung</th>
-                            <th>Stückzahl</th>
                             <th>Einzelpreis</th>
+                            <th>Stückzahl</th>
                             <th>Gesamtpreis</th>
                         </tr>
                     </thead>
