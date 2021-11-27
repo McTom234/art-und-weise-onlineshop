@@ -9,8 +9,7 @@
         <div>
             <div class="dropdown">
                 <?php
-                $products_array = array();
-                array_push($products_array, "products");
+                $products_array = array("products");
                 foreach ($categories as $category) {
                     array_push($products_array, $category->name);
                 } ?>
