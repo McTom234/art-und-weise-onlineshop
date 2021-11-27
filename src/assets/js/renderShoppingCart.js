@@ -53,6 +53,10 @@ function renderShoppingCart() {
                                 price
                          */
 
+                        // check figure creation
+                        let image = true;
+                        if (!item.images.length > 0) image = false;
+
                         // create <a/> instance
                         const aPreset = document.createElement('a')
                         aPreset.setAttribute('href', './show?id=' + product_ID);
@@ -60,14 +64,18 @@ function renderShoppingCart() {
 
                         // create parent of product <article/>
                         const article = document.createElement('article');
+                        if (!image) article.className = "no-figure";
 
                             // create figure for image
-                            const figure = document.createElement('figure');
-                                const figureLink = aPreset.cloneNode(false);
-                                    const figureImg = document.createElement('img');
-                                    figureImg.setAttribute('src', item.images[0].base64);
-                                figureLink.appendChild(figureImg);
-                            figure.appendChild(figureLink);
+                            let figure = null;
+                            if (image) {
+                                figure = document.createElement('figure');
+                                    const figureLink = aPreset.cloneNode(false);
+                                        const figureImg = document.createElement('img');
+                                        figureImg.setAttribute('src', item.images[0].base64);
+                                    figureLink.appendChild(figureImg);
+                                figure.appendChild(figureLink);
+                            }
 
                             // create h3 item title
                             const title = document.createElement('h3');
@@ -115,7 +123,7 @@ function renderShoppingCart() {
                             flexContainer.appendChild(controls);
                             flexContainer.appendChild(price);
 
-                        article.appendChild(figure);
+                        if (image) article.appendChild(figure);
                         article.appendChild(title);
                         article.appendChild(description);
                         article.appendChild(flexContainer);

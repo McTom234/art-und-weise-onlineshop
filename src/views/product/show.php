@@ -38,11 +38,16 @@
     <main>
         <?php if ($product) { ?>
             <article>
-                <figure>
-                    <img src="<?= $product->images[0]->base64 ?>" class="item_image" alt="Image: <?= $product->name ?>"/>
-                </figure>
+                <?php if (count($product->images)>0) { ?>
+                    <figure>
+                        <img src="<?= $product->images[0]->base64 ?>" class="item_image" alt="Image: <?= $product->name ?>"/>
+                    </figure>
 
-                <div>
+                    <div>
+                <?php } else { ?>
+                    <div class="no-figure">
+                <?php } ?>
+
                     <h4><?= $product->name; ?></h4>
 
                     <?php if ($c): ?>
@@ -56,12 +61,11 @@
                     <?php if ($product->discount > 0) { ?>
                         <span><?=str_replace('.', ',', $product->discountPriceEuro)?></span>
 
-                        <span style='text-decoration: line-through'><?=str_replace('.', ',', $product->priceEuro)?></span>
+                        <span><?=str_replace('.', ',', $product->priceEuro)?></span>
 <?php
                     }
                     else {
-?>
-                        <span><?=str_replace('.', ',', $product->priceEuro)?></span>
+?>                     <span style="grid-column: 2;"><?=str_replace('.', ',', $product->priceEuro)?></span>
                     <?php } ?>
 
                     <a href="#popup" id="addToCartButton" class="link-button">In den Einkaufswagen</a>

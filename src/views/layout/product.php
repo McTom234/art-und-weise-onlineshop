@@ -1,7 +1,9 @@
 <article class="grid-column--4">
-    <a class="no-text-decoration" href="./show?id=<?=$product->product_ID?>">
-        <figure style="background-image: url('<?=$product->images[0]->base64?>')"></figure>
-    </a>
+    <?php if (count($product->images)>0) { ?>
+        <a class="no-text-decoration" href="./show?id=<?=$product->product_ID?>">
+            <figure style="background-image: url('<?=$product->images[0]->base64?>')"></figure>
+        </a>
+    <?php } ?>
 
     <h4>
         <a class="no-text-decoration" href="./show?id=<?=$product->product_ID?>"><?=$product->name?></a>
