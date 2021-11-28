@@ -9,3 +9,5 @@ $(function() {
         if ($(this).scrollTop() === 0) animate = true;
     });
 });
+
+console.log("test")
