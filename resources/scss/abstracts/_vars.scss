@@ -1,0 +1,110 @@
+// colors
+// color palette
+$white: #ffffff;
+$pale-spring-bud: #faf4f4;
+$blood-red: #6c0008;
+$dark-slate-gray: #3e4e50;
+$hunter-green: #415d43;
+
+$placeholder-images: $pale-spring-bud;
+
+$navbar-color: #6c0008ff;
+$navbar-text-color: $white;
+
+$border-radius: 8px;
+
+// fonts
+@import url("https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Georama:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+$font-size: 20px;
+$font-style-headline1: (
+        font-family: unquote("Georama"),
+        font-size: 6em,
+        font-weight: 600,
+        line-height: 1.5em
+);
+$font-style-headline2: (
+        font-family: unquote("Georama"),
+        font-size: 4em,
+        font-weight: 500,
+        line-height: 1.5em
+);
+$font-style-headline3: (
+        font-family: unquote("Georama"),
+        font-size: 3em,
+        font-weight: 500,
+        line-height: 1.5em
+);
+$font-style-headline4: (
+        font-family: unquote("Georama"),
+        font-size: 2em,
+        font-weight: 500,
+        line-height: 1.5em
+);
+$font-style-headline5: (
+        font-family: unquote("Georama"),
+        font-size: 1.5em,
+        font-weight: 400,
+        line-height: 1.5em
+);
+$font-style-headline6: (
+        font-family: unquote("Georama"),
+        font-size: 1.25em,
+        font-weight: 300,
+        line-height: 1.5em
+);
+$font-style-body1: (
+        font-family: unquote("Bitter"),
+        font-size: 1em,
+        font-weight: 400,
+        line-height: 1.2em
+);
+$font-style-body2: (
+        font-family: unquote("Montserrat"),
+        font-size: 1em,
+        font-weight: 400,
+        line-height: 1.2em
+);
+$font-style-subtitle1: (
+        font-family: unquote("Georama"),
+        font-size: 1em,
+        font-weight: 500,
+        line-height: 1.25em
+);
+$font-style-subtitle2: (
+        font-family: unquote("Georama"),
+        font-size: .8em,
+        font-weight: 400,
+        line-height: 1em
+);
+$font-style-button: (
+        font-family: unquote("Montserrat"),
+        font-size: .8em,
+        font-weight: 600,
+        line-height: 1.25em,
+        text-transform: uppercase
+);
+$font-style-overline: (
+        font-family: unquote("Montserrat"),
+        font-size: .6em,
+        font-weight: 400,
+        line-height: 1em,
+        text-transform: uppercase
+);
+$font-style-caption: (
+        font-family: unquote("Montserrat"),
+        font-size: .75em,
+        font-weight: 400,
+        line-height: 1.2em
+);
+$font-style-fontAwesome: (
+        font-family: unquote("FontAwesome")
+);
+
+$responsive_breakpoints: (
+        sm: 600px,
+        md: 770px,
+        lg: 990px,
+        xl: 1200px,
+        xxl: 1460px
+);
+

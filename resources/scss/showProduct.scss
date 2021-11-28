@@ -1,0 +1,127 @@
+@use "components/popup";
+@use "components/quantitySelect";
+@use "abstracts";
+@use "components";
+
+main {
+  margin: 0 1.5em;
+} // main
+
+
+article {
+  @extend section;
+  @extend .grid-container;
+  margin-bottom: 1em !important;
+
+  figure {
+    grid-column: span 3;
+    margin: 0;
+
+    img {
+      width: 100%;
+      margin: auto;
+      display: block;
+    } // img
+
+  } // figure
+
+  & > div {
+    grid-column: span 5;
+
+    h4 {
+      margin: 0;
+    } // h4
+
+    p {
+      margin: 1em;
+      text-align: justify;
+    } // p
+
+  } // div
+
+  aside {
+    grid-column: span 4;
+    display: grid;
+    margin-top: 4em;
+    grid-template: repeat(4, auto) / repeat(2, auto);
+    grid-gap: .5em;
+    height: min-content;
+
+    * {
+      height: min-content;
+    }
+
+    span {
+      grid-column: 1;
+      grid-row: 1;
+      @include abstracts.font(abstracts.$font-style-subtitle1) {
+        font-size: 1.75em;
+        font-weight: 400;
+      };
+      text-align: center;
+
+      &:nth-of-type(2) {
+        grid-column: 2;
+        grid-row: 1;
+        text-decoration: line-through;
+        color: abstracts.$blood-red;
+        font-weight: 300;
+      } // :nth-of-type(2)
+
+      &::after {
+        content: ' €';
+      } // ::after
+
+    } // span
+
+    p {
+      grid-row: 4;
+      grid-column: 2;
+      font-size: 1.75em;
+      margin: auto;
+      font-weight: 500;
+
+      &::after {
+        content: ' €';
+      } // ::after
+
+    } // p
+
+    button, a {
+      grid-column: span 2;
+      grid-row: 3;
+    } // button, a
+
+    a {
+      grid-row: 2;
+      text-align: center;
+    }
+
+    div {
+      grid-row: 4;
+      grid-column: 1;
+    }
+
+  } // aside
+
+  @include abstracts.breakpoint(lg) {
+    aside {
+      grid-column: span 12;
+      margin-top: 0;
+    }
+    & > div {
+      grid-column: span 9;
+    }
+  }
+
+  @include abstracts.breakpoint(sm) {
+    figure {
+      grid-column-start: 4;
+      grid-column-end: 10;
+    }
+    & > div {
+      grid-column: span 12;
+    }
+  }
+
+} // section

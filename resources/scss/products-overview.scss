@@ -1,0 +1,16 @@
+@use "components";
+@use "abstracts" as a;
+
+@use "components/article";
+@use "components/searchbar";
+@use "components/page-navigation";
+
+.grid-container {
+  margin: 1em 0;
+}
+
+h2 {
+  margin-block: 0;
+}
+
+

@@ -1,23 +1,26 @@
 {
-  "name": "art-und-weise",
-  "version": "1.0.0",
-  "description": "Onlineshop for student company \"Art und Weise\"",
-  "main": "index.js",
-  "dependencies": {
-    "copyfiles": "^2.4.1",
-    "jquery": "^3.5.1",
-    "jquery.cookie": "^1.4.1",
-    "sass": "^1.37.0"
-  },
-  "scripts": {
-    "update-copy": "npm update && npm run copy-jquery-js",
-    "copy-jquery-js": "copyfiles -u 3 node_modules/jquery/dist/jquery.min.js dist/js && copyfiles -u 2 node_modules/jquery.cookie/jquery.cookie.js",
-    "compile-folder": "sass src/assets/scss/:dist/assets/css/",
-    "compile-watch": "sass --watch src/assets/scss/:dist/assets/css/",
-    "make-dist-ready": "copyfiles -e \"src/assets/scss/**\" -u 1 \"src/**/*\" dist/ && copyfiles -u 1 \"src/.htaccess\" dist/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Humboldt-Gymnasium-Potsdam/art-und-weise_website.git"
-  }
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.2.1",
+        "alpinejs": "^3.4.2",
+        "autoprefixer": "^10.1.0",
+        "axios": "^0.21",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.2.1",
+        "postcss-import": "^12.0.1",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.43.5",
+        "sass-loader": "^12.1.0",
+        "tailwindcss": "^2.0.2"
+    }
 }
