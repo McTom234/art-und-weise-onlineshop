@@ -57,6 +57,10 @@ function renderShoppingCart() {
                                 price
                          */
 
+                        // check figure creation
+                        let image = true;
+                        if (!item.images.length > 0) image = false;
+
                         // create <a/> instance
                         const aPreset = document.createElement('a')
                         aPreset.setAttribute('href', './show?id=' + product_ID);
@@ -64,62 +68,66 @@ function renderShoppingCart() {
 
                         // create parent of product <article/>
                         const article = document.createElement('article');
+                        if (!image) article.className = "no-figure";
 
-                        // create figure for image
-                        const figure = document.createElement('figure');
-                        const figureLink = aPreset.cloneNode(false);
-                        const figureImg = document.createElement('img');
-                        //figureImg.setAttribute('src', item.images[0].base64);
-                        figureLink.appendChild(figureImg);
-                        figure.appendChild(figureLink);
-
-                        // create h3 item title
-                        const title = document.createElement('h3');
-                        const titleLink = aPreset.cloneNode(false);
-                        titleLink.textContent = item.name;
-                        title.appendChild(titleLink);
-
-                        // create p item description
-                        const description = document.createElement('p');
-                        const descriptionLink = aPreset.cloneNode(false);
-                        descriptionLink.textContent = item.description;
-                        description.appendChild(descriptionLink);
-
-                        // create div flex container for quantity selector, delete button and price
-                        const flexContainer = document.createElement('div');
-                        // create div item controls container for quantity selector and delete button
-                        const controls = document.createElement('div');
-                        controls.className = "item-control";
-
-                        const values = [0, 1, 2, 3, 4, 5];
-                        const quantitySelect = createQuantitySelect(count, values, 100, true, function (number) {
-                            if (number === 0) {
-                                deleteItem(product_ID);
-                                cartList.removeChild(article);
-                                renderShoppingCart();
-                            } else {
-                                setItem(product_ID, number);
-                                renderShoppingCart();
+                            // create figure for image
+                            let figure = null;
+                            if (image) {
+                                figure = document.createElement('figure');
+                                    const figureLink = aPreset.cloneNode(false);
+                                        const figureImg = document.createElement('img');
+                                        figureImg.setAttribute('src', item.images[0].base64);
+                                    figureLink.appendChild(figureImg);
+                                figure.appendChild(figureLink);
                             }
-                        });
-                        const deleteButton = document.createElement('button');
-                        deleteButton.textContent = 'Löschen';
-                        deleteButton.addEventListener('click', function () {
-                            deleteItem(product_ID);
-                            cartList.removeChild(article);
-                            if (cartList.childElementCount <= 1) {
-                                renderEmptyShoppingCart();
-                            }
-                        });
-                        controls.appendChild(quantitySelect);
-                        controls.appendChild(deleteButton);
 
-                        const price = document.createElement('span');
-                        price.textContent = (item.price * count).toFixed(2).replace(".", ",");
-                        flexContainer.appendChild(controls);
-                        flexContainer.appendChild(price);
+                            // create h3 item title
+                            const title = document.createElement('h3');
+                                const titleLink = aPreset.cloneNode(false);
+                                titleLink.textContent = item.name;
+                            title.appendChild(titleLink);
 
-                        article.appendChild(figure);
+                            // create p item description
+                            const description = document.createElement('p');
+                                const descriptionLink = aPreset.cloneNode(false);
+                                descriptionLink.textContent = item.description;
+                            description.appendChild(descriptionLink);
+
+                            // create div flex container for quantity selector, delete button and price
+                            const flexContainer = document.createElement('div');
+                                // create div item controls container for quantity selector and delete button
+                                const controls = document.createElement('div');
+                                    controls.className = "item-control";
+
+                                    const values = [ 0, 1, 2, 3, 4, 5 ];
+                                    const quantitySelect = createQuantitySelect(count, values, 100, true, function (number) {
+                                            if (number === 0) {
+                                                deleteItem(product_ID);
+                                                cartList.removeChild(article);
+                                                renderShoppingCart();
+                                            } else {
+                                                setItem(product_ID, number);
+                                                renderShoppingCart();
+                                            }
+                                        });
+                                    const deleteButton = document.createElement('button');
+                                        deleteButton.textContent = 'Löschen';
+                                        deleteButton.addEventListener('click', function () {
+                                                deleteItem(product_ID);
+                                                cartList.removeChild(article);
+                                                if(cartList.childElementCount <= 1){
+                                                    renderEmptyShoppingCart();
+                                                }
+                                            });
+                                controls.appendChild(quantitySelect);
+                                controls.appendChild(deleteButton);
+
+                                const price = document.createElement('span');
+                                    price.textContent = (item.price * count).toFixed(2).replace(".", ",");
+                            flexContainer.appendChild(controls);
+                            flexContainer.appendChild(price);
+
+                        if (image) article.appendChild(figure);
                         article.appendChild(title);
                         article.appendChild(description);
                         article.appendChild(flexContainer);

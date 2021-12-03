@@ -9,7 +9,7 @@ use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
-    use HasFactory, Searchable, Uuids;
+    use HasFactory, Uuids;
 
     public function images()
     {

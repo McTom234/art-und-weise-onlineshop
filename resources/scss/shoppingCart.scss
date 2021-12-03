@@ -21,15 +21,19 @@ main {
       padding: 1em;
       gap: 1em;
       display: grid;
-      grid-template: repeat(3, auto) / 25% auto;
+      grid-template: repeat(3, auto) / 300px auto;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1em;
       box-shadow: 0 0 0 a.$dark-slate-gray;
       transition: box-shadow 300ms ease-in-out;
 
+      &.no-figure {
+        grid-template-columns: auto !important;
+      }
+
       @include a.breakpoint(lg) {
-        grid-template-columns: 20% auto ;
+        grid-template-columns: 200px auto ;
       }
       @include a.breakpoint(md) {
         grid-template-columns: auto;
@@ -46,8 +50,9 @@ main {
         a {
           width: 100%;
           img {
-            width: 100%;
+            width: min(350px, 100%);
             display: block;
+            margin: auto;
           }
         }
       }
@@ -77,7 +82,7 @@ main {
         div.item-control {
           margin: auto;
           gap: .5em 1em;
-          justify-content: initial;
+          justify-content: center;
 
           .quantity-select {
             margin: 0;
