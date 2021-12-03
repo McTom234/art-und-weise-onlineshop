@@ -55,6 +55,7 @@
             <a href="#popup" id="addToCartButton" class="link-button">In den Einkaufswagen</a>
             <button class="inactive" id="buyButton">Jetzt kaufen</button>
             <div id="quantitySelect-wrapper"></div>
+            <div id="total-price"></div>
         </aside>
     </article>
 </main>
@@ -65,26 +66,20 @@
 <script src="{{asset('js/shoppingCart.js')}}"></script>
 <script src="{{asset('js/quantitySelect.js')}}"></script>
 <script>
-    const url = window.location.href.split('#');
-    while (url.length >= 2 && url[url.length - 1] !== "") {
-        url.pop();
-        window.location.href = url.join();
-    }
-
     const values = [
         1, 2, 3, 4, 5
     ]
     let currentValue = 1;
     document.getElementById('quantitySelect-wrapper').appendChild(
         createQuantitySelect(currentValue, values, 100, true, function (number) {
-            let price = document.getElementById('price');
+            let price = document.getElementById('total-price');
             price.textContent = ({{$product->getDiscountPriceEuro()}} * number).toFixed(2).toString().replace(".", ",");
             currentValue = number;
         })
     );
 
     document.getElementById('addToCartButton').addEventListener('click', function () {
-        addItem("{{$product->id}}", currentValue)
+        setItem("{{$product->id}}", currentValue)
         openPopup();
     });
 
@@ -96,11 +91,6 @@
         let result = document.getElementById('popup-result');
         result.textContent = (currentValue * {{$product->getDiscountPriceEuro()}}).toFixed(2).toString().replace(".", ",");
     }
-
-    let buyButton = document.getElementById('buyButton');
-    buyButton.addEventListener('click', function () {
-        console.log('buy');
-    });
 </script>
 </body>
 

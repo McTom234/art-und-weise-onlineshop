@@ -19,4 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('cart', [CartController::class, 'fetchCart']);
+Route::prefix('cart')->group(function () {
+    Route::post('/set', [CartController::class, 'set'])->name('set');
+});
+
+

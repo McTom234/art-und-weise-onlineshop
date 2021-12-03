@@ -15,7 +15,6 @@ const mix = require('laravel-mix');
 mix.js('resources/js/cookies.js', 'public/js')
     .js('resources/js/products.js', 'public/js')
     .js('resources/js/quantitySelect.js', 'public/js')
-    .js('resources/js/renderShoppingCart.js', 'public/js')
     .js('resources/js/shoppingCart.js', 'public/js')
     .sass('resources/scss/home.scss', 'public/css')
     .sass('resources/scss/user-forms.scss', 'public/css')

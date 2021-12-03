@@ -7,37 +7,16 @@ window.deleteItem = function (id) {
     setCookies('shoppingCart', shoppingCart);
 }
 
-window.addItem = function (id, number = 1) {
-
-    let shoppingCart = getCookies('shoppingCart');
-    if (!shoppingCart) {
-        shoppingCart = {};
+window.setItem = function (id, number = 1, additional = 1) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", '/api/cart/set', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            console.log(xhr.responseText);
+        }
     }
-
-    if (shoppingCart[id]) {
-        shoppingCart[id] += number;
-    } else {
-        shoppingCart[id] = number;
-    }
-
-    setCookies('shoppingCart', shoppingCart);
-}
-
-window.setItem = function (id, count) {
-
-    let shoppingCart = getCookies('shoppingCart');
-    if (shoppingCart === null) {
-        shoppingCart = {};
-    }
-    shoppingCart[id] = count;
-
-    setCookies('shoppingCart', shoppingCart);
-}
-
-window.getShoppingCart = function () {
-
-    return getCookies('shoppingCart');
-
+    xhr.send(`id=${id}&number=${number}&additional=${additional}`);
 }
 
 

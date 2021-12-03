@@ -1,3 +1,9 @@
+@php
+    if(!isset($categories)){
+        $categories = \App\Models\Category::all();
+    }
+@endphp
+
 <nav id="navbar">
     <a class="nav-button-home" href="/" {{$index != "home" ?: "data-active"}}>Art und Weise</a>
 
@@ -14,7 +20,7 @@
                         <a href="{{url("/products")}}">Alle Produkte</a>
                         @foreach ($categories as $category)
                             <a href="{{url("/products/{$category->id}")}}" {{$index != $category->id ?: "data-active"}}>{{$category->name}}</a>
-                        @endforeach
+                    @endforeach
                 </div>
             </div>
 

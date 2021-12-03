@@ -14,36 +14,20 @@ window.deleteItem = function (id) {
   setCookies('shoppingCart', shoppingCart);
 };
 
-window.addItem = function (id) {
+window.setItem = function (id) {
   var number = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var shoppingCart = getCookies('shoppingCart');
+  var additional = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", '/api/cart/set', true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-  if (!shoppingCart) {
-    shoppingCart = {};
-  }
+  xhr.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      console.log(xhr.responseText);
+    }
+  };
 
-  if (shoppingCart[id]) {
-    shoppingCart[id] += number;
-  } else {
-    shoppingCart[id] = number;
-  }
-
-  setCookies('shoppingCart', shoppingCart);
-};
-
-window.setItem = function (id, count) {
-  var shoppingCart = getCookies('shoppingCart');
-
-  if (shoppingCart === null) {
-    shoppingCart = {};
-  }
-
-  shoppingCart[id] = count;
-  setCookies('shoppingCart', shoppingCart);
-};
-
-window.getShoppingCart = function () {
-  return getCookies('shoppingCart');
+  xhr.send("id=".concat(id, "&number=").concat(number, "&additional=").concat(additional));
 };
 /******/ })()
 ;

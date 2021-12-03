@@ -19,7 +19,6 @@ class ProdcutsController extends Controller
         $query = $request->has('q') ? $request->q : '';
         $limit = 15;
 
-        $categories = Category::all();
         $category = null;
         $products = null;
         $productsCount = 0;
@@ -51,11 +50,10 @@ class ProdcutsController extends Controller
             return route($route->getName(), $parameters);
         };
 
-        return view('products', ['categories' => $categories, 'products' => $products, 'category' => $category, 'page' => $page, 'query' => $query, 'maxPages' => $maxPages, 'routePage' => $routePage, 'search' => $search]);
+        return view('products', ['products' => $products, 'category' => $category, 'page' => $page, 'query' => $query, 'maxPages' => $maxPages, 'routePage' => $routePage, 'search' => $search]);
     }
 
     public function product(Product $product){
-        $categories = Category::all();
-        return view('product', ['categories' => $categories, 'product' => $product]);
+        return view('product', ['product' => $product]);
     }
 }

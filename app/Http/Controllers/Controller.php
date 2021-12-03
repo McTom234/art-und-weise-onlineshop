@@ -51,7 +51,6 @@ class Controller extends BaseController
     }
 
     public function about(){
-        $categories = Category::all();
-        return view('about' , ['categories' => $categories]);
+        return view('about');
     }
 }

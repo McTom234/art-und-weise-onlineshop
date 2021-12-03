@@ -576,18 +576,21 @@ footer .copyright {
   margin: 20px;
 }
 
+.quantity-input {
+  -moz-column-gap: 0.3em;
+       column-gap: 0.3em;
+  align-items: center;
+}
+
 .quantity-input input {
-  font-size: 16px;
   color: #fff;
   background-color: gray;
   padding: 8px 16px;
   outline: none;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-}
-
-.quantity-input button {
-  margin-top: 20px;
+  font-size: 1em;
+  border-radius: 8px;
 }
 
 .hide {
@@ -633,6 +636,7 @@ footer .copyright {
   left: 0;
   right: 0;
   z-index: 99;
+  display: block;
 }
 
 /* Hide the items when the select box is closed: */
@@ -662,16 +666,19 @@ main section article {
   padding: 1em;
   gap: 1em;
   display: grid;
-  grid-template: repeat(3, auto)/25% auto;
+  grid-template: repeat(3, auto)/300px auto;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1em;
   box-shadow: 0 0 0 #3e4e50;
   transition: box-shadow 300ms ease-in-out;
 }
+main section article.no-figure {
+  grid-template-columns: auto !important;
+}
 @media (max-width: 990px) {
   main section article {
-    grid-template-columns: 20% auto;
+    grid-template-columns: 200px auto;
   }
 }
 @media (max-width: 770px) {
@@ -691,8 +698,9 @@ main section article figure a {
   width: 100%;
 }
 main section article figure a img {
-  width: 100%;
+  width: min(350px, 100%);
   display: block;
+  margin: auto;
 }
 main section article h3 {
   margin: 0;
@@ -716,7 +724,7 @@ main section article div {
 main section article div div.item-control {
   margin: auto;
   gap: 0.5em 1em;
-  justify-content: initial;
+  justify-content: center;
 }
 main section article div div.item-control .quantity-select {
   margin: 0;

@@ -391,18 +391,21 @@ mobile:
   margin: 20px;
 }
 
+.quantity-input {
+  -moz-column-gap: 0.3em;
+       column-gap: 0.3em;
+  align-items: center;
+}
+
 .quantity-input input {
-  font-size: 16px;
   color: #fff;
   background-color: gray;
   padding: 8px 16px;
   outline: none;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-}
-
-.quantity-input button {
-  margin-top: 20px;
+  font-size: 1em;
+  border-radius: 8px;
 }
 
 .hide {
@@ -448,6 +451,7 @@ mobile:
   left: 0;
   right: 0;
   z-index: 99;
+  display: block;
 }
 
 /* Hide the items when the select box is closed: */
@@ -730,6 +734,9 @@ article figure img {
 article > div {
   grid-column: span 5;
 }
+article > div.no-figure {
+  grid-column: span 8;
+}
 article > div h4 {
   margin: 0;
 }
@@ -802,6 +809,9 @@ article aside div {
   }
   article > div {
     grid-column: span 9;
+  }
+  article > div.no-figure {
+    grid-column: span 12;
   }
 }
 @media (max-width: 600px) {
