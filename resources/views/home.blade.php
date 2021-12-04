@@ -38,7 +38,7 @@
             </div>
             <div class="grid-container">
                 @foreach($category->products()->take(3)->get() as $product)
-                    @include('layouts.product')
+                    @include('layouts.product-grid')
                 @endforeach
             </div>
             <a class="link-button more-items" href="{{route('products', ['category_id' => $category->id])}}">Weitere</a>
