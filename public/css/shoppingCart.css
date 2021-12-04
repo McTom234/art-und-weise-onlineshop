@@ -334,7 +334,7 @@ nav {
     padding-inline: 1em !important;
   }
 }
-nav a, nav div.dropdown b {
+nav a, nav div.dropdown b, nav form button {
   text-decoration: none;
   position: relative;
   text-align: center;
@@ -345,7 +345,7 @@ nav a, nav div.dropdown b {
   line-height: 1.2em;
   color: #ffffff;
 }
-nav a::before, nav div.dropdown b::before {
+nav a::before, nav div.dropdown b::before, nav form button::before {
   content: "";
   position: absolute;
   left: 0;
@@ -356,13 +356,13 @@ nav a::before, nav div.dropdown b::before {
   transform: scaleX(0);
   transition: all 150ms ease-in-out;
 }
-nav a:hover, nav div.dropdown b:hover, nav a:focus-visible, nav div.dropdown b:focus-visible {
+nav a:hover, nav div.dropdown b:hover, nav form button:hover, nav a:focus-visible, nav div.dropdown b:focus-visible, nav form button:focus-visible {
   outline: none;
 }
-nav a:hover::before, nav div.dropdown b:hover::before, nav a:focus-visible::before, nav div.dropdown b:focus-visible::before {
+nav a:hover::before, nav div.dropdown b:hover::before, nav form button:hover::before, nav a:focus-visible::before, nav div.dropdown b:focus-visible::before, nav form button:focus-visible::before {
   transform: scaleX(0.8);
 }
-nav a.nav-button-shopping-cart, nav div.dropdown b.nav-button-shopping-cart {
+nav a.nav-button-shopping-cart, nav div.dropdown b.nav-button-shopping-cart, nav form button.nav-button-shopping-cart {
   margin: 10px 10px 10px 14px;
   padding: 4px 6px 4px 6px;
   color: #6c0008ff;
@@ -375,7 +375,7 @@ nav a.nav-button-shopping-cart, nav div.dropdown b.nav-button-shopping-cart {
   line-height: 1.25em;
   text-transform: uppercase;
 }
-nav a.nav-button-shopping-cart::before, nav div.dropdown b.nav-button-shopping-cart::before {
+nav a.nav-button-shopping-cart::before, nav div.dropdown b.nav-button-shopping-cart::before, nav form button.nav-button-shopping-cart::before {
   content: "";
   display: inline-block;
   position: absolute;
@@ -387,15 +387,15 @@ nav a.nav-button-shopping-cart::before, nav div.dropdown b.nav-button-shopping-c
   transform: translateZ(-1px) scaleX(0);
   mix-blend-mode: soft-light;
 }
-nav a.nav-button-shopping-cart::after, nav div.dropdown b.nav-button-shopping-cart::after {
+nav a.nav-button-shopping-cart::after, nav div.dropdown b.nav-button-shopping-cart::after, nav form button.nav-button-shopping-cart::after {
   content: "\f07a";
   font-family: FontAwesome;
   padding-left: 4px;
 }
-nav a.nav-button-shopping-cart:hover::before, nav div.dropdown b.nav-button-shopping-cart:hover::before, nav a.nav-button-shopping-cart:focus-visible::before, nav div.dropdown b.nav-button-shopping-cart:focus-visible::before, nav a.nav-button-shopping-cart[data-active]::before, nav div.dropdown b.nav-button-shopping-cart[data-active]::before {
+nav a.nav-button-shopping-cart:hover::before, nav div.dropdown b.nav-button-shopping-cart:hover::before, nav form button.nav-button-shopping-cart:hover::before, nav a.nav-button-shopping-cart:focus-visible::before, nav div.dropdown b.nav-button-shopping-cart:focus-visible::before, nav form button.nav-button-shopping-cart:focus-visible::before, nav a.nav-button-shopping-cart[data-active]::before, nav div.dropdown b.nav-button-shopping-cart[data-active]::before, nav form button.nav-button-shopping-cart[data-active]::before {
   transform: translateZ(-1px) scaleX(1);
 }
-nav a.nav-button-home, nav div.dropdown b.nav-button-home {
+nav a.nav-button-home, nav div.dropdown b.nav-button-home, nav form button.nav-button-home {
   font-family: Georama;
   font-size: 1em;
   font-weight: 500;
@@ -403,8 +403,12 @@ nav a.nav-button-home, nav div.dropdown b.nav-button-home {
   align-self: center;
   flex-shrink: 0;
 }
-nav a[data-active], nav div.dropdown b[data-active] {
+nav a[data-active], nav div.dropdown b[data-active], nav form button[data-active] {
   text-shadow: 1px 1px 4px white;
+}
+nav form button {
+  text-transform: none;
+  box-shadow: none;
 }
 nav label {
   -webkit-user-select: none;
@@ -457,7 +461,7 @@ nav div.dropdown {
   color: #ffffff;
   z-index: 99;
 }
-nav div.dropdown:hover a::after, nav div.dropdown:hover b::after, nav div.dropdown:focus-within a::after, nav div.dropdown:focus-within b::after {
+nav div.dropdown:hover a::after, nav div.dropdown:hover form button::after, nav form div.dropdown:hover button::after, nav div.dropdown:hover b::after, nav div.dropdown:focus-within a::after, nav div.dropdown:focus-within form button::after, nav form div.dropdown:focus-within button::after, nav div.dropdown:focus-within b::after {
   transform: rotate(-0.5turn);
   padding-left: 0;
   padding-right: 6px;
@@ -465,10 +469,10 @@ nav div.dropdown:hover a::after, nav div.dropdown:hover b::after, nav div.dropdo
 nav div.dropdown:hover .dropdown-content, nav div.dropdown:focus-within .dropdown-content {
   transform: scaleY(1) scaleX(1);
 }
-nav div.dropdown > a::before, nav div.dropdown > b::before {
+nav div.dropdown > a::before, nav form div.dropdown > button::before, nav div.dropdown > b::before {
   content: none;
 }
-nav div.dropdown a::after, nav div.dropdown b::after {
+nav div.dropdown a::after, nav div.dropdown form button::after, nav form div.dropdown button::after, nav div.dropdown b::after {
   display: inline-block;
   content: "\f0d7";
   font-family: FontAwesome;
@@ -492,13 +496,13 @@ nav div.dropdown .dropdown-content {
   width: -moz-max-content;
   width: max-content;
 }
-nav div.dropdown .dropdown-content a, nav div.dropdown .dropdown-content b {
+nav div.dropdown .dropdown-content a, nav div.dropdown .dropdown-content form button, nav form div.dropdown .dropdown-content button, nav div.dropdown .dropdown-content b {
   float: none;
   padding: 8px 16px;
   display: block;
   text-align: left;
 }
-nav div.dropdown .dropdown-content a::after, nav div.dropdown .dropdown-content b::after {
+nav div.dropdown .dropdown-content a::after, nav div.dropdown .dropdown-content form button::after, nav form div.dropdown .dropdown-content button::after, nav div.dropdown .dropdown-content b::after {
   content: none;
 }
 nav div.navbar-container {
@@ -576,18 +580,21 @@ footer .copyright {
   margin: 20px;
 }
 
+.quantity-input {
+  -moz-column-gap: 0.3em;
+       column-gap: 0.3em;
+  align-items: center;
+}
+
 .quantity-input input {
-  font-size: 16px;
   color: #fff;
   background-color: gray;
   padding: 8px 16px;
   outline: none;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-}
-
-.quantity-input button {
-  margin-top: 20px;
+  font-size: 1em;
+  border-radius: 8px;
 }
 
 .hide {
@@ -633,6 +640,7 @@ footer .copyright {
   left: 0;
   right: 0;
   z-index: 99;
+  display: block;
 }
 
 /* Hide the items when the select box is closed: */
@@ -662,16 +670,19 @@ main section article {
   padding: 1em;
   gap: 1em;
   display: grid;
-  grid-template: repeat(3, auto)/25% auto;
+  grid-template: repeat(3, auto)/300px auto;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1em;
   box-shadow: 0 0 0 #3e4e50;
   transition: box-shadow 300ms ease-in-out;
 }
+main section article.no-figure {
+  grid-template-columns: auto !important;
+}
 @media (max-width: 990px) {
   main section article {
-    grid-template-columns: 20% auto;
+    grid-template-columns: 200px auto;
   }
 }
 @media (max-width: 770px) {
@@ -691,8 +702,9 @@ main section article figure a {
   width: 100%;
 }
 main section article figure a img {
-  width: 100%;
+  width: min(350px, 100%);
   display: block;
+  margin: auto;
 }
 main section article h3 {
   margin: 0;
@@ -716,7 +728,7 @@ main section article div {
 main section article div div.item-control {
   margin: auto;
   gap: 0.5em 1em;
-  justify-content: initial;
+  justify-content: center;
 }
 main section article div div.item-control .quantity-select {
   margin: 0;
