@@ -27,8 +27,8 @@ class ProdcutsController extends Controller
         if ($category_id && !$query) {
             $category = Category::query()->find($category_id);
             if ($category) {
-
                 $products = $category->products()->forPage($page, $limit)->get();
+                $productsCount = count($products);
             }
         } else {
             $productsQuery = Product::query()->where('name', 'LIKE', "%{$query}%")->orWhere('description', 'LIKE', "%{$query}%");
@@ -37,6 +37,19 @@ class ProdcutsController extends Controller
         }
 
         $maxPages = ceil($productsCount / $limit);
+
+        if ($page > $maxPages) {
+            $route = $request->route();
+            $parameters = $route->parameters();
+            $parameters['p'] = $maxPages;
+            return redirect()->route($route->getName(), $parameters);
+        }
+        elseif ($page < 1) {
+            $route = $request->route();
+            $parameters = $route->parameters();
+            $parameters['p'] = 1;
+            return redirect()->route($route->getName(), $parameters);
+        }
 
         $routePage = function ($page) use ($request) {
             $route = $request->route();
