@@ -1,4 +1,7 @@
-@php($need_figure = $product->images()->first())
+@php
+    // $need_figure = $product->images()->first()
+    $need_figure = true;
+@endphp
 <article class="{{$need_figure ? '' : 'no-figure'}}">
     @if($need_figure)
         <figure>
@@ -14,8 +17,8 @@
         <a></a>
     </p>
     <div>
-        <div>
-
+        <div class="item-control">
+            <div id="quantitySelect-wrapper"></div>
             <button></button>
         </div>
         <span></span>
