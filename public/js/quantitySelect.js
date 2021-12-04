@@ -16,6 +16,7 @@ window.createQuantitySelect = function (defaultValue, values, maxValue, isLastEx
   dropdown.className = "select-items select-hide";
 
   var _loop = function _loop(i) {
+    if (values[i] === 0) return "continue";
     var element = document.createElement("div");
 
     if (isLastExtends && i >= values.length - 1) {
@@ -28,12 +29,7 @@ window.createQuantitySelect = function (defaultValue, values, maxValue, isLastEx
       return "continue";
     }
 
-    if (values[i] === 0) {
-      element.textContent = values[i] + " (Löschen)";
-    } else {
-      element.textContent = values[i];
-    }
-
+    element.textContent = values[i];
     element.addEventListener('click', function () {
       onSelect(values[i]);
       defaultElement.textContent = "Menge: " + this.textContent;

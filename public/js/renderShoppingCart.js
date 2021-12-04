@@ -54,20 +54,29 @@ function renderShoppingCart() {
                         delete button
                     price
              */
-            // create <a/> instance
+            // check figure creation
+
+            var image = true;
+            if (!item.images.length > 0) image = false; // create <a/> instance
 
             var aPreset = document.createElement('a');
             aPreset.setAttribute('href', './show?id=' + product_ID);
             aPreset.className = "no-text-decoration article-image"; // create parent of product <article/>
 
-            var article = document.createElement('article'); // create figure for image
+            var article = document.createElement('article');
+            if (!image) article.className = "no-figure"; // create figure for image
 
-            var figure = document.createElement('figure');
-            var figureLink = aPreset.cloneNode(false);
-            var figureImg = document.createElement('img'); //figureImg.setAttribute('src', item.images[0].base64);
+            var figure = null;
 
-            figureLink.appendChild(figureImg);
-            figure.appendChild(figureLink); // create h3 item title
+            if (image) {
+              figure = document.createElement('figure');
+              var figureLink = aPreset.cloneNode(false);
+              var figureImg = document.createElement('img');
+              figureImg.setAttribute('src', item.images[0].base64);
+              figureLink.appendChild(figureImg);
+              figure.appendChild(figureLink);
+            } // create h3 item title
+
 
             var title = document.createElement('h3');
             var titleLink = aPreset.cloneNode(false);
@@ -110,7 +119,7 @@ function renderShoppingCart() {
             price.textContent = (item.price * count).toFixed(2).replace(".", ",");
             flexContainer.appendChild(controls);
             flexContainer.appendChild(price);
-            article.appendChild(figure);
+            if (image) article.appendChild(figure);
             article.appendChild(title);
             article.appendChild(description);
             article.appendChild(flexContainer);
