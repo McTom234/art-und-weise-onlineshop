@@ -1,3 +1,9 @@
+@php
+    if(!isset($categories)){
+        $categories = \App\Models\Category::all();
+    }
+@endphp
+
 <nav id="navbar">
     <a class="nav-button-home" href="/" {{$index != "home" ?: "data-active"}}>Art und Weise</a>
 
