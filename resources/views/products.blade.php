@@ -22,7 +22,7 @@
     @if(count($products) > 0)
         <div class="grid-container">
             @foreach($products as $product)
-                @include('layouts.product')
+                @include('layouts.product-grid')
             @endforeach
         </div>
     @else

@@ -99,6 +99,12 @@ nav {
 
   } // a
 
+  form button {
+      @extend a;
+      text-transform: none;
+      box-shadow: none;
+  }
+
   label {
     user-select: none;
     align-items: center;

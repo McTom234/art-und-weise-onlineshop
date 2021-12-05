@@ -1,9 +1,3 @@
-@php
-    if(!isset($categories)){
-        $categories = \App\Models\Category::all();
-    }
-@endphp
-
 <nav id="navbar">
     <a class="nav-button-home" href="/" {{$index != "home" ?: "data-active"}}>Art und Weise</a>
 
@@ -13,14 +7,15 @@
     <div class="navbar-container">
         <div>
             <div class="dropdown">
-                <a {{$index != "products" ?: "data-active"}} data-screenFull>Produkte</a>
+                <b {{$index != "products" ?: "data-active"}} data-responsive>Produkte</b>
+                <a href="{{url("/products")}}" {{$index != "products" ?: "data-active"}} data-screenFull>Produkte</a>
 
                 <div class="dropdown-content">
-                    <a {{$index != "products" ?: "data-active"}} data-responsive>
-                        <a href="{{url("/products")}}">Alle Produkte</a>
                         @foreach ($categories as $category)
                             <a href="{{url("/products/{$category->id}")}}" {{$index != $category->id ?: "data-active"}}>{{$category->name}}</a>
-                    @endforeach
+                        @endforeach
+
+                        <a href="{{url("/products")}}" {{$index != "products" ?: "data-active"}} data-responsive>Alle Produkte</a>
                 </div>
             </div>
 

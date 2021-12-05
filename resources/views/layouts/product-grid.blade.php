@@ -1,6 +1,8 @@
 <article class="grid-column--4">
     <a class="no-text-decoration" href="{{url("/product/{$product->id}")}}">
-        <figure style="background-image: url('{{$product->images()->first()->base64}}')"></figure>
+        <figure @if ($product->images()->first())
+                    style="background-image: url('{{$product->images()->first()->base64}}')"
+                @endif></figure>
     </a>
 
     <h4>
