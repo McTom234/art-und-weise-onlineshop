@@ -2,6 +2,13 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <script>
+        const url = window.location.href.split('#');
+        while (url.length >= 2 && url[url.length-1] !== "") {
+            url.pop();
+            window.location.href = url.join();
+        }
+    </script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -35,6 +42,7 @@
 
 <main>
     <article>
+{{--        TODO: no image could be possible --}}
         <figure>
             <img src="{{$product->images()->first()->base64}}" class="item_image" alt="{{$product->name}}"/>
         </figure>
@@ -49,13 +57,15 @@
 
         <aside>
             @if ($product->discount > 0)
-                <span>{{$product->getDiscountPriceEuro()}}</span>
+                <span>{{str_replace('.', ',', $product->getDiscountPriceEuro())}}</span>
+                <span>{{str_replace('.', ',', $product->getPriceEuro())}}</span>
+            @else
+                <span style="grid-column: 2;">{{str_replace('.', ',', $product->getPriceEuro())}}</span>
             @endif
-            <span>{{$product->getPriceEuro()}}</span>
             <a href="#popup" id="addToCartButton" class="link-button">In den Einkaufswagen</a>
             <button class="inactive" id="buyButton">Jetzt kaufen</button>
             <div id="quantitySelect-wrapper"></div>
-            <div id="total-price"></div>
+            <p id="price">{{str_replace(".", ",", round($product->getDiscountPriceEuro(), 2))}}</p>
         </aside>
     </article>
 </main>
@@ -72,7 +82,7 @@
     let currentValue = 1;
     document.getElementById('quantitySelect-wrapper').appendChild(
         createQuantitySelect(currentValue, values, 100, true, function (number) {
-            let price = document.getElementById('total-price');
+            let price = document.getElementById('price');
             price.textContent = ({{$product->getDiscountPriceEuro()}} * number).toFixed(2).toString().replace(".", ",");
             currentValue = number;
         })
@@ -91,6 +101,8 @@
         let result = document.getElementById('popup-result');
         result.textContent = (currentValue * {{$product->getDiscountPriceEuro()}}).toFixed(2).toString().replace(".", ",");
     }
+
+    // TODO: implement buy button
 </script>
 </body>
 
