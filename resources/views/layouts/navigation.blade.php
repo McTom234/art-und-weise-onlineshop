@@ -40,8 +40,21 @@
                 <a href="{{url('/login')}}" {{$index != "login" ?: "data-active"}}>Anmelden</a>
                 <a href="{{url('/register')}}" {{$index != "register" ?: "data-active"}}>Registrieren</a>
             @endguest
+
+            @php
+                $cartCount = 0;
+                if (isset($_COOKIE['cart'])) {
+                    $cart = json_decode($_COOKIE['cart'], true);
+                    foreach ($cart as $product_id => $number) {
+                        $cartCount += $number;
+                    }
+                    $cartCount = ' '.$cartCount;
+                } else {
+                    $cartCount = '';
+                }
+            @endphp
             <a class="nav-button-shopping-cart"
-               href="{{route('cart')}}" {{$index != "cart" ?: "data-active"}}>Warenkorb {{0}}</a>
+               href="{{route('cart')}}" {{$index != "cart" ?: "data-active"}}>Warenkorb{{$cartCount}}</a>
         </div>
     </div>
 </nav>
