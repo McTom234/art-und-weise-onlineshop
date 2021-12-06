@@ -57,15 +57,15 @@
 
         <aside>
             @if ($product->discount > 0)
-                <span>{{str_replace('.', ',', $product->getDiscountPriceEuro())}}</span>
-                <span>{{str_replace('.', ',', $product->getPriceEuro())}}</span>
+                <span>{{number_format($product->getDiscountPriceEuro(), 2, ',', '.')}}</span>
+                <span>{{number_format($product->getPriceEuro(), 2, ',', '.')}}</span>
             @else
-                <span style="grid-column: 2;">{{str_replace('.', ',', $product->getPriceEuro())}}</span>
+                <span style="grid-column: 2;">{{number_format($product->getPriceEuro(), 2, ',', '.')}}</span>
             @endif
             <a href="#popup" id="addToCartButton" class="link-button">In den Einkaufswagen</a>
             <button class="inactive" id="buyButton">Jetzt kaufen</button>
             <div id="quantitySelect-wrapper"></div>
-            <p id="price">{{str_replace(".", ",", round($product->getDiscountPriceEuro(), 2))}}</p>
+            <p id="price">{{number_format($product->getDiscountPriceEuro(), 2, ',', '.')}}</p>
         </aside>
     </article>
 </main>

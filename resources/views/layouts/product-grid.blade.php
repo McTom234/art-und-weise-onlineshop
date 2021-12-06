@@ -15,9 +15,9 @@
 
     <div class="price">
         @if ($product->discount > 0)
-            <span>{{$product->getDiscountPriceEuro()}}</span>
+            <span>{{number_format($product->getDiscountPriceEuro(), 2, ',', '.')}}</span>
         @endif
-        <span>{{$product->getPriceEuro()}}</span>
+        <span>{{number_format($product->getPriceEuro(), 2, ',', '.')}}</span>
         <a href="{{url("/product/{$product->id}")}}" class="link-button">Jetzt Bestellen</a>
     </div>
 </article>
