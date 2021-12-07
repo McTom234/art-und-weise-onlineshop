@@ -51,7 +51,7 @@ class CartController extends Controller
             $cart[$product_id] = $product_number;
         }
 
-        if ($cart[$product_id] < 1) unset($cart[$product_id]);
+        for ($i = 0; $i < count($cart); $i++) if (array_values($cart)[$i] <= 0) array_splice($cart, $i, 1);
 
         $response = new Response('Cart successfully updated!');
         $response->withCookie(cookie()->forever('cart', json_encode($cart)));
