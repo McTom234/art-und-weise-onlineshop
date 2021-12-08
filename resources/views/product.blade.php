@@ -72,7 +72,6 @@
 
 @include('layouts.footer')
 
-<script src="{{asset('js/cookies.js')}}"></script>
 <script src="{{asset('js/shoppingCart.js')}}"></script>
 <script src="{{asset('js/quantitySelect.js')}}"></script>
 <script>
@@ -88,8 +87,8 @@
         })
     );
 
-    document.getElementById('addToCartButton').addEventListener('click', function () {
-        setItem("{{$product->id}}", currentValue)
+    document.getElementById('addToCartButton').addEventListener('click', async function () {
+        await setItem("{{$product->id}}", currentValue)
         openPopup();
     });
 
