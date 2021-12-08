@@ -51,8 +51,7 @@ class CartController extends Controller
             $cart[$product_id] = $product_number;
         }
 
-
-        $response = new Response('Cart successfully updated!');
+        $response = new Response(json_encode($cart));
         $response->withCookie(cookie()->forever('cart', json_encode($cart)));
         return $response;
     }
