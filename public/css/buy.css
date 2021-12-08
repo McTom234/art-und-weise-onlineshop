@@ -449,6 +449,15 @@ nav div span {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+nav div span#navbar-cart-counter {
+  color: #6c0008ff;
+  font-family: Georama;
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 1.2em;
+  line-height: 1em;
+  font-size: 1em;
+}
 nav div.dropdown {
   position: relative;
   display: inline-block;

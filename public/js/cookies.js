@@ -7,14 +7,6 @@
   \*********************************/
 /***/ (() => {
 
-window.setCookies = function (cookieName, cookieObject) {
-  var expireDays = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 30;
-  var cookieString = JSON.stringify(cookieObject);
-  var day = new Date();
-  day.setTime(day.getTime() + expireDays * 24 * 60 * 60 * 1000);
-  document.cookie = "".concat(cookieName, "=").concat(cookieString, "; expires=").concat(day, "; path=/;");
-};
-
 window.getCookies = function (cookieName) {
   var name = cookieName + '=';
   var decodedCookie = decodeURIComponent(document.cookie);
