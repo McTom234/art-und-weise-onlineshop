@@ -2,13 +2,6 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <script>
-        const url = window.location.href.split('#');
-        while (url.length >= 2 && url[url.length-1] !== "") {
-            url.pop();
-            window.location.href = url.join();
-        }
-    </script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -75,6 +68,7 @@
 <script src="{{asset('js/shoppingCart.js')}}"></script>
 <script src="{{asset('js/quantitySelect.js')}}"></script>
 <script>
+    // todo include dynamic navbar counter changes
     const values = [
         1, 2, 3, 4, 5
     ]

@@ -27,6 +27,7 @@
 <script src="{{asset('js/shoppingCart.js')}}"></script>
 <script src="{{asset('js/quantitySelect.js')}}"></script>
 <script>
+    // todo exclude
     const wrappers = document.getElementsByTagName("quantity");
     const priceTags = document.getElementsByTagName("price");
     for (let i = 0; i < wrappers.length; i++) {
