@@ -17,7 +17,7 @@ class Privacy {
             }
             if (c.indexOf(cName) === 0) {
                 try {
-                    const oldExpire = new Date(c.substring(name.length, c.length));
+                    const oldExpire = new Date(Number(c.substring(cName.length, c.length)));
                     if (oldExpire.getTime() >= new Date().getTime()) return true;
                 } catch (e) {
                 }
