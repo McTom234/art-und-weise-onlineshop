@@ -53,8 +53,7 @@
                     $cartCount = '';
                 }
             @endphp
-            <a class="nav-button-shopping-cart"
-               href="{{route('cart')}}" {{$index != "cart" ?: "data-active"}}>Warenkorb{{$cartCount}}</a>
+            <a class="nav-button-shopping-cart" href="{{route('cart')}}" {{$index != "cart" ?: "data-active"}}>Warenkorb<span id="navbar-cart-counter">{{$cartCount}}</span></a>
         </div>
     </div>
 </nav>

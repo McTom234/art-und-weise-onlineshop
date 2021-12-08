@@ -142,6 +142,19 @@ nav {
       flex-shrink: 1 !important;
       overflow: hidden;
       text-overflow: ellipsis;
+
+        &#navbar-cart-counter {
+            color: a.$navbar-color;
+            @include a.font-style(
+                    map-get(a.$font-style-headline6, "font-family"),
+                    map-get(a.$font-style-body2, "font-size"),
+                    map-get(a.$font-style-headline4, "font-weight"),
+                    map-get(a.$font-style-body2, "line-height"),
+                    false
+            );
+            line-height: 1em;
+            font-size: 1em;
+        }
     }
 
     &.dropdown {
