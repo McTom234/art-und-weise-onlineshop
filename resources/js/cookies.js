@@ -1,13 +1,3 @@
-window.setCookies = function (cookieName, cookieObject, expireDays = 30) {
-
-    let cookieString = JSON.stringify(cookieObject);
-
-    let day = new Date();
-    day.setTime(day.getTime() + (expireDays * 24 * 60 * 60 * 1000));
-
-    document.cookie = `${cookieName}=${cookieString}; expires=${day}; path=/;`
-}
-
 window.getCookies = function (cookieName) {
     const name = cookieName + '=';
     const decodedCookie = decodeURIComponent(document.cookie);

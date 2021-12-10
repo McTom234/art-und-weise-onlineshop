@@ -1,0 +1,30 @@
+@use "../abstracts";
+
+div#cookie-privacy-claimer {
+    display: flex;
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: yellow;
+    color: black;
+    padding: 1em;
+    z-index: 9999;
+    overflow: hidden;
+    gap: .5em;
+    align-items: center;
+    transition: all 125ms ease-in-out;
+
+    &.visible {
+        bottom: 0;
+    }
+
+    p {
+        margin: 0;
+        flex-grow: 1;
+    }
+
+    a {
+        color: white;
+    }
+}

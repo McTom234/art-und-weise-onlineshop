@@ -46,5 +46,6 @@
     @endforeach
 </main>
 @include('layouts.footer')
+@include('layouts.cookie-hint')
 </body>
 </html>

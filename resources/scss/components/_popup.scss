@@ -54,6 +54,12 @@
         margin: 0;
         @include a.font(a.$font-style-body2);
       }
+        &.list {
+            display: block;
+            p {
+                margin: 1em;
+            }
+        }
     }
 
     .popup-bottom {

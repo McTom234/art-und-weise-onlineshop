@@ -1,4 +1,5 @@
 @use "../abstracts" as a;
+@use "../components/popup";
 
 footer {
   padding: 2em 10vw 1em;
@@ -8,9 +9,12 @@ footer {
   position: sticky;
   top: 100vh;
   user-select: none;
+  display: flex;
+  flex-direction: row-reverse;
+    gap: 2em;
 
   .copyright {
-    display: flex;
-    flex-direction: row-reverse;
+      flex-grow: 1;
+      text-align: end;
   }
 }

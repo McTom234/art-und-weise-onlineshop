@@ -27,18 +27,40 @@
 <script src="{{asset('js/shoppingCart.js')}}"></script>
 <script src="{{asset('js/quantitySelect.js')}}"></script>
 <script>
+    // todo exclude
     const wrappers = document.getElementsByTagName("quantity");
+    const priceTags = document.getElementsByTagName("price");
     for (let i = 0; i < wrappers.length; i++) {
         const wrapper = wrappers.item(i);
         wrapper.append(
-            createQuantitySelect(wrapper.attributes.getNamedItem("data-number").nodeValue, [1, 2, 3, 4, 5], 100, true, function (number) {
-                {{--todo total price span with custom tag and data- attributes--}}
-                {{--let price = document.getElementById('total-price');--}}
-                {{--price.textContent = ({{$product->getDiscountPriceEuro()}} * number).toFixed(2).toString().replace(".", ",");--}}
-                // todo add shopping cart button as custom tag and modify value
-                setItem(wrapper.attributes.getNamedItem("data-id").nodeValue, number, 0)
+            createQuantitySelect(wrapper.attributes.getNamedItem("data-number").nodeValue, [1, 2, 3, 4, 5], 100, true, async function (number) {
+                // todo total price span with custom tag and data- attributes
+                const priceTag = getPriceTag(wrapper.attributes.getNamedItem("data-id").nodeValue);
+                priceTag.textContent = (priceTag.attributes.getNamedItem("data-base-price").nodeValue * number).toFixed(2).toString().replace(".", ",");
+
+                await setItem(wrapper.attributes.getNamedItem("data-id").nodeValue, number, 0).then(value => {
+                    const cart = JSON.parse(value);
+                    // navbar
+                    let count = 0;
+                    for (const cartObject in cart) {
+                        count += Number(cart[cartObject]);
+                    }
+                    setCartCount(count);
+                });
             })
         );
+    }
+
+    function getPriceTag(id) {
+        for (let i = 0; i < priceTags.length; i++) {
+            if (priceTags.item(i).attributes.getNamedItem("data-id").nodeValue === id) return priceTags.item(i);
+        }
+    }
+
+    function setCartCount(count) {
+        if (count > 0) count = ' '+count;
+        else count = '';
+        document.getElementById('navbar-cart-counter').innerHTML = count;
     }
 </script>
 </body>
