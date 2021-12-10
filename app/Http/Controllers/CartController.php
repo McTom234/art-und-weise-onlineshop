@@ -51,8 +51,11 @@ class CartController extends Controller
             $cart[$product_id] = $product_number;
         }
 
-        $response = new Response(json_encode($cart));
+        for ($i = 0; $i < count($cart); $i++) if (array_values($cart)[$i] <= 0) array_splice($cart, $i, 1);
+      
+        $response = new Response(json_encode($cart));      
         $response->withCookie(cookie()->forever('cart', json_encode($cart)));
+      
         return $response;
     }
 }
