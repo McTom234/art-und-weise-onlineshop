@@ -59,6 +59,7 @@
             <button class="inactive" id="buyButton">Jetzt kaufen</button>
             <div id="quantitySelect-wrapper"></div>
             <p id="price">{{number_format($product->getDiscountPriceEuro(), 2, ',', '.')}}</p>
+            <i>zzgl. Versandkosten</i>
         </aside>
     </article>
 </main>

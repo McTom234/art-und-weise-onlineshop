@@ -105,6 +105,22 @@ article {
       grid-column: 1;
     }
 
+      i {
+          grid-column: 2;
+          margin: auto;
+          @include abstracts.font(abstracts.$font-style-subtitle1);
+          line-height: 1em;
+
+          @include abstracts.breakpoint(xxl) {
+              grid-column: span 2;
+              text-align: end;
+              margin-right: 1em;
+          }
+          @include abstracts.breakpoint(lg) {
+              margin: auto;
+          }
+      }
+
   } // aside
 
   @include abstracts.breakpoint(lg) {
