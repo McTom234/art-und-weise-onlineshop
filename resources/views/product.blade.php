@@ -35,12 +35,16 @@
 
 <main>
     <article>
-{{--        TODO: no image could be possible --}}
-        <figure>
-            <img src="{{$product->images()->first()->base64}}" class="item_image" alt="{{$product->name}}"/>
-        </figure>
+        @if($product->images()->first())
+            <figure>
+                <img src="{{$product->images()->first()->base64}}" class="item_image" alt="{{$product->name}}"/>
+            </figure>
 
-        <div>
+            <div>
+        @else
+            <div class="no-figure">
+        @endif
+
             <h4>{{$product->name}}</h4>
             @foreach($product->categories()->get() as $category)
                 <p><a href="{{url("products/{$category->id}")}}">{{$category->name}}</a></p>
