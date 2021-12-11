@@ -47,7 +47,7 @@ class Controller extends BaseController
         } **/
 
         $categories = Category::all();
-        return view('home' , ['categories' => $categories]);
+        return view('home' , ['categories' => $categories, 'popular' => Product::getPopularProducts()]);
     }
 
     public function about(){

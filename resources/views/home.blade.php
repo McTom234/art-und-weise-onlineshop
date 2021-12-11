@@ -26,8 +26,11 @@
             <h3>Beliebte Produkte</h3>
             <p>Eine Auswahl unserer beliebtesten Produkte aus unserem Onlineshop.</p>
         </div>
-
-        <a class="link-button more-items" href="/products">Weitere</a>
+        <div class="grid-container">
+            @foreach($popular as $product)
+                @include('layouts.product-grid')
+            @endforeach
+        </div>
     </section>
 
     @foreach($categories as $category)

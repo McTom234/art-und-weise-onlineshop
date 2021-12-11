@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -34,5 +34,15 @@ class Product extends Model
         if (strlen($this->description) > $charsLimit)
             return substr($this->description, 0, strrpos(substr($this->description, 0, $charsLimit), " ")).'...';
         else return $this->description;
+    }
+
+    static function getPopularProducts() {
+        // todo rewrite from raw to methode select
+        $dbRequest = DB::select('SELECT p.id, (SELECT SUM(o.quantity) from orders o where o.product_id = p.id) as count from products p order by count desc, p.created_at limit 3;');
+        $result = [];
+        foreach ($dbRequest as $item) {
+            array_push($result, Product::all()->where('id', $item->id)->first());
+        }
+        return $result;
     }
 }
