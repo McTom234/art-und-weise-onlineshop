@@ -51,8 +51,6 @@ if (env('DB2_HOST') !== null) {
     $DBs = array_combine(['mysql', 'mysql2'], $DBs);
 }
 
-var_dump($DBs);
-
 return [
 
     /*
