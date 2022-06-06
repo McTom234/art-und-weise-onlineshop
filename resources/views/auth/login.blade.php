@@ -17,7 +17,7 @@
         @csrf
         <h2>Anmeldung</h2>
 
-        <input id="email" type="email" name="email" required/>
+        <input id="email" type="email" name="email" value="{{ old('email') }}" required/>
         <label for="email">E-Mail</label>
 
         <input id="password" type="password" name="password" required/>

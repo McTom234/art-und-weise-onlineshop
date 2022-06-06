@@ -18,39 +18,39 @@
         <h2>Registrierung</h2>
         <fieldset>
             <div>
-                <input id="forename" type="text" class="form_input" name="forename" required/>
+                <input id="forename" type="text" class="form_input" name="forename" value="{{ old('forename') }}" required/>
                 <label for="forename">Vorname</label>
             </div>
 
             <div>
-                <input id="surname" type="text" class="form_input" name="surname" required/>
+                <input id="surname" type="text" class="form_input" name="surname" value="{{ old('surname') }}" required/>
                 <label for="surname">Nachname</label>
             </div>
         </fieldset>
 
         <fieldset>
             <div>
-                <input id="street" type="text" class="form_input" name="street" required/>
+                <input id="street" type="text" class="form_input" name="street" value="{{ old('street') }}" required/>
                 <label for="street">Straße</label>
             </div>
 
             <div>
-                <input id="street_number" type="text" class="form_input" name="street_number" required/>
+                <input id="street_number" type="text" class="form_input" name="street_number" value="{{ old('street_number') }}" required/>
                 <label for="street_number">Nummer</label>
             </div>
 
             <div>
-                <input id="postcode" type="text" class="form_input" name="postcode" required/>
+                <input id="postcode" type="text" class="form_input" name="postcode" value="{{ old('postcode') }}" required/>
                 <label for="postcode">PLZ</label>
             </div>
 
             <div>
-                <input id="city" type="text" class="form_input" name="city" required/>
+                <input id="city" type="text" class="form_input" name="city" value="{{ old('city') }}" required/>
                 <label for="city">Stadt</label>
             </div>
         </fieldset>
 
-        <input id="email" type="email" class="form_input" name="email" required/>
+        <input id="email" type="email" class="form_input" name="email" value="{{ old('email') }}" required/>
         <label for="email">E-Mail</label>
 
         <input id="password" type="password" class="form_input" name="password" autocomplete="new-password" required/>
