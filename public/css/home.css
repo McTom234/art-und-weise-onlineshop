@@ -91,7 +91,7 @@ body {
   line-height: 1.25em;
   text-transform: uppercase;
   border-radius: 8px;
-  padding: 8px;
+  padding: 0.5em;
   border: none;
   cursor: pointer;
   box-shadow: 0 0 0 #415d43;
@@ -186,31 +186,24 @@ mobile:
   .grid-column--2 {
     grid-column: span 3;
   }
-
   .grid-column--3 {
     grid-column: span 4;
   }
-
   .grid-column--4 {
     grid-column: span 6;
   }
-
   .grid-column--6 {
     grid-column: span 12;
   }
-
   .grid-column--8 {
     grid-column: span 12;
   }
-
   .grid-column--9 {
     grid-column: span 12;
   }
-
   .grid-column--10 {
     grid-column: span 12;
   }
-
   .grid-column--12 {
     grid-column: span 12;
   }
@@ -219,31 +212,24 @@ mobile:
   .grid-column--2 {
     grid-column: span 3;
   }
-
   .grid-column--3 {
     grid-column: span 4;
   }
-
   .grid-column--4 {
     grid-column: span 6;
   }
-
   .grid-column--6 {
     grid-column: span 12;
   }
-
   .grid-column--8 {
     grid-column: span 12;
   }
-
   .grid-column--9 {
     grid-column: span 12;
   }
-
   .grid-column--10 {
     grid-column: span 12;
   }
-
   .grid-column--12 {
     grid-column: span 12;
   }
@@ -252,31 +238,24 @@ mobile:
   .grid-column--2 {
     grid-column: span 3;
   }
-
   .grid-column--3 {
     grid-column: span 4;
   }
-
   .grid-column--4 {
     grid-column: span 6;
   }
-
   .grid-column--6 {
     grid-column: span 12;
   }
-
   .grid-column--8 {
     grid-column: span 12;
   }
-
   .grid-column--9 {
     grid-column: span 12;
   }
-
   .grid-column--10 {
     grid-column: span 12;
   }
-
   .grid-column--12 {
     grid-column: span 12;
   }
@@ -285,37 +264,30 @@ mobile:
   .grid-column--2 {
     grid-column: span 12;
   }
-
   .grid-column--3 {
     grid-column: span 12;
   }
-
   .grid-column--4 {
     grid-column: span 12;
   }
-
   .grid-column--6 {
     grid-column: span 12;
   }
-
   .grid-column--8 {
     grid-column: span 12;
   }
-
   .grid-column--9 {
     grid-column: span 12;
   }
-
   .grid-column--10 {
     grid-column: span 12;
   }
-
   .grid-column--12 {
     grid-column: span 12;
   }
 }
 nav {
-  background-color: #6c0008ff;
+  background-color: #6c0008;
   padding-inline: 10vw;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -365,7 +337,7 @@ nav a:hover::before, nav div.dropdown b:hover::before, nav form button:hover::be
 nav a.nav-button-shopping-cart, nav div.dropdown b.nav-button-shopping-cart, nav form button.nav-button-shopping-cart {
   margin: 10px 10px 10px 14px;
   padding: 4px 6px 4px 6px;
-  color: #6c0008ff;
+  color: #6c0008;
   background: #ffffff;
   border-radius: 8px;
   transform-style: preserve-3d;
@@ -426,7 +398,7 @@ nav input, nav label {
 nav div {
   display: flex;
   align-items: center;
-  background-color: #6c0008ff;
+  background-color: #6c0008;
 }
 nav div [data-responsive] {
   display: none !important;
@@ -451,11 +423,9 @@ nav div span {
   text-overflow: ellipsis;
 }
 nav div span#navbar-cart-counter {
-  color: #6c0008ff;
+  color: #6c0008;
   font-family: Georama;
-  font-size: 1em;
   font-weight: 500;
-  line-height: 1.2em;
   line-height: 1em;
   font-size: 1em;
 }
@@ -496,7 +466,7 @@ nav div.dropdown .dropdown-content {
   margin-top: 14px;
   padding-bottom: 6px;
   position: absolute;
-  background-color: #6c0008ff;
+  background-color: #6c0008;
   min-width: 160px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   transform: scaleY(0) scaleX(0);
@@ -594,9 +564,7 @@ nav .align-right {
   margin: 1em 0.25em 0;
   text-align: center;
   font-family: Montserrat;
-  font-size: 1em;
   font-weight: 400;
-  line-height: 1.2em;
   font-size: 1.25em;
   line-height: 1.5em;
 }
@@ -852,7 +820,7 @@ section .link-button, section header a, header section a, section button {
   line-height: 1.25em;
   text-transform: uppercase;
   border-radius: 8px;
-  padding: 8px;
+  padding: 0.5em;
   border: none;
   cursor: pointer;
   box-shadow: 0 0 0 #415d43;
@@ -1071,10 +1039,22 @@ section article .price {
   position: sticky;
   top: 100%;
 }
-section article .price span {
-  float: left;
+section article .price i {
+  grid-column: 2;
   font-family: Georama;
   font-size: 1em;
+  font-weight: 500;
+  line-height: 1em;
+  align-self: center;
+  text-align: end;
+}
+section article .price i.stock {
+  color: #6c0008;
+  text-decoration: underline;
+  border-radius: 0.3em;
+}
+section article .price span {
+  font-family: Georama;
   font-weight: 500;
   line-height: 1.25em;
   font-size: 1.75em;
@@ -1092,13 +1072,13 @@ section article .price span:nth-of-type(2) {
   font-weight: 300;
 }
 section article .price .link-button, section article .price header a, header section article .price a {
-  line-height: calc(16px + 0.8em);
   text-align: center;
   grid-column: 2;
   grid-row: 2;
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
+  align-self: center;
 }
 section .more-items {
   display: inline-flex;

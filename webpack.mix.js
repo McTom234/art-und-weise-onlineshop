@@ -28,5 +28,5 @@ mix.js('resources/js/cookies.js', 'public/js')
         postCss: [ require('tailwindcss')('./tailwind.config.js') ]
     })
     .version()
-    .browserSync('localhost:8001')
+    .browserSync('localhost:8000')
     .disableSuccessNotifications();
