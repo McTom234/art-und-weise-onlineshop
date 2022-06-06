@@ -24,3 +24,9 @@ mix.js('resources/js/cookies.js', 'public/js')
     .sass('resources/scss/ordered.scss', 'public/css')
     .sass('resources/scss/shoppingCart.scss', 'public/css')
     .sass('resources/scss/showProduct.scss', 'public/css')
+    .options({
+        postCss: [ require('tailwindcss')('./tailwind.config.js') ]
+    })
+    .version()
+    .browserSync('localhost:8001')
+    .disableSuccessNotifications();
