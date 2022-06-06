@@ -1,4 +1,28 @@
 {
+    "name": "art-und-weise_website",
+    "repository": {
+        "url": "https://github.com/Humboldt-Gymnasium-Potsdam/art-und-weise_website"
+    },
+    "contributors": [
+        {
+            "name": "McTom234",
+            "url": "https://github.com/McTom234"
+        },
+        {
+            "name": "j0bIT",
+            "url": "https://github.com/j0bIT"
+        }
+    ],
+    "maintainers": [
+        {
+            "name": "McTom234",
+            "url": "https://github.com/McTom234"
+        },
+        {
+            "name": "j0bIT",
+            "url": "https://github.com/j0bIT"
+        }
+    ],
     "private": true,
     "scripts": {
         "dev": "npm run development",
