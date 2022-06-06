@@ -15,7 +15,8 @@
         "laravel/framework": "^v9.0",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "ext-json": "*"
+        "ext-json": "*",
+      "ext-pdo": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

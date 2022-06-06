@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 
 $DBs = [
-    [
+    'mysql' => [
         'driver' => 'mysql',
         'url' => env('DATABASE_URL'),
         'host' => env('DB_HOST', '127.0.0.1'),
@@ -24,11 +24,9 @@ $DBs = [
     ]
 ];
 
-$DBs = array_combine(['mysql'], $DBs);
-
 if (env('DB2_HOST') !== null) {
     $DBs = array_merge($DBs, [
-        [
+        'mysql2' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB2_HOST', '127.0.0.1'),
@@ -48,7 +46,6 @@ if (env('DB2_HOST') !== null) {
             ]) : [],
         ]
     ]);
-    $DBs = array_combine(['mysql', 'mysql2'], $DBs);
 }
 
 return [
