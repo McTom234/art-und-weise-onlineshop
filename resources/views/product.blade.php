@@ -63,7 +63,14 @@
             <button class="inactive" id="buyButton">Jetzt kaufen</button>
             <div id="quantitySelect-wrapper"></div>
             <p id="price">{{number_format($product->getDiscountPriceEuro(), 2, ',', '.')}}</p>
-            <i>zzgl. Versandkosten</i>
+            <div class="supplement">
+                @if ($product->contingent <= 0)
+                    <i class="stock">nicht verfügbar</i>
+                @else
+                    <i>noch {{$product->contingent}} verfügbar</i>
+                @endif
+                <i>zzgl. Versandkosten</i>
+            </div>
         </aside>
     </article>
 </main>

@@ -57,7 +57,7 @@ body{
     color: vars.$white;
     @include mixins.font(vars.$font-style-button);
     border-radius: vars.$border-radius;
-    padding: 8px;
+    padding: .5em;
     border: none;
     cursor: pointer;
     box-shadow: 0 0 0 vars.$hunter-green;
