@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Member whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Member whereUserId($value)
  * @mixin \Eloquent
+ * @method static \Database\Factories\MemberFactory factory(...$parameters)
  */
 class Member extends Model
 {

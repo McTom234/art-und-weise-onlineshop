@@ -2,6 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Checkout;
+use App\Models\Image;
+use App\Models\Location;
+use App\Models\Member;
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +21,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(3)->create();
+        Image::factory()->count(5)->create();
+        Location::factory()->count(5)->create();
+        User::factory()->count(5)->create();
+        Member::factory()->count(3)->create();
+        Category::factory()->count(4)->create();
+        Product::factory()->count(10)->create();
+        Order::factory()->count(15)->create();
+        Checkout::factory()->count(5)->create();
     }
 }

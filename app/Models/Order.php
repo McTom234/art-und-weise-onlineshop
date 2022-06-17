@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereQuantity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Database\Factories\OrderFactory factory(...$parameters)
  */
 class Order extends Model
 {

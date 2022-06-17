@@ -28,7 +28,6 @@ class CheckoutFactory extends Factory
         $aUsers = User::all(['id']);
         $user_id = $aUsers->all()[random_int(0, $aUsers->count()-1)];
         return [
-            'name' => $this->faker->name(),
             'user_id' => $user_id
         ];
     }

@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Image whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Image whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Database\Factories\ImageFactory factory(...$parameters)
  */
 class Image extends Model
 {

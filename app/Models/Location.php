@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Location whereStreetNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Location whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Database\Factories\LocationFactory factory(...$parameters)
  */
 class Location extends Model
 {

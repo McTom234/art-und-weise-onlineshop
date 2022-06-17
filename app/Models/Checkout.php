@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Checkout whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Checkout whereUserId($value)
  * @mixin \Eloquent
+ * @method static \Database\Factories\CheckoutFactory factory(...$parameters)
  */
 class Checkout extends Model
 {

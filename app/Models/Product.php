@@ -35,6 +35,7 @@ use Illuminate\Support\Facades\DB;
  * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Database\Factories\ProductFactory factory(...$parameters)
  */
 class Product extends Model
 {

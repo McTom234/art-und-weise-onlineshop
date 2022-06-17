@@ -22,7 +22,7 @@ class LocationFactory extends Factory
         return [
             'street' => $this->faker->streetName(),
             'street_number' => $this->faker->buildingNumber(),
-            'postcode' => $this->faker->postcode(),
+            'postcode' => $this->faker->numberBetween(0, 99999),
             'city' => $this->faker->city()
         ];
     }
