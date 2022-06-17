@@ -8,19 +8,22 @@ use App\Models\Location;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $categories = Category::all();
         return view('auth.register', ['categories' => $categories]);
@@ -29,12 +32,12 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'forename' => ['required', 'string', 'max:255'],
@@ -47,21 +50,24 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'forename' => $request->forename,
-            'surname' => $request->surname,
+        $user = new User();
+        $user->forename = $request->forename;
+        $user->surname = $request->surname;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $success = $user->save();
 
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $location = new Location();
+        $location->street = $request->street;
+        $location->street_number = $request->street_number;
+        $location->postcode = $request->postcode;
+        $location->city = $request->city;
+        $location->user_id = $user->id;
+        $success = $success && $location->save();
 
-        $location = Location::create([
-            'street' => $request->street,
-            'street_number' => $request->street_number,
-            'postcode' => $request->postcode,
-            'city' => $request->city,
-            'user_id' => $user->id
-        ]);
+        if (!$success) {
+            return redirect()->back()->withErrors('Error while creating user. Contact admin. Error#1001');
+        }
 
         event(new Registered($user));
 

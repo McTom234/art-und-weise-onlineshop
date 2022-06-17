@@ -31,4 +31,11 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory, Uuids;
+
+    protected $fillable = [
+        'price',
+        'discount',
+        'quantity',
+        'product_id'
+    ];
 }

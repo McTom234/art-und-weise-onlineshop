@@ -3,20 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Image;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function home(){
-
+    public function home(): Factory|View|Application
+    {
+        // TODO: DB seeding
         /**
         for ($i = 1; $i <= 4; $i++) {
             $category = new Category();
@@ -51,7 +53,8 @@ class Controller extends BaseController
         return view('home' , ['categories' => $categories, 'popular' => Product::getPopularProducts()]);
     }
 
-    public function about(){
+    public function about(): Factory|View|Application
+    {
         return view('about');
     }
 }

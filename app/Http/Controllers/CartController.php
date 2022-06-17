@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
 
-    public function cart(Request $request)
+    public function cart(): Factory|View|Application
     {
         if (isset($_COOKIE['cart'])) {
             $cart = json_decode($_COOKIE['cart'], true);
@@ -29,7 +30,7 @@ class CartController extends Controller
         return view('cart', ['products' => $products]);
     }
 
-    public function set(Request $request)
+    public function set(Request $request): Response
     {
         $request->validate([
             'id' => 'string|required',
@@ -52,10 +53,10 @@ class CartController extends Controller
         }
 
         for ($i = 0; $i < count($cart); $i++) if (array_values($cart)[$i] <= 0) array_splice($cart, $i, 1);
-      
-        $response = new Response(json_encode($cart));      
+
+        $response = new Response(json_encode($cart));
         $response->withCookie(cookie()->forever('cart', json_encode($cart)));
-      
+
         return $response;
     }
 }

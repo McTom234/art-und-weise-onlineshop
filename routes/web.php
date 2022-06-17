@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\ProdcutsController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 
@@ -20,8 +20,8 @@ use App\Http\Controllers\Controller;
 Route::get('/', [Controller::class, 'home'])->name('home');
 Route::get('/about', [Controller::class, 'about'])->name('about');
 
-Route::get('/products/{category_id?}', [ProdcutsController::class, 'products'])->name('products');
-Route::get('/product/{product}', [ProdcutsController::class, 'product'])->name('product');
+Route::get('/products/{category_id?}', [ProductsController::class, 'products'])->name('products');
+Route::get('/product/{product}', [ProductsController::class, 'product'])->name('product');
 
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 

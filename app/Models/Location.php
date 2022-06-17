@@ -41,7 +41,6 @@ class Location extends Model
         'street',
         'street_number',
         'postcode',
-        'city',
-        'user_id'
+        'city'
     ];
 }

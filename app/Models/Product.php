@@ -40,20 +40,28 @@ class Product extends Model
 {
     use HasFactory, Uuids;
 
-    public function images()
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'discount',
+        'contingent'
+    ];
+
+    public function images(): BelongsToMany
     {
         return $this->belongsToMany(Image::class);
     }
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
-    public function getPriceEuro()
+    public function getPriceEuro(): string
     {
         return number_format($this->price / 100, 2);
     }
 
-    public function getDiscountPriceEuro()
+    public function getDiscountPriceEuro(): string
     {
         if($this->discount == 0) return  $this->getPriceEuro();
         return number_format($this->getPriceEuro() * $this->discount / 100, 2);
@@ -66,13 +74,13 @@ class Product extends Model
         else return $this->description;
     }
 
-    static function getPopularProducts()
+    static function getPopularProducts(): array
     {
         // todo rewrite from raw to methode select
         $dbRequest = DB::select('SELECT p.id, (SELECT SUM(o.quantity) from orders o where o.product_id = p.id) as count from products p order by count desc, p.created_at limit 3;');
         $result = [];
         foreach ($dbRequest as $item) {
-            $result[] = Product::all()->where('id', $item->id)->first();
+            $result[] = Product::all()->firstWhere('id', $item->id);
         }
         return $result;
     }

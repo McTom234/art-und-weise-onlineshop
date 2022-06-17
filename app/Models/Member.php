@@ -27,4 +27,9 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model
 {
     use HasFactory, Uuids;
+
+    protected $fillable = [
+        'rights',
+        'user_id'
+    ];
 }

@@ -29,12 +29,16 @@ class Category extends Model
 {
     use HasFactory, Uuids;
 
-    public function products()
+    protected $fillable = [
+        'name'
+    ];
+
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
     }
 
-    public function productsByQuery($query)
+    public function productsByQuery($query): BelongsToMany
     {
         return $this->belongsToMany(Product::class)->where('name', 'LIKE', "%{$query}%")->orWhere('description', 'LIKE', "%{$query}%");
     }
