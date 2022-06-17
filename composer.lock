@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c69a3c9ad2a48150de86eb5b1d803560",
+    "content-hash": "ba2f0e1b8623ee32834233752c002122",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
