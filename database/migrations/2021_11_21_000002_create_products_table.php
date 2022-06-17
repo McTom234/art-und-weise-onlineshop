@@ -4,22 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->timestamps();
+            $table->string('name')->index();
+            $table->text('description')->nullable();
             $table->unsignedInteger('price')->default(0);
             $table->unsignedSmallInteger('discount')->default(0);
-            $table->unsignedInteger('quantity')->default(0);
-            $table->foreignUuid('product_id')->constrained('products')->cascadeOnUpdate()->restrictOnDelete();
+            $table->unsignedSmallInteger('contingent')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -28,8 +29,8 @@ class CreateOrdersTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('products');
     }
-}
+};
