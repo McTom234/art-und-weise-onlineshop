@@ -14,7 +14,7 @@
 
                 <div class="dropdown-content">
                         @foreach (\App\Models\Category::all() as $category)
-                            @php/** @var \App\Models\Category $category */@endphp
+                            @php /** @var \App\Models\Category $category */ @endphp
                             <a href="{{ route('products.category', $category->id) }}" {{ !request()->routeIs('products.category') ? : request()->route()->parameters['category']->id != $category->id ? : "data-active" }}>{{ $category->name }}</a>
                         @endforeach
 

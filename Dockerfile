@@ -1,6 +1,4 @@
-# Create a dev image with all dependencies
-# Not really required, just to speed up the build process
-FROM php:8.1-apache as dev
+FROM php:8.1-fpm
 
 # Arguments defined in docker-compose.yml
 ARG user
