@@ -1,9 +1,10 @@
-@use "../abstracts";
+@use "../abstracts/vars";
+@use "../abstracts/mixins";
 
 /* The container must be positioned relative: */
 .quantity-select {
   position: relative;
-  @include abstracts.font(abstracts.$font-style-body1);
+  @include mixins.font(vars.$font-style-body1);
   margin: 20px;
 }
 
@@ -17,7 +18,8 @@
   background-color: gray;
   padding: 8px 16px;
   outline: none;
-  border: 1px solid transparent;
+  border-style: solid;
+  border-width: 1px;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
   font-size: 1em;
   border-radius: 8px;
@@ -39,7 +41,8 @@
   right: 10px;
   width: 0;
   height: 0;
-  border: 6px solid transparent;
+  border-style: solid;
+  border-width: 6px;
   border-color: #fff transparent transparent transparent;
 }
 
@@ -53,7 +56,8 @@
 .select-items div,.select-selected {
   color: #fff;
   padding: 8px 30px 8px 16px;
-  border: 1px solid transparent;
+  border-style: solid;
+  border-width: 1px;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
   cursor: pointer;
 }

@@ -1,5 +1,5 @@
-@use "abstracts" as a;
-@use "components";
+@use "abstracts/vars" as a;
+@use "abstracts/mixins";
 @use "components/quantitySelect";
 
 main {
@@ -32,10 +32,10 @@ main {
                 grid-template-columns: auto !important;
             }
 
-            @include a.breakpoint(lg) {
+            @include mixins.breakpoint(lg) {
                 grid-template-columns: 200px auto;
             }
-            @include a.breakpoint(md) {
+            @include mixins.breakpoint(md) {
                 grid-template-columns: auto;
             }
 
@@ -67,7 +67,7 @@ main {
                     position: absolute;
                     bottom: -.25em;
                     right: 0;
-                    @include a.font-style(
+                    @include mixins.font-style(
                             map-get(a.$font-style-subtitle1, "font-family"),
                             .4em,
                             100,
@@ -120,7 +120,7 @@ main {
                     margin-left: auto;
 
                     user-select: none;
-                    @include a.font(a.$font-style-body2) {
+                    @include mixins.font(a.$font-style-body2) {
                         font-size: 2em;
                     }
 

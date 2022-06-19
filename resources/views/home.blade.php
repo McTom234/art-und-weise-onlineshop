@@ -33,7 +33,7 @@
         </div>
         <div class="grid-container">
             @foreach($popular as $product)
-                @include('layouts.product-grid')
+                <x-product-grid :product="$product"></x-product-grid>
             @endforeach
         </div>
     </section>
@@ -41,17 +41,15 @@
     @foreach($categories as $category)
         <section>
             <div class="intro">
-                <h3>{{$category->name}}</h3>
-                <p>Eine Auswahl von Produkten aus der Kategorie {{$category->name}}.</p>
+                <h3>{{ $category->name }}</h3>
+                <p>Eine Auswahl von Produkten aus der Kategorie {{ $category->name }}.</p>
             </div>
             <div class="grid-container">
-                @each('layouts.product-grid', $category->products()->take(3)->get(), 'product')
+                @foreach($category->products()->take(3)->get() as $product)
+                    <x-product-grid :product="$product"></x-product-grid>
+                @endforeach
             </div>
-            <a class="link-button more-items" href="{{route('products.category', ['category' => $category->id])}}">Weitere</a>
+            <a class="link-button more-items" href="{{ route('products.category', ['category' => $category->id]) }}">Weitere</a>
         </section>
     @endforeach
-@endsection
-
-@section('foot-scripts')
-    <x-cookie-hint></x-cookie-hint>
 @endsection

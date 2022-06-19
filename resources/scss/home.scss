@@ -1,5 +1,6 @@
-@use "components";
-@use "abstracts" as a;
+@use "abstracts/vars" as a;
+@use "abstracts/mixins";
+@use "abstracts/init";
 
 header {
   height: 90vh;
@@ -62,7 +63,7 @@ header {
 
     &::after, &::before {
       content: '\f0d7';
-      @include a.font(a.$font-style-fontAwesome);
+      @include mixins.font(a.$font-style-fontAwesome);
       padding-left: 8px;
       padding-right: 8px;
       display: inline-block;

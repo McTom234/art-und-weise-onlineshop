@@ -1,5 +1,5 @@
-@use "abstracts" as a;
-@use "components";
+@use "abstracts/vars" as a;
+@use "abstracts/mixins";
 
 body {
   background: a.$pale-spring-bud;
@@ -63,7 +63,7 @@ form {
     display: block;
   }
 
-  @include a.input();
+  @include mixins.input();
 
   button, .link-button {
     width: 90%;
@@ -72,13 +72,14 @@ form {
   }
 
   h2 {
+    font-size: 3em;
     line-height: 1em;
     padding: .25em 0;
     margin: 0;
   }
 
   p.info {
-    @include a.font(a.$font-style-subtitle2);
+    @include mixins.font(a.$font-style-subtitle2);
     margin: 0 .5em 1em;
     padding: 1em;
     overflow-wrap: break-word;
@@ -89,7 +90,7 @@ form {
   }
 
   p.error {
-    @include a.font(a.$font-style-body2);
+    @include mixins.font(a.$font-style-body2);
     margin: 1em .5em 0;
     padding: 1em;
     overflow-wrap: break-word;
@@ -102,7 +103,7 @@ form {
 
 } // form
 
-@include a.breakpoint(sm) {
+@include mixins.breakpoint(sm) {
   form {
     max-width: 100%;
     width: 100%;

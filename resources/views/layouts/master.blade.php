@@ -9,6 +9,10 @@
     <meta name="description" content="@yield('description', '')">
     <meta name="keywords" content="@yield('keywords', '')">
 
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+
+    <script src="{{ asset('js/app.js') }}" type="application/javascript"></script>
+
     @yield('head-scripts', '')
 </head>
 <body>
@@ -24,6 +28,15 @@
 
     @include('layouts.footer')
 
+    <x-cookie-hint></x-cookie-hint>
+
     @yield('foot-scripts', '')
+    <script>
+        const url = window.location.href.split('#');
+        while (url.length >= 2 && url[url.length-1] !== "") {
+            url.pop();
+            window.location.href = url.join();
+        }
+    </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('head-scripts')
-    <link rel="stylesheet" href="{{asset('css/user-forms.css')}}"/>
+    <link rel="stylesheet" href="{{ asset('css/auth-forms.css') }}"/>
 @endsection
 
 @section('content')

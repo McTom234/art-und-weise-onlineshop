@@ -1,11 +1,11 @@
-@use "../abstracts" as a;
-@use "../components/popup";
+@use "../abstracts/vars";
+@use "../abstracts/mixins";
 
 footer {
   padding: 2em 10vw 1em;
-  background: a.$dark-slate-gray;
-  color: a.$white;
-  @include a.font(a.$font-style-subtitle2);
+  background: vars.$dark-slate-gray;
+  color: vars.$white;
+  @include mixins.font(vars.$font-style-subtitle2);
   position: sticky;
   top: 100vh;
   user-select: none;

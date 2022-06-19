@@ -4,4 +4,4 @@
     <a class="no-text-decoration link-button" onclick="privacy.closeHint()">Ablehnen</a>
 </div>
 
-<script src="{{asset('js/privacy.js')}}"></script>
+<script src="{{ asset('js/privacy.js') }}"></script>

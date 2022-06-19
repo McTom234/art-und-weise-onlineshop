@@ -34,7 +34,6 @@ function createQuantitySelect (defaultValue: number, values: number[], maxValue:
         element.textContent = values[i].toString();
 
         element.addEventListener('click', function () {
-
             onSelect(values[i]);
             defaultElement.textContent = "Menge: " + this.textContent;
 

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('checkout_order', function (Blueprint $table) {
-            $table->unsignedInteger('id')->autoIncrement()->primary();
+            $table->unsignedInteger('id')->autoIncrement();
             $table->uuid('checkout_id')->index();
             $table->uuid('order_id')->index();
 

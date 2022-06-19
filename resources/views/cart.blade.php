@@ -1,23 +1,27 @@
 @extends('layouts.master')
 
 @section('head-scripts')
-    <link rel="stylesheet" href="{{asset('css/shoppingCart.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
 @endsection
 
 @section('content')
     <section id="cart-list">
         <h2>Warenkorb</h2>
-        @each('layouts.product-list', $products, 'product')
+        @foreach($products as $product)
+            <x-product-list :product="$product"></x-product-list>
+        @endforeach
     </section>
 
     @if($products->count() > 0)
-        <a href="{{route('checkout.details')}}" id="buy-button" class="link-button">Kaufen</a>
+        <a href="{{ route('checkout.details') }}" id="buy-button" class="link-button">Kaufen</a>
+    @else
+        <p>Der Warenkorb ist leer.</p>
     @endif
 @endsection
 
 @section('foot-scripts')
-    <script src="{{asset('js/shoppingCart.js')}}"></script>
-    <script src="{{asset('js/quantitySelect.js')}}"></script>
+    <script src="{{ asset('js/shoppingCart.js') }}"></script>
+    <script src="{{ asset('js/quantitySelect.js') }}"></script>
     <script>
         // todo exclude
         const wrappers = document.getElementsByTagName("quantity");
@@ -30,7 +34,7 @@
                     const priceTag = getPriceTag(wrapper.attributes.getNamedItem("data-id").nodeValue);
                     priceTag.textContent = (priceTag.attributes.getNamedItem("data-base-price").nodeValue * number).toFixed(2).toString().replace(".", ",");
 
-                    setItem(Number(wrapper.attributes.getNamedItem("data-id").nodeValue), number).then(res => {
+                    setItem(wrapper.attributes.getNamedItem("data-id").nodeValue, number).then(res => {
                         const cart = res.data;
                         // navbar
                         let count = 0;

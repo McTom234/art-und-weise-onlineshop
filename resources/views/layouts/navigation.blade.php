@@ -1,3 +1,5 @@
+{{--{{ dd(request()->route()) }}--}}
+
 <nav id="navbar">
     <a class="nav-button-home" href="{{ route('index') }}" {{ !request()->routeIs('index') ? : "data-active" }}>Art und Weise</a>
 
@@ -13,7 +15,7 @@
                 <div class="dropdown-content">
                         @foreach (\App\Models\Category::all() as $category)
                             @php/** @var \App\Models\Category $category */@endphp
-                            <a href="{{ route('products.category', $category->id) }}" {{ !request()->routeIs('products.category') ? : request()->route()->parameters['category'] != $category->id ? : "data-active" }}>{{ $category->name }}</a>
+                            <a href="{{ route('products.category', $category->id) }}" {{ !request()->routeIs('products.category') ? : request()->route()->parameters['category']->id != $category->id ? : "data-active" }}>{{ $category->name }}</a>
                         @endforeach
 
                         <a href="{{ route('products.index') }}" {{ !request()->routeIs('index') ? : "data-active" }} data-responsive>Alle Produkte</a>
@@ -36,18 +38,6 @@
                 <a href="{{ route('register') }}" {{ !request()->routeIs('register') ? : "data-active" }}>Registrieren</a>
             @endguest
 
-            @php
-                $cartCount = 0;
-                if (isset($_COOKIE['cart'])) {
-                    $cart = json_decode($_COOKIE['cart'], true);
-                    foreach ($cart as $product_id => $number) {
-                        $cartCount += $number;
-                    }
-                    $cartCount = ' '.$cartCount;
-                } else {
-                    $cartCount = '';
-                }
-            @endphp
             <a class="nav-button-shopping-cart" href="{{ route('cart') }}" {{ !request()->routeIs('cart') ? : "data-active" }}>Warenkorb<span id="navbar-cart-counter">{{ $cartCount }}</span></a>
         </div>
     </div>

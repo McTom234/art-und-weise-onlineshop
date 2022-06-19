@@ -15,7 +15,7 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 });
 
-Route::group(['middleware' => ['admin']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
         ->name('password.confirm');
     Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']);

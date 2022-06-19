@@ -1,4 +1,6 @@
-@use "../abstracts" as a;
+@use "../abstracts/vars" as a;
+@use "../abstracts/mixins";
+@use "../abstracts/init";
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
 nav {
@@ -8,10 +10,10 @@ nav {
   display: flex;
   position: relative;
 
-  @include a.breakpoint(xxl) {
+  @include mixins.breakpoint(xxl) {
     padding-inline: 5vw !important;
   }
-  @include a.breakpoint(xl) {
+  @include mixins.breakpoint(xl) {
     padding-inline: 1em !important;
   }
 
@@ -20,7 +22,7 @@ nav {
     position: relative;
     text-align: center;
     padding: 14px 16px;
-    @include a.font(a.$font-style-body2);
+    @include mixins.font(a.$font-style-body2);
     color: a.$navbar-text-color;
 
     &::before {
@@ -37,6 +39,7 @@ nav {
 
     &:hover, &:focus-visible {
       outline: none;
+      box-shadow: none;
 
       &::before {
         transform: scaleX(.8);
@@ -51,7 +54,7 @@ nav {
       background: a.$navbar-text-color;
       border-radius: a.$border-radius;
       transform-style: preserve-3d;
-      @include a.font(a.$font-style-button);
+      @include mixins.font(a.$font-style-button);
 
       &::before {
         content: '';
@@ -82,7 +85,7 @@ nav {
     } // .nav-button-shopping-cart
 
     &.nav-button-home {
-      @include a.font-style(
+      @include mixins.font-style(
                       map-get(a.$font-style-headline6, "font-family"),
                       map-get(a.$font-style-body2, "font-size"),
                       map-get(a.$font-style-headline4, "font-weight"),
@@ -137,7 +140,7 @@ nav {
     }
 
     span {
-      @include a.font(a.$font-style-subtitle2);
+      @include mixins.font(a.$font-style-subtitle2);
       color: a.$navbar-text-color;
       flex-shrink: 1 !important;
       overflow: hidden;
@@ -145,7 +148,7 @@ nav {
 
         &#navbar-cart-counter {
             color: a.$navbar-color;
-            @include a.font-style(
+            @include mixins.font-style(
                     map-get(a.$font-style-headline6, "font-family"),
                     map-get(a.$font-style-body2, "font-size"),
                     map-get(a.$font-style-headline4, "font-weight"),
@@ -233,7 +236,7 @@ nav {
 
   } // div
 
-  @include a.breakpoint(lg) {
+  @include mixins.breakpoint(lg) {
     div {
       &.navbar-container {
         transform-origin: 50% 0;

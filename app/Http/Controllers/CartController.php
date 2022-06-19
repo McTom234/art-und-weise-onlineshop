@@ -18,15 +18,10 @@ class CartController extends Controller
      */
     public function getCartView(): Factory|View|Application
     {
-        if (isset($_COOKIE['cart'])) {
-            $cart = json_decode($_COOKIE['cart'], true);
-        } else {
-            $cart = [];
-        }
+        $cart = collect(json_decode($_COOKIE['cart'] ?? '[]', true));
         $products = collect();
         foreach ($cart as $product_id => $number) {
-            $product = Product::find($product_id);
-            if ($product) {
+            if ($product = Product::find($product_id)) {
                 $product->number = $number;
                 $products->add($product);
             }
@@ -49,8 +44,11 @@ class CartController extends Controller
         $product_id = $request->get('id');
         $product_number = $request->get('number');
 
+        if (Product::find($product_id) == null)
+            return response()->setStatusCode(404)->json(json_encode(['error' => "product with id: `$product_id` not found"]))->withCookie(cookie()->forever('cart', $cart->toJson()));
+
         if ($request->has('additional') && $request->get('additional')) {
-            $product_number += $cart->value($product_id, 0);
+            $product_number += $cart->get($product_id, 0);
         }
         $cart->put($product_id, $product_number);
 

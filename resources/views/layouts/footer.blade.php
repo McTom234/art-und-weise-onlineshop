@@ -29,11 +29,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    const url = window.location.href.split('#');
-    while (url.length >= 2 && url[url.length-1] !== "") {
-        url.pop();
-        window.location.href = url.join();
-    }
-</script>
