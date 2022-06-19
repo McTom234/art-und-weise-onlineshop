@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\Checkout;
+use App\Models\Image;
+use App\Models\Location;
+use App\Models\Member;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -27,6 +35,15 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureRateLimiting();
+
+        $this->model('category', Category::class);
+        $this->model('checkout', Checkout::class);
+        $this->model('image', Image::class);
+        $this->model('location', Location::class);
+        $this->model('member', Member::class);
+        $this->model('order', Order::class);
+        $this->model('product', Product::class);
+        $this->model('user', User::class);
 
         $this->routes(function () {
             Route::prefix('api')

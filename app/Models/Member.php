@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\MemberFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Member newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Member newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Member query()
@@ -23,7 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Member whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Member whereUserId($value)
  * @mixin \Eloquent
- * @method static \Database\Factories\MemberFactory factory(...$parameters)
  */
 class Member extends Model
 {

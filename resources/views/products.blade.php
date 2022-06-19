@@ -21,15 +21,13 @@
 
     @if(count($products) > 0)
         <div class="grid-container">
-            @foreach($products as $product)
-                @include('layouts.product-grid')
-            @endforeach
+            @each('layouts.product-grid', $products, 'product')
         </div>
     @else
         <p class="product-not-found">Es wurden keine Produkte gefunden.</p>
     @endif
 
-    @include('layouts.page-navigation')
+    {{ $products->links() }}
 </main>
 @include('layouts.footer')
 </body>

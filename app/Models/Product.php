@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use App\Traits\Uuids;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Product
@@ -17,25 +20,26 @@ use Illuminate\Support\Facades\DB;
  * @property int $price
  * @property int $discount
  * @property int $contingent
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|\App\Models\Category[] $categories
  * @property-read int|null $categories_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
- * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Product query()
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereContingent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDiscount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
- * @mixin \Eloquent
  * @method static \Database\Factories\ProductFactory factory(...$parameters)
+ * @method static Builder|Product newModelQuery()
+ * @method static Builder|Product newQuery()
+ * @method static Builder|Product query()
+ * @method static Builder|Product search(string $search)
+ * @method static Builder|Product whereContingent($value)
+ * @method static Builder|Product whereCreatedAt($value)
+ * @method static Builder|Product whereDescription($value)
+ * @method static Builder|Product whereDiscount($value)
+ * @method static Builder|Product whereId($value)
+ * @method static Builder|Product whereName($value)
+ * @method static Builder|Product wherePrice($value)
+ * @method static Builder|Product whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class Product extends Model
 {
@@ -65,24 +69,25 @@ class Product extends Model
     public function getDiscountPriceEuro(): string
     {
         if($this->discount == 0) return  $this->getPriceEuro();
-        return number_format($this->getPriceEuro() * $this->discount / 100, 2);
+        return number_format($this->getPriceEuro() * (100 - $this->discount) / 100, 2);
     }
 
-    public function getShortDescription($charsLimit = 150)
+    public function getShortDescription($charsLimit = 150): ?string
     {
         if (strlen($this->description) > $charsLimit)
             return substr($this->description, 0, strrpos(substr($this->description, 0, $charsLimit), " ")).'...';
         else return $this->description;
     }
 
-    static function getPopularProducts(): array
+    public function scopeSearch(Builder $query, string $search): Builder
     {
-        // todo rewrite from raw to methode select
-        $dbRequest = DB::select('SELECT p.id, (SELECT SUM(o.quantity) from orders o where o.product_id = p.id) as count from products p order by count desc, p.created_at limit 3;');
-        $result = [];
-        foreach ($dbRequest as $item) {
-            $result[] = Product::all()->firstWhere('id', $item->id);
-        }
-        return $result;
+        return $query->where('name', 'LIKE', "%$search%")
+            ->orWhere('description', 'LIKE', "%$search%");
+    }
+
+    static function getPopularProducts(): Collection
+    {
+        $popular = Order::groupBy('product_id')->selectRaw('SUM(quantity) as count, product_id')->orderByDesc('count')->limit(3)->pluck('product_id', 'count');
+        return Product::all()->filter(fn($product) => $popular->contains($product->id));
     }
 }

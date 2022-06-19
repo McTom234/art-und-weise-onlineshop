@@ -15,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $forename
  * @property string $surname
  * @property string $email
- * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string|null $email_verified_at
  * @property string $password
  * @property string $location_id
  * @property string|null $remember_token
@@ -74,6 +74,5 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 }

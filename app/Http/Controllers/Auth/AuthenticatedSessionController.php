@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\Category;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,8 +20,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        $categories = Category::all();
-        return view('auth.login', ['categories' => $categories]);
+        return view('auth.login');
     }
 
     /**

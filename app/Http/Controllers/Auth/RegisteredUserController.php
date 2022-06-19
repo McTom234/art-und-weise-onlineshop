@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Location;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -13,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -25,8 +23,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $categories = Category::all();
-        return view('auth.register', ['categories' => $categories]);
+        return view('auth.register');
     }
 
     /**
@@ -35,7 +32,6 @@ class RegisteredUserController extends Controller
      * @param Request $request
      * @return RedirectResponse
      *
-     * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
@@ -50,23 +46,40 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $location = Location::where('street', '=', $request->get('street'))
+            ->orWhere('street_number', '=', $request->get('street_number'))
+            ->orWhere('postcode', '=', $request->get('postcode'))
+            ->orWhere('city', '=', $request->get('city'))
+            ->get();
+
+        if ($location->count() > 0)
+        {
+            $location = $location->first();
+        }
+        else
+        {
+            $location = new Location();
+            $location->street = $request->get('street');
+            $location->street_number = $request->get('street_number');
+            $location->postcode = $request->get('postcode');
+            $location->city = $request->get('city');
+            $success = $location->save();
+
+            if (!$success) {
+                return redirect()->back()->withErrors('Error while creating location. Contact admin. Error#Registration1');
+            }
+        }
+
         $user = new User();
-        $user->forename = $request->forename;
-        $user->surname = $request->surname;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $user->forename = $request->get('forename');
+        $user->surname = $request->get('surname');
+        $user->email = $request->get('email');
+        $user->password = Hash::make($request->get('password'));
+        $user->location_id = $location->id;
         $success = $user->save();
 
-        $location = new Location();
-        $location->street = $request->street;
-        $location->street_number = $request->street_number;
-        $location->postcode = $request->postcode;
-        $location->city = $request->city;
-        $location->user_id = $user->id;
-        $success = $success && $location->save();
-
         if (!$success) {
-            return redirect()->back()->withErrors('Error while creating user. Contact admin. Error#1001');
+            return redirect()->back()->withErrors('Error while creating location. Contact admin. Error#Registration2');
         }
 
         event(new Registered($user));

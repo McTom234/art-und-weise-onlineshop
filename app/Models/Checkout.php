@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\CheckoutFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Checkout newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Checkout newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Checkout query()
@@ -21,7 +22,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Checkout whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Checkout whereUserId($value)
  * @mixin \Eloquent
- * @method static \Database\Factories\CheckoutFactory factory(...$parameters)
  */
 class Checkout extends Model
 {

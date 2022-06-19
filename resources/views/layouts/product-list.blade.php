@@ -24,7 +24,7 @@
         <div class="item-control">
             <quantity data-id="{{$product->id}}" data-number="{{$product->number}}"></quantity>
             <button
-                onclick="(async function() {await setItem('{{$product->id}}', 0, 0); window.location.reload(true)})();">
+                onclick="(async function() {setItem('{{$product->id}}', 0).then(() => window.location.reload());})();">
                 Löschen
             </button>
         </div>
