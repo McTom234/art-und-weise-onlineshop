@@ -1,14 +1,15 @@
 {
-    "/js/cookies.js": "/js/cookies.js?id=2778c59f2c7ff4f7fa60054a15cbf902",
-    "/js/products.js": "/js/products.js?id=e6371795109fdfb4080a0e8fca93d160",
-    "/js/quantitySelect.js": "/js/quantitySelect.js?id=7a12330e6966ebb81a01924ef63f3992",
-    "/js/shoppingCart.js": "/js/shoppingCart.js?id=4124c487282808aa737c406ff0dcfb8f",
-    "/js/privacy.js": "/js/privacy.js?id=2a93e87b4ba1282bbfdd54c26dd6ec2c",
-    "/css/ordered.css": "/css/ordered.css?id=62b1eace3b2573176744e3c121b1bbf3",
-    "/css/buy.css": "/css/buy.css?id=e3f8abf3d18c5c070dd87c162c00618d",
-    "/css/products-overview.css": "/css/products-overview.css?id=d08fe40a0f4663bb3df3a8727e455ecd",
-    "/css/user-forms.css": "/css/user-forms.css?id=700398af6035fcc0f8acedc2ebb8cf43",
-    "/css/home.css": "/css/home.css?id=d043511f85ceda7fa5799fea13e58834",
-    "/css/showProduct.css": "/css/showProduct.css?id=86285297ccef0a17d62bcae2667a1e85",
-    "/css/shoppingCart.css": "/css/shoppingCart.css?id=a71c3033abefc85d42444332cef7f2e9"
+    "/js/app.js": "/js/app.js?id=1340cc8540d1db3bdb614976e809d673",
+    "/js/shoppingCart.js": "/js/shoppingCart.js?id=7701a5391a79bbe4cb1508014f09587d",
+    "/js/products.js": "/js/products.js?id=0c088522d6cc5a8f5a595c205492ccec",
+    "/js/quantitySelect.js": "/js/quantitySelect.js?id=0d10a598ced45dc4fee0abbeb5f9d086",
+    "/js/privacy.js": "/js/privacy.js?id=633b043d64b72c38a874e06adf520bac",
+    "/css/index.css": "/css/index.css?id=876e6867eb4881a06ee3a5ae895eeae6",
+    "/css/products.css": "/css/products.css?id=5928e82aab428d404e85b3f82c70ef86",
+    "/css/auth-forms.css": "/css/auth-forms.css?id=1889d504beab72a30989e9500ca68470",
+    "/css/home.css": "/css/home.css?id=0ff43de4671d0ae3cacb7818b514963e",
+    "/css/product.css": "/css/product.css?id=82ccb8a17e417cb4fefec80312896654",
+    "/css/cart.css": "/css/cart.css?id=fb89c36ffb3442ab473a209af129304d",
+    "/css/buy.css": "/css/buy.css?id=885a5f91779ca644a068dd554e19111a",
+    "/css/ordered.css": "/css/ordered.css?id=4a781d282eefec0fff1cfc0c06da93f5"
 }

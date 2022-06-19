@@ -1,9 +1,12 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 var __webpack_exports__ = {};
 /*!****************************************!*\
-  !*** ./resources/js/quantitySelect.js ***!
+  !*** ./resources/js/quantitySelect.ts ***!
   \****************************************/
-window.createQuantitySelect = function (defaultValue, values, maxValue, isLastExtends, onSelect) {
+
+
+function createQuantitySelect(defaultValue, values, maxValue, isLastExtends, onSelect) {
   document.addEventListener("click", closeAllQuantitySelects);
   var quantitySelect = document.createElement("div");
   quantitySelect.className = "quantity-select";
@@ -29,7 +32,7 @@ window.createQuantitySelect = function (defaultValue, values, maxValue, isLastEx
       return "continue";
     }
 
-    element.textContent = values[i];
+    element.textContent = values[i].toString();
     element.addEventListener('click', function () {
       onSelect(values[i]);
       defaultElement.textContent = "Menge: " + this.textContent;
@@ -60,8 +63,8 @@ window.createQuantitySelect = function (defaultValue, values, maxValue, isLastEx
 
   if (isLastExtends) {
     var submit = function submit() {
-      if (input.value < inputStartValue) {
-        onSelect(input.value);
+      if (Number(input.value) < inputStartValue) {
+        onSelect(Number(input.value));
         defaultElement.classList.toggle("hide");
         quantityInput.classList.toggle("hide");
         defaultElement.textContent = "Menge: " + input.value;
@@ -75,7 +78,7 @@ window.createQuantitySelect = function (defaultValue, values, maxValue, isLastEx
           }
         }
 
-        input.value = inputStartValue;
+        input.value = inputStartValue.toString();
       } else {
         onSelect(parseInt(input.value, 10));
         button.className = "hide";
@@ -88,8 +91,8 @@ window.createQuantitySelect = function (defaultValue, values, maxValue, isLastEx
     var input = document.createElement("input");
     input.type = "number";
     input.min = "0";
-    input.max = maxValue;
-    input.value = inputStartValue;
+    input.max = maxValue.toString();
+    input.value = inputStartValue.toString();
     var button = document.createElement("button");
     button.textContent = "Aktualisieren";
     input.addEventListener("keyup", function (event) {
@@ -100,11 +103,11 @@ window.createQuantitySelect = function (defaultValue, values, maxValue, isLastEx
     input.addEventListener("input", function () {
       button.removeAttribute("class");
 
-      if (input.value > maxValue) {
-        input.value = maxValue;
+      if (Number(input.value) > maxValue) {
+        input.value = maxValue.toString();
       }
 
-      if (input.value < 0) {
+      if (Number(input.value) < 0) {
         input.value = '';
       }
     });
@@ -113,7 +116,7 @@ window.createQuantitySelect = function (defaultValue, values, maxValue, isLastEx
       quantityInput.className = "quantity-input";
       defaultElement.classList.toggle("hide");
       button.className = "hide";
-      input.value = defaultValue;
+      input.value = defaultValue.toString();
     } else {
       quantityInput.className = "quantity-input hide";
     }
@@ -125,9 +128,11 @@ window.createQuantitySelect = function (defaultValue, values, maxValue, isLastEx
   }
 
   return quantitySelect;
-};
+}
 
-window.closeAllQuantitySelects = function () {
+window.createQuantitySelect = createQuantitySelect;
+
+function closeAllQuantitySelects() {
   var selectItems = document.getElementsByClassName("select-items");
   var selectSelected = document.getElementsByClassName("select-selected");
 
@@ -138,6 +143,6 @@ window.closeAllQuantitySelects = function () {
   for (var _i2 = 0; _i2 < selectItems.length; _i2++) {
     selectItems[_i2].classList.add("select-hide");
   }
-};
+}
 /******/ })()
 ;

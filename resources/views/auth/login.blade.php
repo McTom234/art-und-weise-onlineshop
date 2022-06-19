@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="de">
+@extends('layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schülerfirma Art und Weise | Login</title>
-    <link rel="stylesheet" href="{{asset('css/user-forms.css')}}"/>
-</head>
+@section('head-scripts')
+    <link rel="stylesheet" href="{{ asset('css/auth-forms.css') }}"/>
+@endsection
 
-<body>
-@include('layouts.navigation', ['index' => 'login'])
-
-<main>
+@section('content')
     <form id="menu" action="{{ route('login') }}" method="post">
         @csrf
         <h2>Anmeldung</h2>
@@ -30,8 +22,4 @@
             <p class="error">Email oder Passwort falsch!</p>
         @endif
     </form>
-
-</main>
-@include('layouts.footer')
-</body>
-</html>
+@endsection

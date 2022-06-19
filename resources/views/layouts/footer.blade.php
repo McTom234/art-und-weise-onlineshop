@@ -1,5 +1,5 @@
 <footer>
-    <span class="copyright">Schülerfirma Art & Weise &copy; 2021</span>
+    <span class="copyright">Schülerfirma Art & Weise &copy; 2021 - {{ \Carbon\Carbon::now()->year }}</span>
     <a href="#popup-privacy" class="no-text-decoration">Datenschutzerklärung</a>
     <a href="#popup-imprint" class="no-text-decoration">Impressum</a>
 </footer>
@@ -29,11 +29,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    const url = window.location.href.split('#');
-    while (url.length >= 2 && url[url.length-1] !== "") {
-        url.pop();
-        window.location.href = url.join();
-    }
-</script>

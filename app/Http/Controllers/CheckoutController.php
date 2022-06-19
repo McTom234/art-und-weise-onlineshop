@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class CheckoutController extends Controller
 {
-    public function details(){
+    public function details(): Factory|View|Application
+    {
         return view('checkout.details');
     }
 
-    public function success(){
+    public function success(): Factory|View|Application
+    {
         return view('checkout.success');
     }
 }

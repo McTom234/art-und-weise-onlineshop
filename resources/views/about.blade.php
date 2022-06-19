@@ -1,18 +1,10 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Schülerfirma Art und Weise | Bestellung</title>
+@section('head-scripts')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-</head>
+@endsection
 
-<body>
-@include('layouts.navigation', ['index' => 'about'])
-
-<main>
+@section('content')
     <!--    TODO Content-->
 
     <h2>Danke für Ihren Besuch!</h2>
@@ -29,9 +21,4 @@
     <h3>Versand und Versandkosten</h3>
 
     <p></p>
-</main>
-
-@include('layouts.footer')
-</body>
-
-</html>
+@endsection

@@ -1,4 +1,5 @@
-@use "../abstracts" as a;
+@use "../abstracts/vars" as a;
+@use "../abstracts/mixins";
 
 article {
     border: .1em solid a.$hunter-green;
@@ -62,7 +63,7 @@ article {
 
         i {
             grid-column: 2;
-            @include a.font(a.$font-style-subtitle1);
+            @include mixins.font(a.$font-style-subtitle1);
             line-height: 1em;
             align-self: center;
             text-align: end;
@@ -75,7 +76,7 @@ article {
         }
 
         span {
-            @include a.font(a.$font-style-subtitle1) {
+            @include mixins.font(a.$font-style-subtitle1) {
                 font-size: 1.75em;
             }
             grid-column: 1;

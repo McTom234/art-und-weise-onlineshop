@@ -1,5 +1,3 @@
-const mix = require('laravel-mix');
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,18 +10,20 @@ const mix = require('laravel-mix');
  */
 
 
-mix.js('resources/js/cookies.js', 'public/js')
-    .js('resources/js/products.js', 'public/js')
-    .js('resources/js/quantitySelect.js', 'public/js')
-    .js('resources/js/shoppingCart.js', 'public/js')
-    .js('resources/js/privacy.js', 'public/js')
+require('laravel-mix')
+    .ts('resources/js/app.ts', 'public/js')
+    .ts('resources/js/shoppingCart.ts', 'public/js')
+    .ts('resources/js/products.ts', 'public/js')
+    .ts('resources/js/quantitySelect.ts', 'public/js')
+    .ts('resources/js/privacy.ts', 'public/js')
+    .sass('resources/scss/index.scss', 'public/css')
     .sass('resources/scss/home.scss', 'public/css')
-    .sass('resources/scss/user-forms.scss', 'public/css')
-    .sass('resources/scss/products-overview.scss', 'public/css')
+    .sass('resources/scss/auth-forms.scss', 'public/css')
+    .sass('resources/scss/products.scss', 'public/css')
     .sass('resources/scss/buy.scss', 'public/css')
     .sass('resources/scss/ordered.scss', 'public/css')
-    .sass('resources/scss/shoppingCart.scss', 'public/css')
-    .sass('resources/scss/showProduct.scss', 'public/css')
+    .sass('resources/scss/cart.scss', 'public/css')
+    .sass('resources/scss/product.scss', 'public/css')
     .options({
         postCss: [ require('tailwindcss')('./tailwind.config.js') ]
     })

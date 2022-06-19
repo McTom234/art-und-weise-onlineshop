@@ -1,11 +1,7 @@
-@php
-    if(!isset($categories)){
-        $categories = \App\Models\Category::all();
-    }
-@endphp
+{{--{{ dd(request()->route()) }}--}}
 
 <nav id="navbar">
-    <a class="nav-button-home" href="/" {{$index != "home" ?: "data-active"}}>Art und Weise</a>
+    <a class="nav-button-home" href="{{ route('index') }}" {{ !request()->routeIs('index') ? : "data-active" }}>Art und Weise</a>
 
     <input type="checkbox" id="checkbox_toggle">
     <label for="checkbox_toggle" class="align-right">&#9776;</label>
@@ -13,47 +9,36 @@
     <div class="navbar-container">
         <div>
             <div class="dropdown">
-                <b {{$index != "products" ?: "data-active"}} data-responsive>Produkte</b>
-                <a href="{{url("/products")}}" {{$index != "products" ?: "data-active"}} data-screenFull>Produkte</a>
+                <b {{ !request()->routeIs('products.*') ? : "data-active" }} data-responsive>Produkte</b>
+                <a href="{{ route('products.index') }}" {{ !request()->routeIs('products.*') ? : "data-active" }} data-screenFull>Produkte</a>
 
                 <div class="dropdown-content">
-                        @foreach ($categories as $category)
-                            <a href="{{url("/products/{$category->id}")}}" {{$index != $category->id ?: "data-active"}}>{{$category->name}}</a>
+                        @foreach (\App\Models\Category::all() as $category)
+                            @php /** @var \App\Models\Category $category */ @endphp
+                            <a href="{{ route('products.category', $category->id) }}" {{ !request()->routeIs('products.category') ? : request()->route()->parameters['category']->id != $category->id ? : "data-active" }}>{{ $category->name }}</a>
                         @endforeach
 
-                        <a href="{{url("/products")}}" {{$index != "products" ?: "data-active"}} data-responsive>Alle Produkte</a>
+                        <a href="{{ route('products.index') }}" {{ !request()->routeIs('index') ? : "data-active" }} data-responsive>Alle Produkte</a>
                 </div>
             </div>
 
-            <a href="{{route('about')}}" {{$index != "about" ?: "data-active"}}>Über uns</a>
+            <a href="{{ route('about') }}" {{ !request()->routeIs('about') ? : "data-active" }}>Über uns</a>
         </div>
         <div class="align-right">
             @auth
-                <span class="navbar-text">{{Auth::user()->forename}} {{Auth::user()->surname}}</span>
-                <form method="post" action="{{route('logout')}}">
+                <span class="navbar-text">{{ Auth::user()->forename }} {{ Auth::user()->surname }}</span>
+                <form method="post" action="{{ route('logout') }}">
                     @csrf
-                    <button>Abmelden</button>
+                    <button type="submit">Abmelden</button>
                 </form>
             @endauth
 
             @guest
-                <a href="{{url('/login')}}" {{$index != "login" ?: "data-active"}}>Anmelden</a>
-                <a href="{{url('/register')}}" {{$index != "register" ?: "data-active"}}>Registrieren</a>
+                <a href="{{ route('login') }}" {{ !request()->routeIs('login') ? : "data-active" }}>Anmelden</a>
+                <a href="{{ route('register') }}" {{ !request()->routeIs('register') ? : "data-active" }}>Registrieren</a>
             @endguest
 
-            @php
-                $cartCount = 0;
-                if (isset($_COOKIE['cart'])) {
-                    $cart = json_decode($_COOKIE['cart'], true);
-                    foreach ($cart as $product_id => $number) {
-                        $cartCount += $number;
-                    }
-                    $cartCount = ' '.$cartCount;
-                } else {
-                    $cartCount = '';
-                }
-            @endphp
-            <a class="nav-button-shopping-cart" href="{{route('cart')}}" {{$index != "cart" ?: "data-active"}}>Warenkorb<span id="navbar-cart-counter">{{$cartCount}}</span></a>
+            <a class="nav-button-shopping-cart" href="{{ route('cart') }}" {{ !request()->routeIs('cart') ? : "data-active" }}>Warenkorb<span id="navbar-cart-counter">{{ $cartCount }}</span></a>
         </div>
     </div>
 </nav>

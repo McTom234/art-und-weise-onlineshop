@@ -1,13 +1,13 @@
-@use "components";
-@use "abstracts" as a;
+@use "abstracts/mixins";
+@use "abstracts/vars";
 
 h2, h3, ul, section {
   margin: 0 !important;
 }
 
 .grid-column--6 {
-  border: 2px solid a.$dark-slate-gray;
-  border-radius: a.$border-radius;
+  border: 2px solid vars.$dark-slate-gray;
+  border-radius: vars.$border-radius;
   padding: 0 1em 1em;
 }
 
@@ -42,12 +42,12 @@ table {
   }
 
   thead {
-    @include a.font(a.$font-style-body1);
-    background: a.$pale-spring-bud;
+    @include mixins.font(vars.$font-style-body1);
+    background: vars.$pale-spring-bud;
     border-bottom: solid 2px black;
   }
   tbody, tfoot {
-    @include a.font(a.$font-style-body2);
+    @include mixins.font(vars.$font-style-body2);
   }
   tfoot {
     border-top: double 3px black;

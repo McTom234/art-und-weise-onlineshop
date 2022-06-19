@@ -1,0 +1,67 @@
+version: '3.9'
+
+services:
+    app:
+        build:
+            args:
+                user: admin
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: art-und-weise
+        container_name: art-und-weise-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - .:/var/www
+        networks:
+            - art-und-weise
+
+    nginx:
+        image: nginx:stable-alpine
+        container_name: art-und-weise-nginx
+        restart: unless-stopped
+        ports:
+            - '8000:80'
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d
+        networks:
+            - art-und-weise
+
+    db:
+        image: mariadb:10.7.1
+        container_name: art-und-weise-db
+        restart: unless-stopped
+        ports:
+            - '13307:3306'
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+        networks:
+            - art-und-weise
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        container_name: art-und-weise-phpmyadmin
+        restart: unless-stopped
+        ports:
+            - '8001:80'
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            PMA_HOST: art-und-weise-db
+            PMA_USER: root
+            PMA_PASSWORD: ${DB_PASSWORD}
+            UPLOAD_LIMIT: 300M
+        networks:
+            - art-und-weise
+
+networks:
+    art-und-weise:
+        driver: bridge

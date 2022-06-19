@@ -7,11 +7,10 @@ use Illuminate\Support\Str;
 trait Uuids
 {
     /**
-     * Boot function from Laravel.
+     * Boot-function from Laravel.
      */
-    protected static function boot()
+    public static function bootUuids(): void
     {
-        parent::boot();
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = Str::uuid()->toString();
@@ -24,7 +23,7 @@ trait Uuids
      *
      * @return bool
      */
-    public function getIncrementing()
+    public function getIncrementing(): bool
     {
         return false;
     }
@@ -34,7 +33,7 @@ trait Uuids
      *
      * @return string
      */
-    public function getKeyType()
+    public function getKeyType(): string
     {
         return 'string';
     }

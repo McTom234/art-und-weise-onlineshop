@@ -2,16 +2,22 @@
 
 use Illuminate\Support\Str;
 
+function env_db_helper($db, $key, $default = null) {
+    $key = strtoupper($key);
+    $db = strtoupper($db);
+    return env("{$db}_DB_$key", env("DB_$key", $default));
+}
+
 $DBs = [
-    'mysql' => [
+    'shared' => [
         'driver' => 'mysql',
-        'url' => env('DATABASE_URL'),
-        'host' => env('DB_HOST', '127.0.0.1'),
-        'port' => env('DB_PORT', '3306'),
-        'database' => env('DB_DATABASE', 'forge'),
-        'username' => env('DB_USERNAME', 'forge'),
-        'password' => env('DB_PASSWORD', ''),
-        'unix_socket' => env('DB_SOCKET', ''),
+        'url' => env_db_helper('SHARED', 'URL'),
+        'host' => env_db_helper('SHARED', 'HOST'),
+        'port' => env_db_helper('SHARED', 'PORT', '3306'),
+        'database' => env_db_helper('SHARED', 'DATABASE', 'art_und_weise'),
+        'username' => env_db_helper('SHARED', 'USERNAME', 'art_und_weise'),
+        'password' => env_db_helper('SHARED', 'PASSWORD', ''),
+        'unix_socket' => env_db_helper('SHARED', 'SOCKET', ''),
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
         'prefix' => '',
@@ -19,34 +25,48 @@ $DBs = [
         'strict' => true,
         'engine' => null,
         'options' => extension_loaded('pdo_mysql') ? array_filter([
-            PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            PDO::MYSQL_ATTR_SSL_CA => env_db_helper('SHARED', 'MYSQL_ATTR_SSL_CA'),
+        ]) : [],
+    ],
+    'local' => [
+        'driver' => 'mysql',
+        'url' => env_db_helper('LOCAL', 'URL'),
+        'host' => env_db_helper('LOCAL', 'HOST', '127.0.0.1'),
+        'port' => env_db_helper('LOCAL', 'PORT', '3306'),
+        'database' => env_db_helper('LOCAL', 'DATABASE', 'art_und_weise'),
+        'username' => env_db_helper('LOCAL', 'USERNAME', 'art_und_weise'),
+        'password' => env_db_helper('LOCAL', 'PASSWORD', ''),
+        'unix_socket' => env_db_helper('LOCAL', 'SOCKET', ''),
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'prefix_indexes' => true,
+        'strict' => true,
+        'engine' => null,
+        'options' => extension_loaded('pdo_mysql') ? array_filter([
+            PDO::MYSQL_ATTR_SSL_CA => env_db_helper('LOCAL', 'MYSQL_ATTR_SSL_CA'),
+        ]) : [],
+    ],
+    'docker' => [
+        'driver' => 'mysql',
+        'url' => env_db_helper('DOCKER', 'URL'),
+        'host' => env_db_helper('DOCKER', 'HOST', '127.0.0.1'),
+        'port' => env_db_helper('DOCKER', 'PORT', '13307'),
+        'database' => env_db_helper('DOCKER', 'DATABASE', 'art_und_weise'),
+        'username' => env_db_helper('DOCKER', 'USERNAME', 'art_und_weise'),
+        'password' => env_db_helper('DOCKER', 'PASSWORD', ''),
+        'unix_socket' => env_db_helper('DOCKER', 'SOCKET', ''),
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'prefix_indexes' => true,
+        'strict' => true,
+        'engine' => null,
+        'options' => extension_loaded('pdo_mysql') ? array_filter([
+            PDO::MYSQL_ATTR_SSL_CA => env_db_helper('DOCKER', 'MYSQL_ATTR_SSL_CA'),
         ]) : [],
     ]
 ];
-
-if (env('DB2_HOST') !== null) {
-    $DBs = array_merge($DBs, [
-        'mysql2' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB2_HOST', '127.0.0.1'),
-            'port' => env('DB2_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB2_USERNAME', 'forge'),
-            'password' => env('DB2_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ]
-    ]);
-}
 
 return [
 
@@ -61,7 +81,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -79,8 +99,7 @@ return [
     |
     */
 
-    'connections' => array_merge([
-
+    'connections' => array_merge($DBs, [
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
@@ -117,7 +136,7 @@ return [
             'prefix_indexes' => true,
         ],
 
-    ], $DBs),
+    ]),
 
     /*
     |--------------------------------------------------------------------------

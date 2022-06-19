@@ -1,26 +1,31 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+@extends('layouts.master')
 
-    <title>Schülerfirma Art und Weise</title>
+@php
+    /**
+     * @var \Illuminate\Database\Eloquent\Collection $popular
+     * @var \Illuminate\Database\Eloquent\Collection $categories
+     * @var \App\Models\Product $product
+     * @var \App\Models\Category $category
+     */
+@endphp
+
+@section('head-scripts')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-</head>
+@endsection
 
-<body>
-<header>
-    <div>
-        <h4>Schülerfirma</h4>
+@section('header')
+    <header>
+        <div>
+            <h4>Schülerfirma</h4>
 
-        <h1>Art & Weise</h1>
-    </div>
+            <h1>Art & Weise</h1>
+        </div>
 
-    <a href="#navbar">Mehr Erfahren!</a>
-</header>
-@include('layouts.navigation', ['index' => 'home'])
-<main>
+        <a href="#navbar">Mehr Erfahren!</a>
+    </header>
+@endsection
+
+@section('content')
     <section>
         <div class="intro">
             <h3>Beliebte Produkte</h3>
@@ -28,7 +33,7 @@
         </div>
         <div class="grid-container">
             @foreach($popular as $product)
-                @include('layouts.product-grid')
+                <x-product-grid :product="$product"></x-product-grid>
             @endforeach
         </div>
     </section>
@@ -36,19 +41,15 @@
     @foreach($categories as $category)
         <section>
             <div class="intro">
-                <h3>{{$category->name}}</h3>
-                <p>Eine Auswahl von Produkten aus der Kategorie {{$category->name}}.</p>
+                <h3>{{ $category->name }}</h3>
+                <p>Eine Auswahl von Produkten aus der Kategorie {{ $category->name }}.</p>
             </div>
             <div class="grid-container">
                 @foreach($category->products()->take(3)->get() as $product)
-                    @include('layouts.product-grid')
+                    <x-product-grid :product="$product"></x-product-grid>
                 @endforeach
             </div>
-            <a class="link-button more-items" href="{{route('products', ['category_id' => $category->id])}}">Weitere</a>
+            <a class="link-button more-items" href="{{ route('products.category', ['category' => $category->id]) }}">Weitere</a>
         </section>
     @endforeach
-</main>
-@include('layouts.footer')
-@include('layouts.cookie-hint')
-</body>
-</html>
+@endsection

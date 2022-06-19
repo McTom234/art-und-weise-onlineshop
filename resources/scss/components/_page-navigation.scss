@@ -1,9 +1,14 @@
-@use "../abstracts" as a;
+@use "../abstracts/vars" as a;
+@use "../abstracts/mixins";
+@use "../abstracts/init";
 
 .page-navigation {
   margin: 1em auto;
   width: max-content;
-  @include a.font(a.$font-style-subtitle1);
+  @include mixins.font(a.$font-style-subtitle1);
+  display: flex;
+  gap: 1em;
+  align-items: center;
 
   a {
     @extend .link-button;
@@ -15,8 +20,16 @@
       background: a.$hunter-green;
       color: white;
     }
-    &.inactive {
-      pointer-events: none;
-    }
+  }
+
+  span.inactive {
+    @extend .link-button;
+      background: gray;
+    color: initial;
+    border: solid 1px a.$dark-slate-gray;
+    transition-property: all;
+    pointer-events: none;
+    cursor: not-allowed;
+    box-shadow: 0 0 0 #000;
   }
 }

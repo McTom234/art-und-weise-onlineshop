@@ -2,34 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
-
-    public function cart(Request $request)
+    /**
+     * Renders the view with products in cart.
+     *
+     * @return Factory|View|Application
+     */
+    public function getCartView(): Factory|View|Application
     {
-        if (isset($_COOKIE['cart'])) {
-            $cart = json_decode($_COOKIE['cart'], true);
-        } else {
-            $cart = [];
-        }
-        $products = [];
+        $cart = collect(json_decode($_COOKIE['cart'] ?? '[]', true));
+        $products = collect();
         foreach ($cart as $product_id => $number) {
-            $product = Product::query()->find($product_id);
-            if ($product) {
+            if ($product = Product::find($product_id)) {
                 $product->number = $number;
-                array_push($products, $product);
+                $products->add($product);
             }
         }
-        return view('cart', ['products' => $products]);
+        return view('cart', compact('products'));
     }
 
-    public function set(Request $request)
+    public function set(Request $request): JsonResponse
     {
         $request->validate([
             'id' => 'string|required',
@@ -37,25 +37,23 @@ class CartController extends Controller
         ]);
 
         if (isset($_COOKIE['cart'])) {
-            $cart = json_decode($_COOKIE['cart'], true);
+            $cart = collect(json_decode($_COOKIE['cart'], true));
         } else {
-            $cart = [];
+            $cart = collect();
         }
-        $product_id = $request->id;
-        $product_number = $request->number;
+        $product_id = $request->get('id');
+        $product_number = $request->get('number');
 
-        if ($request->additional) {
-            $old_product_number = $cart[$product_id] ?? 0;
-            $cart[$product_id] = $old_product_number + $product_number;
-        } else {
-            $cart[$product_id] = $product_number;
+        if (Product::find($product_id) == null)
+            return response()->setStatusCode(404)->json(json_encode(['error' => "product with id: `$product_id` not found"]))->withCookie(cookie()->forever('cart', $cart->toJson()));
+
+        if ($request->has('additional') && $request->get('additional')) {
+            $product_number += $cart->get($product_id, 0);
         }
+        $cart->put($product_id, $product_number);
 
-        for ($i = 0; $i < count($cart); $i++) if (array_values($cart)[$i] <= 0) array_splice($cart, $i, 1);
-      
-        $response = new Response(json_encode($cart));      
-        $response->withCookie(cookie()->forever('cart', json_encode($cart)));
-      
-        return $response;
+        $cart = $cart->filter(fn($item) => $item > 0);
+
+        return response()->json($cart->toJson())->withCookie(cookie()->forever('cart', $cart->toJson()));
     }
 }

@@ -2,38 +2,39 @@
 
 namespace Database\Factories;
 
+use App\Models\Location;
+use App\Models\User;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use JetBrains\PhpStorm\ArrayShape;
 
+/**
+ * @extends Factory<User>
+ */
 class UserFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
+     * @throws Exception
      */
-    public function definition()
+    #[ArrayShape(['forename' => "string", 'surname' => "string", 'email' => "string", 'password' => "string", 'remember_token' => "string", 'location_id' => "string"])]
+    public function definition(): array
     {
+        if (Location::count('id') == 0) {
+            Location::factory()->create();
+        }
+        $aUsers = Location::all(['id']);
+        $location_id = $aUsers->all()[random_int(0, $aUsers->count()-1)];
         return [
-            'name' => $this->faker->name(),
+            'forename' => $this->faker->firstName(),
+            'surname' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'location_id' => $location_id
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
     }
 }

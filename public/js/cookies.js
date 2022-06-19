@@ -1,98 +1,6 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
-
-/***/ "./resources/js/cookies.js":
-/*!*********************************!*\
-  !*** ./resources/js/cookies.js ***!
-  \*********************************/
-/***/ (() => {
-
-window.getCookies = function (cookieName) {
-  var name = cookieName + '=';
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var cookieStrings = decodedCookie.split(';');
-
-  for (var i = 0; i < cookieStrings.length; i++) {
-    var string = cookieStrings[i];
-
-    while (string.charAt(0) === ' ') {
-      string = string.substring(1);
-    }
-
-    if (string.indexOf(name) === 0) {
-      return JSON.parse(string.substring(name.length, string.length));
-    }
-  }
-
-  return null;
-};
-
-/***/ }),
-
-/***/ "./resources/scss/shoppingCart.scss":
-/*!******************************************!*\
-  !*** ./resources/scss/shoppingCart.scss ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/scss/showProduct.scss":
-/*!*****************************************!*\
-  !*** ./resources/scss/showProduct.scss ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/scss/home.scss":
-/*!**********************************!*\
-  !*** ./resources/scss/home.scss ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/scss/user-forms.scss":
-/*!****************************************!*\
-  !*** ./resources/scss/user-forms.scss ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/scss/products-overview.scss":
-/*!***********************************************!*\
-  !*** ./resources/scss/products-overview.scss ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
 
 /***/ "./resources/scss/buy.scss":
 /*!*********************************!*\
@@ -100,7 +8,6 @@ __webpack_require__.r(__webpack_exports__);
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -113,7 +20,66 @@ __webpack_require__.r(__webpack_exports__);
   \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/scss/shoppingCart.scss":
+/*!******************************************!*\
+  !*** ./resources/scss/cart.scss ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/scss/showProduct.scss":
+/*!*****************************************!*\
+  !*** ./resources/scss/product.scss ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/scss/home.scss":
+/*!**********************************!*\
+  !*** ./resources/scss/home.scss ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/scss/user-forms.scss":
+/*!****************************************!*\
+  !*** ./resources/scss/auth-forms.scss ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/scss/products-overview.scss":
+/*!***********************************************!*\
+  !*** ./resources/scss/products.scss ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -124,7 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -138,17 +104,17 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
@@ -181,12 +147,12 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			return result;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -197,37 +163,37 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		// no baseURI
-/******/ 		
+/******/
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/cookies": 0,
-/******/ 			"css/ordered": 0,
-/******/ 			"css/buy": 0,
 /******/ 			"css/products-overview": 0,
 /******/ 			"css/user-forms": 0,
 /******/ 			"css/home": 0,
 /******/ 			"css/showProduct": 0,
-/******/ 			"css/shoppingCart": 0
+/******/ 			"css/shoppingCart": 0,
+/******/ 			"css/ordered": 0,
+/******/ 			"css/buy": 0
 /******/ 		};
-/******/ 		
+/******/
 /******/ 		// no chunk on demand loading
-/******/ 		
+/******/
 /******/ 		// no prefetching
-/******/ 		
+/******/
 /******/ 		// no preloaded
-/******/ 		
+/******/
 /******/ 		// no HMR
-/******/ 		
+/******/
 /******/ 		// no HMR manifest
-/******/ 		
+/******/
 /******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
+/******/
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
@@ -252,26 +218,25 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			}
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
-/******/ 		
+/******/
 /******/ 		var chunkLoadingGlobal = self["webpackChunkart_und_weise_website"] = self["webpackChunkart_und_weise_website"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	
+/******/
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/ordered","css/buy","css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart"], () => (__webpack_require__("./resources/js/cookies.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/ordered","css/buy","css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart"], () => (__webpack_require__("./resources/scss/home.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/ordered","css/buy","css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart"], () => (__webpack_require__("./resources/scss/user-forms.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/ordered","css/buy","css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart"], () => (__webpack_require__("./resources/scss/products-overview.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/ordered","css/buy","css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart"], () => (__webpack_require__("./resources/scss/buy.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/ordered","css/buy","css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart"], () => (__webpack_require__("./resources/scss/ordered.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/ordered","css/buy","css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart"], () => (__webpack_require__("./resources/scss/shoppingCart.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/ordered","css/buy","css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart"], () => (__webpack_require__("./resources/scss/showProduct.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart","css/ordered","css/buy"], () => (__webpack_require__("./resources/scss/home.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart","css/ordered","css/buy"], () => (__webpack_require__("./resources/scss/user-forms.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart","css/ordered","css/buy"], () => (__webpack_require__("./resources/scss/products-overview.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart","css/ordered","css/buy"], () => (__webpack_require__("./resources/scss/buy.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart","css/ordered","css/buy"], () => (__webpack_require__("./resources/scss/ordered.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart","css/ordered","css/buy"], () => (__webpack_require__("./resources/scss/shoppingCart.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/products-overview","css/user-forms","css/home","css/showProduct","css/shoppingCart","css/ordered","css/buy"], () => (__webpack_require__("./resources/scss/showProduct.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+/******/
 /******/ })()
 ;
