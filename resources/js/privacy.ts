@@ -28,12 +28,12 @@ class Privacy {
 
     printHint() {
         const hint = document.getElementById('cookie-privacy-claimer');
-        hint.classList.add('visible');
+        hint!.classList.add('visible');
     }
 
     closeHint() {
         const hint = document.getElementById('cookie-privacy-claimer');
-        hint.classList.remove('visible');
+        hint!.classList.remove('visible');
     }
 }
 

@@ -25,12 +25,12 @@
         for (let i = 0; i < wrappers.length; i++) {
             const wrapper = wrappers.item(i);
             wrapper.append(
-                createQuantitySelect(wrapper.attributes.getNamedItem("data-number").nodeValue, [1, 2, 3, 4, 5], 100, true, async function (number) {
+                createQuantitySelect(Number(wrapper.attributes.getNamedItem("data-number").nodeValue), [1, 2, 3, 4, 5], 100, true, async function (number) {
                     // todo total price span with custom tag and data- attributes
                     const priceTag = getPriceTag(wrapper.attributes.getNamedItem("data-id").nodeValue);
                     priceTag.textContent = (priceTag.attributes.getNamedItem("data-base-price").nodeValue * number).toFixed(2).toString().replace(".", ",");
 
-                    setItem(wrapper.attributes.getNamedItem("data-id").nodeValue, number).then(res => {
+                    setItem(Number(wrapper.attributes.getNamedItem("data-id").nodeValue), number).then(res => {
                         const cart = res.data;
                         // navbar
                         let count = 0;

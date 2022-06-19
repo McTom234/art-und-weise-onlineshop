@@ -1,9 +1,12 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 var __webpack_exports__ = {};
 /*!**********************************!*\
-  !*** ./resources/js/products.js ***!
+  !*** ./resources/js/products.ts ***!
   \**********************************/
-var row = 0;
+
+
+var row = 0; // TODO unused
 
 function fetchProducts(number) {
   var http = new XMLHttpRequest();
@@ -24,13 +27,12 @@ function fetchProducts(number) {
 }
 
 for (var i = 0; i < 3; i++) {// fetchProducts(3);
-}
-
-$(window).scroll(function () {
-  if ($(window).scrollTop() > $(document).height() - $(window).height() * 2) {
-    for (var _i = 0; _i < 3; _i++) {//fetchProducts(3);
-    }
-  }
-});
+} // $(window).scroll(function() {
+//     if($(window).scrollTop() > $(document).height() - $(window).height() * 2) {
+//         for(let i = 0; i < 3; i++){
+//             //fetchProducts(3);
+//         }
+//     }
+// });
 /******/ })()
 ;
