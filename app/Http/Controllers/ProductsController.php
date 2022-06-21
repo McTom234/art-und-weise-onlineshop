@@ -28,7 +28,7 @@ class ProductsController extends Controller
         }
         $products = $products->paginate(15);
 
-        return view('products', compact('products', 'query'));
+        return view('products.products', compact('products', 'query'));
     }
 
     public function productsForCategory(Request $request, Category $category): View|Factory|RedirectResponse|Application
@@ -46,11 +46,11 @@ class ProductsController extends Controller
         }
         $products = $products->paginate(15);
 
-        return view('products', compact('products', 'category', 'query'));
+        return view('products.products', compact('products', 'category', 'query'));
     }
 
     public function show(Product $product): Factory|View|Application
     {
-        return view('product', ['product' => $product]);
+        return view('products.product', ['product' => $product]);
     }
 }
