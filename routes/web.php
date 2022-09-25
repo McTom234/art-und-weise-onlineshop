@@ -17,6 +17,8 @@ use App\Http\Controllers\Controller;
 |
 */
 
+require __DIR__.'/auth.php';
+
 Route::get('', [Controller::class, 'home'])
     ->name('index');
 
@@ -43,6 +45,3 @@ Route::prefix('checkout')->middleware(['auth'])->group(function () {
     Route::get('success', [CheckoutController::class, 'success'])
         ->name('checkout.success');
 });
-
-require __DIR__.'/auth.php';
-require __DIR__.'/admin.php';

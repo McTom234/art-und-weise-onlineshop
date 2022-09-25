@@ -18,7 +18,11 @@
 <body>
     @yield('header', '')
 
-    @include('layouts.navigation')
+    @if(request()->routeIs('admin.*'))
+        @include('layouts.admin.navigation')
+    @else
+        @include('layouts.navigation')
+    @endif
 
     @yield('body-before-content', '')
     <main>
