@@ -72,13 +72,6 @@ class Product extends Model
         return number_format($this->getPriceEuro() * (100 - $this->discount) / 100, 2);
     }
 
-    public function getShortDescription($charsLimit = 150): ?string
-    {
-        if (strlen($this->description) > $charsLimit)
-            return substr($this->description, 0, strrpos(substr($this->description, 0, $charsLimit), " ")).'...';
-        else return $this->description;
-    }
-
     public function scopeSearch(Builder $query, string $search): Builder
     {
         return $query->where('name', 'LIKE', "%$search%")
