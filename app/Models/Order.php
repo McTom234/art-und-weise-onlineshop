@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Traits\Uuids;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Order
@@ -15,20 +18,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $discount
  * @property int $quantity
  * @property string $product_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $checkout_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read \App\Models\Checkout $checkout
+ * @property-read \App\Models\Product $product
  * @method static \Database\Factories\OrderFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Order query()
- * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Order whereDiscount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Order wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Order whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Order whereQuantity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @method static Builder|Order newModelQuery()
+ * @method static Builder|Order newQuery()
+ * @method static Builder|Order query()
+ * @method static Builder|Order whereCheckoutId($value)
+ * @method static Builder|Order whereCreatedAt($value)
+ * @method static Builder|Order whereDiscount($value)
+ * @method static Builder|Order whereId($value)
+ * @method static Builder|Order wherePrice($value)
+ * @method static Builder|Order whereProductId($value)
+ * @method static Builder|Order whereQuantity($value)
+ * @method static Builder|Order whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class Order extends Model
 {
