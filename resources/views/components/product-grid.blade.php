@@ -23,7 +23,7 @@
     </p>
 
     <div class="price">
-        @if ($product->discount > 0)
+        @if ($product->discount > 0 && (number_format($product->getDiscountPriceEuro(), 2, ',', '.') !== number_format($product->getPriceEuro(), 2, ',', '.')))
             <span>{{ number_format($product->getDiscountPriceEuro(), 2, ',', '.') }}</span>
         @endif
         @if ($product->contingent <= 0)
