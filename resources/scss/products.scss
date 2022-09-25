@@ -1,13 +1,14 @@
 @use "components/article";
 @use "components/searchbar";
 @use "components/page-navigation";
+@use "abstracts/vars";
 
 .grid-container {
   margin: 1em 0;
 }
 
-h2 {
-  margin-block: 0;
+h3 {
+  margin-block: .5em;
+  text-align: center;
+  color: vars.$blood-red;
 }
-
-

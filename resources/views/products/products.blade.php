@@ -6,7 +6,7 @@
 
 @section('content')
     @isset($category)
-        <h2>{{ $category->name }}</h2>
+        <h3>{{ $category->name }}</h3>
     @endisset
 
     <x-searchbar :query="$query"></x-searchbar>

@@ -39,7 +39,7 @@
             <div class="no-figure">
         @endif
 
-            <h4>{{ $product->name }}</h4>
+            <h3>{{ $product->name }}</h3>
             @foreach($product->categories()->get() as $category)
                 <p><a href="{{ route('products.category', $category->id) }}">{{ $category->name }}</a></p>
             @endforeach

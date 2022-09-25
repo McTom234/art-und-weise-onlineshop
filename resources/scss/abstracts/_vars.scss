@@ -15,7 +15,7 @@ $border-radius: 8px;
 
 // fonts
 @import url("https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Georama:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-$font-size: 20px;
+$font-size: 16px;
 $font-style-headline1: (
         font-family: unquote("Georama"),
         font-size: 6em,
@@ -24,33 +24,33 @@ $font-style-headline1: (
 );
 $font-style-headline2: (
         font-family: unquote("Georama"),
-        font-size: 4em,
+        font-size: 3em,
         font-weight: 500,
         line-height: 1.5em
 );
 $font-style-headline3: (
         font-family: unquote("Georama"),
-        font-size: 3em,
+        font-size: 2em,
         font-weight: 500,
-        line-height: 1.5em
+        line-height: 1.25em
 );
 $font-style-headline4: (
         font-family: unquote("Georama"),
-        font-size: 2em,
+        font-size: 1.5em,
         font-weight: 500,
-        line-height: 1.5em
+        line-height: 1.1em
 );
 $font-style-headline5: (
         font-family: unquote("Georama"),
         font-size: 1.5em,
         font-weight: 400,
-        line-height: 1.5em
+        line-height: 1.1em
 );
 $font-style-headline6: (
         font-family: unquote("Georama"),
         font-size: 1.25em,
         font-weight: 300,
-        line-height: 1.5em
+        line-height: 1em
 );
 $font-style-body1: (
         font-family: unquote("Bitter"),
