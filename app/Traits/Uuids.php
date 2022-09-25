@@ -12,9 +12,10 @@ trait Uuids
     public static function bootUuids(): void
     {
         static::creating(function ($model) {
-            if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = Str::uuid()->toString();
-            }
+            $model->keyType = 'string';
+            $model->incrementing = false;
+
+            $model->{$model->getKeyName()} = $model->{$model->getKeyName()} ?: (string) Str::orderedUuid();
         });
     }
 

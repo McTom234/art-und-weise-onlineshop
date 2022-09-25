@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::defaultView('components.pagination');
         Paginator::defaultSimpleView('components.pagination-simple');
+
+        Schema::defaultStringLength(125);
     }
 }
