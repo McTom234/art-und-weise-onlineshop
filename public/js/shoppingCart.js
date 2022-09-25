@@ -13,6 +13,17 @@ function setItem(product_id) {
     id: product_id,
     number: product_count,
     additional: additional
+  }).then(function (response) {
+    // navbar
+    var cart = JSON.parse(response.data);
+    var count = 0;
+
+    for (var cartObject in cart) {
+      count += Number(cart[cartObject]);
+    }
+
+    document.getElementById('navbar-cart-counter').innerHTML = ' ' + String(count);
+    return response;
   });
 }
 
