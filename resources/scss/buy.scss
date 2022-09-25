@@ -1,8 +1,8 @@
 @use "abstracts/mixins";
 @use "abstracts/vars";
 
-h2, h3, ul, section {
-  margin: 0 !important;
+h2, h4, ul, section {
+  margin: 0 0 .5em !important;
 }
 
 .grid-column--6 {
@@ -23,21 +23,18 @@ table {
   }
 
   th {
-    width: 1px;
-    text-align: center;
+    text-align: end;
 
-    &:nth-child(1), &:nth-child(4) {
-      width: 2px;
+    &:first-child {
+      text-align: center;
     }
   }
 
   td {
     border-bottom: solid 1px black;
-    &:nth-child(4), &:nth-child(2) {
-      text-align: end;
-    }
-    &:nth-child(3) {
-      text-align: center;
+    text-align: end;
+    &:first-child {
+      text-align: inherit;
     }
   }
 
