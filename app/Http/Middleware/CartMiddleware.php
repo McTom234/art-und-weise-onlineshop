@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Product;
 use Closure;
+use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,6 +29,7 @@ class CartMiddleware
         else $cartCount = '';
 
         View::share('cartCount', $cartCount);
-        return $next($request)->withCookie(cookie()->forever('cart', $cart->toJson()));
+        Cookie::queue(Cookie::forever('cart', $cart->toJson()));
+        return $next($request);
     }
 }

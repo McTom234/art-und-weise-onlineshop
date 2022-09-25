@@ -178,6 +178,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Laravel Permission
+         */
+        Spatie\Permission\PermissionServiceProvider::class,
+
     ],
 
     /*

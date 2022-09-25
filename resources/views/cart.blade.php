@@ -34,15 +34,7 @@
                     const priceTag = getPriceTag(wrapper.attributes.getNamedItem("data-id").nodeValue);
                     priceTag.textContent = (priceTag.attributes.getNamedItem("data-base-price").nodeValue * number).toFixed(2).toString().replace(".", ",");
 
-                    setItem(wrapper.attributes.getNamedItem("data-id").nodeValue, number).then(res => {
-                        const cart = res.data;
-                        // navbar
-                        let count = 0;
-                        for (const cartObject in cart) {
-                            count += Number(cart[cartObject]);
-                        }
-                        setCartCount(count);
-                    });
+                    setItem(wrapper.attributes.getNamedItem("data-id").nodeValue, number).then();
                 })
             );
         }
@@ -51,12 +43,6 @@
             for (let i = 0; i < priceTags.length; i++) {
                 if (priceTags.item(i).attributes.getNamedItem("data-id").nodeValue === id) return priceTags.item(i);
             }
-        }
-
-        function setCartCount(count) {
-            if (count > 0) count = ' '+count;
-            else count = '';
-            document.getElementById('navbar-cart-counter').innerHTML = count;
         }
     </script>
 @endsection

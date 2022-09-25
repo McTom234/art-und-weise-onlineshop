@@ -19,7 +19,7 @@ class CheckoutFactory extends Factory
      * @return array<string, mixed>
      * @throws Exception
      */
-    #[ArrayShape(['name' => "string", 'user_id' => "mixed"])]
+    #[ArrayShape(['user_id' => "mixed"])]
     public function definition(): array
     {
         if (User::count('id') == 0) {

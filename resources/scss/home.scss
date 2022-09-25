@@ -24,13 +24,8 @@ header {
     } // h1, h4
 
     h1 {
-      text-shadow: 0 0 0 a.$hunter-green;
-      transition: text-shadow 100ms ease-in;
-
-      &:hover {
         text-shadow: 2px 2px  4px a.$hunter-green;
-      } // :hover
-
+      transition: text-shadow 100ms ease-in;
     } // h1
 
     h4 {

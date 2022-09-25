@@ -39,7 +39,7 @@
             <div class="no-figure">
         @endif
 
-            <h4>{{ $product->name }}</h4>
+            <h3>{{ $product->name }}</h3>
             @foreach($product->categories()->get() as $category)
                 <p><a href="{{ route('products.category', $category->id) }}">{{ $category->name }}</a></p>
             @endforeach
@@ -47,7 +47,7 @@
         </div>
 
         <aside>
-            @if ($product->discount > 0)
+            @if ($product->discount > 0 && (number_format($product->getDiscountPriceEuro(), 2, ',', '.') !== number_format($product->getPriceEuro(), 2, ',', '.')))
                 <span>{{ number_format($product->getDiscountPriceEuro(), 2, ',', '.') }}</span>
                 <span>{{ number_format($product->getPriceEuro(), 2, ',', '.') }}</span>
             @else

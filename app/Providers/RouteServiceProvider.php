@@ -40,7 +40,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->model('checkout', Checkout::class);
         $this->model('image', Image::class);
         $this->model('location', Location::class);
-        $this->model('member', Member::class);
         $this->model('order', Order::class);
         $this->model('product', Product::class);
         $this->model('user', User::class);
@@ -52,6 +51,11 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            Route::prefix('admin')
+                ->name('admin.')
+                ->middleware(['web', 'auth', 'admin'])
+                ->group(base_path('routes/admin.php'));
         });
     }
 
