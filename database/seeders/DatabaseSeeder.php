@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
         Location::factory()->count(5)->create();
         User::factory()->count(4)->create();
         User::create(['forename' => 'Test', 'surname' => 'Admin', 'email' => 'admin@test.org', 'password' => Hash::make('password'), 'location_id' => Location::first()->id]);
-        Member::factory()->count(3)->create();
         Category::factory()->count(4)->create();
         Product::factory()->count(10)->create();
         Order::factory()->count(15)->create();
